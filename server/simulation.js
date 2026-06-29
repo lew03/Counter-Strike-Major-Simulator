@@ -450,6 +450,7 @@ module.exports = {
   teamOverallRating,
   teamMapRating,
   applyCoach,
+  winProbability,
   buildMajorRun,
   advanceMajor,
   standingsView,
