@@ -115,6 +115,7 @@ function runView(run) {
     swissRound: run.swissRound,
     mapPool: run.mapPool,
     bannedMap: run.bannedMap,
+    userForm: run.userForm || [],
     standings: run.stage === "swiss" || run.stage === "eliminated_swiss" || run.playoff
       ? Object.values(run.standings)
           .map((s) => ({

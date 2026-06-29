@@ -86,6 +86,7 @@ export default function MajorView({
   const headerStage = activeRound ? activeRound.type : run.stage === "playoffs" ? "playoff_round" : run.stage;
 
   if (isFirstRound) {
+    const FORM_ICON = { hot: "🔥", cold: "❄️", steady: "➖" } as const;
     return (
       <div className="panel fade-in major-view tall-panel major-start-screen">
         <div className="major-start-title">🏆 The Major Begins</div>
@@ -93,6 +94,20 @@ export default function MajorView({
           Your roster is locked in. First stop: the Swiss Stage — five rounds standing between you and
           the Playoffs.
         </p>
+        {run.userForm && run.userForm.length > 0 && (
+          <div className="form-strip">
+            <div className="form-strip-label">Roster form this major</div>
+            <div className="form-strip-players">
+              {run.userForm.map((f) => (
+                <div key={f.name} className={`form-chip form-${f.form}`}>
+                  <span className="form-chip-icon">{FORM_ICON[f.form]}</span>
+                  <span className="form-chip-name">{f.name}</span>
+                  <span className="form-chip-state">{f.form}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
         <button className="start-btn" onClick={onAdvance} disabled={advancing}>
           {advancing ? "Starting..." : "Start"}
         </button>

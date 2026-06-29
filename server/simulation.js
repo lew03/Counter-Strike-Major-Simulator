@@ -192,6 +192,31 @@ function matchSummary(teamA, teamB, result, format) {
   };
 }
 
+// --- Per-major player form (hot/cold streaks) ---
+// Every player rolls a fresh form state when a major starts, nudging their effective
+// rating for that run. "steady" is most common; hot/cold are the wildcards. Applied to
+// BOTH the user's roster and every AI team, so each major plays out a little differently
+// even with identical lineups (this is also what keeps the AI field varied run-to-run).
+const FORM_STATES = [
+  { label: "cold", min: 0.93, max: 0.975 },
+  { label: "steady", min: 0.975, max: 1.025 },
+  { label: "hot", min: 1.025, max: 1.07 },
+];
+
+function rollForm() {
+  const r = Math.random();
+  const state = r < 0.25 ? FORM_STATES[0] : r < 0.75 ? FORM_STATES[1] : FORM_STATES[2];
+  const factor = state.min + Math.random() * (state.max - state.min);
+  return { label: state.label, factor };
+}
+
+function applyForm(playersArr) {
+  return playersArr.map((p) => {
+    const form = rollForm();
+    return { ...p, rating: p.rating * form.factor, form: form.label, formFactor: form.factor };
+  });
+}
+
 // AI rosters get a rating bump so a well-drafted user team doesn't sit comfortably
 // above the field by default. The boost is difficulty-driven (passed in from the
 // run builder) — higher = harder opponents.
@@ -199,7 +224,7 @@ const DEFAULT_AI_BOOST = 1.03;
 
 function teamFromEra(era, coachesPool, aiBoost) {
   const boost = aiBoost || DEFAULT_AI_BOOST;
-  const players = era.players.map((p) => ({ ...p, rating: p.rating * boost }));
+  const players = applyForm(era.players.map((p) => ({ ...p, rating: p.rating * boost })));
   const coach = coachesPool && coachesPool.length
     ? coachesPool[Math.floor(Math.random() * coachesPool.length)]
     : null;
@@ -217,9 +242,23 @@ function teamFromEra(era, coachesPool, aiBoost) {
 // --- Swiss-system Opening Stage (16 teams, mirrors the current Valve Major format) ---
 
 function buildMajorRun(userTeam, teamEras, bannedMap, coachesPool, aiBoost) {
+  // Roll fresh form for the user's roster this major and fold it into their ratings.
+  const formedPlayers = applyForm(userTeam.players);
+  const userForm = formedPlayers.map((p) => ({
+    name: p.name,
+    role: p.role,
+    form: p.form,
+    factor: p.formFactor,
+  }));
+  const formedUser = {
+    ...userTeam,
+    players: formedPlayers,
+    overall: applyCoach(teamOverallRating(formedPlayers), userTeam.coach),
+  };
+
   const chosenEras = shuffle(teamEras).slice(0, 15);
   const aiTeams = chosenEras.map((era) => teamFromEra(era, coachesPool, aiBoost));
-  const allTeams = shuffle([userTeam, ...aiTeams]);
+  const allTeams = shuffle([formedUser, ...aiTeams]);
 
   const standings = {};
   for (const t of allTeams) {
@@ -231,6 +270,7 @@ function buildMajorRun(userTeam, teamEras, bannedMap, coachesPool, aiBoost) {
     swissRound: 0,
     standings,
     teamOrder: allTeams.map((t) => t.id),
+    userForm,
     mapPool: MAP_POOL.filter((m) => m !== bannedMap),
     bannedMap: bannedMap || null,
     playoff: null,

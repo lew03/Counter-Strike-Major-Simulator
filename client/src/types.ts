@@ -91,6 +91,13 @@ export interface PlayoffRoundLog {
   matches: MatchResult[];
 }
 
+export interface PlayerForm {
+  name: string;
+  role: Role;
+  form: "hot" | "steady" | "cold";
+  factor: number;
+}
+
 export interface MajorRun {
   stage: "swiss" | "playoffs" | "done" | "eliminated_swiss";
   finished: boolean;
@@ -100,6 +107,7 @@ export interface MajorRun {
   swissRound: number;
   mapPool: string[];
   bannedMap: string | null;
+  userForm: PlayerForm[];
   standings: StandingRow[];
   playoff: {
     roundIndex: number;

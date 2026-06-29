@@ -948,7 +948,74 @@ tr.mvp-row {
 .major-start-text {
   font-size: 16px;
   max-width: 480px;
-  margin: 8px 0 28px;
+  margin: 8px 0 24px;
+}
+
+/* Per-major roster form strip */
+
+.form-strip {
+  margin: 4px 0 26px;
+}
+
+.form-strip-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6f7280;
+  margin-bottom: 10px;
+}
+
+.form-strip-players {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.form-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 88px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid #2a2d38;
+  background: #1c1f28;
+}
+
+.form-chip-icon {
+  font-size: 18px;
+}
+
+.form-chip-name {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.form-chip-state {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #9a9aa8;
+}
+
+.form-chip.form-hot {
+  border-color: #c2562a;
+  background: rgba(226, 119, 47, 0.12);
+}
+
+.form-chip.form-hot .form-chip-state {
+  color: #ff9a5a;
+}
+
+.form-chip.form-cold {
+  border-color: #2a5a8f;
+  background: rgba(74, 144, 226, 0.12);
+}
+
+.form-chip.form-cold .form-chip-state {
+  color: #6fb0ff;
 }
 
 /* Game over screen */
