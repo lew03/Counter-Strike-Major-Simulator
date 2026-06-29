@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const crypto = require("crypto");
+const fs = require("fs");
+const path = require("path");
 const players = require("./data/players.json");
 const coaches = require("./data/coaches.json");
 const teamEras = require("./data/teams.json");
@@ -11,9 +13,54 @@ app.use(cors());
 app.use(express.json());
 
 const DRAFT_ORDER = [...ROLES, "coach"];
-const BUDGET = 850000;
 
-const teams = new Map(); // teamId -> { name, players, coach, overall, history: [], currentRun: null }
+// Difficulty presets — more money + weaker opponents = easier.
+const DIFFICULTIES = {
+  easy: { budget: 1050000, aiBoost: 1.0 },
+  normal: { budget: 850000, aiBoost: 1.03 },
+  hard: { budget: 680000, aiBoost: 1.06 },
+};
+function difficultyConfig(d) {
+  return DIFFICULTIES[d] || DIFFICULTIES.normal;
+}
+
+// --- Disk persistence: durable team rosters + career history survive restarts.
+//     In-progress major runs are intentionally NOT persisted (they're cheap to
+//     re-start and fragile to serialise) — only the roster and history are. ---
+const STATE_FILE = path.join(__dirname, "data", "teams-state.json");
+const teams = new Map(); // teamId -> { name, players, coach, overall, totalSpend, budget, difficulty, history, currentRun }
+
+function loadTeams() {
+  try {
+    const raw = fs.readFileSync(STATE_FILE, "utf8");
+    const obj = JSON.parse(raw);
+    for (const [id, t] of Object.entries(obj)) {
+      teams.set(id, { ...t, currentRun: null });
+    }
+    console.log(`Loaded ${teams.size} saved team(s) from disk.`);
+  } catch {
+    // no state file yet — fine
+  }
+}
+
+let saveQueued = false;
+function saveTeams() {
+  if (saveQueued) return;
+  saveQueued = true;
+  setImmediate(() => {
+    saveQueued = false;
+    const obj = {};
+    for (const [id, t] of teams.entries()) {
+      const { currentRun, ...durable } = t;
+      obj[id] = durable;
+    }
+    try {
+      fs.writeFileSync(STATE_FILE, JSON.stringify(obj));
+    } catch (e) {
+      console.error("Failed to persist teams:", e.message);
+    }
+  });
+}
 
 function poolForRole(role) {
   return role === "coach" ? coaches : players.filter((p) => p.role === role);
@@ -89,6 +136,20 @@ function runView(run) {
   };
 }
 
+function teamView(team, teamId) {
+  return {
+    teamId,
+    name: team.name,
+    players: team.players,
+    coach: team.coach,
+    overall: team.overall,
+    totalSpend: team.totalSpend,
+    budget: team.budget,
+    difficulty: team.difficulty,
+    history: team.history,
+  };
+}
+
 app.get("/api/roles", (req, res) => {
   res.json({ roles: ROLES });
 });
@@ -96,7 +157,8 @@ app.get("/api/roles", (req, res) => {
 app.get("/api/config", (req, res) => {
   const minPrices = {};
   for (const role of DRAFT_ORDER) minPrices[role] = minPriceForRole(role);
-  res.json({ budget: BUDGET, draftOrder: DRAFT_ORDER, minPrices });
+  const { budget } = difficultyConfig(req.query.difficulty);
+  res.json({ budget, draftOrder: DRAFT_ORDER, minPrices });
 });
 
 app.get("/api/maps", (req, res) => {
@@ -117,7 +179,7 @@ app.get("/api/draft/options", (req, res) => {
 });
 
 app.post("/api/team", (req, res) => {
-  const { picks, coachId, teamName, bannedMap } = req.body;
+  const { picks, coachId, teamName, bannedMap, difficulty } = req.body;
   if (!picks || ROLES.some((r) => !picks[r]) || !coachId) {
     return res.status(400).json({ error: "Must provide a pick for every role plus a coach" });
   }
@@ -134,9 +196,11 @@ app.post("/api/team", (req, res) => {
     return res.status(400).json({ error: e.message });
   }
 
+  const diffKey = DIFFICULTIES[difficulty] ? difficulty : "normal";
+  const { budget } = difficultyConfig(diffKey);
   const totalSpend = roster.reduce((sum, p) => sum + p.price, 0) + coach.price;
-  if (totalSpend > BUDGET) {
-    return res.status(400).json({ error: `Roster costs $${totalSpend.toLocaleString()}, over the $${BUDGET.toLocaleString()} budget` });
+  if (totalSpend > budget) {
+    return res.status(400).json({ error: `Roster costs $${totalSpend.toLocaleString()}, over the $${budget.toLocaleString()} budget` });
   }
 
   const teamId = crypto.randomUUID();
@@ -149,25 +213,21 @@ app.post("/api/team", (req, res) => {
     coach,
     overall,
     totalSpend,
+    budget,
+    difficulty: diffKey,
     bannedMap: validBannedMap,
     history: [],
     currentRun: null,
   });
+  saveTeams();
 
-  res.json({ teamId, name, players: roster, coach, overall, totalSpend, budget: BUDGET, bannedMap: validBannedMap });
+  res.json(teamView(teams.get(teamId), teamId));
 });
 
 app.get("/api/team/:teamId", (req, res) => {
   const team = teams.get(req.params.teamId);
   if (!team) return res.status(404).json({ error: "Team not found" });
-  res.json({
-    name: team.name,
-    players: team.players,
-    coach: team.coach,
-    overall: team.overall,
-    history: team.history,
-    currentRun: team.currentRun ? runView(team.currentRun) : null,
-  });
+  res.json(teamView(team, req.params.teamId));
 });
 
 app.post("/api/major/:teamId/start", (req, res) => {
@@ -183,7 +243,8 @@ app.post("/api/major/:teamId/start", (req, res) => {
     overall: team.overall,
   };
 
-  const run = buildMajorRun(userTeam, teamEras, team.bannedMap, coaches);
+  const { aiBoost } = difficultyConfig(team.difficulty);
+  const run = buildMajorRun(userTeam, teamEras, team.bannedMap, coaches, aiBoost);
   team.currentRun = run;
 
   res.json({ run: runView(run) });
@@ -207,11 +268,13 @@ app.post("/api/major/:teamId/advance", (req, res) => {
       eliminatedAt: run.userEliminatedAt,
       champion: run.champion,
     });
+    saveTeams();
   }
 
   res.json({ roundResult, run: runView(run), attempts: team.history.length });
 });
 
+loadTeams();
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`CS Major Team Picker API running on http://localhost:${PORT}`);

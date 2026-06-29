@@ -1,6 +1,6 @@
-import { useState } from "react";
-import type { Player, Role, MajorRun, RoundResult, HistoryEntry } from "./types";
-import { createTeam, startMajor, advanceMajor as advanceMajorApi } from "./api";
+import { useEffect, useState } from "react";
+import type { Player, Role, MajorRun, RoundResult, HistoryEntry, Difficulty } from "./types";
+import { createTeam, startMajor, advanceMajor as advanceMajorApi, fetchTeam } from "./api";
 import Welcome from "./components/Welcome";
 import TeamName from "./components/TeamName";
 import Draft from "./components/Draft";
@@ -10,8 +10,12 @@ import { isMuted, setMuted } from "./sound";
 
 type Stage = "welcome" | "name" | "draft" | "team" | "major";
 
+const SAVED_TEAM_KEY = "csmajor_teamId";
+
 export default function App() {
+  const [booting, setBooting] = useState(true);
   const [stage, setStage] = useState<Stage>("welcome");
+  const [difficulty, setDifficulty] = useState<Difficulty>("normal");
   const [pendingTeamName, setPendingTeamName] = useState("Your Team");
   const [teamId, setTeamId] = useState<string | null>(null);
   const [teamName, setTeamName] = useState("Your Team");
@@ -28,7 +32,32 @@ export default function App() {
   const [muted, setMutedState] = useState(isMuted());
   const [runAttempt, setRunAttempt] = useState(0);
 
-  const handleWelcomeStart = () => {
+  // On load, resume a previously-drafted team if one is saved and still on the server.
+  useEffect(() => {
+    const savedId = localStorage.getItem(SAVED_TEAM_KEY);
+    if (!savedId) {
+      setBooting(false);
+      return;
+    }
+    fetchTeam(savedId)
+      .then((res) => {
+        setTeamId(res.teamId);
+        setTeamName(res.name);
+        setPlayers(res.players);
+        setCoach(res.coach);
+        setOverall(res.overall);
+        setTotalSpend(res.totalSpend);
+        setBudget(res.budget);
+        setDifficulty(res.difficulty);
+        setHistory(res.history);
+        setStage("team");
+      })
+      .catch(() => localStorage.removeItem(SAVED_TEAM_KEY))
+      .finally(() => setBooting(false));
+  }, []);
+
+  const handleWelcomeStart = (chosen: Difficulty) => {
+    setDifficulty(chosen);
     setStage("name");
   };
 
@@ -40,7 +69,7 @@ export default function App() {
   const handleDraftComplete = async (picks: Record<Role, string>, coachId: string) => {
     setError(null);
     try {
-      const res = await createTeam(picks, coachId, pendingTeamName, null);
+      const res = await createTeam(picks, coachId, pendingTeamName, difficulty);
       setTeamId(res.teamId);
       setTeamName(res.name);
       setPlayers(res.players);
@@ -48,6 +77,9 @@ export default function App() {
       setOverall(res.overall);
       setTotalSpend(res.totalSpend);
       setBudget(res.budget);
+      setDifficulty(res.difficulty);
+      setHistory(res.history);
+      localStorage.setItem(SAVED_TEAM_KEY, res.teamId);
       setStage("team");
     } catch (e: any) {
       setError(e.message);
@@ -95,6 +127,7 @@ export default function App() {
   };
 
   const handleRestart = () => {
+    localStorage.removeItem(SAVED_TEAM_KEY);
     setStage("welcome");
     setTeamId(null);
     setTeamName("Your Team");
@@ -113,6 +146,14 @@ export default function App() {
     setMuted(next);
     setMutedState(next);
   };
+
+  if (booting) {
+    return (
+      <div className="hero-screen">
+        <div className="hint">Loading…</div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -139,7 +180,7 @@ export default function App() {
 
           {error && <div className="panel error">{error}</div>}
 
-          {stage === "draft" && <Draft onComplete={handleDraftComplete} />}
+          {stage === "draft" && <Draft difficulty={difficulty} onComplete={handleDraftComplete} />}
 
           {stage === "team" && coach && (
             <TeamSummary
@@ -149,7 +190,8 @@ export default function App() {
               overall={overall}
               totalSpend={totalSpend}
               budget={budget}
-              attempts={history.length}
+              difficulty={difficulty}
+              history={history}
               onSimulate={handleStartMajor}
               simulating={false}
             />

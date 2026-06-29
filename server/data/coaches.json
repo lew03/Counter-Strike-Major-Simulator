@@ -12,6 +12,28 @@
   },
   {
     "id": "c02",
+    "name": "XTQZZZ",
+    "country": "FR",
+    "role": "coach",
+    "era": "2020-2026",
+    "team": "Vitality",
+    "rating": 1.06,
+    "kd": 3,
+    "price": 138000
+  },
+  {
+    "id": "c03",
+    "name": "B1ad3",
+    "country": "RU",
+    "role": "coach",
+    "era": "2021-2025",
+    "team": "Natus Vincere",
+    "rating": 1.05,
+    "kd": 2,
+    "price": 105000
+  },
+  {
+    "id": "c04",
     "name": "zews",
     "country": "BR",
     "role": "coach",
@@ -22,7 +44,18 @@
     "price": 105000
   },
   {
-    "id": "c03",
+    "id": "c05",
+    "name": "peacemaker",
+    "country": "BR",
+    "role": "coach",
+    "era": "2017-2023",
+    "team": "TYLOO / Liquid",
+    "rating": 1.04,
+    "kd": 1,
+    "price": 80000
+  },
+  {
+    "id": "c06",
     "name": "YNk",
     "country": "RS",
     "role": "coach",
@@ -33,7 +66,18 @@
     "price": 60000
   },
   {
-    "id": "c04",
+    "id": "c07",
+    "name": "kassad",
+    "country": "PL",
+    "role": "coach",
+    "era": "2016-2022",
+    "team": "Evil Geniuses",
+    "rating": 1.03,
+    "kd": 0,
+    "price": 60000
+  },
+  {
+    "id": "c08",
     "name": "HUNDEN",
     "country": "DK",
     "role": "coach",
@@ -44,7 +88,18 @@
     "price": 46000
   },
   {
-    "id": "c05",
+    "id": "c09",
+    "name": "Rejin",
+    "country": "DE",
+    "role": "coach",
+    "era": "2018-2023",
+    "team": "MOUZ / G2",
+    "rating": 1.02,
+    "kd": 0,
+    "price": 46000
+  },
+  {
+    "id": "c10",
     "name": "RobbaN",
     "country": "SE",
     "role": "coach",
@@ -55,7 +110,18 @@
     "price": 35000
   },
   {
-    "id": "c06",
+    "id": "c11",
+    "name": "devoduvek",
+    "country": "FR",
+    "role": "coach",
+    "era": "2021-2026",
+    "team": "Vitality",
+    "rating": 1.01,
+    "kd": 0,
+    "price": 35000
+  },
+  {
+    "id": "c12",
     "name": "pita",
     "country": "BR",
     "role": "coach",
@@ -66,7 +132,29 @@
     "price": 26000
   },
   {
-    "id": "c07",
+    "id": "c13",
+    "name": "jokerN",
+    "country": "DK",
+    "role": "coach",
+    "era": "2018-2023",
+    "team": "Heroic",
+    "rating": 1,
+    "kd": 0,
+    "price": 26000
+  },
+  {
+    "id": "c14",
+    "name": "Elmapuddy",
+    "country": "ZA",
+    "role": "coach",
+    "era": "2019-2024",
+    "team": "ENCE / Heroic",
+    "rating": 0.99,
+    "kd": 0,
+    "price": 20000
+  },
+  {
+    "id": "c15",
     "name": "starix",
     "country": "UA",
     "role": "coach",

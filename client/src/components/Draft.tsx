@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { DraftSlot, Player, Role } from "../types";
+import type { DraftSlot, Player, Role, Difficulty } from "../types";
 import { fetchConfig, fetchRoleOptions } from "../api";
 import PlayerCard from "./PlayerCard";
 import { playPickSound } from "../sound";
@@ -17,8 +17,10 @@ const POOL_SIZE = 6;
 const REROLL_COST = 50000;
 
 export default function Draft({
+  difficulty,
   onComplete,
 }: {
+  difficulty: Difficulty;
   onComplete: (picks: Record<Role, string>, coachId: string) => void;
 }) {
   const [draftOrder, setDraftOrder] = useState<DraftSlot[] | null>(null);
@@ -34,7 +36,7 @@ export default function Draft({
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchConfig()
+    fetchConfig(difficulty)
       .then((cfg) => {
         setDraftOrder(cfg.draftOrder);
         setMinPrices(cfg.minPrices);
@@ -42,7 +44,7 @@ export default function Draft({
         setRemainingBudget(cfg.budget);
       })
       .catch((e) => setError(e.message));
-  }, []);
+  }, [difficulty]);
 
   useEffect(() => {
     if (!draftOrder) return;
@@ -127,7 +129,7 @@ export default function Draft({
       <div className="card-grid" key={`${role}-${remainingBudget}`}>
         {candidates.map((p, i) => (
           <div key={p.id} className="card-pop" style={{ animationDelay: `${i * 0.05}s` }}>
-            <PlayerCard player={p} onClick={() => handlePick(p)} />
+            <PlayerCard player={p} showValue onClick={() => handlePick(p)} />
           </div>
         ))}
       </div>

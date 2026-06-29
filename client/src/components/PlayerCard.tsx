@@ -17,12 +17,16 @@ function initials(name: string) {
 export default function PlayerCard({
   player,
   selected,
+  showValue,
   onClick,
 }: {
   player: Player;
   selected?: boolean;
+  showValue?: boolean;
   onClick?: () => void;
 }) {
+  // Rating delivered per $100k spent — higher = better value for money.
+  const valuePer100k = player.price > 0 ? (player.rating / (player.price / 100000)) : 0;
   return (
     <button className={`player-card ${selected ? "selected" : ""}`} onClick={onClick}>
       <div className="player-avatar">
@@ -50,7 +54,17 @@ export default function PlayerCard({
           <span>K/D {player.kd.toFixed(2)}</span>
         )}
       </div>
-      <div className="player-price">${player.price.toLocaleString()}</div>
+      <div className="player-price">
+        ${player.price.toLocaleString()}
+        {showValue && player.role !== "coach" && (
+          <span
+            className="player-value"
+            title="Rating delivered per $100k spent — higher is better value"
+          >
+            {valuePer100k.toFixed(2)} val
+          </span>
+        )}
+      </div>
     </button>
   );
 }

@@ -1,5 +1,6 @@
 export type Role = "entry" | "awp" | "support" | "lurker" | "igl";
 export type DraftSlot = Role | "coach";
+export type Difficulty = "easy" | "normal" | "hard";
 
 export interface Player {
   id: string;
@@ -30,7 +31,8 @@ export interface TeamResponse {
   overall: number;
   totalSpend: number;
   budget: number;
-  bannedMap: string | null;
+  difficulty: Difficulty;
+  history: HistoryEntry[];
 }
 
 export interface ScoreboardRow {

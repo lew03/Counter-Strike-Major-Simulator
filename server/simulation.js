@@ -192,13 +192,14 @@ function matchSummary(teamA, teamB, result, format) {
   };
 }
 
-// AI rosters get a modest rating bump so a well-drafted user team doesn't sit
-// comfortably above the field by default — keeps good drafting valuable without
-// making the major a coin flip against weak historical lineups.
-const AI_STRENGTH_BOOST = 1.03;
+// AI rosters get a rating bump so a well-drafted user team doesn't sit comfortably
+// above the field by default. The boost is difficulty-driven (passed in from the
+// run builder) — higher = harder opponents.
+const DEFAULT_AI_BOOST = 1.03;
 
-function teamFromEra(era, coachesPool) {
-  const players = era.players.map((p) => ({ ...p, rating: p.rating * AI_STRENGTH_BOOST }));
+function teamFromEra(era, coachesPool, aiBoost) {
+  const boost = aiBoost || DEFAULT_AI_BOOST;
+  const players = era.players.map((p) => ({ ...p, rating: p.rating * boost }));
   const coach = coachesPool && coachesPool.length
     ? coachesPool[Math.floor(Math.random() * coachesPool.length)]
     : null;
@@ -215,9 +216,9 @@ function teamFromEra(era, coachesPool) {
 
 // --- Swiss-system Opening Stage (16 teams, mirrors the current Valve Major format) ---
 
-function buildMajorRun(userTeam, teamEras, bannedMap, coachesPool) {
+function buildMajorRun(userTeam, teamEras, bannedMap, coachesPool, aiBoost) {
   const chosenEras = shuffle(teamEras).slice(0, 15);
-  const aiTeams = chosenEras.map((era) => teamFromEra(era, coachesPool));
+  const aiTeams = chosenEras.map((era) => teamFromEra(era, coachesPool, aiBoost));
   const allTeams = shuffle([userTeam, ...aiTeams]);
 
   const standings = {};

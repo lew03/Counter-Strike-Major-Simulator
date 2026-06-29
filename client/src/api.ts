@@ -2,6 +2,7 @@ import type {
   Role,
   Player,
   DraftSlot,
+  Difficulty,
   DraftConfig,
   TeamResponse,
   StartMajorResponse,
@@ -10,9 +11,15 @@ import type {
 
 const BASE = "/api";
 
-export async function fetchConfig(): Promise<DraftConfig> {
-  const res = await fetch(`${BASE}/config`);
+export async function fetchConfig(difficulty: Difficulty): Promise<DraftConfig> {
+  const res = await fetch(`${BASE}/config?difficulty=${difficulty}`);
   if (!res.ok) throw new Error("Failed to fetch draft config");
+  return res.json();
+}
+
+export async function fetchTeam(teamId: string): Promise<TeamResponse> {
+  const res = await fetch(`${BASE}/team/${teamId}`);
+  if (!res.ok) throw new Error("Team not found");
   return res.json();
 }
 
@@ -33,12 +40,12 @@ export async function createTeam(
   picks: Record<Role, string>,
   coachId: string,
   teamName: string,
-  bannedMap: string | null
+  difficulty: Difficulty
 ): Promise<TeamResponse> {
   const res = await fetch(`${BASE}/team`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ picks, coachId, teamName, bannedMap }),
+    body: JSON.stringify({ picks, coachId, teamName, difficulty }),
   });
   if (!res.ok) {
     const err = await res.json().catch(() => ({ error: "Failed to create team" }));

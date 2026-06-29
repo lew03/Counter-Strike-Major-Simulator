@@ -1,5 +1,12 @@
-import type { Player } from "../types";
+import type { Player, HistoryEntry, Difficulty } from "../types";
 import PlayerCard from "./PlayerCard";
+import CareerStats from "./CareerStats";
+
+const DIFFICULTY_LABEL: Record<Difficulty, string> = {
+  easy: "Easy",
+  normal: "Normal",
+  hard: "Hard",
+};
 
 export default function TeamSummary({
   teamName,
@@ -8,7 +15,8 @@ export default function TeamSummary({
   overall,
   totalSpend,
   budget,
-  attempts,
+  difficulty,
+  history,
   onSimulate,
   simulating,
 }: {
@@ -18,18 +26,24 @@ export default function TeamSummary({
   overall: number;
   totalSpend: number;
   budget: number;
-  attempts: number;
+  difficulty: Difficulty;
+  history: HistoryEntry[];
   onSimulate: () => void;
   simulating: boolean;
 }) {
+  const attempts = history.length;
   return (
     <div className="panel fade-in">
       <h2>{teamName}</h2>
-      <p className="hint">Overall team rating: {overall.toFixed(2)}</p>
+      <p className="hint">
+        Overall team rating: {overall.toFixed(2)} · Difficulty: {DIFFICULTY_LABEL[difficulty]}
+      </p>
       <p className="hint">
         Budget spent: <strong>${totalSpend.toLocaleString()}</strong> / ${budget.toLocaleString()} (
         ${(budget - totalSpend).toLocaleString()} unspent)
       </p>
+
+      {attempts > 0 && <CareerStats history={history} />}
       <div className="card-grid">
         {players.map((p, i) => (
           <div key={p.id} className="card-pop" style={{ animationDelay: `${i * 0.05}s` }}>
@@ -43,7 +57,6 @@ export default function TeamSummary({
       <button className="primary-btn" onClick={onSimulate} disabled={simulating}>
         {simulating ? "Simulating..." : attempts === 0 ? "Run the Major" : "Run Another Major"}
       </button>
-      {attempts > 0 && <p className="hint">Attempts so far: {attempts}</p>}
     </div>
   );
 }
