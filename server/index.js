@@ -274,8 +274,23 @@ app.post("/api/major/:teamId/advance", (req, res) => {
   res.json({ roundResult, run: runView(run), attempts: team.history.length });
 });
 
+// --- Production: serve the built client so the whole app runs as ONE process on
+//     one port (how it's deployed). In local dev this folder doesn't exist and the
+//     Vite dev server proxies /api here instead, so this block is simply skipped. ---
+const CLIENT_DIST = path.join(__dirname, "..", "client", "dist");
+if (fs.existsSync(CLIENT_DIST)) {
+  app.use(express.static(CLIENT_DIST));
+  // SPA fallback: any non-API GET returns index.html so client routing works.
+  // A plain middleware (no path pattern) avoids path-to-regexp edge cases.
+  app.use((req, res, next) => {
+    if (req.method !== "GET" || req.path.startsWith("/api")) return next();
+    res.sendFile(path.join(CLIENT_DIST, "index.html"));
+  });
+  console.log("Serving built client from", CLIENT_DIST);
+}
+
 loadTeams();
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
-  console.log(`CS Major Team Picker API running on http://localhost:${PORT}`);
+  console.log(`CS Major Team Picker running on http://localhost:${PORT}`);
 });

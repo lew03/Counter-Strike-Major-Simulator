@@ -1,0 +1,14 @@
+{
+  "name": "cs-major-team-picker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Draft a Counter-Strike roster under a salary cap and simulate a Valve Major.",
+  "scripts": {
+    "install:all": "cd server && npm install && cd ../client && npm install",
+    "build": "cd client && npm install && npm run build",
+    "start": "cd server && npm install && node index.js",
+    "dev:server": "cd server && npm run dev",
+    "dev:client": "cd client && npm run dev",
+    "test": "cd server && npm test"
+  }
+}
