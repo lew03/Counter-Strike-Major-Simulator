@@ -1,0 +1,1066 @@
+[
+  {
+    "id": "t01",
+    "name": "Astralis",
+    "year": "2017",
+    "logo": "AST",
+    "players": [
+      {
+        "name": "gla1ve",
+        "country": "DK",
+        "role": "igl",
+        "rating": 1.08
+      },
+      {
+        "name": "device",
+        "country": "DK",
+        "role": "awp",
+        "rating": 1.22
+      },
+      {
+        "name": "dupreeh",
+        "country": "DK",
+        "role": "entry",
+        "rating": 1.14
+      },
+      {
+        "name": "Xyp9x",
+        "country": "DK",
+        "role": "support",
+        "rating": 1.07
+      },
+      {
+        "name": "Kjaerbye",
+        "country": "DK",
+        "role": "lurker",
+        "rating": 1.1
+      }
+    ]
+  },
+  {
+    "id": "t02",
+    "name": "Astralis",
+    "year": "2019",
+    "logo": "AST",
+    "players": [
+      {
+        "name": "gla1ve",
+        "country": "DK",
+        "role": "igl",
+        "rating": 1.1
+      },
+      {
+        "name": "device",
+        "country": "DK",
+        "role": "awp",
+        "rating": 1.3
+      },
+      {
+        "name": "dupreeh",
+        "country": "DK",
+        "role": "entry",
+        "rating": 1.18
+      },
+      {
+        "name": "Xyp9x",
+        "country": "DK",
+        "role": "support",
+        "rating": 1.1
+      },
+      {
+        "name": "Magisk",
+        "country": "DK",
+        "role": "lurker",
+        "rating": 1.19
+      }
+    ]
+  },
+  {
+    "id": "t03",
+    "name": "FaZe Clan",
+    "year": "2016",
+    "logo": "FAZE",
+    "players": [
+      {
+        "name": "karrigan",
+        "country": "DK",
+        "role": "igl",
+        "rating": 1.02
+      },
+      {
+        "name": "GuardiaN",
+        "country": "SK",
+        "role": "awp",
+        "rating": 1.19
+      },
+      {
+        "name": "olofmeister",
+        "country": "SE",
+        "role": "entry",
+        "rating": 1.17
+      },
+      {
+        "name": "rain",
+        "country": "NO",
+        "role": "support",
+        "rating": 1.11
+      },
+      {
+        "name": "kioShiMa",
+        "country": "FR",
+        "role": "lurker",
+        "rating": 1.08
+      }
+    ]
+  },
+  {
+    "id": "t04",
+    "name": "FaZe Clan",
+    "year": "2018",
+    "logo": "FAZE",
+    "players": [
+      {
+        "name": "karrigan",
+        "country": "DK",
+        "role": "igl",
+        "rating": 1.05
+      },
+      {
+        "name": "GuardiaN",
+        "country": "SK",
+        "role": "awp",
+        "rating": 1.2
+      },
+      {
+        "name": "NiKo",
+        "country": "BA",
+        "role": "entry",
+        "rating": 1.24
+      },
+      {
+        "name": "rain",
+        "country": "NO",
+        "role": "support",
+        "rating": 1.13
+      },
+      {
+        "name": "olofmeister",
+        "country": "SE",
+        "role": "lurker",
+        "rating": 1.14
+      }
+    ]
+  },
+  {
+    "id": "t05",
+    "name": "FaZe Clan",
+    "year": "2022",
+    "logo": "FAZE",
+    "players": [
+      {
+        "name": "karrigan",
+        "country": "DK",
+        "role": "igl",
+        "rating": 1.04
+      },
+      {
+        "name": "broky",
+        "country": "LV",
+        "role": "awp",
+        "rating": 1.17
+      },
+      {
+        "name": "NiKo",
+        "country": "BA",
+        "role": "entry",
+        "rating": 1.22
+      },
+      {
+        "name": "rain",
+        "country": "NO",
+        "role": "support",
+        "rating": 1.09
+      },
+      {
+        "name": "Twistzz",
+        "country": "CA",
+        "role": "lurker",
+        "rating": 1.19
+      }
+    ]
+  },
+  {
+    "id": "t06",
+    "name": "FaZe Clan",
+    "year": "2026",
+    "logo": "FAZE",
+    "players": [
+      {
+        "name": "karrigan",
+        "country": "DK",
+        "role": "igl",
+        "rating": 1
+      },
+      {
+        "name": "broky",
+        "country": "LV",
+        "role": "awp",
+        "rating": 1.15
+      },
+      {
+        "name": "frozen",
+        "country": "SK",
+        "role": "entry",
+        "rating": 1.19
+      },
+      {
+        "name": "Twistzz",
+        "country": "CA",
+        "role": "support",
+        "rating": 1.18
+      },
+      {
+        "name": "jimpphat",
+        "country": "FI",
+        "role": "lurker",
+        "rating": 1.12
+      }
+    ]
+  },
+  {
+    "id": "t07",
+    "name": "Natus Vincere",
+    "year": "2018",
+    "logo": "NAVI",
+    "players": [
+      {
+        "name": "Zeus",
+        "country": "UA",
+        "role": "igl",
+        "rating": 0.99
+      },
+      {
+        "name": "s1mple",
+        "country": "UA",
+        "role": "awp",
+        "rating": 1.3
+      },
+      {
+        "name": "electroNic",
+        "country": "RU",
+        "role": "entry",
+        "rating": 1.16
+      },
+      {
+        "name": "Boombl4",
+        "country": "RU",
+        "role": "support",
+        "rating": 1.08
+      },
+      {
+        "name": "flamie",
+        "country": "RU",
+        "role": "lurker",
+        "rating": 1.05
+      }
+    ]
+  },
+  {
+    "id": "t08",
+    "name": "Natus Vincere",
+    "year": "2021",
+    "logo": "NAVI",
+    "players": [
+      {
+        "name": "B1ad3",
+        "country": "RU",
+        "role": "igl",
+        "rating": 1.02
+      },
+      {
+        "name": "s1mple",
+        "country": "UA",
+        "role": "awp",
+        "rating": 1.35
+      },
+      {
+        "name": "electroNic",
+        "country": "RU",
+        "role": "entry",
+        "rating": 1.2
+      },
+      {
+        "name": "Boombl4",
+        "country": "RU",
+        "role": "support",
+        "rating": 1.1
+      },
+      {
+        "name": "Perfecto",
+        "country": "RU",
+        "role": "lurker",
+        "rating": 1.12
+      }
+    ]
+  },
+  {
+    "id": "t09",
+    "name": "Natus Vincere",
+    "year": "2024",
+    "logo": "NAVI",
+    "players": [
+      {
+        "name": "B1ad3",
+        "country": "RU",
+        "role": "igl",
+        "rating": 1
+      },
+      {
+        "name": "iM",
+        "country": "EE",
+        "role": "awp",
+        "rating": 1.18
+      },
+      {
+        "name": "b1t",
+        "country": "UA",
+        "role": "entry",
+        "rating": 1.22
+      },
+      {
+        "name": "Aleksib",
+        "country": "FI",
+        "role": "support",
+        "rating": 1.05
+      },
+      {
+        "name": "jL",
+        "country": "FR",
+        "role": "lurker",
+        "rating": 1.14
+      }
+    ]
+  },
+  {
+    "id": "t10",
+    "name": "G2 Esports",
+    "year": "2023",
+    "logo": "G2",
+    "players": [
+      {
+        "name": "huNter-",
+        "country": "BA",
+        "role": "igl",
+        "rating": 1.13
+      },
+      {
+        "name": "m0NESY",
+        "country": "RU",
+        "role": "awp",
+        "rating": 1.26
+      },
+      {
+        "name": "NiKo",
+        "country": "BA",
+        "role": "entry",
+        "rating": 1.21
+      },
+      {
+        "name": "jks",
+        "country": "AU",
+        "role": "support",
+        "rating": 1.12
+      },
+      {
+        "name": "hooxi",
+        "country": "NL",
+        "role": "lurker",
+        "rating": 1
+      }
+    ]
+  },
+  {
+    "id": "t11",
+    "name": "G2 Esports",
+    "year": "2025",
+    "logo": "G2",
+    "players": [
+      {
+        "name": "huNter-",
+        "country": "BA",
+        "role": "igl",
+        "rating": 1.11
+      },
+      {
+        "name": "m0NESY",
+        "country": "RU",
+        "role": "awp",
+        "rating": 1.27
+      },
+      {
+        "name": "NiKo",
+        "country": "BA",
+        "role": "entry",
+        "rating": 1.2
+      },
+      {
+        "name": "nexa",
+        "country": "BA",
+        "role": "support",
+        "rating": 1.04
+      },
+      {
+        "name": "malbsMd",
+        "country": "ES",
+        "role": "lurker",
+        "rating": 1.06
+      }
+    ]
+  },
+  {
+    "id": "t12",
+    "name": "Vitality",
+    "year": "2023",
+    "logo": "VIT",
+    "players": [
+      {
+        "name": "apEX",
+        "country": "FR",
+        "role": "igl",
+        "rating": 1.02
+      },
+      {
+        "name": "Spinx",
+        "country": "PT",
+        "role": "awp",
+        "rating": 1.17
+      },
+      {
+        "name": "ZywOo",
+        "country": "FR",
+        "role": "entry",
+        "rating": 1.33
+      },
+      {
+        "name": "Magisk",
+        "country": "DK",
+        "role": "support",
+        "rating": 1.1
+      },
+      {
+        "name": "Shox",
+        "country": "FR",
+        "role": "lurker",
+        "rating": 1.05
+      }
+    ]
+  },
+  {
+    "id": "t13",
+    "name": "Vitality",
+    "year": "2025",
+    "logo": "VIT",
+    "players": [
+      {
+        "name": "apEX",
+        "country": "FR",
+        "role": "igl",
+        "rating": 1
+      },
+      {
+        "name": "Spinx",
+        "country": "PT",
+        "role": "awp",
+        "rating": 1.19
+      },
+      {
+        "name": "ZywOo",
+        "country": "FR",
+        "role": "entry",
+        "rating": 1.35
+      },
+      {
+        "name": "flameZ",
+        "country": "BE",
+        "role": "support",
+        "rating": 1.15
+      },
+      {
+        "name": "jL",
+        "country": "FR",
+        "role": "lurker",
+        "rating": 1.16
+      }
+    ]
+  },
+  {
+    "id": "t14",
+    "name": "Team Liquid",
+    "year": "2017",
+    "logo": "TL",
+    "players": [
+      {
+        "name": "jdm64",
+        "country": "US",
+        "role": "igl",
+        "rating": 0.97
+      },
+      {
+        "name": "Hiko",
+        "country": "US",
+        "role": "awp",
+        "rating": 1.03
+      },
+      {
+        "name": "nitr0",
+        "country": "US",
+        "role": "entry",
+        "rating": 1.06
+      },
+      {
+        "name": "EliGE",
+        "country": "US",
+        "role": "support",
+        "rating": 1.08
+      },
+      {
+        "name": "Twistzz",
+        "country": "CA",
+        "role": "lurker",
+        "rating": 1.04
+      }
+    ]
+  },
+  {
+    "id": "t15",
+    "name": "Team Liquid",
+    "year": "2019",
+    "logo": "TL",
+    "players": [
+      {
+        "name": "nitr0",
+        "country": "US",
+        "role": "igl",
+        "rating": 1.07
+      },
+      {
+        "name": "Stewie2K",
+        "country": "US",
+        "role": "awp",
+        "rating": 1.06
+      },
+      {
+        "name": "EliGE",
+        "country": "US",
+        "role": "entry",
+        "rating": 1.17
+      },
+      {
+        "name": "NAF",
+        "country": "CA",
+        "role": "support",
+        "rating": 1.16
+      },
+      {
+        "name": "Twistzz",
+        "country": "CA",
+        "role": "lurker",
+        "rating": 1.2
+      }
+    ]
+  },
+  {
+    "id": "t16",
+    "name": "Team Spirit",
+    "year": "2023",
+    "logo": "SPR",
+    "players": [
+      {
+        "name": "chopper",
+        "country": "RU",
+        "role": "igl",
+        "rating": 1.01
+      },
+      {
+        "name": "sh1ro",
+        "country": "RU",
+        "role": "awp",
+        "rating": 1.26
+      },
+      {
+        "name": "donk",
+        "country": "RU",
+        "role": "entry",
+        "rating": 1.3
+      },
+      {
+        "name": "magixx",
+        "country": "RU",
+        "role": "support",
+        "rating": 1.14
+      },
+      {
+        "name": "zont1x",
+        "country": "RU",
+        "role": "lurker",
+        "rating": 1.12
+      }
+    ]
+  },
+  {
+    "id": "t17",
+    "name": "Team Spirit",
+    "year": "2025",
+    "logo": "SPR",
+    "players": [
+      {
+        "name": "fantasy",
+        "country": "RU",
+        "role": "igl",
+        "rating": 1
+      },
+      {
+        "name": "Ax1Le",
+        "country": "RU",
+        "role": "awp",
+        "rating": 1.23
+      },
+      {
+        "name": "donk",
+        "country": "RU",
+        "role": "entry",
+        "rating": 1.36
+      },
+      {
+        "name": "magixx",
+        "country": "RU",
+        "role": "support",
+        "rating": 1.16
+      },
+      {
+        "name": "zont1x",
+        "country": "RU",
+        "role": "lurker",
+        "rating": 1.15
+      }
+    ]
+  },
+  {
+    "id": "t18",
+    "name": "Virtus.pro",
+    "year": "2014",
+    "logo": "VP",
+    "players": [
+      {
+        "name": "TaZ",
+        "country": "PL",
+        "role": "igl",
+        "rating": 0.96
+      },
+      {
+        "name": "NEO",
+        "country": "PL",
+        "role": "awp",
+        "rating": 1.1
+      },
+      {
+        "name": "byali",
+        "country": "PL",
+        "role": "entry",
+        "rating": 1.05
+      },
+      {
+        "name": "Snax",
+        "country": "PL",
+        "role": "support",
+        "rating": 1.09
+      },
+      {
+        "name": "pasha",
+        "country": "PL",
+        "role": "lurker",
+        "rating": 1.02
+      }
+    ]
+  },
+  {
+    "id": "t19",
+    "name": "Ninjas in Pyjamas",
+    "year": "2014",
+    "logo": "NIP",
+    "players": [
+      {
+        "name": "Xizt",
+        "country": "SE",
+        "role": "igl",
+        "rating": 1
+      },
+      {
+        "name": "f0rest",
+        "country": "SE",
+        "role": "awp",
+        "rating": 1.2
+      },
+      {
+        "name": "GeT_RiGhT",
+        "country": "SE",
+        "role": "entry",
+        "rating": 1.15
+      },
+      {
+        "name": "friberg",
+        "country": "SE",
+        "role": "support",
+        "rating": 1.05
+      },
+      {
+        "name": "fifflaren",
+        "country": "SE",
+        "role": "lurker",
+        "rating": 1
+      }
+    ]
+  },
+  {
+    "id": "t20",
+    "name": "EnVyUs",
+    "year": "2015",
+    "logo": "NV",
+    "players": [
+      {
+        "name": "apEX",
+        "country": "FR",
+        "role": "igl",
+        "rating": 1
+      },
+      {
+        "name": "kennyS",
+        "country": "FR",
+        "role": "awp",
+        "rating": 1.21
+      },
+      {
+        "name": "Happy",
+        "country": "FR",
+        "role": "entry",
+        "rating": 1.08
+      },
+      {
+        "name": "NBK-",
+        "country": "FR",
+        "role": "support",
+        "rating": 1.05
+      },
+      {
+        "name": "Shox",
+        "country": "FR",
+        "role": "lurker",
+        "rating": 1.12
+      }
+    ]
+  },
+  {
+    "id": "t21",
+    "name": "SK Gaming",
+    "year": "2017",
+    "logo": "SK",
+    "players": [
+      {
+        "name": "FalleN",
+        "country": "BR",
+        "role": "igl",
+        "rating": 1.05
+      },
+      {
+        "name": "fer",
+        "country": "BR",
+        "role": "awp",
+        "rating": 1.18
+      },
+      {
+        "name": "coldzera",
+        "country": "BR",
+        "role": "entry",
+        "rating": 1.22
+      },
+      {
+        "name": "TACO",
+        "country": "BR",
+        "role": "support",
+        "rating": 1.08
+      },
+      {
+        "name": "fnx",
+        "country": "BR",
+        "role": "lurker",
+        "rating": 1.02
+      }
+    ]
+  },
+  {
+    "id": "t22",
+    "name": "Cloud9",
+    "year": "2018",
+    "logo": "C9",
+    "players": [
+      {
+        "name": "Stewie2K",
+        "country": "US",
+        "role": "igl",
+        "rating": 1.09
+      },
+      {
+        "name": "autimatic",
+        "country": "US",
+        "role": "awp",
+        "rating": 1.13
+      },
+      {
+        "name": "tarik",
+        "country": "TR",
+        "role": "entry",
+        "rating": 1.1
+      },
+      {
+        "name": "RUSH",
+        "country": "CA",
+        "role": "support",
+        "rating": 1.06
+      },
+      {
+        "name": "Skadoodle",
+        "country": "US",
+        "role": "lurker",
+        "rating": 1.11
+      }
+    ]
+  },
+  {
+    "id": "t23",
+    "name": "MOUZ",
+    "year": "2024",
+    "logo": "MOUZ",
+    "players": [
+      {
+        "name": "Aleksib",
+        "country": "FI",
+        "role": "igl",
+        "rating": 1.01
+      },
+      {
+        "name": "torzsi",
+        "country": "HU",
+        "role": "awp",
+        "rating": 1.11
+      },
+      {
+        "name": "xertioN",
+        "country": "DK",
+        "role": "entry",
+        "rating": 1.16
+      },
+      {
+        "name": "siuhy",
+        "country": "PL",
+        "role": "support",
+        "rating": 1.1
+      },
+      {
+        "name": "Bymas",
+        "country": "PL",
+        "role": "lurker",
+        "rating": 1.18
+      }
+    ]
+  },
+  {
+    "id": "t24",
+    "name": "Team Falcons",
+    "year": "2025",
+    "logo": "FLC",
+    "players": [
+      {
+        "name": "MICHU",
+        "country": "PL",
+        "role": "igl",
+        "rating": 1.03
+      },
+      {
+        "name": "skiba",
+        "country": "PL",
+        "role": "awp",
+        "rating": 1.13
+      },
+      {
+        "name": "iM",
+        "country": "EE",
+        "role": "entry",
+        "rating": 1.2
+      },
+      {
+        "name": "w0nderful",
+        "country": "UA",
+        "role": "support",
+        "rating": 1.16
+      },
+      {
+        "name": "Patsi",
+        "country": "AT",
+        "role": "lurker",
+        "rating": 1.09
+      }
+    ]
+  },
+  {
+    "id": "t25",
+    "name": "BIG",
+    "year": "2019",
+    "logo": "BIG",
+    "players": [
+      {
+        "name": "tabseN",
+        "country": "DE",
+        "role": "igl",
+        "rating": 1
+      },
+      {
+        "name": "syrsoN",
+        "country": "DE",
+        "role": "awp",
+        "rating": 1.07
+      },
+      {
+        "name": "gob b",
+        "country": "DE",
+        "role": "entry",
+        "rating": 1.04
+      },
+      {
+        "name": "k1to",
+        "country": "DE",
+        "role": "support",
+        "rating": 1.06
+      },
+      {
+        "name": "XANTARES",
+        "country": "TR",
+        "role": "lurker",
+        "rating": 1.1
+      }
+    ]
+  },
+  {
+    "id": "t26",
+    "name": "Heroic",
+    "year": "2021",
+    "logo": "HER",
+    "players": [
+      {
+        "name": "cadiaN",
+        "country": "DK",
+        "role": "igl",
+        "rating": 1.02
+      },
+      {
+        "name": "k0nfig",
+        "country": "DK",
+        "role": "awp",
+        "rating": 1.13
+      },
+      {
+        "name": "TeSeS",
+        "country": "DK",
+        "role": "entry",
+        "rating": 1.08
+      },
+      {
+        "name": "stavn",
+        "country": "DK",
+        "role": "support",
+        "rating": 1.18
+      },
+      {
+        "name": "sjuush",
+        "country": "DK",
+        "role": "lurker",
+        "rating": 1.05
+      }
+    ]
+  },
+  {
+    "id": "t27",
+    "name": "FURIA",
+    "year": "2022",
+    "logo": "FUR",
+    "players": [
+      {
+        "name": "art",
+        "country": "BR",
+        "role": "igl",
+        "rating": 1.04
+      },
+      {
+        "name": "yuurih",
+        "country": "BR",
+        "role": "awp",
+        "rating": 1.18
+      },
+      {
+        "name": "kscerato",
+        "country": "BR",
+        "role": "entry",
+        "rating": 1.19
+      },
+      {
+        "name": "VINI",
+        "country": "BR",
+        "role": "support",
+        "rating": 1.07
+      },
+      {
+        "name": "drop",
+        "country": "BR",
+        "role": "lurker",
+        "rating": 1.03
+      }
+    ]
+  },
+  {
+    "id": "t28",
+    "name": "ENCE",
+    "year": "2019",
+    "logo": "ENCE",
+    "players": [
+      {
+        "name": "sergej",
+        "country": "EE",
+        "role": "igl",
+        "rating": 1.02
+      },
+      {
+        "name": "JDC",
+        "country": "AU",
+        "role": "awp",
+        "rating": 1.08
+      },
+      {
+        "name": "Aleksib",
+        "country": "FI",
+        "role": "entry",
+        "rating": 1
+      },
+      {
+        "name": "allu",
+        "country": "FI",
+        "role": "support",
+        "rating": 1.1
+      },
+      {
+        "name": "xseveN",
+        "country": "FI",
+        "role": "lurker",
+        "rating": 1.06
+      }
+    ]
+  }
+]

@@ -1,0 +1,79 @@
+[
+  {
+    "id": "c01",
+    "name": "zonic",
+    "country": "DK",
+    "role": "coach",
+    "era": "2016-2022",
+    "team": "Astralis",
+    "rating": 1.06,
+    "kd": 4,
+    "price": 138000
+  },
+  {
+    "id": "c02",
+    "name": "zews",
+    "country": "BR",
+    "role": "coach",
+    "era": "2015-2019",
+    "team": "SK Gaming / MIBR",
+    "rating": 1.05,
+    "kd": 1,
+    "price": 105000
+  },
+  {
+    "id": "c03",
+    "name": "YNk",
+    "country": "RS",
+    "role": "coach",
+    "era": "2018-2023",
+    "team": "Liquid / Cloud9",
+    "rating": 1.03,
+    "kd": 0,
+    "price": 60000
+  },
+  {
+    "id": "c04",
+    "name": "HUNDEN",
+    "country": "DK",
+    "role": "coach",
+    "era": "2016-2024",
+    "team": "North / Heroic",
+    "rating": 1.02,
+    "kd": 0,
+    "price": 46000
+  },
+  {
+    "id": "c05",
+    "name": "RobbaN",
+    "country": "SE",
+    "role": "coach",
+    "era": "2014-2020",
+    "team": "Ninjas in Pyjamas",
+    "rating": 1.01,
+    "kd": 0,
+    "price": 35000
+  },
+  {
+    "id": "c06",
+    "name": "pita",
+    "country": "BR",
+    "role": "coach",
+    "era": "2020-2024",
+    "team": "G2 Esports",
+    "rating": 1,
+    "kd": 0,
+    "price": 26000
+  },
+  {
+    "id": "c07",
+    "name": "starix",
+    "country": "UA",
+    "role": "coach",
+    "era": "2017-2022",
+    "team": "Forze / HellRaisers",
+    "rating": 0.99,
+    "kd": 0,
+    "price": 20000
+  }
+]

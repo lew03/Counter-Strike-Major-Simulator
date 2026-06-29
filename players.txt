@@ -1,0 +1,977 @@
+Players
+Player	Teams	Maps	Rounds	K-D Diff	K/D	Rating
+3.0
+Russiadonk	Spirit	468	10147	+2606	1.38	1.40
+FranceZywOo	Vitality	466	10135	+2763	1.47	1.35
+Russiam0NESY	FalconsG2	493	10827	+2376	1.37	1.26
+Russiakyousuke	FalconsSpirit Academy	431	9459	+1181	1.18	1.23
+Russiakl1m	MIBRG2 Ares	229	4837	+1057	1.36	1.22
+ArgentinaLuken	9zGaimin Gladiators	286	6025	+874	1.23	1.22
+DenmarkblameF	BIGfnatic	600	13082	+2235	1.28	1.20
+Australiaasap	THUNDER dOWNUNDERRooster	426	8736	+1101	1.20	1.20
+ChinaJamYoung	TYLOO	423	9057	+947	1.16	1.19
+Russiaslaxejezzz	QWENTRYHestaPsychoFace	333	7292	+710	1.14	1.19
+Brazilinsani	MIBR	552	11761	+955	1.12	1.18
+Russiash1ro	Spirit	410	8891	+2061	1.43	1.18
+Russiadeko	WWAurora	497	10683	+1947	1.30	1.18
+New ZealandADDICT	SemperFiBad News Kangaroosex-TALONTALONVERTEX	344	7153	+680	1.15	1.18
+BrazilKSCERATO	FURIA	539	11660	+1286	1.18	1.18
+BelarusMaSvAl	magicBetera	515	11404	+741	1.10	1.18
+Brazillatto	Legacy	601	12848	+1454	1.18	1.18
+New Zealandnettik	FlyQuestRoosterTALON	311	6550	+641	1.15	1.18
+CanadaHexT	WildcardNRGM80	620	12693	+1241	1.16	1.17
+RussiaqqGOD	Just SwingGR	204	4374	+289	1.10	1.17
+Argentinatry	Passion UAImperial	419	9145	+1674	1.31	1.17
+United Statesjunior	VocaNounsRaveBLUEJAYS	649	13471	+2565	1.33	1.17
+AustraliaBiBiAhn	FlyQuest RED	218	4476	+360	1.12	1.17
+Argentinatomaszin	BESTIA	659	14309	+1062	1.11	1.17
+Brazilvsm	paiNFlamengoFluxoKeyd Stars	476	10239	+899	1.13	1.17
+Kazakhstanmolodoy	FURIADMSAMKAL	422	9124	+1717	1.32	1.17
+United StatesJeorge	VocaNRGNouns	624	12989	+1051	1.13	1.16
+Swedennilo	HEROICMetizport	534	11563	+1323	1.17	1.16
+RussiaMagnojez	BetBoom	673	14632	+783	1.08	1.16
+IndiaPh1NNN	Gods Reign	227	4750	+409	1.13	1.16
+TurkeyXANTARES	AuroraEternal Fire	497	11005	+1030	1.14	1.16
+IsraelHeavyGod	G2Cloud9OG	487	10522	+891	1.13	1.16
+Ukrainenpl	B8	711	15629	+1156	1.11	1.16
+Ukrainecairne	TNLNinjas in PyjamasInner Circle	436	9497	+743	1.12	1.16
+United StatesLake	M80Carpe Diem	490	10253	+475	1.07	1.16
+Slovakiafrozen	FaZe	514	11272	+944	1.13	1.16
+United StatesWolffe	LAGBLUEJAYSUnjustified	380	8063	+607	1.11	1.15
+Brazilpiriajr	paiNBounty HuntersFluxoadalYamigos	551	11843	+1315	1.17	1.15
+United StatesFawx	FlyQuest REDShimmerSupernova Comets	235	4898	+537	1.16	1.15
+Bosnia and HerzegovinaNiKo	FalconsG2	515	11328	+910	1.12	1.15
+Belarusgr1ks	BIGAurora Young BludAuroraAstrum	702	15398	+2631	1.29	1.15
+United StatesZucar	regainASPYREDETONATE	238	5062	+32	1.01	1.15
+Bulgariah4rn	AcendPompa	240	5195	+857	1.28	1.15
+United Kingdomsmooya	Into the BreachThe Witchersfish123	477	10492	+1810	1.28	1.15
+Estoniaropz	VitalityFaZe	545	11946	+1605	1.22	1.15
+CanadaTwistzz	FaZeLiquid	505	10934	+843	1.12	1.15
+PolandmhL	WildcardWildcard AcademyTALONFalcons	278	6017	+890	1.24	1.15
+Russiadea	Getting InfoElevateVoca	463	9850	+1314	1.22	1.15
+Polandvicu	NAVI JavelinsPigeonsEco WarriorsBIG EQUIPA	277	5773	+680	1.18	1.15
+United Statesempathy	ShimmerSupernova CometsTSM ImpactSakura	292	6061	+258	1.06	1.15
+Russiact0m	WW	233	4995	+336	1.10	1.14
+Hungaryxelex	MOUZMOUZ NXT	298	6585	+558	1.13	1.14
+Brazildumau	Legacy	601	12848	+1234	1.15	1.14
+Mongoliask0R	The HunsEruption	315	6827	+734	1.16	1.14
+BelgiumChucky	GenOne	391	8376	+1243	1.26	1.14
+Russiar3salt	Nemesis9 PandasSangalFORZEAurora	830	17920	+1176	1.10	1.14
+Russiatenzy	magicBetera	448	9973	+507	1.07	1.14
+FranceASTRA	BIG EQUIPANAVI JavelinsFrance feLet Her CookZerance	202	4279	+346	1.13	1.14
+Ukraineb1t	Natus Vincere	470	10117	+820	1.13	1.14
+Kosovomakazze	Natus VincereNAVI Junior	567	12219	+444	1.05	1.14
+United StatesBrehze	NRG	245	5030	+445	1.14	1.14
+Chinaz4KR	Lynn Vision	384	8188	+991	1.20	1.14
+MongoliaSenzu	The MongolZPassion UA	474	10455	+907	1.13	1.14
+Swedenphzy	AstralisWildcard9INE	485	10250	+1350	1.22	1.14
+Latviashadiy	SemperFi	331	7011	+686	1.15	1.14
+SerbianEMANHA	Zero Tenacityillwill	1035	22713	+352	1.02	1.14
+PolandxKacpersky	Ninjas in PyjamasENCEYoung Ninjas	455	9950	+282	1.04	1.14
+MexicoMarKE	Getting InfoNounsRave	377	7982	+479	1.09	1.14
+Brazilkoala	SharksGalorys	691	14766	+1605	1.18	1.14
+SwedenMaiL09	AllianceJohnny SpeedsMetizport	352	7650	+609	1.12	1.13
+Russiaflouzer	Nuclear TigeRES	375	8217	+422	1.08	1.13
+Russiaz1Nny	BET-M33RUSH B	586	12755	+347	1.04	1.13
+United StatesREKMEISTER	Chicken Coop	204	4349	+183	1.06	1.13
+UkraineDawy	Inner CircleTNL	464	10154	+699	1.10	1.13
+SlovakiaMATYS	G2fnatic	651	14114	+698	1.07	1.13
+RussiaAlv	Ursa	341	7353	+1200	1.27	1.13
+Germanyslaxz-	M80	557	11645	+1871	1.28	1.13
+RomaniaANa	Imperial ValkyriesPigeons	222	4358	+652	1.25	1.13
+MongoliaZesta	NEXVOIDATOXIHC	259	5604	+246	1.06	1.13
+BulgariaRainwaker	Monte500	618	13594	+814	1.09	1.13
+Chiledav1deuS	RED CanidspaiN	620	13438	+802	1.09	1.13
+Russiamizu	HOTU	396	8573	+408	1.07	1.13
+RussiaKaide	RUBYex-RUBY	729	15708	+883	1.08	1.13
+Kazakhstandemente	Rune EatersALLINNERSFORZE Reload	245	5379	+361	1.10	1.13
+ChinaChildKing	Rare Atom	368	7844	+476	1.09	1.13
+IsraelflameZ	Vitality	466	10135	+372	1.06	1.13
+Brazildoc	Sharks	786	16980	+903	1.08	1.13
+Ukrainejambo	fnaticPassion UA	775	17031	+1915	1.18	1.13
+CanadaBeaKie	FarmVilleTake FlyteReasonundefined	213	4660	+455	1.16	1.12
+GuatemalamalbsMd	G2M80	528	11313	+439	1.06	1.12
+Australiasliimey	RoosterMindfreak	342	7102	+638	1.14	1.12
+Russiakashl1d	K27	415	9079	+1042	1.19	1.12
+DenmarkLucky	SashiEspionage	801	17396	+1880	1.18	1.12
+BelarustN1R	SpiritGUN5FORZEHEROIC	713	15653	+1053	1.10	1.12
+Portugalewjerkz	SAWNinjas in Pyjamas	491	10575	+169	1.02	1.12
+Argentinaluchov	9zBESTIA	717	15516	+472	1.04	1.12
+United StatesInfinite	Party AstronautsVocaWildcard	337	7128	+265	1.06	1.12
+UkraineOneUn1que	LeoL&G	472	10143	+613	1.09	1.12
+United StatesPose1doNN	ZomblersTsunamiLimitless	305	6592	+922	1.22	1.12
+KazakhstanHObbit	1winCloud9	431	9408	+682	1.11	1.12
+MongoliaMiQ	NEXVOIDATOX	275	5931	+265	1.06	1.12
+Russiad1Ledez	BetBoom9 Pandas	730	15808	+777	1.07	1.12
+Brazilckzao	Fake do BiruFOLHA AMARELAIntenseadalYamigosElevate	324	6909	+265	1.06	1.12
+Russiakarnez	Ursa	207	4520	+251	1.08	1.12
+Russiayouka	RUSTECFORZE ReloadHOTU	202	4383	+489	1.18	1.12
+SpainMartinezSa	Gentle Mates9zMovistar Riders	567	12373	+1718	1.23	1.12
+United StatesEliGE	LiquidComplexityFaZe	421	9226	+460	1.07	1.12
+AustraliaINS	FlyQuestGrayhound	352	7313	+266	1.05	1.12
+Polandreiko	ESCAnonymoRevenantWalczaki	653	14305	+629	1.06	1.12
+AustraliaaliStair	THUNDER dOWNUNDERFlyQuestSemperFiGrayhound	360	7443	+949	1.22	1.12
+PolandHanka	NAVI JavelinsBIG EQUIPA	207	4343	+188	1.06	1.12
+United StatesJBa	M80Wildcard	523	10975	+775	1.11	1.11
+UkraineKvem	Passion UAIKLADRILLAS	528	11544	+601	1.07	1.11
+Mongolianin9	The Huns	389	8424	+812	1.15	1.11
+Lithuaniaryu	AstralisMonteMonte Gen	651	14236	+743	1.08	1.11
+ChinaMoseyuh	TYLOO	352	7501	+496	1.10	1.11
+Belarusxeedo	K27	411	9004	+375	1.06	1.11
+Brazilgbb	GalorysSolid	692	14831	+719	1.07	1.11
+Denmarknicoodoz	OGGaimin GladiatorsECSTATICHEROICPreasy	668	14682	+1764	1.18	1.11
+United StatesFruitcupx	BOSSBLUEJAYS	410	8684	+511	1.09	1.11
+United StatesGrizz	Marsborne	485	10399	+558	1.08	1.11
+South AfricaSonic	NRGWildcard	495	10432	+423	1.06	1.11
+UkraineSt0m4k	HEROIC AcademyTNL	274	5887	+156	1.04	1.11
+Mongoliacool4st	Chinggis WarriorsIHC	298	6409	+526	1.13	1.11
+GermanyKrimbo	BIG	482	10446	+1002	1.16	1.11
+LithuaniatAk	G2 Ares	260	5636	+305	1.08	1.11
+United StatesCLASIA	NounsBLUEJAYSWildcard	316	6698	+393	1.09	1.11
+United StatesoSee	NRG	448	9301	+1061	1.19	1.11
+Brazildecenty	ImperialFluxo	599	12871	+1231	1.15	1.11
+Ukrainew0nderful	Natus Vincere	497	10706	+1407	1.22	1.11
+Denmarkleakz	TrickedWOPA	458	10061	+336	1.05	1.11
+Swedenadamb	OGMetizport	633	13923	+620	1.07	1.11
+United Statesconsti	LAGVagrants	364	7704	+1150	1.26	1.11
+AustraliaLiazz	THUNDER dOWNUNDERFlyQuestGrayhound	359	7373	+520	1.12	1.11
+Russialattykk	1win	505	11004	+1554	1.25	1.11
+Russiashg	ARCRED	213	4767	+206	1.06	1.11
+Polandflayy	RebelsVenomKOLESIE	567	12474	+1412	1.18	1.11
+GermanyJDC	BIG	585	12580	+518	1.06	1.11
+RussiaPorya	PERAFlame Sharks	212	4559	+291	1.10	1.11
+IsraelSpinx	MOUZVitality	450	9827	+865	1.14	1.11
+TurkeyWicadia	AuroraEternal Fire	508	11260	+594	1.08	1.11
+KosovoCaleyy	MANAKubix	423	9083	+327	1.05	1.11
+AustraliaVexite	FlyQuestGrayhound	352	7313	+352	1.07	1.11
+ChinaTiger	Rare AtomNewhappyDogEvil	242	5317	+482	1.14	1.11
+Swedeneraa	AllianceGODSENTCPH Wolves	755	16345	+2506	1.25	1.11
+CanadaFaNg	Party AstronautsBOSSGetting InfoNRG	355	7641	+528	1.10	1.11
+Russiaz1k4	Nuclear TigeRES	378	8193	+986	1.19	1.11
+Uruguaydgt	9zpaiN	489	10582	+1084	1.16	1.11
+Brazilnqz	paiN	595	12818	+1716	1.24	1.11
+North MacedoniastressarN	SINNERS	309	6882	+524	1.12	1.11
+SwedenREZ	GamerLegionNinjas in Pyjamas	454	9904	+383	1.06	1.11
+IsraelxertioN	MOUZ	488	10629	+289	1.04	1.11
+Kazakhstantasman	NOVAQ	294	6403	+288	1.07	1.10
+RussiaAx1Le	TDKCloud9BetBoom	519	11339	+473	1.06	1.10
+Russiadwushka	BebopInsilioVP.Prodigy	456	10014	+374	1.06	1.10
+Brazilnardes	ODDIKYawara	276	5822	+576	1.16	1.10
+LithuaniajL	Natus VincereMOUZ	314	6781	+345	1.08	1.10
+United StatesSwisher	M80	563	11780	+404	1.05	1.10
+Russiaspirit	Just PlayersFORZE Reload	519	11487	+205	1.03	1.10
+DenmarkJBOEN	BIG AcademyVoltPreasyAstralis Talent	334	7278	+698	1.15	1.10
+BelarusFenomeN	INOX DivisionCYBERSHOKE	818	17763	+2514	1.25	1.10
+PolandDGL	PhantomPERA	285	6216	+865	1.23	1.10
+MongoliayAmi	Chinggis WarriorsThe HunsATOXIHC	320	6935	+401	1.09	1.10
+ChinaL1haNg	Rare Atom	456	9751	+352	1.05	1.10
+RomanialauNX	FUTNexusRevenant	586	13027	+392	1.04	1.10
+Czech RepublicPR	GamerLegionMOUZ NXT	605	13122	+600	1.07	1.10
+Brazilvenomzera	MIBRRED Canids	697	15080	+463	1.05	1.10
+Latviakeen	SemperFiSystem5	309	6485	+474	1.11	1.10
+BrazilHEN1	ImperialRED CanidsGaimin Gladiators	450	9487	+1208	1.23	1.10
+PolandKylar	PhantomENCE9INE	406	8916	+351	1.06	1.10
+FinlandBanjo	FOKUSFire Flux	545	11886	+398	1.05	1.10
+Kazakhstansyph0	NemigaSpirit Academy	531	11537	+470	1.06	1.10
+Turkeysoulfly	AuroraFire Flux	564	12401	+221	1.03	1.10
+Turkeyxfl0ud	HEROICSangal	540	11788	+108	1.01	1.10
+Polandb1elany	KOLESIECPH WolvesIlluminar	785	17252	+590	1.05	1.10
+RussiaDjon8	SPARTAFLuffy GangstersLavked	656	14217	+588	1.06	1.10
+Swedenmaxster	EYEBALLERSNinjas in Pyjamas	480	10511	+762	1.11	1.10
+Swedenpoiii	100 ThievesEYEBALLERSAlliance	598	13149	+358	1.04	1.10
+Brazillash	Keyd StarsYawaraElevate	306	6460	+643	1.16	1.10
+Russiaexecutor	BET-MRUSH B33	694	15146	+557	1.06	1.10
+ChinaStarry	Lynn Vision	358	7596	+459	1.09	1.10
+Swedenspooke	OGJohnny SpeedsSprout	700	15547	+586	1.05	1.10
+Mongoliacobrazera	The MongolZThe Huns	345	7456	+220	1.04	1.10
+RussiaArtFr0st	BetBoomPARIVISIONTDKSpirit	610	13238	+2372	1.33	1.10
+RussiaJame	PARIVISIONVirtus.pro	671	14711	+2315	1.29	1.10
+Ukrainer1nkle	Ninjas in PyjamasB8	514	11294	+1478	1.21	1.10
+AzerbaijansugaR	TDKInsilio	681	14701	+493	1.05	1.10
+KazakhstanICY	Virtus.proAMKALCloud9NOVAQ	405	8955	+1289	1.25	1.10
+Swedenavid	Alliance	789	17150	+819	1.07	1.10
+Romaniaregali	Eternal FireFlyQuestOG	236	5172	+663	1.21	1.10
+Russiak0s	INOX DivisioneLITenergyUrsaNuclear TigeRES	232	5089	+250	1.07	1.10
+United StatesBwills	BOSSNouns	251	5229	+170	1.05	1.10
+MongoliaMagnumZ	BMZEruption	208	4397	+441	1.16	1.10
+TurkeyjottAAA	Eternal FireSangalAurora	524	11615	+505	1.06	1.10
+Czech Republicoskar	SINNERS	545	12002	+1493	1.20	1.10
+United Statessnav	VocaElevateBLUEJAYSGetting Info	682	14428	+562	1.06	1.10
+Denmarkthamlike	WOPASTATEex-Astralis Talent	314	6853	+298	1.07	1.10
+DenmarkZyphon	SashiTSM	752	16283	+433	1.04	1.10
+SwedenPlopski	MetizportGODSENT	537	11907	+325	1.04	1.09
+Russiaoz1k	1win	381	8283	+194	1.04	1.09
+PolandMarkoś	los kogutosPGE TurowTNCIlluminar	430	9434	+997	1.18	1.09
+AustraliaDrox	VantageMindfreakStirlzs AngelsHousebetsKZG	205	4413	+262	1.09	1.09
+Swedendraken	Johnny Speeds	628	13900	+1784	1.21	1.09
+FranceMaka	3DMAX	698	15229	+1376	1.15	1.09
+Swedenjocab	Johnny SpeedsYoung Ninjas	446	9708	+639	1.10	1.09
+Brazillux	paiNLegacy	634	13534	+455	1.05	1.09
+Russiaglowiing	CYBERSHOKE9 Pandas	913	19759	+530	1.04	1.09
+EstoniaaNdu	ALGOCPH WolvesGamerLegionBC.Game	477	10568	-7	1.00	1.09
+Brazilcoldzera	RED CanidsODDIKLegacyFake do Biru	550	11882	+913	1.12	1.09
+ChinaJee	TYLOOLynn Vision	375	7981	+1021	1.22	1.09
+Hong KongTerryyy	RoosterThe Art of WarOnly One Word	230	4774	+272	1.09	1.09
+ChileHUASOPEEK	9z	595	12718	+444	1.05	1.09
+Denmarkbr0	NRGMonteAstralis	458	9724	+279	1.04	1.09
+Polandbnox	PermittaEternal Fire9INESangal	912	19944	+553	1.04	1.09
+Francemisutaaa	3DMAX9INEGenOneInto the Breach	560	12273	+220	1.03	1.09
+FinlandJimpphat	MOUZ	436	9532	+663	1.12	1.09
+Brazilsaadzin	LegacyW7M	631	13456	+1622	1.21	1.09
+Hungarysl3nd	INFINITEGamerLegionEndpoint	407	8798	+957	1.18	1.09
+Chinachengking	Rare AtomFengDa	204	4436	+188	1.06	1.09
+Australiahazr	SemperFiBad News Kangaroosex-TALONTALONVERTEX	368	7666	+107	1.02	1.09
+Ukrainedem0n	FUTNAVI Junior	626	13592	+614	1.07	1.09
+Ukrainej3kie	FAVBET	668	14630	+364	1.04	1.09
+BulgariaREDSTAR	Acend500Into the Breach	601	13200	+1091	1.13	1.09
+Russiatex1y	NemesisRUSH BGUN5	719	15705	+612	1.06	1.09
+Denmarkdevice	100 ThievesAstralis	467	10171	+1142	1.19	1.09
+Russiaqw1nk1	K27	369	8103	+101	1.02	1.09
+Brazilhardzao	Fake do BiruRED Canids2GAME	592	12706	+708	1.09	1.09
+Russiafrontales	HOTUHesta	281	6069	+625	1.17	1.09
+RomaniaXELLOW	Nexus	770	16855	+1365	1.13	1.09
+Brazilksloks	ODDIK	536	11509	+728	1.10	1.09
+Mongolialaxiee	AkimboRaveBLUEJAYS	330	6928	+214	1.04	1.09
+Czech RepublicSHOCK	SINNERS	919	20327	+664	1.05	1.09
+United StatesCxzi	Party AstronautsMarsborneComplexity	505	10935	-66	0.99	1.09
+Australiadpr	MindfreakKZG	285	6052	+428	1.11	1.09
+Argentinaatarax1a	IsurusKRÜ	417	8868	+569	1.10	1.09
+Polandswiz	ASTRALBetclicbrazylijski luz	344	7507	+177	1.03	1.09
+North MacedoniaaidKiT	PartizanmegoshortGenOne	239	5232	+635	1.20	1.09
+Denmarknut nut	ECSTATIC	668	14706	+336	1.04	1.09
+Spainmopoz	Gentle MatesIberian SoulKOI	690	15357	-171	0.98	1.09
+Russiarelaxxie	K27ex-RUBY	482	10604	+299	1.04	1.09
+Russiaclax	Sangal9 PandasAuroraAstrum	845	18571	+932	1.08	1.09
+KazakhstanAlkaren	Spirit AcademyHEROIC	341	7469	+682	1.15	1.09
+Polandkisserek	SINNERSRebels	597	13258	+56	1.01	1.09
+Francedrac	GenOneMousquetaires	364	8039	+158	1.03	1.09
+Mongoliaxerolte	The HunsChinggis Warriors	363	7814	+247	1.05	1.09
+BrazilJOTA	Gaimin Gladiatorsex-W7M	268	5670	+232	1.06	1.09
+UkraineWoro2k	MontePassion UAEternal Fire	608	13346	+1530	1.18	1.09
+Lebanonm1N1	JiJieHao	347	7568	+1003	1.22	1.09
+United Statesogwizard	MarsborneParty AstronautsLAGSportsBetExpert	386	8134	+889	1.18	1.09
+Polandsuonko	OramondReason	398	8306	-56	0.99	1.09
+United StatescJ dA K1nG	FarmVilleNouns	404	8627	+444	1.08	1.09
+Argentinamaxxkor	SharksDusty Roots	483	10318	+821	1.13	1.08
+Denmarksirah	100 ThievesECSTATICMOUZ NXT	832	18113	+1048	1.09	1.08
+Braziltomate	GalorysSolid	517	11086	+663	1.10	1.08
+Finlandoopee	CSDIILITHeimo	288	6411	+205	1.05	1.08
+Russian0rb3r7	HOTUVirtus.pro	473	10355	+51	1.01	1.08
+IsraelNertZ	G2HEROICLiquid	518	11260	+469	1.06	1.08
+Finland8Juho8	CSDIILIT	203	4534	-13	1.00	1.08
+UkraineDemQQ	Eternal FireMontePassion UA	722	15834	+842	1.08	1.08
+BulgariaJorko	FOKUSCPH Wolves	281	6085	+570	1.15	1.08
+SlovakiaM1key	UNiTYECLOT	686	14873	+438	1.04	1.08
+Czech Republicforsyy	MetizportECLOT	908	19845	+2786	1.24	1.08
+GeorgiawieenN	Imperial ValkyriesPigeonsEco Warriorsdream catchers fe	202	4121	+25	1.01	1.08
+United Statesreck	WildcardM80	444	9444	+312	1.05	1.08
+Russiadanistzz	SangalSpaceBetBoom	658	14250	+1152	1.13	1.08
+Ukraineheadtr1ck	Inner CircleB8	605	13334	+1589	1.20	1.08
+United Statesshane	Getting InfoVocaElevateBadasstimbermen	548	11674	+275	1.04	1.08
+Romanias0und	Nexus9INE	781	17076	+98	1.01	1.08
+Brazilpancc	ODDIKBESTIA	291	6216	+270	1.07	1.08
+Lithuaniadziugss	FUTNAVI Junior	608	13202	+315	1.04	1.08
+Franceafro	Montefnatic	585	12807	+1192	1.15	1.08
+Chinarage	KaleidoMorningstarURNinJaBromo	246	5318	+13	1.00	1.08
+FranceKursy	GenOneGamerLegion	280	6206	+786	1.20	1.08
+Brazilcass1n	BESTIAinSanitY	465	10083	+1142	1.19	1.08
+RussiaTruNiQ	SpaceRUBY	466	10279	+363	1.05	1.08
+RussiaxiELO	PARIVISIONGUN5	679	14913	+192	1.02	1.08
+Ukrainesynyx	ARCREDBeteraThe Witchers	606	13498	+470	1.05	1.08
+Denmarkrefrezh	9INEPreasy	446	9785	+517	1.08	1.08
+CanadaNAF	Liquid	434	9360	+479	1.08	1.08
+BulgariaoxygeN	500Entropiq	384	8384	+2	1.00	1.08
+Russiazweih	PARIVISIONNemigaSpirit	471	10430	+147	1.02	1.08
+Ukrainekensizor	B8kONO	545	11940	+161	1.02	1.08
+Ukrainesdy	ENCEMonte	533	11529	+551	1.07	1.08
+United StatesWolfY	MarsborneParty Astronauts	570	12251	+1224	1.17	1.08
+DenmarkZanto	STATEWOPAAstralis Talentex-Astralis Talent	395	8690	-30	0.99	1.08
+Chinasomebody	Rare Atom	265	5562	+159	1.04	1.08
+RussiaRe1GN	Nuclear TigeRESHOTU	281	6129	+196	1.05	1.08
+GermanyfaveN	BIG9INEBLEED	676	14937	+874	1.09	1.08
+Braziltogs	SharksODDIK	404	8861	+781	1.14	1.08
+RussiaFL4MUS	GamerLegionNemigaVirtus.proBetBoom	456	9985	+129	1.02	1.08
+RussiaTRAVIS	SPARTAAMKALPARIVISIONWHITEBIRD	732	16198	+370	1.04	1.08
+BulgariaSHiPZ	500rottweilers	353	7797	+73	1.01	1.08
+United StatesRUSH	NounsParty Astronauts	291	6081	+156	1.04	1.08
+Brazilrdnzao	Sharks	786	16978	+490	1.04	1.08
+DenmarkStaehr	Astralis	463	10015	+124	1.02	1.08
+ChinaMercury	TYLOO	423	9057	+285	1.05	1.08
+BrazilchayJESUS	FluxoRED CanidsImperial	505	10870	+502	1.07	1.08
+Portugalstory	FlyQuestSAW	495	10620	+913	1.14	1.08
+UzbekistanRyujin	ARCRED1win	605	13324	+225	1.02	1.08
+SpainSunPayus	G2FalconsHEROIC	490	10606	+1127	1.18	1.07
+Russiaabiraju	PsychoFaceQWENTRYHesta	332	7351	+48	1.01	1.07
+MontenegroCjoffo	ex-Zero TenacityZero Tenacity	1083	23639	+652	1.04	1.07
+BrazilMisfit	FlamengoSolidPatins da FerrariKRÜ	232	4972	+444	1.15	1.07
+Brazilmawth	VascoE-Xolos LAZER	253	5448	+362	1.11	1.07
+Argentinatom1jed	ShindeNDusty Roots	434	9319	-93	0.99	1.07
+CroatiaMatheos	FOKUSCPH Wolves	407	8810	-52	0.99	1.07
+DenmarkBotman	MASONIC	304	6710	-22	1.00	1.07
+Brazilnoway	Imperial	663	14258	+492	1.05	1.07
+RussiaXant3r	TDKNemiga	723	15800	-120	0.99	1.07
+PolandKEi	PhantomMonte9INE	420	9213	+125	1.02	1.07
+SerbiaDragon	PartizanMetizport	605	13306	+482	1.05	1.07
+New Zealandchelleos	Rooster	423	8713	+793	1.15	1.07
+Russiabl1x1	CYBERSHOKEAurora Young Blud	836	18236	-17	1.00	1.07
+Brazildiozera	ODDIKElevateIntenseGameHuntersMIBR Academy	329	7017	+90	1.02	1.07
+NetherlandsCRUC1AL	EndpointInto the Breach	421	9229	+900	1.16	1.07
+RussiaBELCHONOKK	PARIVISION	682	14951	+268	1.03	1.07
+United Statesslump	Getting InfoFLUFFY AIMERSVoca	241	5120	+126	1.04	1.07
+Latvia4X1s	Ursa	321	6918	+52	1.01	1.07
+Mongolia910	The MongolZ	536	11845	+1121	1.15	1.07
+Russiazorte	BetBoomTDK	587	12613	+1296	1.17	1.07
+SerbiaVLDN	PartizanBLEED	555	12309	+363	1.05	1.07
+RomaniaiM	Natus Vincere	470	10117	+287	1.04	1.07
+Polandjcobbb	FaZeBetclic	376	8266	-13	1.00	1.07
+DenmarkAnlelele	ECSTATIC	720	15791	+280	1.03	1.07
+Norwayhallzerk	ComplexityPassion UA	357	7846	+643	1.14	1.07
+Ukrainejackasmo	fnaticPassion UA	802	17609	+467	1.04	1.07
+Polandmantuu	9INEBIG	543	12064	+1351	1.19	1.07
+KazakhstankhaN	Nemiga	715	15632	+1706	1.18	1.07
+CanadaDrop	Chicken CoopTsunamiTake Flyte	224	4773	-107	0.97	1.07
+RussiaMokuj1n	CYBERSHOKESpirit Academy	456	9864	+159	1.02	1.07
+United StatesGrim	NRGComplexityPassion UA	412	9007	+227	1.04	1.07
+Denmarkkralle	MASONIC	264	5823	-264	0.94	1.07
+Brazilrealz1n	Vikings KRUNO MILLEFlamengo	304	6592	+271	1.07	1.07
+Denmarksjuush	Ninjas in PyjamasHEROIC	561	12229	+207	1.03	1.07
+Polandolimp	WalczakiESCRebels	605	13307	-257	0.97	1.07
+BulgariaKalubeR	AcendThe Chosen Few	309	6739	+170	1.04	1.07
+Polandhypex	GamerLegionBetclic	411	8974	+806	1.15	1.07
+Denmarkstavn	Astralis	313	6833	+253	1.06	1.07
+Russiacronuss	1win	378	8224	-73	0.99	1.07
+RomaniaadamS	KOIillwill9zMovistar Riders	493	10942	+468	1.07	1.07
+Ukrainecptkurtka023	Inner CircleB8kONO	748	16487	-362	0.97	1.07
+FranceNeityu	ENCEMOUZ NXT	736	15953	+265	1.03	1.07
+DenmarkFessor	CPH WolvesInner CircleSashi	252	5531	-2	1.00	1.07
+KazakhstanBotpa1	Omega	219	4713	-100	0.97	1.07
+Argentinapavv	ProcyonLaChampionsLigaPrasso	258	5500	-21	0.99	1.07
+North Macedonia2high	UNiTYENCE AcademyAM	338	7454	+126	1.03	1.07
+Russiaxm1nd	LavkedFlame Sharks	233	4910	+459	1.15	1.07
+AustraliaSaVage	SemperFi	259	5388	+203	1.06	1.07
+Brazilpepe	Bounty HuntersSharksGalorys	298	6315	+107	1.03	1.07
+Australiajks	FlyQuestLiquid	239	5137	+216	1.07	1.07
+Czech RepublicZEDKO	SampiSINNERS	620	13658	+12	1.00	1.07
+Russianota	PARIVISIONRUSH B	598	13120	+326	1.04	1.07
+CroatiaDEPRESHN	AtreidesPartizan	296	6493	+566	1.14	1.07
+RussiaSdaim	NemesisGUN5AMKAL	888	19686	-104	0.99	1.07
+Swedennawwk	Johnny SpeedsApeksBC.GameBLEED	658	14464	+1955	1.24	1.07
+Latviashield	Fire FluxMonte Gen9INE	316	6898	+693	1.17	1.07
+DenmarkNickyB	TrickedPrestige	235	5120	-40	0.99	1.07
+United Stateskmrn	LAGAkimbo	287	6118	+104	1.03	1.07
+Australiadamyo	Ground ZeroHousebetsBad News Kangaroos	380	7921	+234	1.04	1.06
+Russiasowalio	NemigaRUBY	613	13107	+240	1.03	1.06
+Ukrainezont1x	Spirit	434	9357	+244	1.04	1.06
+PolandF1KU	OGWildcard	460	9947	+32	1.00	1.06
+Argentinaabizz	ShindeN	401	8647	-63	0.99	1.06
+United StatesPeeping	WildcardElevateNouns	546	11520	+253	1.03	1.06
+JordanBOROS	JiJieHaoFalconsInto the Breach	318	6956	+13	1.00	1.06
+Finlandteme	ENCE Academy	456	9756	+178	1.03	1.06
+KosovoBledarD	MANAKubixThe Suspect	483	10444	+777	1.12	1.06
+Argentinanacho	BESTIAShindeN	338	7312	+132	1.03	1.06
+Portugalkrazy	RhynoSAWBC.Game	377	8094	+277	1.05	1.06
+RussiaRaijin	ARCREDLEON	492	10922	+23	1.00	1.06
+Chinalan	Last BulletDogEvilWings Up	207	4441	+249	1.08	1.06
+Polandmoonwalk	WalczakiESCFriendly Campers	392	8534	-105	0.98	1.06
+Bosnia and Herzegovinabrutmonster	ex-Zero TenacityZero Tenacity	1074	23454	+1450	1.10	1.06
+Polanddycha	MonteBetclicillwillENCE	495	10646	-103	0.99	1.06
+Ukrainenifee	TNLBetera	378	8157	-22	1.00	1.06
+United Kingdommezii	Vitality	473	10288	+234	1.04	1.06
+Kazakhstankade0	HOTUALLINNERSDEPO	301	6355	-40	0.99	1.06
+PolandDemho	BetclicEnterprise	710	15446	-57	0.99	1.06
+Portugalarrozdoce	SAWOGNinjas in Pyjamas	517	11184	+40	1.01	1.06
+Brazildetr0ittJ	Fake do BiruGalorys2GAME	551	11746	+1024	1.14	1.06
+Denmarkjabbi	Astralis	447	9655	+140	1.02	1.06
+PolandSpavaQu	OramondPermittaIlluminarReason	465	9798	+622	1.10	1.06
+Spainsausol	Gentle MatesIberian SoulSangal	643	14164	+523	1.05	1.06
+FrancehAdji	illwillMonte	566	12388	+338	1.04	1.06
+KosovoKrabeni	FUTNAVI Junior	642	13944	+161	1.02	1.06
+ChinaWestmelon	Lynn Vision	384	8188	-51	0.99	1.06
+Brazilzevy	Fluxo	566	12025	+1171	1.16	1.06
+Braziltele	Yawara	296	6193	-168	0.96	1.06
+Polandhades	BetclicMonteENCE	590	12719	+1223	1.16	1.06
+Kosovoammar	MANAKubix	439	9427	+58	1.01	1.06
+RussiaFL1T	Virtus.pro	386	8450	+377	1.07	1.06
+Swedenbobeksde	EYEBALLERS9INEJohnny SpeedsGODSENT	873	19315	-300	0.98	1.06
+RussiaYumsaN	ex-RUBY	309	6829	+472	1.11	1.06
+Malaysiakaze	Rare AtomTYLOO	313	6513	+519	1.14	1.06
+Polandfr3nd	KOLESIEEnterprisePermittaWildcard Academy	603	13288	+1357	1.16	1.06
+UkraineSmash	FAVBET	669	14646	-86	0.99	1.06
+PolandFrontsiderr	OramondReasonlajtbitexe	358	7475	+63	1.01	1.06
+Russiayiksrezo	GUN5Nemesis	225	5004	+28	1.01	1.06
+Russiafineshine52	GUN5HOTU	370	8252	+509	1.10	1.06
+BrazilAlisson	LPDASHGalorys	407	8629	+476	1.09	1.06
+Turkeywoxic	AuroraEternal Fire	503	11144	+1042	1.16	1.06
+Brazilyuurih	FURIA	539	11660	+379	1.05	1.06
+MongoliaROUX	Chinggis WarriorsIHC	402	8610	-182	0.97	1.06
+Polandszejn	ALGOCPH WolvesPhantom	513	11186	-13	1.00	1.06
+VietnamN1ghtraid	ArcadeUndergroundVantage	217	4767	+260	1.08	1.06
+UkraineBurmylov	MOUZ NXTkONOHashirasfnatic	597	12902	+1142	1.14	1.06
+Hungarytorzsi	MOUZ	488	10629	+1333	1.22	1.06
+SpainJoey	MOUZ NXT	216	4809	+114	1.04	1.06
+Argentinaivz	ShindeN	383	8185	+436	1.08	1.06
+Brazilhistory	RED CanidsHypeFluxo	401	8683	+827	1.16	1.06
+DenmarkTeSeS	FalconsHEROIC	542	12003	+13	1.00	1.06
+RomaniaMoDo	SINNERSOGTSM9INE	465	10317	+1019	1.17	1.06
+Swedentwist	Alliance	782	16977	-33	1.00	1.06
+Kazakhstanmag1k3Y	NemesisInsilioGUN5	386	8418	+939	1.18	1.06
+United Statesautimatic	NRGEvil Geniuses	222	4530	+124	1.04	1.06
+RomaniaBlytz	ECLOTNexusSangal	677	14511	+169	1.02	1.06
+Australiagump	AbyssalMindfreakAnimus Victoria	275	5788	+6	1.00	1.06
+Russiafame	Virtus.pro	422	9240	+149	1.02	1.06
+United StatesSandman	LAGVagrants	431	9103	+11	1.00	1.06
+Finlandpodi	ENCEENCE Academy	506	11002	+1187	1.18	1.06
+Germanypr1metapz	BC.GameSangalBIG Academy	440	9557	-76	0.99	1.06
+ArgentinaKAISER	Bounty Hunters	557	11864	+740	1.11	1.06
+PolandSaMey	WalczakiESCSangalAnonymo	768	16829	+1243	1.12	1.06
+United Statesnitr0	NRG	402	8327	+102	1.02	1.05
+Uruguaytimo	BESTIAIsurus	297	6390	-90	0.98	1.05
+Ukraines4ltovsk1yy	FAVBETkONO	601	13040	+1351	1.18	1.05
+Argentinaguty	ShindeNDusty Roots	304	6563	-127	0.97	1.05
+RussiaKaiR0N-	NemigaBetBoomAMKAL	633	13567	+197	1.02	1.05
+Russiayuramyata	SPARTAFLuffy Gangsters	499	10849	+1089	1.17	1.05
+RussiaKIRO	BET-MRUSH B33	692	15103	+846	1.09	1.05
+Brazilnyezin	GameHuntersCasepaiN	464	9941	+145	1.02	1.05
+BrazilLucaozy	FluxoMIBR	577	12319	+472	1.06	1.05
+Kosovojuanflatroo	Into the BreachGuild Eaglesm1x	461	10232	-108	0.99	1.05
+Russiaeightz999	PsychoFaceQWENTRYLEONHesta	330	7253	+408	1.09	1.05
+Latviarud	Young NinjasGL Academy	260	5762	+509	1.14	1.05
+Czech Republicmanguss	SampiECLOT	385	8397	+80	1.01	1.05
+Latviabroky	FaZe	503	11106	+980	1.14	1.05
+Brazilsnow	paiNCase	642	13942	+269	1.03	1.05
+Romania7Kick	illwillNexusfish123	411	9071	+238	1.04	1.05
+Ukraineamster	LeokONOB8	606	13235	+76	1.01	1.05
+Brazilbiguzera	paiN	643	13879	-185	0.98	1.05
+TurkeyimoRR	Eternal Fire	271	5887	+170	1.04	1.05
+CanadaWalco	NRGRaveEvil GeniusesParty Astronauts	283	5875	+39	1.01	1.05
+KazakhstankAlash	DMSAMKALHOTU	526	11535	-38	1.00	1.05
+DenmarksL1m3	STATEWOPASprout	404	8826	+683	1.12	1.05
+RussiaAW	magicDMSAMKALPARIVISION	566	12437	+304	1.04	1.05
+Ukrainedoni	BIG AcademyWildcard AcademyNEVERMORE	254	5605	-31	0.99	1.05
+Czech RepublicPechyn	UNiTY	232	5119	+50	1.01	1.05
+PolandQlocuu	KOLESIEVenomBetclicbrazylijski luz	557	12222	0	1.00	1.05
+PortugalNOPEEj	RebelsGTZFTWRhyno	394	8619	+249	1.05	1.05
+Denmarkanber	EACALGOHEROIC AcademyAaB	314	6886	-167	0.97	1.05
+RussiaPatsi	SangalPARIVISIONAuroraAstrum	759	16603	-310	0.97	1.05
+Brazilnaitte	ODDIK	734	15758	+4	1.00	1.05
+United StatesCryptic	LAGBOSSNounsRaveBLUEJAYS	568	11924	-402	0.95	1.05
+Kazakhstanadai	Omega	212	4571	+1	1.00	1.05
+Brazilzede	Keyd StarsW7MElevatePatins da Ferrari	406	8617	+73	1.01	1.05
+Brazilfelps	ImperialGaimin GladiatorsRED Canids	510	10871	+220	1.03	1.05
+UkrainePolbandana	kONOBASEMENT BOYSAlter Egoex-ENEIDA	287	6265	+64	1.02	1.05
+JordanISSAA	JiJieHao	201	4414	+234	1.08	1.05
+Kazakhstanforkyz	Rune EatersNOVAQ	318	6916	-222	0.96	1.05
+United Stateschop	MarsborneParty Astronauts	553	11926	+156	1.02	1.05
+Russialov1kus	BebopCYBERSHOKE	688	15025	+654	1.07	1.05
+PolandkRaSnaL	MonteInner Circle	516	11328	+61	1.01	1.05
+Australiadexter	THUNDER dOWNUNDERFlyQuestGrayhound	332	6856	-15	1.00	1.05
+Czech Republicnbqq	ECLOT	882	19252	+328	1.03	1.05
+RussiaFinigaN	GUN5Fire Flux	272	5824	+217	1.06	1.05
+Ukrainenotineki	CYBERSHOKE	739	16088	+659	1.07	1.05
+Mongoliamzinho	The MongolZ	536	11845	-90	0.99	1.05
+Kazakhstanmo0N	magicRUBYAMKAL	397	8552	+684	1.13	1.05
+GermanyPerX	ALTERNATE aTTaX	389	8458	+161	1.03	1.05
+Brazilurban0	Case9z	435	9332	-124	0.98	1.05
+Russiabluewh1te	BET-MAurora Young Blud33Chimera	722	15934	-350	0.97	1.05
+Brazilshz	inSanitYGaimin Gladiatorsex-W7MadalYamigos	353	7511	+191	1.04	1.05
+Brazilhonda	Vikings KRPlayersKRÜ	211	4610	+77	1.02	1.05
+DenmarkTauson	GamerLegionECSTATIC	496	10904	+117	1.02	1.05
+LithuaniaRaY5ive	ASTRAL	243	5194	-128	0.96	1.05
+RussiaS1ren	BetBoom	665	14455	+251	1.03	1.05
+Germanys1n	M80BIG	556	11750	+280	1.04	1.05
+Czech RepublicDytor	ECLOT	799	17263	+233	1.02	1.05
+Polandtomiko	Permitta	599	13164	+157	1.02	1.05
+Canadadjay	LAGMIGHT	382	8082	-27	1.00	1.05
+RussiaKusMe	FORZE ReloadVP.Prodigy	518	11425	-317	0.96	1.05
+Argentinarighi	KRÜ	375	8077	-12	1.00	1.05
+LatviaYEKINDAR	FURIALiquid	476	10253	-82	0.99	1.05
+AustraliadangeR	AbyssalRoosterMindfreak	205	4272	+205	1.08	1.05
+DenmarkMistR	SashiEspionage	643	14022	-288	0.97	1.05
+TurkeyCalyx	Eternal Fire	472	10314	+376	1.06	1.05
+United KingdomGirafffe	The Last ResortVerdantALASKAWashington	421	9085	-19	1.00	1.05
+Brazilt9rnay	W7MKeyd StarsODDIK	279	5882	+40	1.01	1.05
+Argentinanaz	ShindeNBESTIA	569	12232	-310	0.96	1.05
+FranceLucky	3DMAX	695	15177	+262	1.03	1.05
+MongoliaNEUZ	5starChinggis WarriorsEruption	261	5542	-98	0.98	1.04
+United KingdomSurreal	Endpoint	359	7739	+63	1.01	1.04
+Brazilabr	GameHuntersCorinthians	445	9526	+283	1.05	1.04
+DenmarkGriller	PreasyALGO	246	5309	-17	1.00	1.04
+Denmarkn1Xen	CPH WolvesECSTATICAaBWOPA	705	15509	+326	1.03	1.04
+United Statesviz	MarsborneParty Astronauts	241	5122	-66	0.98	1.04
+Kazakhstandef1zer	NOVAQ	356	7676	-157	0.97	1.04
+Polandbajmi	WalczakiESCEnterprise	709	15558	+25	1.00	1.04
+Argentinameyern	9zBESTIABounty HuntersDusty Roots	563	12183	+415	1.05	1.04
+DenmarkNikodeon	MOUZ NXT	264	5858	-66	0.98	1.04
+UkraineFlierax	TNLInner Circle	432	9438	+874	1.16	1.04
+Denmarkkraghen	9INEGaimin GladiatorsECSTATIC	848	18756	-265	0.98	1.04
+RussiaKrad	AMKAL9 PandasFORZE	496	10951	-375	0.95	1.04
+FranceJACKZ	HashirasGenOneMousquetairesTSMkONO	599	13209	+90	1.01	1.04
+Russiaswetsi	Endless JourneyFORZE Reload	233	5042	+259	1.08	1.04
+LuxembourgMarix	FAVBETEntropiq	819	17869	-7	1.00	1.04
+DenmarkBeccie	SashiPreasy	576	12404	-279	0.97	1.04
+Canadafreshie	BOSSBLUEJAYSSportsBetExpert	523	11001	-62	0.99	1.04
+Ukrainealex666	B8	615	13442	+43	1.00	1.04
+Australiarekonz	RoosterMANTRAFURYsunday school	244	5094	-79	0.98	1.04
+Brazilexit	FluxoMIBR	531	11303	+428	1.06	1.04
+UkraineOWNER	BASEMENT BOYSB8kONOBetera	433	9360	+68	1.01	1.04
+Brazilnicks	Fluxo	277	5871	+86	1.02	1.04
+PortugalAg1l	100 ThievesSAWRhynoFTW	487	10661	+205	1.03	1.04
+Denmarkdupreeh	FalconsPreasyHEROIC	218	4783	+85	1.03	1.04
+DenmarkCabbi	SashiEspionage	959	20770	+4	1.00	1.04
+DenmarkAltekz	AMPreasyTSMSashi	637	13867	-3	1.00	1.04
+Czech RepublicNEOFRAG	UNiTYSINNERSECLOT	539	11641	+47	1.01	1.04
+BrazilTuurtle	Fake do BiruODDIKBounty Hunters	463	9817	-54	0.99	1.04
+Belarusm1QUSE	Nuclear TigeRESAurora Young BludChimera	632	13783	-148	0.98	1.04
+Germanykyuubii	BIGAMfnaticSangal	488	10502	-113	0.98	1.04
+Brazilf4stzin	inSanitYadalYamigosFOLHA AMARELA	297	6341	-33	0.99	1.04
+RussiaH4SAN4TOR	ex-RUBYRUBY	745	16312	-459	0.96	1.04
+Mongoliacontrolez	The HunsChinggis Warriors	343	7404	+87	1.02	1.04
+HungaryAaron	PERAJiJieHao	321	6970	-48	0.99	1.04
+Argentinabuda	BESTIA9zKRÜ	439	9443	-192	0.97	1.04
+Palestine0SAMAS	JiJieHao	341	7417	+111	1.02	1.04
+Brazilkye	Fluxo	451	9600	+266	1.04	1.04
+Germanyprosus	BIG AcademyBIG	410	9015	+6	1.00	1.04
+ChinaC4LLM3SU3	Lynn Vision	271	5822	+68	1.02	1.04
+Polandultimate	LiquidIlluminar	419	9053	+530	1.09	1.04
+BrazilVINI	Imperial	663	14258	-298	0.97	1.04
+DenmarkBuzz	OGECSTATIC	375	8257	+1	1.00	1.04
+Finlandallu	JANOCSDIILIT	224	4915	+215	1.06	1.04
+PolandMelavi	AnonymozajezdzaczeBetclicTNC	243	5279	+358	1.10	1.04
+MongoliabLitz	The MongolZ	536	11845	+5	1.00	1.04
+FinlandAlxc	HAVU	228	4894	-91	0.97	1.04
+Russiah1te	BeteraDMSmagic	528	11849	+1041	1.15	1.04
+United KingdomCYPHER	BLEEDBC.GamefnaticTSM	631	13961	-472	0.95	1.04
+Australiaapocdud	Ground ZeroHousebets	375	7795	-212	0.96	1.04
+Bosnia and Herzegovinasimke	Zero Tenacity	727	16060	-356	0.97	1.04
+Ukrainecmtry	FUTNAVI Junior	582	12651	+543	1.07	1.04
+FranceDjoko	GenOne3DMAX	747	16257	-281	0.98	1.04
+DenmarkacoR	SashiTSMECSTATICGamerLegion	488	10557	+734	1.11	1.04
+United Statesdare	ElevateGetting InfotimbermenBadassBLUEJAYS	387	8178	-164	0.97	1.04
+Norwayrain	100 ThievesFaZe	505	11162	-248	0.97	1.04
+United StatesSLIGHT	BOSSWildcardBLUEJAYS	572	12020	+876	1.12	1.04
+BrazilMachado	CrashersFake do Biru	222	4705	+409	1.14	1.04
+BulgariashaiK	AcendThe Chosen Few	234	5134	-91	0.97	1.04
+United Statesmason	LAGVagrantsInControl	298	6340	-193	0.96	1.04
+ChinaEmiliaQAQ	Lynn Vision	384	8188	-73	0.99	1.04
+Norwayjkaem	BC.GameApeksBLEED	471	10476	-153	0.98	1.04
+Finlandottob	HAVU	225	4842	+371	1.12	1.04
+FranceBrooxsy	GenOne	540	11758	-267	0.97	1.04
+DenmarkNodios	Gaimin GladiatorsECSTATICTricked	493	10868	-75	0.99	1.04
+Brazilzmb	LPVikings KRCaseUNO MILLE	602	13004	-164	0.98	1.04
+RussiaelectroNic	BC.GameVirtus.proCloud9	395	8569	-193	0.97	1.04
+Brazilponter	Bounty HuntersODDIKRED CanidsSwingers	517	10992	+28	1.00	1.04
+Brazildestiny	SolidGalorysRED Canids	713	15261	-7	1.00	1.04
+MontenegroMaden	FalconsZero Tenacityillwill	448	9797	-47	0.99	1.04
+SlovakiaPepo	SINNERS	388	8557	+552	1.11	1.03
+SwedenLekr0	Johnny SpeedsBC.Game	578	12693	-173	0.98	1.03
+Denmarkvalde	TSMTricked	388	8511	-47	0.99	1.03
+RussiaPolt	Insilio	273	5920	+79	1.02	1.03
+Swedensusp	HEROICWildcardMetizport	498	10712	-251	0.97	1.03
+United Statesnicx	Passion UALAGComplexity	435	9512	-144	0.98	1.03
+BrazildelboNi	FlamengoadalYamigosKeyd Stars	276	5955	+95	1.02	1.03
+DenmarkroeJ	Gaimin GladiatorsPreasy	338	7476	-56	0.99	1.03
+Russiatwenty3	Imperial ValkyriesPigeons	289	5732	-22	0.99	1.03
+MongoliaAccuracyTG	NEXVOIDATOXIHC	235	5125	+90	1.03	1.03
+LithuaniaBymas	MonteInto the Breach	355	7762	+260	1.05	1.03
+Brazillevi	Imperial9zW7M	252	5352	+277	1.08	1.03
+PolandSobol	AnonymoEnterpriseKOLESIEVenomRebels	624	13530	-505	0.95	1.03
+RussiaNorwi	AuroraSangalAstrum	912	20005	-269	0.98	1.03
+UkrainekL1o	LeoL&G	476	10231	-125	0.98	1.03
+Swedenhampus	BLEED500MetizportJohnny Speeds	572	12672	-319	0.96	1.03
+Kazakhstandukefissura	HOTU	267	5694	-113	0.97	1.03
+United Statesjason	FLUFFY AIMERS	209	4552	-100	0.97	1.03
+UzbekistanDSSj	ARCRED	625	13883	+591	1.06	1.03
+RussiaForester	AMKALWHITEBIRDSPARTACYBERSHOKE	470	10468	+110	1.02	1.03
+RussiaPipw	Insilio	350	7621	-217	0.96	1.03
+Polandcej0t	Endpoint9INESprout	738	16263	-299	0.97	1.03
+DenmarkkroK	Astralis TalentTricked	343	7391	-340	0.94	1.03
+PolandVegi	PermittaWildLotus	298	6570	+6	1.00	1.03
+Ukrainemarat2k	LeoL&G	450	9723	-34	0.99	1.03
+Mongoliakabal	ATOX	201	4273	-52	0.98	1.03
+Brazildrop	MIBRRED Canids	627	13475	-18	1.00	1.03
+SerbiaKind0	ex-Zero TenacityPartizan	649	14092	+345	1.04	1.03
+AustraliaOmichella	Ground ZeroVantage	329	7053	-313	0.94	1.03
+FranceEx3rcice	3DMAX	696	15198	+98	1.01	1.03
+United StatesjchancE	Take FlyteChicken CoopBad News CapybarasPhoenixOne More	297	6331	+138	1.03	1.03
+Brazilspinnie	METANOIA WolvesPlayers	276	5923	-252	0.94	1.03
+United Statesfl0m	Mythic	238	5025	-220	0.94	1.03
+RussiasstiNiX	Just PlayersCYBERSHOKEAMKAL	618	13737	+67	1.01	1.03
+UkraineTr0ublE	BASEMENT BOYS	213	4557	+233	1.08	1.03
+Romaniavolt	FOKUSGamerLegion500	558	12323	-276	0.97	1.03
+Indiaf1redup	Gods Reign	205	4261	+147	1.05	1.03
+Mongoliaclouden	5starNomadS	211	4528	-174	0.95	1.03
+EstoniaNeqy	ASTRAL	239	5128	-262	0.93	1.03
+Polandphr	Illuminar	253	5570	-102	0.97	1.03
+Argentinalenci	ProcyonLaChampionsLigaKRÜ	298	6331	-19	1.00	1.03
+BrazilRCF	CaseGameHuntersFOLHA AMARELA	308	6809	+443	1.10	1.03
+UkraineMalkiss	LeoL&G	422	9089	+738	1.14	1.03
+SwedenSapec	Johnny SpeedsEYEBALLERS	693	15205	-593	0.94	1.03
+United KingdomCoolComs	ZomblersTsunamiLegacy Kingdom	255	5544	-196	0.95	1.03
+Brazilmlhzin	FluxoMIBR Academy	224	4699	-63	0.98	1.03
+GermanytabseN	BIG	633	13647	-612	0.93	1.03
+BrazilMITHPUTTINI	Players	281	6141	+399	1.11	1.03
+Brazilkauez	paiNRED Canids	691	14930	+39	1.00	1.03
+Germanyhyped	ALTERNATE aTTaXBIG	580	12472	+889	1.11	1.03
+United StatesnosraC	VocaNounsGetting Info	640	13333	-219	0.98	1.02
+Ukrainefostar	illwillPermitta	205	4423	-124	0.96	1.02
+Argentinarzk	ex-KRÜDusty RootsLaChampionsLigaPrasso	257	5606	-292	0.93	1.02
+PortugalTMKj	RebelsRhynoWildcard Academy	372	8003	-240	0.96	1.02
+DenmarksSen	EACWildcard AcademyAaBAstralis Talent	392	8516	-165	0.97	1.02
+SwedenKRIMZ	fnatic	630	13756	-38	1.00	1.02
+Brazilxureba	Keyd StarsSolid2GAMEFake do Biru	596	12854	-154	0.98	1.02
+Ukrainekr1vda	BASEMENT BOYSLeoL&G	339	7312	-131	0.97	1.02
+SwedenHEAP	Johnny SpeedsEYEBALLERS	814	17809	-45	1.00	1.02
+Brazilbsd	GameHuntersCaseGaimin Gladiatorsex-W7M	421	8932	+416	1.07	1.02
+RussiaKENSI	AuroraAstrum	733	16188	+21	1.00	1.02
+United Statesmotm	Marsborne	375	8085	-30	0.99	1.02
+Brazilhapp	LPGalorysNITRO	575	12201	+339	1.04	1.02
+Turkeypaz	Fire Flux	384	8407	-15	1.00	1.02
+GeorgiaSchwarz	ENCE Academy	418	8927	-277	0.96	1.02
+AustriaS3NSEY	Fire Flux	208	4642	+177	1.06	1.02
+BulgariaSkrimo	AcendViperioThe Chosen Few	405	8802	-440	0.93	1.02
+Ukrainebondik	FAVBET	629	13773	+193	1.02	1.02
+AustraliaTjP	THUNDER dOWNUNDERRooster	406	8346	-242	0.96	1.02
+Brazilmello	GameHuntersFOLHA AMARELAFURIA Academy	346	7463	+543	1.12	1.02
+PortugalaragornN	SAWBC.GameRhynoFTW	282	6147	-319	0.93	1.02
+Denmarkkwezz	STATESashiEspionageWOPA	692	15044	-274	0.97	1.02
+Brazilsaffee	MIBR	409	8720	+490	1.09	1.02
+Finlandmyltsi	AMENCE AcademyENCE	534	11549	-197	0.98	1.02
+Slovakiafino	Sampi	418	9195	+564	1.10	1.02
+RomaniaCiocardau	HYPERSPIRITNexus	425	9374	-320	0.95	1.02
+North MacedoniaCacaNito	BC.GameApeks	442	9771	-58	0.99	1.02
+Romaniad1maje	HYPERSPIRITINFINITE	231	4989	-202	0.94	1.02
+United Statesdvrk	regainASPYRE	221	4686	-19	0.99	1.02
+Brazilb4rtiN	Legacyex-W7MGaimin Gladiators	402	8681	-63	0.99	1.02
+Swedendelle	EYEBALLERSAM	310	6865	-193	0.96	1.02
+Brazilmatios	Keyd StarsODDIK	615	13112	-169	0.98	1.02
+Brazilrainny	HypeCrashersPlayers	218	4772	-97	0.97	1.02
+Russiamagixx	Spirit	395	8492	+47	1.01	1.02
+Russiashalfey	9 PandasFORZE	542	11811	+292	1.04	1.02
+KazakhstanPump	NOVAQ	345	7455	-164	0.97	1.02
+Russianafany	TDKBetBoomAMKAL	574	12323	-601	0.93	1.02
+Uruguayzock	Bounty HuntersBESTIA	598	12588	-17	1.00	1.02
+Russiash1nejezzz	ex-RUBYChimeraRUBY	506	11118	+57	1.01	1.02
+PolandPOLO	MINLATEBetclicbrazylijski luzIlluminar	381	8350	+435	1.08	1.02
+Brazildanoco	FlamengoKeyd StarsE-Xolos LAZER	413	8780	-427	0.93	1.02
+United KingdomAZUWU	MonteEndpoint	659	14304	-269	0.97	1.02
+BrazilALLE	UNO MILLESolidFlamengo	358	7564	-215	0.96	1.02
+IraqBibu	JiJieHaoPERA	430	9390	+40	1.01	1.02
+Swedenbsover	Lilmix	222	4749	-226	0.94	1.02
+MongoliaN2o	AkimboOMiTMoney CrewG3	220	4770	-64	0.98	1.02
+Ukrainet3ns1on	FAVBET	429	9486	+610	1.11	1.02
+Mongoliafury5k	BMZEruptionChinggis Warriors	245	5183	-319	0.92	1.02
+Polandex1st	KOLESIEEnterpriseMINLATE	533	11758	-350	0.96	1.02
+Brazillukiz	2GAMEVikings KRFake do BiruVasco	300	6438	-104	0.98	1.02
+SwedenJW	EYEBALLERS	774	17027	+150	1.01	1.02
+BrazilcLd	UNO MILLETropa do KinGui	216	4592	-67	0.98	1.02
+DenmarkkiR	Astralis Talentex-Astralis Talent	284	6103	-316	0.93	1.02
+Kazakhstanher1tage	Rune Eaters	218	4805	-142	0.96	1.02
+Brazildivine	LP9z AcademyDASHGalorys	368	7769	+633	1.14	1.02
+Denmarksalazar	TrickedECSTATICGaimin Gladiators	547	12001	+448	1.06	1.02
+BrazilvinaabEAST	ALKAHypeSwingersKeyd Stars	304	6531	-79	0.98	1.02
+TurkeyEMSTAR	Eternal Fire	230	4982	-332	0.91	1.02
+DenmarkMol011	AaBPrestigeSashi AcademySashiPreasy Mix	244	5184	-122	0.97	1.02
+Kosovocerber	MANA	329	7068	-208	0.96	1.02
+Braziln1ssim	LegacypaiN	431	9158	+6	1.00	1.02
+RussiaGoody	AtreidesFORZE Reload1winGL Academy	314	6962	-12	1.00	1.02
+ArgentinaHezz	IsurusLaChampionsLigaProcyon	282	5985	-199	0.95	1.02
+RussiaEl1an	SPARTAWHITEBIRDBetera	293	6403	+448	1.12	1.02
+SwitzerlandrigoN	Eternal FireENCEGuild EaglesBIG	580	12671	-465	0.95	1.02
+SwedenL00m1	MetizportAM	436	9485	+376	1.06	1.02
+Brazilbrnz4n	MIBR	469	10003	-212	0.97	1.02
+Brazilxns	PlayersSPORT	262	5732	-162	0.96	1.02
+Czech RepublicMoriiSko	SINNERSUNiTY	632	13777	-567	0.94	1.02
+Russiariskyb0b	Nemiga	628	13785	-423	0.95	1.02
+Braziljz	W7M	201	4242	-191	0.93	1.02
+PortugalIcarus	RebelsRhyno	256	5529	-122	0.97	1.02
+Brazildesh	Keyd StarsSwingersBad News ChickensCorinthians	342	7278	+438	1.10	1.02
+Polandfanatyk	OramondReason	377	7880	-174	0.97	1.01
+Spainalex	Gentle MatesIberian SoulNinjas in Pyjamas	593	13028	-379	0.96	1.01
+BrazilarT	LegacyFluxoFURIA	598	12705	-525	0.94	1.01
+Kazakhstanbuster	DEPOALLINNERS1winNOVAQ	345	7356	-114	0.98	1.01
+DenmarkChr1zN	HEROICOGMOUZ NXT	736	16027	-601	0.95	1.01
+Brazilgafolo	Sharks	756	16323	+16	1.00	1.01
+United Statesd4rty	BOSSParty Astronauts	394	8289	-222	0.96	1.01
+UkraineMagic	Lazer CatsNAVI Junior	217	4719	+239	1.08	1.01
+Serbianexa	BC.GameG2BLEED	413	9104	-11	1.00	1.01
+Argentinadeco	IsurusKRÜBESTIA	364	7837	-343	0.93	1.01
+DenmarkKristou	ECSTATIC	583	12879	+4	1.00	1.01
+United Statesjared	Chicken CoopMIGHTTake Flyte	216	4534	-196	0.94	1.01
+DenmarkViggo	AaBPreasy	271	5851	-383	0.91	1.01
+RussiaFpSSS	Insilio	340	7430	+198	1.04	1.01
+Russiafaydett	BebopInsilio	636	13944	-613	0.94	1.01
+Russia1NVISIBLEE	LavkedSPARTAARCRED	686	15138	-1264	0.89	1.01
+DenmarkNoruyp	MASONIC	291	6442	+300	1.07	1.01
+Bosnia and HerzegovinahuNter-	G2	487	10587	+52	1.01	1.01
+Polandyvro	los kogutosTNCAnonymo	354	7761	-40	0.99	1.01
+MongoliaTechno	The MongolZ	536	11845	-428	0.95	1.01
+LithuaniaMAGILA	Fingers CrossedCPH WolvesLazer CatsGrannys Knockers	278	6020	-240	0.95	1.01
+Kosovosinnopsyy	JiJieHaoInto the BreachGuild Eaglesm1x	575	12658	-681	0.92	1.01
+Polandvirtuoso	AnonymoBetclicbrazylijski luzQMISTRY	381	8264	-274	0.95	1.01
+RussiamaQuein	DONSTURUBY	361	7868	+639	1.14	1.01
+Czech Republicmajky	BRUTESINNERS	386	8400	-423	0.93	1.01
+DenmarkBoye	TrickedAaB	264	5748	-213	0.95	1.01
+SwedenwalleN	LilmixENERGYULTRA	213	4567	-124	0.96	1.01
+DenmarkBukhavez	MASONIC	206	4488	-374	0.88	1.01
+IsraelBluePho3nix	Young NinjasNinjas in Pyjamas	214	4702	-96	0.97	1.01
+Ukraines-chilla	Passion UA	418	9164	-465	0.92	1.01
+Denmarkqx	AaB	296	6358	-536	0.88	1.01
+PolandGoofy	ENCE9INEOLDBOYS PL	217	4716	-197	0.94	1.01
+Denmarkbekker	EACAaB	299	6449	+238	1.06	1.01
+Romaniaragga	NexusHYPERSPIRIT	679	14969	-574	0.95	1.01
+Czech Republicwoozzzi	UNiTY	359	7703	+297	1.06	1.01
+SwedenBrollan	MOUZ	421	9188	-445	0.93	1.01
+Swedenyxngstxr	HEROICSangal	590	12801	-207	0.98	1.01
+DenmarkQueenix	HashirasGaimin GladiatorsECSTATIC	558	12353	-436	0.95	1.01
+Brazilbnc	Bounty HuntersGameHuntersSolidUNO MILLE	405	8748	-314	0.95	1.01
+PolandKunai	Phantom	262	5791	-307	0.93	1.01
+ChinaSummer	Rare Atom	456	9717	-243	0.96	1.01
+BulgariaCeRq	500BLEED	566	12479	+705	1.09	1.01
+SwedenWonder	LilmixWildcard AcademyFUT Academy	212	4563	-181	0.94	1.01
+GermanyArroW	ALTERNATE aTTaXBIG Academy	382	8277	-385	0.93	1.01
+Brazilprt	GameHunters	368	7951	-360	0.93	1.01
+Braziln1cks	VascoSharks	239	5103	+236	1.08	1.01
+Romaniafnl	NexusMonte GenHEROIC Academy	365	7944	-132	0.98	1.01
+Turkeyjresy	PCIFICEternal Fire	211	4616	-230	0.93	1.01
+Brazilfokiu	W7M	264	5618	-521	0.88	1.01
+Portugalstadodo	RebelsIberian SoulKOI	559	12419	+545	1.07	1.01
+Kazakhstannoni	Rune EatersALLINNERS	333	7266	+113	1.02	1.00
+Australiafoggers	AbyssalAnimus VictoriaArcadeKZG	242	5107	-345	0.91	1.00
+Kosovogxx-	ASTRALGuild EaglesAMBad News Eagles	382	8348	+374	1.07	1.00
+SwedenRo1f	EYEBALLERSJohnny Speeds	723	15968	-479	0.95	1.00
+Czech Republicbeastik	SINNERS	928	20508	-998	0.93	1.00
+Russiafozil	RUBYSpaceex-RUBY	654	14324	-408	0.96	1.00
+Mongoliaariucle	5starChinggis WarriorsIHC	351	7490	-303	0.94	1.00
+Brazilchelo	ImperialFURIA	508	10994	-491	0.93	1.00
+PolandAntyVirus	OramondReason	360	7490	-387	0.93	1.00
+BelgiumKeoz	GenOneInto the BreachkONOWildLotusGamerLegion	682	14648	-705	0.93	1.00
+United KingdomVacancy	The Last ResortVerdantWashingtonALASKA	460	9856	-747	0.89	1.00
+Lithuaniaspardaus	ECLOTFingers Crossed	276	6110	-177	0.96	1.00
+North Macedoniadan1	AtreidesNOMVoltfish123	244	5237	-268	0.92	1.00
+DenmarkMagisk	FalconsAstralis	341	7512	-68	0.99	1.00
+Russiashady	FORZE ReloadVP.Prodigy	262	5761	+89	1.02	1.00
+Greeceawzek	ALTERNATE aTTaX	419	9085	-423	0.93	1.00
+KazakhstanQikert	1winPARIVISION	524	11298	-216	0.97	1.00
+Brazilskullz	FURIAImperialLiquid	368	7876	+33	1.01	1.00
+PolandAdrieN	los kogutosTNC	378	8163	-118	0.98	1.00
+South AfricaMisteM	Eternal FireYoung NinjasNinjas in Pyjamas	313	6988	-532	0.89	1.00
+Australiavision	Ground ZeroVantageSemperFi	331	6964	-152	0.97	1.00
+BrazilfREQ	Bounty HuntersIntense	473	9934	-40	0.99	1.00
+Czech RepublicLevi	UNiTY	231	5096	-317	0.91	1.00
+PolandPrism	Betclicbrazylijski luz	604	13089	-901	0.90	1.00
+Russiak4nfuz	SPARTALavked	481	10446	-433	0.94	1.00
+KazakhstanLack1	AuroraGUN5WHITEBIRDSPARTA	746	16393	-848	0.93	1.00
+Francebodyy	3DMAXfnatic	530	11533	-594	0.93	1.00
+RussiaiDISBALANCE	Bebop9 PandasAMKAL	610	13370	+793	1.10	1.00
+Polandsk1tt	WalczakiMINLATE	210	4577	-291	0.91	1.00
+MongoliaEfire	Chinggis WarriorsIHC	346	7436	-121	0.98	1.00
+Polandmwlky	PhantomEntropiq	235	5168	+101	1.03	1.00
+Brazilperez	MIBR AcademyPatins da FerrariVasco	233	4916	-84	0.97	1.00
+IrelandarTisT	The Last ResortVerdantWashingtonALASKA	492	10607	-14	1.00	1.00
+Uzbekistanhitori	G2 Ares	226	4881	-185	0.94	1.00
+GermanysyrsoN	BIG00NATION	222	4863	+243	1.08	1.00
+Polandmaaryy	Permittalos kogutosTNC	1047	22985	-519	0.97	1.00
+DenmarkMaze	AaBVoltSecret	391	8465	-99	0.98	1.00
+SlovakiasAvana1	Sampi	420	9233	-341	0.94	1.00
+RussiaSELLTER	NemesisGUN5Aurora	980	21619	-944	0.94	1.00
+Brazilyepz	Case	355	7786	-228	0.95	1.00
+Australiapz	Ground ZeroHousebetsBad News KangaroosVERTEX	385	7977	-51	0.99	0.99
+Kazakhstankumao	Rune EatersALLINNERSJiJieHao	360	7846	-362	0.93	0.99
+DenmarkANSG1	Astralis Talent	239	5171	-170	0.95	0.99
+Swedenkreaz	ECLOT	620	13424	-194	0.98	0.99
+Polandmorelz	PermittaPompa	276	6116	-224	0.95	0.99
+United StatesGabe	Take FlyteChicken CoopBad News CapybarasPhoenixOutfit 49	367	7864	-598	0.89	0.99
+Swedenb0denmaster	LilmixAlliance	427	9321	+237	1.04	0.99
+KazakhstanneaLaN	NOVAQ1win	422	9144	-556	0.91	0.99
+United Statesbrett	FLUFFY AIMERSVagrantsBOSSAetherLAG	429	9108	-679	0.90	0.99
+Finlandmillert	ENCE Academy	410	8767	+42	1.01	0.99
+RussiaX5G7V	K27Space	586	12919	-657	0.93	0.99
+IrelandExtinct	The Last ResortVerdantWashingtonALASKA	462	9981	-834	0.89	0.99
+Russiarobo	ex-RUBYSpirit Academy	474	10426	-443	0.94	0.99
+KazakhstanF0R3VER	Virtus.proVP.Prodigy	203	4538	-230	0.93	0.99
+SwedenPlesseN	Alliance	453	9802	-562	0.92	0.99
+Spaindav1g	Gentle MatesIberian SoulKOI	672	14976	-719	0.93	0.99
+SlovakiaSTYKO	ApeksMonteInner Circle	215	4764	-250	0.92	0.99
+FranceTarkky	MousquetairesGenOneaAaADEPTS	276	5878	-311	0.93	0.99
+SwedenPeppzor	EYEBALLERS	273	5974	-315	0.92	0.99
+RussiaSomething	Just PlayersFORZE ReloadVP.Prodigy	541	11920	-713	0.91	0.99
+United StatesStx	ShimmerSupernova CometsSakura	234	4868	-350	0.90	0.99
+Finlanduli	HAVU	331	7013	-252	0.95	0.99
+Brazilhoax	GalorysSharks	270	5766	-415	0.90	0.99
+Brazildrg	SharksSolidGalorys	539	11597	-761	0.90	0.99
+Russiatory	Imperial ValkyriesPigeons	282	5593	-279	0.93	0.99
+United Kingdombevve	The Last ResortWashington	231	4953	-161	0.95	0.99
+Uruguaymax	9z	592	12665	-739	0.91	0.98
+Denmarkniko	TSMSashi00NATION	383	8418	-400	0.93	0.98
+United StatesCooper	Mythic	236	5000	-118	0.97	0.98
+Slovakiarealzen	BRUTE	233	5018	-286	0.92	0.98
+Swedendex	EYEBALLERS	553	12179	-660	0.92	0.98
+PortugalMUTiRiS	SAW	473	10110	-412	0.94	0.98
+RussiaBoombl4	BetBoomCloud9	600	13117	-912	0.90	0.98
+Belarussenka	Nuclear TigeRES	385	8401	-841	0.85	0.98
+Ukraineesenthial	B8	648	14215	-498	0.95	0.98
+Denmarkraalz	9INESprout	896	19835	-1148	0.91	0.98
+FinlandHENU	ENCEENCE AcademyJANO	282	6045	-302	0.93	0.98
+Serbiac0llins	PartizanEntropiq	533	11740	-618	0.92	0.98
+Braziltatazin	VascoE-Xolos LAZER	254	5468	-145	0.96	0.98
+Brazilj0w	Yawara	346	7230	-555	0.89	0.98
+SwedenLNZ	MIBRSangalHEROIC	602	13074	-778	0.91	0.98
+Russiaeasy	GUN5RUBYAurora Young Blud	342	7438	+226	1.05	0.98
+Portugalsnapy	RebelsRhynoGTZ	433	9346	-774	0.89	0.98
+United StatesTyRa	InControl	249	5248	-464	0.88	0.98
+Swedenisak	MetizportGamerLegionNinjas in Pyjamas	503	11006	-501	0.93	0.98
+Argentinadott1	IsurusLaChampionsLigaProcyonPrasso	279	5931	-125	0.97	0.98
+Brazilleo_drk	HypeKeyd StarsSwingers	250	5447	-362	0.91	0.98
+Russiaanttzz	RUSTECHOTUHesta	298	6511	-463	0.90	0.98
+Russiasm3t	Just PlayersDMSAMKAL	284	6256	-100	0.98	0.98
+BelgiumNexius	OGNemesisMOUZ NXT	219	4746	-364	0.89	0.98
+FranceGraviti	3DMAX	617	13473	-700	0.93	0.98
+BelarusChill	AtreidesARCRED	372	8124	-561	0.90	0.98
+SwedenJackinho	LilmixMetizportCPH Wolves	671	14595	-328	0.97	0.98
+Kazakhstandan4o	Omega	207	4453	-312	0.89	0.98
+Brazilnikz	CrashersAmérica	232	4877	-299	0.91	0.98
+North Macedoniakyxsan	FalconsHEROICApeks	545	12041	-819	0.90	0.98
+South AfricaJT	Passion UAComplexity	431	9469	-674	0.90	0.98
+Portugalopdust	MOUZ NXT	282	6238	-610	0.86	0.98
+EstoniaJyo	Ursa1winsYnck	242	5097	-191	0.94	0.98
+United KingdomGizmy	MonteMonte Gen	664	14567	-996	0.90	0.98
+Ukrainebyr9	kONOex-ENEIDAECF	235	5211	-117	0.96	0.98
+Polandhfah	BRUTEBetclicVenom	389	8481	-426	0.93	0.98
+Brazilbrn$	MIBR Academy	208	4346	-54	0.98	0.98
+Finlandarvid	CSDIILITHeimo	266	5940	-377	0.91	0.98
+Polandcasey	Rebels	215	4790	-363	0.89	0.98
+AustraliaSkulL	RoosterFURYVantageMANTRA	254	5367	-552	0.86	0.97
+Polandkadziu	IlluminarPGE Turow	243	5393	-209	0.94	0.97
+Ukraineleen	LeoMonteMonte Gen	373	8119	-421	0.92	0.97
+DenmarkPR1mE	WOPASashi	204	4533	-54	0.98	0.97
+United Statesjsfeltner	InControl	273	5779	-593	0.86	0.97
+GermanyFreeZe	ALTERNATE aTTaX	532	11497	-1075	0.87	0.97
+Latviameowpop	ASTRAL	233	4977	-317	0.91	0.97
+BrazilLeomonster	LPPatins da Ferrari	543	11617	-721	0.91	0.97
+Denmarksuma	Astralis Talentex-Astralis Talent	226	4933	-316	0.91	0.97
+RomaniaADRON	HYPERSPIRITNexus	301	6526	-505	0.89	0.97
+UkrainezeRRoFIX	Inner CirclePassion UA	678	14959	-443	0.96	0.97
+Uruguaycbass	Take FlyteChicken CoopBad News CapybarasOne More	241	5145	-523	0.86	0.97
+SwedenSvedjehed	Johnny Speeds	204	4468	-293	0.90	0.97
+BrazilWOOD7	ODDIK	731	15697	+142	1.01	0.97
+RussiakelieN	WWInsilio	434	9424	-670	0.90	0.97
+SlovakiaThe eLiVe	SampiECLOT	627	13652	-1017	0.89	0.97
+Germanyk1to	AMOG	347	7542	-707	0.87	0.97
+PortugalP3R3IIRA	FamalicãoRhyno	222	4697	-316	0.90	0.97
+IndiaBhavi	Gods ReignArise	239	5024	-471	0.87	0.97
+FranceNBK-	GenOneRevenantFalcons	309	6824	-629	0.87	0.97
+Ukraineonic	Inner CircleTNL	473	10354	-863	0.87	0.97
+PortugalJUST	KOIMovistar Riders	207	4676	-136	0.96	0.97
+United StatesCAJUN	ZomblersTsunamiLegacy Kingdom	254	5515	-670	0.84	0.97
+Russiainterz	1winTSMCloud9	360	7889	-105	0.98	0.97
+Australiatucks	Mindfreak	356	7593	-442	0.91	0.97
+Belarus1eeR	Nemiga	676	14776	-1082	0.89	0.97
+Canadastanislaw	Wildcard	488	10302	-873	0.87	0.97
+Swedenztr	FOKUSGamerLegionMetizport	602	13103	-897	0.90	0.97
+RussiaPsychoDoctor	PsychoFaceQWENTRY	252	5480	-150	0.96	0.97
+ArgentinaBK1	ShindeNIsurus	360	7753	-691	0.87	0.97
+BrazilMaLLby	HypeSwingersPrison Breakers	224	4866	-299	0.91	0.96
+ChinaSPine	KaleidoMorningstarNewhappyURNinJaBromo	278	6031	-454	0.89	0.96
+BelarusGet_Jeka	ARCRED	570	12643	-523	0.94	0.96
+Finlandpuuha	HAVU	304	6483	-587	0.87	0.96
+SlovakiaKat	Imperial ValkyriesPigeons	289	5732	-271	0.93	0.96
+PortugalrafaxF	GTZRhynoFuzosFTW	355	7705	+25	1.00	0.96
+Brazilfl4sh	MIBR AcademyKeyd Stars	218	4599	-420	0.87	0.96
+RomaniaERSIN	aimclubNexus	266	5698	-432	0.89	0.96
+RussiaVILBy	Aurora Young BludChimera	343	7529	-499	0.90	0.96
+UkrainefEAR	fnaticPassion UA	875	19196	-953	0.92	0.96
+Ukrainefakerealityy	BASEMENT BOYSSABREex-SABRE	275	5902	-517	0.88	0.96
+Brazilremix	UNO MILLEVikings KRFlamengo	440	9465	+250	1.04	0.96
+United StatesSeb	VagrantsAetherCarpe DiemLimitlessUnjustified	291	6089	-476	0.89	0.96
+NorwayTapewaare	CPH Wolves	644	13956	-1195	0.88	0.96
+Russiafacecrack	PsychoFaceQWENTRYLEON	299	6567	-600	0.87	0.96
+GermanytiziaN	EntropiqRevenant	215	4752	-466	0.86	0.96
+SwedenupE	Alliance	651	14159	-993	0.89	0.96
+Russiaalpha	CYBERSHOKEPARIVISIONSpirit Academy	456	9811	-604	0.91	0.96
+BrazilLcm	SolidNITRO	308	6615	+36	1.01	0.96
+Argentina1962	ex-KRÜDusty Roots	202	4283	-445	0.85	0.96
+Denmarkb0RUP	MASONICkONOWildLotusHashiras	379	8195	-541	0.90	0.96
+Polandchudy	Anonymobrazylijski luzzajezdzacze	255	5550	-502	0.88	0.95
+KosovoSENER1	MANAGuild Eaglesm1xBad News Eagles	432	9372	-947	0.85	0.95
+PolandBambosh	ALGOBASEMENT BOYS9INE	236	5199	-430	0.88	0.95
+UkraineTopa	Passion UAIKLA	315	6899	-519	0.89	0.95
+PolandNami	los kogutosAnonymoTNCbrazylijski luz	449	9817	-723	0.89	0.95
+Mongoliaobi	AkimboOMiTMoney Crew	230	4954	-495	0.86	0.95
+United StatesTrucklover86	Mythic	248	5243	-322	0.91	0.95
+Russiarikon	FORZE Reload	233	5093	-463	0.87	0.95
+BrazilFalleN	FURIA	539	11660	-508	0.93	0.95
+DenmarkTMB	ECSTATICPreasy	787	17241	-1811	0.85	0.95
+DenmarkVster	WOPAYoung Ninjas	232	5111	-611	0.83	0.95
+Czech RepublicK1-FiDa	UNiTY	501	10861	-926	0.87	0.95
+Portugalroman	SAW	302	6496	-406	0.91	0.95
+Brazilcard	MIBR AcademyW7MGalorysYawara	286	6009	+67	1.02	0.95
+Swedenrobiin	Alliancemegoshort	405	8831	-716	0.88	0.95
+FinlandJelo	JANOHAVU	212	4493	-464	0.85	0.94
+BrazilThuister	Bad LuckMETANOIA WolvesUnderDogsAmérica	211	4390	-461	0.86	0.94
+RussiaSalazar	Ursa	270	5907	-485	0.87	0.94
+FranceapEX	Vitality	471	10264	-793	0.88	0.94
+Brazilrevoltz	Yawara	279	5870	-636	0.85	0.94
+DenmarkIceBerg	SashiTrickedEspionage	883	19200	-2577	0.82	0.94
+United KingdomMiGHTYMAX	Endpoint	366	7880	-921	0.83	0.94
+Argentinareversive	ex-KRÜKRÜ	399	8588	-986	0.84	0.94
+Russiaseized	9 Pandas	204	4460	-381	0.87	0.94
+BrazilLacerda	CrashersYawara	202	4145	-353	0.88	0.94
+Norwaysense	ApeksCPH Wolves	281	6252	-505	0.88	0.94
+DenmarkGnøffe	WOPA	264	5827	-588	0.86	0.94
+Denmarkgla1ve	ENCE	322	6961	-655	0.86	0.94
+UkrainesFade8	magicDMSAMKAL	566	12519	-1369	0.85	0.94
+FinlandCliqq	ENCEENCE Academy	237	4969	-563	0.84	0.94
+Latviaay0k	MOUZ NXT	264	5858	-286	0.93	0.94
+RussiaNickelBack	SPARTAWHITEBIRDAMKAL	292	6454	-734	0.84	0.94
+Argentinanext	ProcyonDusty Roots	220	4738	-362	0.88	0.93
+MongoliaBart4k	The Huns	389	8424	-481	0.91	0.93
+Russiakinqie	BET-MRUSH B33	694	15146	-1775	0.83	0.93
+SerbiaaVN	ex-Zero TenacityZero Tenacity	1081	23603	-1685	0.89	0.93
+DenmarkPatti	STATEECSTATICWOPAGaimin GladiatorsPreasy	572	12453	-1366	0.84	0.93
+BrazilNEKIZ	LegacyGaimin Gladiatorsex-W7M	455	9757	-1098	0.84	0.93
+Kazakhstanlaser	ex-KRÜKRÜ	375	8058	-582	0.89	0.93
+Serbiaemi	ex-Zero TenacityPartizanPompa	420	9156	-1065	0.83	0.93
+BrazilninjaZ	GalorysBounty HuntersSwingers	496	10685	-1162	0.84	0.93
+Russiasol	LavkedSPARTAFLuffy Gangsters	617	13406	-1371	0.85	0.93
+Russiah1kaN	BebopInsilioNuclear TigeRES	253	5669	-504	0.87	0.93
+RussiaMuk0s	Bushido WildcatsHestayngodsQUAZAR	207	4591	-531	0.84	0.93
+Ukrainelevantino	CYBERSHOKEBASEMENT BOYS	315	6816	-804	0.84	0.93
+Russiachopper	Spirit	385	8341	-830	0.85	0.93
+ArgentinaNoktse	BESTIA	614	13352	-996	0.89	0.93
+BrazilReix	CrashersBounty Hunters	343	7257	-732	0.86	0.93
+AustraliaBRACE	HousebetsBad News KangaroosVERTEXex-TALON	281	5849	-672	0.84	0.92
+BulgariaSPELLAN	Acend500The Chosen Few	545	11934	-1270	0.84	0.92
+Brazilnython	GalorysRED CanidsSolid	743	15974	-525	0.95	0.92
+Brazilstormzyn	MIBR AcademyW7M	395	8333	-970	0.84	0.92
+PolandmASKED	PermittaEternal Fire	902	19896	-2101	0.85	0.92
+United Statesmds	Chicken CoopTake FlytePhoenixOutfit 49	360	7614	-1011	0.82	0.92
+Polandinnocent	KOLESIERebelsVenom	594	13091	-1177	0.87	0.92
+United Statesben1337	Party AstronautsBOSS	507	10746	-1395	0.82	0.92
+SwedenGolden	EYEBALLERSGODSENT	290	6377	-646	0.85	0.92
+TurkeyMAJ3R	AuroraEternal Fire	503	11144	-1081	0.85	0.92
+PolandSnax	GamerLegionG2	406	8859	-961	0.84	0.91
+DenmarkcadiaN	OGAstralisLiquid	300	6591	-126	0.97	0.91
+FinlandAleksib	Natus Vincere	470	10117	-1185	0.82	0.91
+United Statessasha	regainASPYREDETONATE	241	5125	-618	0.83	0.91
+BrazilPKL	Fake do Biru2GAMEFluxo	437	9351	-966	0.85	0.91
+SwedenSHiNE	G2 AresJohnny SpeedsEYEBALLERSMetizport	406	8950	-990	0.83	0.91
+Polandsiuhy	LiquidMOUZ	411	8938	-1076	0.83	0.91
+Francedevoduvek	GenOneMousquetaires	382	8421	-1124	0.81	0.90
+PolandFurlan	Illuminar	267	5878	-883	0.79	0.90
+RussiaVert	BeteraSpace	487	10845	-1154	0.84	0.90
+BrazilCutzMeretz	Keyd StarsFlamengoPatins da FerrariCorinthians	587	12465	-1676	0.81	0.90
+BrazilLich	PlayersGameHunters	203	4441	-573	0.82	0.90
+Denmarkbirdfromsky	HashiraskONOWildLotus00NATION	406	8813	-1212	0.80	0.90
+DenmarkSnappi	Ninjas in PyjamasFalcons	491	10647	-1147	0.84	0.90
+BrazilRICIOLI	CaseGameHunters	462	10029	-1348	0.81	0.89
+United StatesSerendipity	ShimmerSupernova CometsSakura	205	4318	-565	0.81	0.89
+Kosovogejmzilla	M1X KSMANAKubix	319	6928	-1079	0.79	0.88
+DenmarkHooXi	AstralisG2	324	6931	-1048	0.78	0.88
+GermanyScrunK	Fire Flux	263	5814	-1018	0.76	0.87
+Denmarkkarrigan	FaZe	547	12125	-2063	0.76	0.86
+Polandmynio	Phantom9INE	219	4809	-868	0.75	0.85
+RomaniaBTN	Nexus	673	14762	-2427	0.77	0.85
+RussiaStRoGo	WW	208	4490	-740	0.76	0.83
+Polanddarchevile	AnonymozajezdzaczePermitta	209	4580	-909	0.73	0.81
+Swedenquix	Lilmix	265	5674	-1261	0.70	0.80
+DenmarkAvou	MASONIC	247	5343	-1336	0.66	0.80
