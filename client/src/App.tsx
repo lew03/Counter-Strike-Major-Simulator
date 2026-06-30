@@ -1,14 +1,7 @@
-import { useEffect, useState } from "react";
-import type {
-  Player,
-  Role,
-  MajorRun,
-  RoundResult,
-  HistoryEntry,
-  Difficulty,
-  TeamResponse,
-} from "./types";
+import { useEffect, useReducer, useState } from "react";
+import type { Difficulty, Role, TeamResponse } from "./types";
 import { createTeam, startMajor, advanceMajor as advanceMajorApi, fetchTeam } from "./api";
+import { appReducer, initialState } from "./appState";
 import Welcome from "./components/Welcome";
 import TeamName from "./components/TeamName";
 import Draft from "./components/Draft";
@@ -17,142 +10,76 @@ import TransferWindow from "./components/TransferWindow";
 import MajorView from "./components/MajorView";
 import { isMuted, setMuted } from "./sound";
 
-type Stage = "welcome" | "name" | "draft" | "team" | "major";
-
 const SAVED_TEAM_KEY = "csmajor_teamId";
 
 export default function App() {
-  const [booting, setBooting] = useState(true);
-  const [stage, setStage] = useState<Stage>("welcome");
-  const [difficulty, setDifficulty] = useState<Difficulty>("normal");
-  const [pendingTeamName, setPendingTeamName] = useState("Your Team");
-  const [teamId, setTeamId] = useState<string | null>(null);
-  const [teamName, setTeamName] = useState("Your Team");
-  const [players, setPlayers] = useState<Player[]>([]);
-  const [coach, setCoach] = useState<Player | null>(null);
-  const [overall, setOverall] = useState(0);
-  const [totalSpend, setTotalSpend] = useState(0);
-  const [budget, setBudget] = useState(0);
-  const [run, setRun] = useState<MajorRun | null>(null);
-  const [roundLog, setRoundLog] = useState<RoundResult[]>([]);
-  const [history, setHistory] = useState<HistoryEntry[]>([]);
-  const [advancing, setAdvancing] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [state, dispatch] = useReducer(appReducer, initialState);
   const [muted, setMutedState] = useState(isMuted());
-  const [runAttempt, setRunAttempt] = useState(0);
-  const [showTransfer, setShowTransfer] = useState(false);
-
-  // Mirror a team payload (from draft, resume or a transfer) into local state.
-  const applyTeamResponse = (res: TeamResponse) => {
-    setTeamId(res.teamId);
-    setTeamName(res.name);
-    setPlayers(res.players);
-    setCoach(res.coach);
-    setOverall(res.overall);
-    setTotalSpend(res.totalSpend);
-    setBudget(res.budget);
-    setDifficulty(res.difficulty);
-    setHistory(res.history);
-  };
 
   // On load, resume a previously-drafted team if one is saved and still on the server.
   useEffect(() => {
     const savedId = localStorage.getItem(SAVED_TEAM_KEY);
     if (!savedId) {
-      setBooting(false);
+      dispatch({ type: "BOOT_RESOLVED", team: null });
       return;
     }
     fetchTeam(savedId)
-      .then((res) => {
-        applyTeamResponse(res);
-        setStage("team");
-      })
-      .catch(() => localStorage.removeItem(SAVED_TEAM_KEY))
-      .finally(() => setBooting(false));
+      .then((res) => dispatch({ type: "BOOT_RESOLVED", team: res }))
+      .catch(() => {
+        localStorage.removeItem(SAVED_TEAM_KEY);
+        dispatch({ type: "BOOT_RESOLVED", team: null });
+      });
   }, []);
 
   const handleWelcomeStart = (chosen: Difficulty) => {
-    setDifficulty(chosen);
-    setStage("name");
+    dispatch({ type: "WELCOME_START", difficulty: chosen });
   };
 
   const handleNameSubmit = (name: string) => {
-    setPendingTeamName(name);
-    setStage("draft");
+    dispatch({ type: "NAME_SUBMIT", name });
   };
 
   const handleDraftComplete = async (picks: Record<Role, string>, coachId: string) => {
-    setError(null);
+    dispatch({ type: "SET_ERROR", error: null });
     try {
-      const res = await createTeam(picks, coachId, pendingTeamName, difficulty);
-      applyTeamResponse(res);
+      const res = await createTeam(picks, coachId, state.pendingTeamName, state.difficulty);
       localStorage.setItem(SAVED_TEAM_KEY, res.teamId);
-      setStage("team");
+      dispatch({ type: "TEAM_READY", team: res, persist: true });
     } catch (e: any) {
-      setError(e.message);
+      dispatch({ type: "SET_ERROR", error: e.message });
     }
   };
 
   const handleTransferComplete = (updated: TeamResponse) => {
-    applyTeamResponse(updated);
-    setShowTransfer(false);
+    dispatch({ type: "TEAM_READY", team: updated, persist: false });
   };
 
   const handleStartMajor = async () => {
-    if (!teamId) return;
-    setError(null);
-    setShowTransfer(false);
+    if (!state.team) return;
+    dispatch({ type: "START_MAJOR_REQUEST" });
     try {
-      const res = await startMajor(teamId);
-      setRun(res.run);
-      setRoundLog([]);
-      setRunAttempt((n) => n + 1);
-      setStage("major");
+      const res = await startMajor(state.team.teamId);
+      dispatch({ type: "MAJOR_STARTED", run: res.run });
     } catch (e: any) {
-      setError(e.message);
+      dispatch({ type: "SET_ERROR", error: e.message });
     }
   };
 
   const handleAdvance = async () => {
-    if (!teamId) return;
-    setAdvancing(true);
-    setError(null);
+    if (!state.team) return;
+    dispatch({ type: "ADVANCE_REQUEST" });
     try {
-      const res = await advanceMajorApi(teamId);
-      setRun(res.run);
-      if (res.roundResult) setRoundLog((prev) => [...prev, res.roundResult as RoundResult]);
-      if (res.run.finished) {
-        setHistory((prev) => [
-          ...prev,
-          {
-            timestamp: Date.now(),
-            userWon: res.run.userWon,
-            eliminatedAt: res.run.userEliminatedAt,
-            champion: res.run.champion || "",
-          },
-        ]);
-      }
+      const res = await advanceMajorApi(state.team.teamId);
+      dispatch({ type: "ADVANCE_RESULT", run: res.run, roundResult: res.roundResult });
     } catch (e: any) {
-      setError(e.message);
-    } finally {
-      setAdvancing(false);
+      dispatch({ type: "SET_ERROR", error: e.message });
+      dispatch({ type: "ADVANCE_FAILED" });
     }
   };
 
   const handleRestart = () => {
     localStorage.removeItem(SAVED_TEAM_KEY);
-    setShowTransfer(false);
-    setStage("welcome");
-    setTeamId(null);
-    setTeamName("Your Team");
-    setPlayers([]);
-    setCoach(null);
-    setOverall(0);
-    setTotalSpend(0);
-    setBudget(0);
-    setRun(null);
-    setRoundLog([]);
-    setHistory([]);
+    dispatch({ type: "RESTART" });
   };
 
   const toggleMute = () => {
@@ -161,13 +88,15 @@ export default function App() {
     setMutedState(next);
   };
 
-  if (booting) {
+  if (state.booting) {
     return (
       <div className="hero-screen">
         <div className="hint">Loading…</div>
       </div>
     );
   }
+
+  const { stage, team, difficulty, run, roundLog, error, advancing, runAttempt, showTransfer } = state;
 
   return (
     <>
@@ -192,43 +121,50 @@ export default function App() {
             </div>
           </header>
 
-          {error && <div className="panel error">{error}</div>}
+          {error && (
+            <div className="panel error">
+              <span>{error}</span>
+              <button className="link-btn" onClick={() => dispatch({ type: "SET_ERROR", error: null })}>
+                dismiss
+              </button>
+            </div>
+          )}
 
           {stage === "draft" && <Draft difficulty={difficulty} onComplete={handleDraftComplete} />}
 
-          {stage === "team" && coach && teamId && showTransfer && (
+          {stage === "team" && team && showTransfer && (
             <TransferWindow
-              teamId={teamId}
-              players={players}
-              coach={coach}
-              budget={budget}
+              teamId={team.teamId}
+              players={team.players}
+              coach={team.coach}
+              budget={team.budget}
               onComplete={handleTransferComplete}
-              onClose={() => setShowTransfer(false)}
+              onClose={() => dispatch({ type: "SET_SHOW_TRANSFER", open: false })}
             />
           )}
 
-          {stage === "team" && coach && !showTransfer && (
+          {stage === "team" && team && !showTransfer && (
             <TeamSummary
-              teamName={teamName}
-              players={players}
-              coach={coach}
-              overall={overall}
-              totalSpend={totalSpend}
-              budget={budget}
-              difficulty={difficulty}
-              history={history}
+              teamName={team.name}
+              players={team.players}
+              coach={team.coach}
+              overall={team.overall}
+              totalSpend={team.totalSpend}
+              budget={team.budget}
+              difficulty={team.difficulty}
+              history={team.history}
               onSimulate={handleStartMajor}
-              onOpenTransfer={() => setShowTransfer(true)}
+              onOpenTransfer={() => dispatch({ type: "SET_SHOW_TRANSFER", open: true })}
               simulating={false}
             />
           )}
 
-          {stage === "major" && run && (
+          {stage === "major" && run && team && (
             <MajorView
               key={runAttempt}
               run={run}
               roundLog={roundLog}
-              history={history}
+              history={team.history}
               onAdvance={handleAdvance}
               onRestart={handleStartMajor}
               onNewDraft={handleRestart}
