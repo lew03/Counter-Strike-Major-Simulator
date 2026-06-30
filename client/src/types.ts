@@ -33,6 +33,7 @@ export interface TeamResponse {
   budget: number;
   difficulty: Difficulty;
   history: HistoryEntry[];
+  activeRun: { run: MajorRun; roundLog: RoundResult[] } | null;
 }
 
 export interface ScoreboardRow {

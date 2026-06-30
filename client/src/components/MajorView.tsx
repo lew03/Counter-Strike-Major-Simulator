@@ -24,7 +24,11 @@ export default function MajorView({
   onNewDraft: () => void;
   advancing: boolean;
 }) {
-  const [revealedCount, setRevealedCount] = useState(0);
+  // Lazy-initialized from the roundLog prop at mount time only: for a freshly-started major
+  // roundLog is empty (0), but when resuming an in-progress run (after Home, or a refresh)
+  // roundLog already contains every completed round — starting revealedCount there shows
+  // that full history immediately instead of re-animating the last round as if it were live.
+  const [revealedCount, setRevealedCount] = useState(() => roundLog.length);
   const [viewingRound, setViewingRound] = useState<RoundResult | null>(null);
   const wins = history.filter((h) => h.userWon).length;
 
@@ -134,127 +138,136 @@ export default function MajorView({
     }
   }
 
-  // Single bordered "window" for the whole round: bracket/standings recap up top, the
-  // live match (or game-over / saved-round detail) below — all inside one scroll region,
-  // so re-running a major doesn't stack a second box above the live simulation.
+  // Single bordered "window": the live match (or saved-round detail) always stays on top,
+  // with the bracket/standings recap underneath. No internal scroll region — the panel grows
+  // with its content and the page itself scrolls, so the simulation never gets boxed into a
+  // cramped scrollable strip.
   return (
-    <div className="panel fade-in major-view tall-panel">
-      {bracketVisible && (
-        <div className="major-bracket-summary">
-          <p className="hint">
-            Majors won: {wins} / {history.length} attempts
-            {revealedRounds.length > 0 && " — click any round below to revisit its saved result"}
-          </p>
+    <>
+      <div className="panel fade-in major-view">
+        {viewingRound ? (
+          <GameDetail round={viewingRound} onBack={() => setViewingRound(null)} />
+        ) : !fullyRevealedAndFinished ? (
+          <>
+            <h2>
+              {headerStage === "swiss_round" && `Swiss Stage — Round ${swissRounds.length + 1} / 5`}
+              {headerStage === "playoff_round" && "Playoffs"}
+            </h2>
 
-          {swissRounds.length > 0 && playoffRounds.length === 0 && (
-            <SwissLadder rounds={swissRounds} onSelect={setViewingRound} />
-          )}
+            {activeRound && userMatch && (
+              <LiveMatch
+                key={roundLog.length}
+                match={userMatch}
+                onContinue={handleContinueFromMatch}
+                advancing={advancing}
+                isLastRound={run.finished}
+              />
+            )}
 
-          {swissRounds.length > 0 && playoffRounds.length > 0 && (
-            <details className="standings-details">
-              <summary>Swiss Stage results ({swissRounds.length}/5) — click to review</summary>
+            {canAdvance && (
+              <button className="primary-btn" onClick={onAdvance} disabled={advancing}>
+                {advancing ? "Simulating round..." : "Play Next Round"}
+              </button>
+            )}
+          </>
+        ) : null}
+
+        {bracketVisible && (
+          <div className="major-bracket-summary">
+            <p className="hint">
+              Majors won: {wins} / {history.length} attempts
+              {revealedRounds.length > 0 && " — click any round below to revisit its saved result"}
+            </p>
+
+            {swissRounds.length > 0 && playoffRounds.length === 0 && (
               <SwissLadder rounds={swissRounds} onSelect={setViewingRound} />
-            </details>
-          )}
+            )}
 
-          {playoffRounds.length > 0 && <PlayoffTree rounds={playoffRounds} onSelect={setViewingRound} />}
+            {swissRounds.length > 0 && playoffRounds.length > 0 && (
+              <details className="standings-details">
+                <summary>Swiss Stage results ({swissRounds.length}/5) — click to review</summary>
+                <SwissLadder rounds={swissRounds} onSelect={setViewingRound} />
+              </details>
+            )}
 
-          {showPendingBracket && pendingPairs.length > 0 && (
-            <div className="pending-bracket">
-              <div className="bracket-round-title">Quarterfinal Matchups</div>
-              <div className="bracket-matches">
-                {pendingPairs.map((pair, i) => (
-                  <div
-                    key={i}
-                    className={`bracket-match-box pending ${pair.some((p) => p.isUser) ? "match-user" : ""}`}
-                  >
-                    {pair.map((t) => (
-                      <div key={t.name} className={`bracket-team-row ${t.isUser ? "is-user" : ""}`}>
-                        <span className="bracket-team-name">
-                          {t.isUser && (
-                            <span className="user-star" aria-hidden="true">
-                              ★{" "}
-                            </span>
-                          )}
-                          {t.name}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                ))}
+            {playoffRounds.length > 0 && <PlayoffTree rounds={playoffRounds} onSelect={setViewingRound} />}
+
+            {showPendingBracket && pendingPairs.length > 0 && (
+              <div className="pending-bracket">
+                <div className="bracket-round-title">Quarterfinal Matchups</div>
+                <div className="bracket-matches">
+                  {pendingPairs.map((pair, i) => (
+                    <div
+                      key={i}
+                      className={`bracket-match-box pending ${pair.some((p) => p.isUser) ? "match-user" : ""}`}
+                    >
+                      {pair.map((t) => (
+                        <div key={t.name} className={`bracket-team-row ${t.isUser ? "is-user" : ""}`}>
+                          <span className="bracket-team-name">
+                            {t.isUser && (
+                              <span className="user-star" aria-hidden="true">
+                                ★{" "}
+                              </span>
+                            )}
+                            {t.name}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          )}
+            )}
 
-          {displayStandings.length > 0 && (
-            <details className="standings-details">
-              <summary>Full Swiss Standings (spoiler)</summary>
-              <div className="standing-group full-width">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Team</th>
-                      <th>W-L</th>
-                      <th>Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {displayStandings.map((t) => (
-                      <tr key={t.name} className={t.isUser ? "is-user-row" : ""}>
-                        <td>
-                          {t.isUser && (
-                            <span className="user-star" aria-hidden="true">
-                              ★{" "}
-                            </span>
-                          )}
-                          {t.name}
-                        </td>
-                        <td>
-                          {t.wins}-{t.losses}
-                        </td>
-                        <td>
-                          {t.resolved === "advanced" && <span className="status-pill advanced">✓ Advanced</span>}
-                          {t.resolved === "eliminated" && <span className="status-pill eliminated">✗ Eliminated</span>}
-                          {t.resolved === "playing" && <span className="status-pill playing">Playing</span>}
-                        </td>
+            {displayStandings.length > 0 && (
+              <details className="standings-details">
+                <summary>Full Swiss Standings (spoiler)</summary>
+                <div className="standing-group full-width">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Team</th>
+                        <th>W-L</th>
+                        <th>Status</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </details>
-          )}
+                    </thead>
+                    <tbody>
+                      {displayStandings.map((t) => (
+                        <tr key={t.name} className={t.isUser ? "is-user-row" : ""}>
+                          <td>
+                            {t.isUser && (
+                              <span className="user-star" aria-hidden="true">
+                                ★{" "}
+                              </span>
+                            )}
+                            {t.name}
+                          </td>
+                          <td>
+                            {t.wins}-{t.losses}
+                          </td>
+                          <td>
+                            {t.resolved === "advanced" && <span className="status-pill advanced">✓ Advanced</span>}
+                            {t.resolved === "eliminated" && <span className="status-pill eliminated">✗ Eliminated</span>}
+                            {t.resolved === "playing" && <span className="status-pill playing">Playing</span>}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </details>
+            )}
+          </div>
+        )}
+      </div>
+
+      {fullyRevealedAndFinished && (
+        <div className="modal-overlay">
+          <div className="panel modal-panel fade-in">
+            <GameOverScreen run={run} history={history} lastMatch={lastMatch} onRestart={onRestart} onNewDraft={onNewDraft} />
+          </div>
         </div>
       )}
-
-      {viewingRound ? (
-        <GameDetail round={viewingRound} onBack={() => setViewingRound(null)} />
-      ) : fullyRevealedAndFinished ? (
-        <GameOverScreen run={run} history={history} lastMatch={lastMatch} onRestart={onRestart} onNewDraft={onNewDraft} />
-      ) : (
-        <>
-          <h2>
-            {headerStage === "swiss_round" && `Swiss Stage — Round ${swissRounds.length + 1} / 5`}
-            {headerStage === "playoff_round" && "Playoffs"}
-          </h2>
-
-          {activeRound && userMatch && (
-            <LiveMatch
-              key={roundLog.length}
-              match={userMatch}
-              onContinue={handleContinueFromMatch}
-              advancing={advancing}
-              isLastRound={run.finished}
-            />
-          )}
-
-          {canAdvance && (
-            <button className="primary-btn" onClick={onAdvance} disabled={advancing}>
-              {advancing ? "Simulating round..." : "Play Next Round"}
-            </button>
-          )}
-        </>
-      )}
-    </div>
+    </>
   );
 }

@@ -20,6 +20,8 @@ export default function TeamSummary({
   onSimulate,
   onOpenTransfer,
   simulating,
+  hasActiveRun,
+  onResume,
 }: {
   teamName: string;
   players: Player[];
@@ -32,6 +34,8 @@ export default function TeamSummary({
   onSimulate: () => void;
   onOpenTransfer: () => void;
   simulating: boolean;
+  hasActiveRun: boolean;
+  onResume: () => void;
 }) {
   const attempts = history.length;
   return (
@@ -45,7 +49,7 @@ export default function TeamSummary({
         ${(budget - totalSpend).toLocaleString()} unspent)
       </p>
 
-      {attempts > 0 && <CareerStats history={history} />}
+      <CareerStats history={history} />
       <div className="card-grid">
         {players.map((p, i) => (
           <div key={p.id} className="card-pop" style={{ animationDelay: `${i * 0.05}s` }}>
@@ -57,9 +61,15 @@ export default function TeamSummary({
         </div>
       </div>
       <div className="team-summary-actions">
-        <button className="primary-btn" onClick={onSimulate} disabled={simulating}>
-          {simulating ? "Simulating..." : attempts === 0 ? "Run the Major" : "Run Another Major"}
-        </button>
+        {hasActiveRun ? (
+          <button className="primary-btn" onClick={onResume}>
+            ▶️ Resume Tournament
+          </button>
+        ) : (
+          <button className="primary-btn" onClick={onSimulate} disabled={simulating}>
+            {simulating ? "Simulating..." : attempts === 0 ? "Run the Major" : "Run Another Major"}
+          </button>
+        )}
         <button className="secondary-btn" onClick={onOpenTransfer}>
           🔁 Transfer Window
         </button>

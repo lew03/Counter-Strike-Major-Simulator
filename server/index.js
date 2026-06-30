@@ -138,6 +138,13 @@ function runView(run) {
 }
 
 function teamView(team, teamId) {
+  // Surface an in-progress, unfinished major so the client can offer "Resume Tournament"
+  // after a refresh or a trip back to the team screen, instead of only being resumable
+  // within the same browser session's React state.
+  const activeRun =
+    team.currentRun && !team.currentRun.finished
+      ? { run: runView(team.currentRun), roundLog: team.currentRun.completedRounds || [] }
+      : null;
   return {
     teamId,
     name: team.name,
@@ -148,6 +155,7 @@ function teamView(team, teamId) {
     budget: team.budget,
     difficulty: team.difficulty,
     history: team.history,
+    activeRun,
   };
 }
 
@@ -314,6 +322,7 @@ app.post("/api/major/:teamId/start", (req, res) => {
 
   const { aiBoost } = difficultyConfig(team.difficulty);
   const run = buildMajorRun(userTeam, teamEras, team.bannedMap, coaches, aiBoost);
+  run.completedRounds = [];
   team.currentRun = run;
 
   res.json({ run: runView(run) });
@@ -329,6 +338,9 @@ app.post("/api/major/:teamId/advance", (req, res) => {
   }
 
   const roundResult = advanceMajor(run);
+  if (roundResult) {
+    (run.completedRounds = run.completedRounds || []).push(roundResult);
+  }
 
   if (run.finished) {
     team.history.push({

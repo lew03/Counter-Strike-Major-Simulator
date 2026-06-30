@@ -8,6 +8,7 @@ import Draft from "./components/Draft";
 import TeamSummary from "./components/TeamSummary";
 import TransferWindow from "./components/TransferWindow";
 import MajorView from "./components/MajorView";
+import SettingsPage from "./components/SettingsPage";
 import { isMuted, setMuted } from "./sound";
 
 const SAVED_TEAM_KEY = "csmajor_teamId";
@@ -78,12 +79,19 @@ export default function App() {
   };
 
   const handleRestart = () => {
+    if (state.team && !window.confirm("Start a new draft? This clears your current roster and career history.")) {
+      return;
+    }
     localStorage.removeItem(SAVED_TEAM_KEY);
     dispatch({ type: "RESTART" });
   };
 
   const handleGoHome = () => {
     dispatch({ type: "GO_HOME" });
+  };
+
+  const handleResumeTournament = () => {
+    dispatch({ type: "RESUME_TOURNAMENT" });
   };
 
   const toggleMute = () => {
@@ -100,7 +108,8 @@ export default function App() {
     );
   }
 
-  const { stage, team, difficulty, run, roundLog, error, advancing, runAttempt, showTransfer } = state;
+  const { stage, team, difficulty, run, roundLog, error, advancing, runAttempt, showTransfer, showSettings } = state;
+  const hasActiveRun = !!run && !run.finished;
 
   return (
     <>
@@ -121,8 +130,11 @@ export default function App() {
                   🏠 Home
                 </button>
               )}
-              <button className="secondary-btn" onClick={handleRestart}>
-                Start New Draft
+              <button
+                className="secondary-btn"
+                onClick={() => dispatch({ type: "SET_SHOW_SETTINGS", open: !showSettings })}
+              >
+                ⚙️ Settings
               </button>
               <button className="mute-btn" onClick={toggleMute} aria-label={muted ? "Unmute sound" : "Mute sound"}>
                 {muted ? "🔇" : "🔊"}
@@ -139,46 +151,58 @@ export default function App() {
             </div>
           )}
 
-          {stage === "draft" && <Draft difficulty={difficulty} onComplete={handleDraftComplete} />}
-
-          {stage === "team" && team && showTransfer && (
-            <TransferWindow
-              teamId={team.teamId}
-              players={team.players}
-              coach={team.coach}
-              budget={team.budget}
-              onComplete={handleTransferComplete}
-              onClose={() => dispatch({ type: "SET_SHOW_TRANSFER", open: false })}
+          {showSettings ? (
+            <SettingsPage
+              onBack={() => dispatch({ type: "SET_SHOW_SETTINGS", open: false })}
+              onStartNewDraft={handleRestart}
+              hasTeam={!!team}
             />
-          )}
+          ) : (
+            <>
+              {stage === "draft" && <Draft difficulty={difficulty} onComplete={handleDraftComplete} />}
 
-          {stage === "team" && team && !showTransfer && (
-            <TeamSummary
-              teamName={team.name}
-              players={team.players}
-              coach={team.coach}
-              overall={team.overall}
-              totalSpend={team.totalSpend}
-              budget={team.budget}
-              difficulty={team.difficulty}
-              history={team.history}
-              onSimulate={handleStartMajor}
-              onOpenTransfer={() => dispatch({ type: "SET_SHOW_TRANSFER", open: true })}
-              simulating={false}
-            />
-          )}
+              {stage === "team" && team && showTransfer && (
+                <TransferWindow
+                  teamId={team.teamId}
+                  players={team.players}
+                  coach={team.coach}
+                  budget={team.budget}
+                  onComplete={handleTransferComplete}
+                  onClose={() => dispatch({ type: "SET_SHOW_TRANSFER", open: false })}
+                />
+              )}
 
-          {stage === "major" && run && team && (
-            <MajorView
-              key={runAttempt}
-              run={run}
-              roundLog={roundLog}
-              history={team.history}
-              onAdvance={handleAdvance}
-              onRestart={handleStartMajor}
-              onNewDraft={handleRestart}
-              advancing={advancing}
-            />
+              {stage === "team" && team && !showTransfer && (
+                <TeamSummary
+                  teamName={team.name}
+                  players={team.players}
+                  coach={team.coach}
+                  overall={team.overall}
+                  totalSpend={team.totalSpend}
+                  budget={team.budget}
+                  difficulty={team.difficulty}
+                  history={team.history}
+                  onSimulate={handleStartMajor}
+                  onOpenTransfer={() => dispatch({ type: "SET_SHOW_TRANSFER", open: true })}
+                  simulating={false}
+                  hasActiveRun={hasActiveRun}
+                  onResume={handleResumeTournament}
+                />
+              )}
+
+              {stage === "major" && run && team && (
+                <MajorView
+                  key={runAttempt}
+                  run={run}
+                  roundLog={roundLog}
+                  history={team.history}
+                  onAdvance={handleAdvance}
+                  onRestart={handleStartMajor}
+                  onNewDraft={handleRestart}
+                  advancing={advancing}
+                />
+              )}
+            </>
           )}
         </div>
       )}

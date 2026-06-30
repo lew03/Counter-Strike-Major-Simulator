@@ -14,6 +14,7 @@ export interface AppState {
   error: string | null;
   runAttempt: number;
   showTransfer: boolean;
+  showSettings: boolean;
 }
 
 export const initialState: AppState = {
@@ -28,7 +29,13 @@ export const initialState: AppState = {
   error: null,
   runAttempt: 0,
   showTransfer: false,
+  showSettings: false,
 };
+
+// Pulls the resumable run + round log (if any) off a freshly-fetched team payload.
+function activeRunFields(team: TeamResponse) {
+  return team.activeRun ? { run: team.activeRun.run, roundLog: team.activeRun.roundLog } : { run: null, roundLog: [] };
+}
 
 export type AppAction =
   | { type: "BOOT_RESOLVED"; team: TeamResponse | null }
@@ -43,13 +50,22 @@ export type AppAction =
   | { type: "ADVANCE_FAILED" }
   | { type: "RESTART" }
   | { type: "GO_HOME" }
-  | { type: "SET_SHOW_TRANSFER"; open: boolean };
+  | { type: "RESUME_TOURNAMENT" }
+  | { type: "SET_SHOW_TRANSFER"; open: boolean }
+  | { type: "SET_SHOW_SETTINGS"; open: boolean };
 
 export function appReducer(state: AppState, action: AppAction): AppState {
   switch (action.type) {
     case "BOOT_RESOLVED":
       return action.team
-        ? { ...state, booting: false, team: action.team, difficulty: action.team.difficulty, stage: "team" }
+        ? {
+            ...state,
+            booting: false,
+            team: action.team,
+            difficulty: action.team.difficulty,
+            stage: "team",
+            ...activeRunFields(action.team),
+          }
         : { ...state, booting: false };
 
     case "WELCOME_START":
@@ -64,8 +80,10 @@ export function appReducer(state: AppState, action: AppAction): AppState {
         team: action.team,
         difficulty: action.team.difficulty,
         showTransfer: false,
+        showSettings: false,
         error: null,
         stage: "team",
+        ...activeRunFields(action.team),
       };
 
     case "SET_ERROR":
@@ -116,10 +134,16 @@ export function appReducer(state: AppState, action: AppAction): AppState {
       return { ...initialState, booting: false };
 
     case "GO_HOME":
-      return state.team ? { ...state, stage: "team", showTransfer: false } : state;
+      return state.team ? { ...state, stage: "team", showTransfer: false, showSettings: false } : state;
+
+    case "RESUME_TOURNAMENT":
+      return state.run && !state.run.finished ? { ...state, stage: "major", showSettings: false } : state;
 
     case "SET_SHOW_TRANSFER":
       return { ...state, showTransfer: action.open };
+
+    case "SET_SHOW_SETTINGS":
+      return { ...state, showSettings: action.open };
 
     default:
       return state;
