@@ -299,7 +299,7 @@ export default function LiveMatch({
           </div>
 
           <div className="live-match-main">
-            <MiniMap mapName={map.name} roundIndex={roundIndex} totalRounds={timeline.length} />
+            <MiniMap mapName={map.name} />
 
             {scheduleA.length > 0 && scheduleB.length > 0 && (
               <>

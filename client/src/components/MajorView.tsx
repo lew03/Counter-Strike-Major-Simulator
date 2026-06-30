@@ -14,6 +14,7 @@ export default function MajorView({
   onAdvance,
   onRestart,
   onNewDraft,
+  onGoHome,
   advancing,
 }: {
   run: MajorRun;
@@ -22,6 +23,7 @@ export default function MajorView({
   onAdvance: () => void;
   onRestart: () => void;
   onNewDraft: () => void;
+  onGoHome: () => void;
   advancing: boolean;
 }) {
   // Lazy-initialized from the roundLog prop at mount time only: for a freshly-started major
@@ -266,7 +268,14 @@ export default function MajorView({
       {fullyRevealedAndFinished && (
         <div className="modal-overlay">
           <div className="panel modal-panel fade-in">
-            <GameOverScreen run={run} history={history} lastMatch={lastMatch} onRestart={onRestart} onNewDraft={onNewDraft} />
+            <GameOverScreen
+              run={run}
+              history={history}
+              lastMatch={lastMatch}
+              onRestart={onRestart}
+              onNewDraft={onNewDraft}
+              onGoHome={onGoHome}
+            />
           </div>
         </div>
       )}

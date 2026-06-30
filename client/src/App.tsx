@@ -199,6 +199,7 @@ export default function App() {
                   onAdvance={handleAdvance}
                   onRestart={handleStartMajor}
                   onNewDraft={handleRestart}
+                  onGoHome={handleGoHome}
                   advancing={advancing}
                 />
               )}
