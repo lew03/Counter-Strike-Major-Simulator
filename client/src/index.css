@@ -280,6 +280,7 @@ body {
 }
 
 .player-card {
+  position: relative;
   background: #20232d;
   border: 1px solid #313543;
   border-radius: 10px;
@@ -287,13 +288,89 @@ body {
   text-align: left;
   color: #e8e8ec;
   cursor: pointer;
-  transition: border-color 0.15s, transform 0.1s;
+  transition: border-color 0.15s, transform 0.1s, box-shadow 0.15s;
   width: 100%;
+  overflow: hidden;
 }
 
 .player-card:hover {
   border-color: #5b8def;
   transform: translateY(-2px);
+}
+
+/* Rarity tiers — gacha-style: common is the visual baseline, each tier up adds a louder
+   border colour and glow, with legendary getting an animated shimmer sweep. */
+.rarity-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 7px;
+  border-radius: 10px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.player-card.rarity-common {
+  border-color: #3a3d4a;
+}
+
+.player-card.rarity-common .rarity-badge {
+  background: #2a2d38;
+  color: #9a9aa8;
+}
+
+.player-card.rarity-rare {
+  border-color: #4a7fd6;
+  box-shadow: 0 0 10px rgba(74, 127, 214, 0.2);
+}
+
+.player-card.rarity-rare .rarity-badge {
+  background: rgba(74, 127, 214, 0.22);
+  color: #8fb4f5;
+}
+
+.player-card.rarity-epic {
+  border-color: #a35ee8;
+  box-shadow: 0 0 14px rgba(163, 94, 232, 0.3);
+}
+
+.player-card.rarity-epic .rarity-badge {
+  background: rgba(163, 94, 232, 0.25);
+  color: #d6acf7;
+}
+
+.player-card.rarity-legendary {
+  border-color: #f0b429;
+  box-shadow: 0 0 18px rgba(240, 180, 41, 0.4);
+  background: linear-gradient(160deg, #2c2414, #20232d 65%);
+}
+
+.player-card.rarity-legendary .rarity-badge {
+  background: linear-gradient(135deg, #f0b429, #ffdd7a);
+  color: #2a1e00;
+}
+
+.player-card.rarity-legendary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 35%, rgba(255, 255, 255, 0.14) 50%, transparent 65%);
+  background-size: 250% 250%;
+  animation: legendaryShimmer 3.2s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes legendaryShimmer {
+  0% {
+    background-position: 200% 0%;
+  }
+  100% {
+    background-position: -100% 0%;
+  }
 }
 
 .player-card.selected {
@@ -385,6 +462,48 @@ body {
   margin-bottom: 16px;
   font-size: 13px;
   color: #9a9aa8;
+}
+
+.rarity-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 10px 0 4px;
+  font-size: 12px;
+  color: #9a9aa8;
+}
+
+.rarity-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rarity-legend-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+}
+
+.rarity-legend-dot.rarity-common {
+  background: #3a3d4a;
+}
+
+.rarity-legend-dot.rarity-rare {
+  background: #4a7fd6;
+  box-shadow: 0 0 6px rgba(74, 127, 214, 0.6);
+}
+
+.rarity-legend-dot.rarity-epic {
+  background: #a35ee8;
+  box-shadow: 0 0 6px rgba(163, 94, 232, 0.6);
+}
+
+.rarity-legend-dot.rarity-legendary {
+  background: linear-gradient(135deg, #f0b429, #ffdd7a);
+  box-shadow: 0 0 8px rgba(240, 180, 41, 0.7);
 }
 
 .budget-amount {
@@ -1158,8 +1277,21 @@ tr.mvp-row {
 .transfer-slot {
   background: #1c1f28;
   border: 1px solid #2a2d38;
+  border-left: 3px solid #3a3d4a;
   border-radius: 8px;
   padding: 10px 12px;
+}
+
+.transfer-slot.rarity-rare {
+  border-left-color: #4a7fd6;
+}
+
+.transfer-slot.rarity-epic {
+  border-left-color: #a35ee8;
+}
+
+.transfer-slot.rarity-legendary {
+  border-left-color: #f0b429;
 }
 
 .transfer-slot.changed {
@@ -1239,6 +1371,7 @@ tr.mvp-row {
   gap: 12px;
   background: #20232d;
   border: 1px solid #313543;
+  border-left: 3px solid #3a3d4a;
   border-radius: 6px;
   padding: 7px 10px;
   color: #e8e8ec;
@@ -1249,6 +1382,19 @@ tr.mvp-row {
 
 .transfer-option:hover {
   border-color: #5b8def;
+  border-left-color: #5b8def;
+}
+
+.transfer-option.rarity-rare {
+  border-left-color: #4a7fd6;
+}
+
+.transfer-option.rarity-epic {
+  border-left-color: #a35ee8;
+}
+
+.transfer-option.rarity-legendary {
+  border-left-color: #f0b429;
 }
 
 .transfer-option-name {

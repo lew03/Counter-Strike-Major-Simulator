@@ -138,6 +138,20 @@ export default function Draft({
         You're given {POOL_SIZE} random candidates you can afford for this slot — every one shown is
         within budget, but pricier picks mean leaner choices later.
       </p>
+      <div className="rarity-legend">
+        <span className="rarity-legend-item">
+          <span className="rarity-legend-dot rarity-common" /> Common
+        </span>
+        <span className="rarity-legend-item">
+          <span className="rarity-legend-dot rarity-rare" /> Rare
+        </span>
+        <span className="rarity-legend-item">
+          <span className="rarity-legend-dot rarity-epic" /> Epic
+        </span>
+        <span className="rarity-legend-item">
+          <span className="rarity-legend-dot rarity-legendary" /> Legendary
+        </span>
+      </div>
       <div className="card-grid" key={`${role}-${remainingBudget}`}>
         {candidates.map((p, i) => (
           <div key={p.id} className="card-pop" style={{ animationDelay: `${i * 0.05}s` }}>

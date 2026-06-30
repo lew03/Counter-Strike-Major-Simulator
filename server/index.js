@@ -79,21 +79,38 @@ function minPriceForRole(role) {
   return Math.min(...pool.map((p) => p.price));
 }
 
-// Proper Fisher-Yates shuffle — Array.sort(() => Math.random() - 0.5) is a well-known
-// biased "shuffle" (comparator-based sorts don't guarantee uniform permutations), which
-// would make some players show up more often than others regardless of prior picks.
-function shuffle(arr) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
+// Relative appearance weight per rarity tier — a gacha-style draw, not a uniform shuffle.
+// Common players dominate the candidate pool; Legendary names show up rarely, so seeing one
+// in your 6 options feels like an actual moment rather than the norm.
+const RARITY_WEIGHT = { common: 100, rare: 35, epic: 10, legendary: 3 };
+
+// Weighted sample-without-replacement: repeatedly draws one item with probability
+// proportional to its rarity weight, removes it, and repeats until `count` is reached or
+// the pool runs out. Falls back to weight 1 for anything missing a rarity (defensive).
+function weightedSample(pool, count) {
+  const items = pool.map((p) => ({ p, w: RARITY_WEIGHT[p.rarity] || 1 }));
+  const result = [];
+  while (result.length < count && items.length > 0) {
+    const total = items.reduce((sum, it) => sum + it.w, 0);
+    let r = Math.random() * total;
+    let idx = items.length - 1;
+    for (let i = 0; i < items.length; i++) {
+      r -= items[i].w;
+      if (r <= 0) {
+        idx = i;
+        break;
+      }
+    }
+    result.push(items[idx].p);
+    items.splice(idx, 1);
   }
-  return a;
+  return result;
 }
 
 // Builds an always-affordable candidate list for the given draft step: it reserves enough
 // budget to still afford the cheapest option in every role/coach slot that comes after this
-// one, so the user can never get soft-locked out of finishing a draft.
+// one, so the user can never get soft-locked out of finishing a draft. Candidates are then
+// drawn from the affordable pool weighted by rarity rather than picked uniformly at random.
 function affordableOptions(role, remainingBudget, count) {
   const pool = poolForRole(role);
   const idx = DRAFT_ORDER.indexOf(role);
@@ -110,7 +127,7 @@ function affordableOptions(role, remainingBudget, count) {
     // an empty list, so the draft can still be completed instead of dead-ending.
     affordable = [pool.reduce((min, p) => (p.price < min.price ? p : min))];
   }
-  return shuffle(affordable).slice(0, count);
+  return weightedSample(affordable, count);
 }
 
 function runView(run) {

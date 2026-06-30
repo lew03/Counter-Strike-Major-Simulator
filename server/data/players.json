@@ -8,7 +8,8 @@
     "rating": 1.4,
     "kd": 1.38,
     "maps": 468,
-    "price": 737000
+    "price": 737000,
+    "rarity": "legendary"
   },
   {
     "id": "p002",
@@ -19,7 +20,8 @@
     "rating": 1.35,
     "kd": 1.47,
     "maps": 466,
-    "price": 633000
+    "price": 633000,
+    "rarity": "legendary"
   },
   {
     "id": "p003",
@@ -30,7 +32,8 @@
     "rating": 1.26,
     "kd": 1.37,
     "maps": 493,
-    "price": 441000
+    "price": 441000,
+    "rarity": "legendary"
   },
   {
     "id": "p004",
@@ -41,7 +44,8 @@
     "rating": 1.23,
     "kd": 1.18,
     "maps": 431,
-    "price": 376000
+    "price": 376000,
+    "rarity": "legendary"
   },
   {
     "id": "p005",
@@ -52,7 +56,8 @@
     "rating": 1.22,
     "kd": 1.36,
     "maps": 229,
-    "price": 354000
+    "price": 354000,
+    "rarity": "rare"
   },
   {
     "id": "p006",
@@ -63,7 +68,8 @@
     "rating": 1.22,
     "kd": 1.23,
     "maps": 286,
-    "price": 354000
+    "price": 354000,
+    "rarity": "epic"
   },
   {
     "id": "p007",
@@ -74,7 +80,8 @@
     "rating": 1.2,
     "kd": 1.28,
     "maps": 600,
-    "price": 309000
+    "price": 309000,
+    "rarity": "legendary"
   },
   {
     "id": "p008",
@@ -85,7 +92,8 @@
     "rating": 1.2,
     "kd": 1.2,
     "maps": 426,
-    "price": 309000
+    "price": 309000,
+    "rarity": "rare"
   },
   {
     "id": "p009",
@@ -96,7 +104,8 @@
     "rating": 1.19,
     "kd": 1.16,
     "maps": 423,
-    "price": 287000
+    "price": 287000,
+    "rarity": "epic"
   },
   {
     "id": "p010",
@@ -107,7 +116,8 @@
     "rating": 1.19,
     "kd": 1.14,
     "maps": 333,
-    "price": 287000
+    "price": 287000,
+    "rarity": "rare"
   },
   {
     "id": "p011",
@@ -118,7 +128,8 @@
     "rating": 1.18,
     "kd": 1.12,
     "maps": 552,
-    "price": 264000
+    "price": 264000,
+    "rarity": "rare"
   },
   {
     "id": "p012",
@@ -129,7 +140,8 @@
     "rating": 1.18,
     "kd": 1.43,
     "maps": 410,
-    "price": 264000
+    "price": 264000,
+    "rarity": "epic"
   },
   {
     "id": "p013",
@@ -140,7 +152,8 @@
     "rating": 1.18,
     "kd": 1.3,
     "maps": 497,
-    "price": 264000
+    "price": 264000,
+    "rarity": "legendary"
   },
   {
     "id": "p014",
@@ -151,7 +164,8 @@
     "rating": 1.18,
     "kd": 1.15,
     "maps": 344,
-    "price": 264000
+    "price": 264000,
+    "rarity": "epic"
   },
   {
     "id": "p015",
@@ -162,7 +176,8 @@
     "rating": 1.18,
     "kd": 1.18,
     "maps": 539,
-    "price": 264000
+    "price": 264000,
+    "rarity": "legendary"
   },
   {
     "id": "p016",
@@ -173,7 +188,8 @@
     "rating": 1.18,
     "kd": 1.1,
     "maps": 515,
-    "price": 264000
+    "price": 264000,
+    "rarity": "rare"
   },
   {
     "id": "p017",
@@ -184,7 +200,8 @@
     "rating": 1.18,
     "kd": 1.18,
     "maps": 601,
-    "price": 264000
+    "price": 264000,
+    "rarity": "legendary"
   },
   {
     "id": "p018",
@@ -195,7 +212,8 @@
     "rating": 1.18,
     "kd": 1.15,
     "maps": 311,
-    "price": 264000
+    "price": 264000,
+    "rarity": "rare"
   },
   {
     "id": "p019",
@@ -206,7 +224,8 @@
     "rating": 1.17,
     "kd": 1.16,
     "maps": 620,
-    "price": 242000
+    "price": 242000,
+    "rarity": "epic"
   },
   {
     "id": "p020",
@@ -217,7 +236,8 @@
     "rating": 1.17,
     "kd": 1.1,
     "maps": 204,
-    "price": 242000
+    "price": 242000,
+    "rarity": "common"
   },
   {
     "id": "p021",
@@ -228,7 +248,8 @@
     "rating": 1.17,
     "kd": 1.31,
     "maps": 419,
-    "price": 242000
+    "price": 242000,
+    "rarity": "rare"
   },
   {
     "id": "p022",
@@ -239,7 +260,8 @@
     "rating": 1.17,
     "kd": 1.33,
     "maps": 649,
-    "price": 242000
+    "price": 242000,
+    "rarity": "epic"
   },
   {
     "id": "p023",
@@ -250,7 +272,8 @@
     "rating": 1.17,
     "kd": 1.12,
     "maps": 218,
-    "price": 242000
+    "price": 242000,
+    "rarity": "common"
   },
   {
     "id": "p024",
@@ -261,7 +284,8 @@
     "rating": 1.17,
     "kd": 1.11,
     "maps": 659,
-    "price": 242000
+    "price": 242000,
+    "rarity": "epic"
   },
   {
     "id": "p025",
@@ -272,7 +296,8 @@
     "rating": 1.17,
     "kd": 1.13,
     "maps": 476,
-    "price": 242000
+    "price": 242000,
+    "rarity": "rare"
   },
   {
     "id": "p026",
@@ -283,7 +308,8 @@
     "rating": 1.17,
     "kd": 1.32,
     "maps": 422,
-    "price": 242000
+    "price": 242000,
+    "rarity": "epic"
   },
   {
     "id": "p027",
@@ -294,7 +320,8 @@
     "rating": 1.16,
     "kd": 1.13,
     "maps": 624,
-    "price": 219000
+    "price": 219000,
+    "rarity": "epic"
   },
   {
     "id": "p028",
@@ -305,7 +332,8 @@
     "rating": 1.16,
     "kd": 1.17,
     "maps": 534,
-    "price": 219000
+    "price": 219000,
+    "rarity": "rare"
   },
   {
     "id": "p029",
@@ -316,7 +344,8 @@
     "rating": 1.16,
     "kd": 1.08,
     "maps": 673,
-    "price": 219000
+    "price": 219000,
+    "rarity": "epic"
   },
   {
     "id": "p030",
@@ -327,7 +356,8 @@
     "rating": 1.16,
     "kd": 1.13,
     "maps": 227,
-    "price": 219000
+    "price": 219000,
+    "rarity": "common"
   },
   {
     "id": "p031",
@@ -338,7 +368,8 @@
     "rating": 1.16,
     "kd": 1.14,
     "maps": 497,
-    "price": 219000
+    "price": 219000,
+    "rarity": "epic"
   },
   {
     "id": "p032",
@@ -349,7 +380,8 @@
     "rating": 1.16,
     "kd": 1.13,
     "maps": 487,
-    "price": 219000
+    "price": 219000,
+    "rarity": "rare"
   },
   {
     "id": "p033",
@@ -360,7 +392,8 @@
     "rating": 1.16,
     "kd": 1.11,
     "maps": 711,
-    "price": 219000
+    "price": 219000,
+    "rarity": "rare"
   },
   {
     "id": "p034",
@@ -371,7 +404,8 @@
     "rating": 1.16,
     "kd": 1.12,
     "maps": 436,
-    "price": 219000
+    "price": 219000,
+    "rarity": "epic"
   },
   {
     "id": "p035",
@@ -382,7 +416,8 @@
     "rating": 1.16,
     "kd": 1.07,
     "maps": 490,
-    "price": 219000
+    "price": 219000,
+    "rarity": "epic"
   },
   {
     "id": "p036",
@@ -393,7 +428,8 @@
     "rating": 1.16,
     "kd": 1.13,
     "maps": 514,
-    "price": 219000
+    "price": 219000,
+    "rarity": "epic"
   },
   {
     "id": "p037",
@@ -404,7 +440,8 @@
     "rating": 1.15,
     "kd": 1.11,
     "maps": 380,
-    "price": 196000
+    "price": 196000,
+    "rarity": "common"
   },
   {
     "id": "p038",
@@ -415,7 +452,8 @@
     "rating": 1.15,
     "kd": 1.17,
     "maps": 551,
-    "price": 196000
+    "price": 196000,
+    "rarity": "rare"
   },
   {
     "id": "p039",
@@ -426,7 +464,8 @@
     "rating": 1.15,
     "kd": 1.16,
     "maps": 235,
-    "price": 196000
+    "price": 196000,
+    "rarity": "common"
   },
   {
     "id": "p040",
@@ -437,7 +476,8 @@
     "rating": 1.15,
     "kd": 1.12,
     "maps": 515,
-    "price": 196000
+    "price": 196000,
+    "rarity": "epic"
   },
   {
     "id": "p041",
@@ -448,7 +488,8 @@
     "rating": 1.15,
     "kd": 1.29,
     "maps": 702,
-    "price": 196000
+    "price": 196000,
+    "rarity": "rare"
   },
   {
     "id": "p042",
@@ -459,7 +500,8 @@
     "rating": 1.15,
     "kd": 1.01,
     "maps": 238,
-    "price": 196000
+    "price": 196000,
+    "rarity": "common"
   },
   {
     "id": "p043",
@@ -470,7 +512,8 @@
     "rating": 1.15,
     "kd": 1.28,
     "maps": 240,
-    "price": 196000
+    "price": 196000,
+    "rarity": "common"
   },
   {
     "id": "p044",
@@ -481,7 +524,8 @@
     "rating": 1.15,
     "kd": 1.28,
     "maps": 477,
-    "price": 196000
+    "price": 196000,
+    "rarity": "rare"
   },
   {
     "id": "p045",
@@ -492,7 +536,8 @@
     "rating": 1.15,
     "kd": 1.22,
     "maps": 545,
-    "price": 196000
+    "price": 196000,
+    "rarity": "epic"
   },
   {
     "id": "p046",
@@ -503,7 +548,8 @@
     "rating": 1.15,
     "kd": 1.12,
     "maps": 505,
-    "price": 196000
+    "price": 196000,
+    "rarity": "epic"
   },
   {
     "id": "p047",
@@ -514,7 +560,8 @@
     "rating": 1.15,
     "kd": 1.24,
     "maps": 278,
-    "price": 196000
+    "price": 196000,
+    "rarity": "common"
   },
   {
     "id": "p048",
@@ -525,7 +572,8 @@
     "rating": 1.15,
     "kd": 1.22,
     "maps": 463,
-    "price": 196000
+    "price": 196000,
+    "rarity": "rare"
   },
   {
     "id": "p049",
@@ -536,7 +584,8 @@
     "rating": 1.15,
     "kd": 1.18,
     "maps": 277,
-    "price": 196000
+    "price": 196000,
+    "rarity": "common"
   },
   {
     "id": "p050",
@@ -547,7 +596,8 @@
     "rating": 1.15,
     "kd": 1.06,
     "maps": 292,
-    "price": 196000
+    "price": 196000,
+    "rarity": "common"
   },
   {
     "id": "p051",
@@ -558,7 +608,8 @@
     "rating": 1.14,
     "kd": 1.1,
     "maps": 233,
-    "price": 172000
+    "price": 172000,
+    "rarity": "common"
   },
   {
     "id": "p052",
@@ -569,7 +620,8 @@
     "rating": 1.14,
     "kd": 1.13,
     "maps": 298,
-    "price": 172000
+    "price": 172000,
+    "rarity": "common"
   },
   {
     "id": "p053",
@@ -580,7 +632,8 @@
     "rating": 1.14,
     "kd": 1.15,
     "maps": 601,
-    "price": 172000
+    "price": 172000,
+    "rarity": "rare"
   },
   {
     "id": "p054",
@@ -591,7 +644,8 @@
     "rating": 1.14,
     "kd": 1.16,
     "maps": 315,
-    "price": 172000
+    "price": 172000,
+    "rarity": "common"
   },
   {
     "id": "p055",
@@ -602,7 +656,8 @@
     "rating": 1.14,
     "kd": 1.26,
     "maps": 391,
-    "price": 172000
+    "price": 172000,
+    "rarity": "common"
   },
   {
     "id": "p056",
@@ -613,7 +668,8 @@
     "rating": 1.14,
     "kd": 1.1,
     "maps": 830,
-    "price": 172000
+    "price": 172000,
+    "rarity": "rare"
   },
   {
     "id": "p057",
@@ -624,7 +680,8 @@
     "rating": 1.14,
     "kd": 1.07,
     "maps": 448,
-    "price": 172000
+    "price": 172000,
+    "rarity": "common"
   },
   {
     "id": "p058",
@@ -635,7 +692,8 @@
     "rating": 1.14,
     "kd": 1.13,
     "maps": 202,
-    "price": 172000
+    "price": 172000,
+    "rarity": "common"
   },
   {
     "id": "p059",
@@ -646,7 +704,8 @@
     "rating": 1.14,
     "kd": 1.13,
     "maps": 470,
-    "price": 172000
+    "price": 172000,
+    "rarity": "rare"
   },
   {
     "id": "p060",
@@ -657,7 +716,8 @@
     "rating": 1.14,
     "kd": 1.05,
     "maps": 567,
-    "price": 172000
+    "price": 172000,
+    "rarity": "rare"
   },
   {
     "id": "p061",
@@ -668,7 +728,8 @@
     "rating": 1.14,
     "kd": 1.14,
     "maps": 245,
-    "price": 172000
+    "price": 172000,
+    "rarity": "common"
   },
   {
     "id": "p062",
@@ -679,7 +740,8 @@
     "rating": 1.14,
     "kd": 1.2,
     "maps": 384,
-    "price": 172000
+    "price": 172000,
+    "rarity": "common"
   },
   {
     "id": "p063",
@@ -690,7 +752,8 @@
     "rating": 1.14,
     "kd": 1.13,
     "maps": 474,
-    "price": 172000
+    "price": 172000,
+    "rarity": "rare"
   },
   {
     "id": "p064",
@@ -701,7 +764,8 @@
     "rating": 1.14,
     "kd": 1.22,
     "maps": 485,
-    "price": 172000
+    "price": 172000,
+    "rarity": "rare"
   },
   {
     "id": "p065",
@@ -712,7 +776,8 @@
     "rating": 1.14,
     "kd": 1.15,
     "maps": 331,
-    "price": 172000
+    "price": 172000,
+    "rarity": "common"
   },
   {
     "id": "p066",
@@ -723,7 +788,8 @@
     "rating": 1.14,
     "kd": 1.02,
     "maps": 1035,
-    "price": 172000
+    "price": 172000,
+    "rarity": "rare"
   },
   {
     "id": "p067",
@@ -734,7 +800,8 @@
     "rating": 1.14,
     "kd": 1.04,
     "maps": 455,
-    "price": 172000
+    "price": 172000,
+    "rarity": "rare"
   },
   {
     "id": "p068",
@@ -745,7 +812,8 @@
     "rating": 1.14,
     "kd": 1.09,
     "maps": 377,
-    "price": 172000
+    "price": 172000,
+    "rarity": "common"
   },
   {
     "id": "p069",
@@ -756,7 +824,8 @@
     "rating": 1.14,
     "kd": 1.18,
     "maps": 691,
-    "price": 172000
+    "price": 172000,
+    "rarity": "rare"
   },
   {
     "id": "p070",
@@ -767,7 +836,8 @@
     "rating": 1.13,
     "kd": 1.12,
     "maps": 352,
-    "price": 148000
+    "price": 148000,
+    "rarity": "common"
   },
   {
     "id": "p071",
@@ -778,7 +848,8 @@
     "rating": 1.13,
     "kd": 1.08,
     "maps": 375,
-    "price": 148000
+    "price": 148000,
+    "rarity": "common"
   },
   {
     "id": "p072",
@@ -789,7 +860,8 @@
     "rating": 1.13,
     "kd": 1.04,
     "maps": 586,
-    "price": 148000
+    "price": 148000,
+    "rarity": "rare"
   },
   {
     "id": "p073",
@@ -800,7 +872,8 @@
     "rating": 1.13,
     "kd": 1.06,
     "maps": 204,
-    "price": 148000
+    "price": 148000,
+    "rarity": "common"
   },
   {
     "id": "p074",
@@ -811,7 +884,8 @@
     "rating": 1.13,
     "kd": 1.1,
     "maps": 464,
-    "price": 148000
+    "price": 148000,
+    "rarity": "common"
   },
   {
     "id": "p075",
@@ -822,7 +896,8 @@
     "rating": 1.13,
     "kd": 1.07,
     "maps": 651,
-    "price": 148000
+    "price": 148000,
+    "rarity": "rare"
   },
   {
     "id": "p076",
@@ -833,7 +908,8 @@
     "rating": 1.13,
     "kd": 1.27,
     "maps": 341,
-    "price": 148000
+    "price": 148000,
+    "rarity": "common"
   },
   {
     "id": "p077",
@@ -844,7 +920,8 @@
     "rating": 1.13,
     "kd": 1.28,
     "maps": 557,
-    "price": 148000
+    "price": 148000,
+    "rarity": "rare"
   },
   {
     "id": "p078",
@@ -855,7 +932,8 @@
     "rating": 1.13,
     "kd": 1.25,
     "maps": 222,
-    "price": 148000
+    "price": 148000,
+    "rarity": "common"
   },
   {
     "id": "p079",
@@ -866,7 +944,8 @@
     "rating": 1.13,
     "kd": 1.06,
     "maps": 259,
-    "price": 148000
+    "price": 148000,
+    "rarity": "common"
   },
   {
     "id": "p080",
@@ -877,7 +956,8 @@
     "rating": 1.13,
     "kd": 1.09,
     "maps": 618,
-    "price": 148000
+    "price": 148000,
+    "rarity": "common"
   },
   {
     "id": "p081",
@@ -888,7 +968,8 @@
     "rating": 1.13,
     "kd": 1.09,
     "maps": 620,
-    "price": 148000
+    "price": 148000,
+    "rarity": "common"
   },
   {
     "id": "p082",
@@ -899,7 +980,8 @@
     "rating": 1.13,
     "kd": 1.07,
     "maps": 396,
-    "price": 148000
+    "price": 148000,
+    "rarity": "common"
   },
   {
     "id": "p083",
@@ -910,7 +992,8 @@
     "rating": 1.13,
     "kd": 1.08,
     "maps": 729,
-    "price": 148000
+    "price": 148000,
+    "rarity": "common"
   },
   {
     "id": "p084",
@@ -921,7 +1004,8 @@
     "rating": 1.13,
     "kd": 1.1,
     "maps": 245,
-    "price": 148000
+    "price": 148000,
+    "rarity": "common"
   },
   {
     "id": "p085",
@@ -932,7 +1016,8 @@
     "rating": 1.13,
     "kd": 1.09,
     "maps": 368,
-    "price": 148000
+    "price": 148000,
+    "rarity": "common"
   },
   {
     "id": "p086",
@@ -943,7 +1028,8 @@
     "rating": 1.13,
     "kd": 1.06,
     "maps": 466,
-    "price": 148000
+    "price": 148000,
+    "rarity": "rare"
   },
   {
     "id": "p087",
@@ -954,7 +1040,8 @@
     "rating": 1.13,
     "kd": 1.08,
     "maps": 786,
-    "price": 148000
+    "price": 148000,
+    "rarity": "common"
   },
   {
     "id": "p088",
@@ -965,7 +1052,8 @@
     "rating": 1.13,
     "kd": 1.18,
     "maps": 775,
-    "price": 148000
+    "price": 148000,
+    "rarity": "rare"
   },
   {
     "id": "p089",
@@ -976,7 +1064,8 @@
     "rating": 1.12,
     "kd": 1.16,
     "maps": 213,
-    "price": 124000
+    "price": 124000,
+    "rarity": "common"
   },
   {
     "id": "p090",
@@ -987,7 +1076,8 @@
     "rating": 1.12,
     "kd": 1.06,
     "maps": 528,
-    "price": 124000
+    "price": 124000,
+    "rarity": "common"
   },
   {
     "id": "p091",
@@ -998,7 +1088,8 @@
     "rating": 1.12,
     "kd": 1.14,
     "maps": 342,
-    "price": 124000
+    "price": 124000,
+    "rarity": "common"
   },
   {
     "id": "p092",
@@ -1009,7 +1100,8 @@
     "rating": 1.12,
     "kd": 1.19,
     "maps": 415,
-    "price": 124000
+    "price": 124000,
+    "rarity": "common"
   },
   {
     "id": "p093",
@@ -1020,7 +1112,8 @@
     "rating": 1.12,
     "kd": 1.18,
     "maps": 801,
-    "price": 124000
+    "price": 124000,
+    "rarity": "common"
   },
   {
     "id": "p094",
@@ -1031,7 +1124,8 @@
     "rating": 1.12,
     "kd": 1.1,
     "maps": 713,
-    "price": 124000
+    "price": 124000,
+    "rarity": "rare"
   },
   {
     "id": "p095",
@@ -1042,7 +1136,8 @@
     "rating": 1.12,
     "kd": 1.02,
     "maps": 491,
-    "price": 124000
+    "price": 124000,
+    "rarity": "common"
   },
   {
     "id": "p096",
@@ -1053,7 +1148,8 @@
     "rating": 1.12,
     "kd": 1.04,
     "maps": 717,
-    "price": 124000
+    "price": 124000,
+    "rarity": "common"
   },
   {
     "id": "p097",
@@ -1064,7 +1160,8 @@
     "rating": 1.12,
     "kd": 1.06,
     "maps": 337,
-    "price": 124000
+    "price": 124000,
+    "rarity": "common"
   },
   {
     "id": "p098",
@@ -1075,7 +1172,8 @@
     "rating": 1.12,
     "kd": 1.09,
     "maps": 472,
-    "price": 124000
+    "price": 124000,
+    "rarity": "common"
   },
   {
     "id": "p099",
@@ -1086,7 +1184,8 @@
     "rating": 1.12,
     "kd": 1.22,
     "maps": 305,
-    "price": 124000
+    "price": 124000,
+    "rarity": "common"
   },
   {
     "id": "p100",
@@ -1097,1656 +1196,7 @@
     "rating": 1.12,
     "kd": 1.11,
     "maps": 431,
-    "price": 124000
-  },
-  {
-    "id": "p101",
-    "name": "MiQ",
-    "country": "MN",
-    "role": "igl",
-    "team": "NEXVOIDATOX",
-    "rating": 1.12,
-    "kd": 1.06,
-    "maps": 275,
-    "price": 124000
-  },
-  {
-    "id": "p102",
-    "name": "d1Ledez",
-    "country": "RU",
-    "role": "awp",
-    "team": "BetBoom",
-    "rating": 1.12,
-    "kd": 1.07,
-    "maps": 730,
-    "price": 124000
-  },
-  {
-    "id": "p103",
-    "name": "ckzao",
-    "country": "BR",
-    "role": "entry",
-    "team": "Fake do Biru",
-    "rating": 1.12,
-    "kd": 1.06,
-    "maps": 324,
-    "price": 124000
-  },
-  {
-    "id": "p104",
-    "name": "karnez",
-    "country": "RU",
-    "role": "support",
-    "team": "Ursa",
-    "rating": 1.12,
-    "kd": 1.08,
-    "maps": 207,
-    "price": 124000
-  },
-  {
-    "id": "p105",
-    "name": "youka",
-    "country": "RU",
-    "role": "lurker",
-    "team": "RUSTECFORZE Reload",
-    "rating": 1.12,
-    "kd": 1.18,
-    "maps": 202,
-    "price": 124000
-  },
-  {
-    "id": "p106",
-    "name": "MartinezSa",
-    "country": "ES",
-    "role": "igl",
-    "team": "Gentle Mates",
-    "rating": 1.12,
-    "kd": 1.23,
-    "maps": 567,
-    "price": 124000
-  },
-  {
-    "id": "p107",
-    "name": "EliGE",
-    "country": "US",
-    "role": "support",
-    "team": "Liquid",
-    "rating": 1.12,
-    "kd": 1.07,
-    "maps": 421,
-    "price": 124000
-  },
-  {
-    "id": "p108",
-    "name": "INS",
-    "country": "AU",
-    "role": "awp",
-    "team": "FlyQuest",
-    "rating": 1.12,
-    "kd": 1.05,
-    "maps": 352,
-    "price": 124000
-  },
-  {
-    "id": "p109",
-    "name": "reiko",
-    "country": "PL",
-    "role": "entry",
-    "team": "ESCAnonymo",
-    "rating": 1.12,
-    "kd": 1.06,
-    "maps": 653,
-    "price": 124000
-  },
-  {
-    "id": "p110",
-    "name": "aliStair",
-    "country": "AU",
-    "role": "support",
-    "team": "THUNDER dOWNUNDER",
-    "rating": 1.12,
-    "kd": 1.22,
-    "maps": 360,
-    "price": 124000
-  },
-  {
-    "id": "p111",
-    "name": "Hanka",
-    "country": "PL",
-    "role": "lurker",
-    "team": "NAVI Javelins",
-    "rating": 1.12,
-    "kd": 1.06,
-    "maps": 207,
-    "price": 124000
-  },
-  {
-    "id": "p112",
-    "name": "JBa",
-    "country": "US",
-    "role": "igl",
-    "team": "M80",
-    "rating": 1.11,
-    "kd": 1.11,
-    "maps": 523,
-    "price": 99000
-  },
-  {
-    "id": "p113",
-    "name": "Kvem",
-    "country": "UA",
-    "role": "awp",
-    "team": "Passion UA",
-    "rating": 1.11,
-    "kd": 1.07,
-    "maps": 528,
-    "price": 99000
-  },
-  {
-    "id": "p114",
-    "name": "nin9",
-    "country": "MN",
-    "role": "entry",
-    "team": "The Huns",
-    "rating": 1.11,
-    "kd": 1.15,
-    "maps": 389,
-    "price": 99000
-  },
-  {
-    "id": "p115",
-    "name": "ryu",
-    "country": "LT",
-    "role": "support",
-    "team": "Astralis",
-    "rating": 1.11,
-    "kd": 1.08,
-    "maps": 651,
-    "price": 99000
-  },
-  {
-    "id": "p116",
-    "name": "Moseyuh",
-    "country": "CN",
-    "role": "lurker",
-    "team": "TYLOO",
-    "rating": 1.11,
-    "kd": 1.1,
-    "maps": 352,
-    "price": 99000
-  },
-  {
-    "id": "p117",
-    "name": "xeedo",
-    "country": "BY",
-    "role": "igl",
-    "team": "K27",
-    "rating": 1.11,
-    "kd": 1.06,
-    "maps": 411,
-    "price": 99000
-  },
-  {
-    "id": "p118",
-    "name": "gbb",
-    "country": "BR",
-    "role": "awp",
-    "team": "Galorys",
-    "rating": 1.11,
-    "kd": 1.07,
-    "maps": 692,
-    "price": 99000
-  },
-  {
-    "id": "p119",
-    "name": "nicoodoz",
-    "country": "DK",
-    "role": "awp",
-    "team": "OG",
-    "rating": 1.11,
-    "kd": 1.18,
-    "maps": 668,
-    "price": 99000
-  },
-  {
-    "id": "p120",
-    "name": "Fruitcupx",
-    "country": "US",
-    "role": "entry",
-    "team": "BOSSBLUEJAYS",
-    "rating": 1.11,
-    "kd": 1.09,
-    "maps": 410,
-    "price": 99000
-  },
-  {
-    "id": "p121",
-    "name": "Grizz",
-    "country": "US",
-    "role": "support",
-    "team": "Marsborne",
-    "rating": 1.11,
-    "kd": 1.08,
-    "maps": 485,
-    "price": 99000
-  },
-  {
-    "id": "p122",
-    "name": "Sonic",
-    "country": "ZA",
-    "role": "lurker",
-    "team": "NRG",
-    "rating": 1.11,
-    "kd": 1.06,
-    "maps": 495,
-    "price": 99000
-  },
-  {
-    "id": "p123",
-    "name": "St0m4k",
-    "country": "UA",
-    "role": "igl",
-    "team": "HEROIC",
-    "rating": 1.11,
-    "kd": 1.04,
-    "maps": 274,
-    "price": 99000
-  },
-  {
-    "id": "p124",
-    "name": "cool4st",
-    "country": "MN",
-    "role": "awp",
-    "team": "Chinggis Warriors",
-    "rating": 1.11,
-    "kd": 1.13,
-    "maps": 298,
-    "price": 99000
-  },
-  {
-    "id": "p125",
-    "name": "Krimbo",
-    "country": "DE",
-    "role": "support",
-    "team": "BIG",
-    "rating": 1.11,
-    "kd": 1.16,
-    "maps": 482,
-    "price": 99000
-  },
-  {
-    "id": "p126",
-    "name": "tAk",
-    "country": "LT",
-    "role": "entry",
-    "team": "G2",
-    "rating": 1.11,
-    "kd": 1.08,
-    "maps": 260,
-    "price": 99000
-  },
-  {
-    "id": "p127",
-    "name": "CLASIA",
-    "country": "US",
-    "role": "support",
-    "team": "Nouns",
-    "rating": 1.11,
-    "kd": 1.09,
-    "maps": 316,
-    "price": 99000
-  },
-  {
-    "id": "p128",
-    "name": "oSee",
-    "country": "US",
-    "role": "awp",
-    "team": "NRG",
-    "rating": 1.11,
-    "kd": 1.19,
-    "maps": 448,
-    "price": 99000
-  },
-  {
-    "id": "p129",
-    "name": "decenty",
-    "country": "BR",
-    "role": "lurker",
-    "team": "Imperial",
-    "rating": 1.11,
-    "kd": 1.15,
-    "maps": 599,
-    "price": 99000
-  },
-  {
-    "id": "p130",
-    "name": "w0nderful",
-    "country": "UA",
-    "role": "awp",
-    "team": "Natus Vincere",
-    "rating": 1.11,
-    "kd": 1.22,
-    "maps": 497,
-    "price": 99000
-  },
-  {
-    "id": "p131",
-    "name": "leakz",
-    "country": "DK",
-    "role": "igl",
-    "team": "Tricked",
-    "rating": 1.11,
-    "kd": 1.05,
-    "maps": 458,
-    "price": 99000
-  },
-  {
-    "id": "p132",
-    "name": "adamb",
-    "country": "SE",
-    "role": "awp",
-    "team": "OG",
-    "rating": 1.11,
-    "kd": 1.07,
-    "maps": 633,
-    "price": 99000
-  },
-  {
-    "id": "p133",
-    "name": "consti",
-    "country": "US",
-    "role": "entry",
-    "team": "LAGVagrants",
-    "rating": 1.11,
-    "kd": 1.26,
-    "maps": 364,
-    "price": 99000
-  },
-  {
-    "id": "p134",
-    "name": "Liazz",
-    "country": "AU",
-    "role": "support",
-    "team": "THUNDER dOWNUNDER",
-    "rating": 1.11,
-    "kd": 1.12,
-    "maps": 359,
-    "price": 99000
-  },
-  {
-    "id": "p135",
-    "name": "lattykk",
-    "country": "RU",
-    "role": "lurker",
-    "team": "1win",
-    "rating": 1.11,
-    "kd": 1.25,
-    "maps": 505,
-    "price": 99000
-  },
-  {
-    "id": "p136",
-    "name": "shg",
-    "country": "RU",
-    "role": "igl",
-    "team": "ARCRED",
-    "rating": 1.11,
-    "kd": 1.06,
-    "maps": 213,
-    "price": 99000
-  },
-  {
-    "id": "p137",
-    "name": "flayy",
-    "country": "PL",
-    "role": "awp",
-    "team": "Rebels",
-    "rating": 1.11,
-    "kd": 1.18,
-    "maps": 567,
-    "price": 99000
-  },
-  {
-    "id": "p138",
-    "name": "JDC",
-    "country": "DE",
-    "role": "entry",
-    "team": "BIG",
-    "rating": 1.11,
-    "kd": 1.06,
-    "maps": 585,
-    "price": 99000
-  },
-  {
-    "id": "p139",
-    "name": "Porya",
-    "country": "RU",
-    "role": "support",
-    "team": "PERA",
-    "rating": 1.11,
-    "kd": 1.1,
-    "maps": 212,
-    "price": 99000
-  },
-  {
-    "id": "p140",
-    "name": "Spinx",
-    "country": "IL",
-    "role": "lurker",
-    "team": "MOUZ",
-    "rating": 1.11,
-    "kd": 1.14,
-    "maps": 450,
-    "price": 99000
-  },
-  {
-    "id": "p141",
-    "name": "Wicadia",
-    "country": "TR",
-    "role": "lurker",
-    "team": "Aurora",
-    "rating": 1.11,
-    "kd": 1.08,
-    "maps": 508,
-    "price": 99000
-  },
-  {
-    "id": "p142",
-    "name": "Caleyy",
-    "country": "XK",
-    "role": "igl",
-    "team": "MANAKubix",
-    "rating": 1.11,
-    "kd": 1.05,
-    "maps": 423,
-    "price": 99000
-  },
-  {
-    "id": "p143",
-    "name": "Vexite",
-    "country": "AU",
-    "role": "awp",
-    "team": "FlyQuest",
-    "rating": 1.11,
-    "kd": 1.07,
-    "maps": 352,
-    "price": 99000
-  },
-  {
-    "id": "p144",
-    "name": "Tiger",
-    "country": "CN",
-    "role": "entry",
-    "team": "Rare Atom",
-    "rating": 1.11,
-    "kd": 1.14,
-    "maps": 242,
-    "price": 99000
-  },
-  {
-    "id": "p145",
-    "name": "eraa",
-    "country": "SE",
-    "role": "support",
-    "team": "Alliance",
-    "rating": 1.11,
-    "kd": 1.25,
-    "maps": 755,
-    "price": 99000
-  },
-  {
-    "id": "p146",
-    "name": "FaNg",
-    "country": "CA",
-    "role": "lurker",
-    "team": "Party Astronauts",
-    "rating": 1.11,
-    "kd": 1.1,
-    "maps": 355,
-    "price": 99000
-  },
-  {
-    "id": "p147",
-    "name": "z1k4",
-    "country": "RU",
-    "role": "igl",
-    "team": "Nuclear Tige",
-    "rating": 1.11,
-    "kd": 1.19,
-    "maps": 378,
-    "price": 99000
-  },
-  {
-    "id": "p148",
-    "name": "dgt",
-    "country": "UY",
-    "role": "awp",
-    "team": "9z",
-    "rating": 1.11,
-    "kd": 1.16,
-    "maps": 489,
-    "price": 99000
-  },
-  {
-    "id": "p149",
-    "name": "nqz",
-    "country": "BR",
-    "role": "entry",
-    "team": "paiN",
-    "rating": 1.11,
-    "kd": 1.24,
-    "maps": 595,
-    "price": 99000
-  },
-  {
-    "id": "p150",
-    "name": "stressarN",
-    "country": "MK",
-    "role": "support",
-    "team": "SINNERS",
-    "rating": 1.11,
-    "kd": 1.12,
-    "maps": 309,
-    "price": 99000
-  },
-  {
-    "id": "p151",
-    "name": "REZ",
-    "country": "SE",
-    "role": "lurker",
-    "team": "GamerLegion",
-    "rating": 1.11,
-    "kd": 1.06,
-    "maps": 454,
-    "price": 99000
-  },
-  {
-    "id": "p152",
-    "name": "xertioN",
-    "country": "IL",
-    "role": "igl",
-    "team": "MOUZ",
-    "rating": 1.11,
-    "kd": 1.04,
-    "maps": 488,
-    "price": 99000
-  },
-  {
-    "id": "p153",
-    "name": "tasman",
-    "country": "KZ",
-    "role": "awp",
-    "team": "NOVAQ",
-    "rating": 1.1,
-    "kd": 1.07,
-    "maps": 294,
-    "price": 74000
-  },
-  {
-    "id": "p154",
-    "name": "Ax1Le",
-    "country": "RU",
-    "role": "entry",
-    "team": "TDK",
-    "rating": 1.1,
-    "kd": 1.06,
-    "maps": 519,
-    "price": 74000
-  },
-  {
-    "id": "p155",
-    "name": "dwushka",
-    "country": "RU",
-    "role": "entry",
-    "team": "Bebop",
-    "rating": 1.1,
-    "kd": 1.06,
-    "maps": 456,
-    "price": 74000
-  },
-  {
-    "id": "p156",
-    "name": "nardes",
-    "country": "BR",
-    "role": "support",
-    "team": "ODDIK",
-    "rating": 1.1,
-    "kd": 1.16,
-    "maps": 276,
-    "price": 74000
-  },
-  {
-    "id": "p157",
-    "name": "jL",
-    "country": "LT",
-    "role": "entry",
-    "team": "Natus Vincere",
-    "rating": 1.1,
-    "kd": 1.08,
-    "maps": 314,
-    "price": 74000
-  },
-  {
-    "id": "p158",
-    "name": "Swisher",
-    "country": "US",
-    "role": "lurker",
-    "team": "M80",
-    "rating": 1.1,
-    "kd": 1.05,
-    "maps": 563,
-    "price": 74000
-  },
-  {
-    "id": "p159",
-    "name": "spirit",
-    "country": "RU",
-    "role": "igl",
-    "team": "Just Players",
-    "rating": 1.1,
-    "kd": 1.03,
-    "maps": 519,
-    "price": 74000
-  },
-  {
-    "id": "p160",
-    "name": "JBOEN",
-    "country": "DK",
-    "role": "awp",
-    "team": "BIG",
-    "rating": 1.1,
-    "kd": 1.15,
-    "maps": 334,
-    "price": 74000
-  },
-  {
-    "id": "p161",
-    "name": "FenomeN",
-    "country": "BY",
-    "role": "entry",
-    "team": "INOX Division",
-    "rating": 1.1,
-    "kd": 1.25,
-    "maps": 818,
-    "price": 74000
-  },
-  {
-    "id": "p162",
-    "name": "DGL",
-    "country": "PL",
-    "role": "support",
-    "team": "Phantom",
-    "rating": 1.1,
-    "kd": 1.23,
-    "maps": 285,
-    "price": 74000
-  },
-  {
-    "id": "p163",
-    "name": "yAmi",
-    "country": "MN",
-    "role": "lurker",
-    "team": "Chinggis Warriors",
-    "rating": 1.1,
-    "kd": 1.09,
-    "maps": 320,
-    "price": 74000
-  },
-  {
-    "id": "p164",
-    "name": "L1haNg",
-    "country": "CN",
-    "role": "igl",
-    "team": "Rare Atom",
-    "rating": 1.1,
-    "kd": 1.05,
-    "maps": 456,
-    "price": 74000
-  },
-  {
-    "id": "p165",
-    "name": "lauNX",
-    "country": "RO",
-    "role": "awp",
-    "team": "FUTNexus",
-    "rating": 1.1,
-    "kd": 1.04,
-    "maps": 586,
-    "price": 74000
-  },
-  {
-    "id": "p166",
-    "name": "PR",
-    "country": "CZ",
-    "role": "entry",
-    "team": "GamerLegion",
-    "rating": 1.1,
-    "kd": 1.07,
-    "maps": 605,
-    "price": 74000
-  },
-  {
-    "id": "p167",
-    "name": "venomzera",
-    "country": "BR",
-    "role": "support",
-    "team": "MIBR",
-    "rating": 1.1,
-    "kd": 1.05,
-    "maps": 697,
-    "price": 74000
-  },
-  {
-    "id": "p168",
-    "name": "keen",
-    "country": "LV",
-    "role": "lurker",
-    "team": "SemperFi",
-    "rating": 1.1,
-    "kd": 1.11,
-    "maps": 309,
-    "price": 74000
-  },
-  {
-    "id": "p169",
-    "name": "HEN1",
-    "country": "BR",
-    "role": "igl",
-    "team": "Imperial",
-    "rating": 1.1,
-    "kd": 1.23,
-    "maps": 450,
-    "price": 74000
-  },
-  {
-    "id": "p170",
-    "name": "Kylar",
-    "country": "PL",
-    "role": "awp",
-    "team": "Phantom",
-    "rating": 1.1,
-    "kd": 1.06,
-    "maps": 406,
-    "price": 74000
-  },
-  {
-    "id": "p171",
-    "name": "Banjo",
-    "country": "FI",
-    "role": "entry",
-    "team": "FOKUS",
-    "rating": 1.1,
-    "kd": 1.05,
-    "maps": 545,
-    "price": 74000
-  },
-  {
-    "id": "p172",
-    "name": "syph0",
-    "country": "KZ",
-    "role": "support",
-    "team": "Nemiga",
-    "rating": 1.1,
-    "kd": 1.06,
-    "maps": 531,
-    "price": 74000
-  },
-  {
-    "id": "p173",
-    "name": "soulfly",
-    "country": "TR",
-    "role": "lurker",
-    "team": "Aurora",
-    "rating": 1.1,
-    "kd": 1.03,
-    "maps": 564,
-    "price": 74000
-  },
-  {
-    "id": "p174",
-    "name": "xfl0ud",
-    "country": "TR",
-    "role": "igl",
-    "team": "HEROIC",
-    "rating": 1.1,
-    "kd": 1.01,
-    "maps": 540,
-    "price": 74000
-  },
-  {
-    "id": "p175",
-    "name": "b1elany",
-    "country": "PL",
-    "role": "awp",
-    "team": "KOLESIECPH Wolves",
-    "rating": 1.1,
-    "kd": 1.05,
-    "maps": 785,
-    "price": 74000
-  },
-  {
-    "id": "p176",
-    "name": "Djon8",
-    "country": "RU",
-    "role": "entry",
-    "team": "SPARTAFLuffy Gangsters",
-    "rating": 1.1,
-    "kd": 1.06,
-    "maps": 656,
-    "price": 74000
-  },
-  {
-    "id": "p177",
-    "name": "maxster",
-    "country": "SE",
-    "role": "support",
-    "team": "EYEBALLERS",
-    "rating": 1.1,
-    "kd": 1.11,
-    "maps": 480,
-    "price": 74000
-  },
-  {
-    "id": "p178",
-    "name": "poiii",
-    "country": "SE",
-    "role": "lurker",
-    "team": "100 Thieves",
-    "rating": 1.1,
-    "kd": 1.04,
-    "maps": 598,
-    "price": 74000
-  },
-  {
-    "id": "p179",
-    "name": "lash",
-    "country": "BR",
-    "role": "igl",
-    "team": "Keyd Stars",
-    "rating": 1.1,
-    "kd": 1.16,
-    "maps": 306,
-    "price": 74000
-  },
-  {
-    "id": "p180",
-    "name": "executor",
-    "country": "RU",
-    "role": "awp",
-    "team": "BET-MRUSH B33",
-    "rating": 1.1,
-    "kd": 1.06,
-    "maps": 694,
-    "price": 74000
-  },
-  {
-    "id": "p181",
-    "name": "Starry",
-    "country": "CN",
-    "role": "entry",
-    "team": "Lynn Vision",
-    "rating": 1.1,
-    "kd": 1.09,
-    "maps": 358,
-    "price": 74000
-  },
-  {
-    "id": "p182",
-    "name": "spooke",
-    "country": "SE",
-    "role": "support",
-    "team": "OG",
-    "rating": 1.1,
-    "kd": 1.05,
-    "maps": 700,
-    "price": 74000
-  },
-  {
-    "id": "p183",
-    "name": "cobrazera",
-    "country": "MN",
-    "role": "lurker",
-    "team": "The MongolZ",
-    "rating": 1.1,
-    "kd": 1.04,
-    "maps": 345,
-    "price": 74000
-  },
-  {
-    "id": "p184",
-    "name": "ArtFr0st",
-    "country": "RU",
-    "role": "entry",
-    "team": "BetBoom",
-    "rating": 1.1,
-    "kd": 1.33,
-    "maps": 610,
-    "price": 74000
-  },
-  {
-    "id": "p185",
-    "name": "Jame",
-    "country": "RU",
-    "role": "awp",
-    "team": "PARIVISION",
-    "rating": 1.1,
-    "kd": 1.29,
-    "maps": 671,
-    "price": 74000
-  },
-  {
-    "id": "p186",
-    "name": "r1nkle",
-    "country": "UA",
-    "role": "igl",
-    "team": "Ninjas in Pyjamas",
-    "rating": 1.1,
-    "kd": 1.21,
-    "maps": 514,
-    "price": 74000
-  },
-  {
-    "id": "p187",
-    "name": "sugaR",
-    "country": "AZ",
-    "role": "awp",
-    "team": "TDK",
-    "rating": 1.1,
-    "kd": 1.05,
-    "maps": 681,
-    "price": 74000
-  },
-  {
-    "id": "p188",
-    "name": "ICY",
-    "country": "KZ",
-    "role": "entry",
-    "team": "Virtus.pro",
-    "rating": 1.1,
-    "kd": 1.25,
-    "maps": 405,
-    "price": 74000
-  },
-  {
-    "id": "p189",
-    "name": "avid",
-    "country": "SE",
-    "role": "support",
-    "team": "Alliance",
-    "rating": 1.1,
-    "kd": 1.07,
-    "maps": 789,
-    "price": 74000
-  },
-  {
-    "id": "p190",
-    "name": "regali",
-    "country": "RO",
-    "role": "lurker",
-    "team": "Eternal Fire",
-    "rating": 1.1,
-    "kd": 1.21,
-    "maps": 236,
-    "price": 74000
-  },
-  {
-    "id": "p191",
-    "name": "k0s",
-    "country": "RU",
-    "role": "igl",
-    "team": "INOX Divisione",
-    "rating": 1.1,
-    "kd": 1.07,
-    "maps": 232,
-    "price": 74000
-  },
-  {
-    "id": "p192",
-    "name": "Bwills",
-    "country": "US",
-    "role": "awp",
-    "team": "BOSSNouns",
-    "rating": 1.1,
-    "kd": 1.05,
-    "maps": 251,
-    "price": 74000
-  },
-  {
-    "id": "p193",
-    "name": "MagnumZ",
-    "country": "MN",
-    "role": "entry",
-    "team": "BMZ",
-    "rating": 1.1,
-    "kd": 1.16,
-    "maps": 208,
-    "price": 74000
-  },
-  {
-    "id": "p194",
-    "name": "jottAAA",
-    "country": "TR",
-    "role": "support",
-    "team": "Eternal Fire",
-    "rating": 1.1,
-    "kd": 1.06,
-    "maps": 524,
-    "price": 74000
-  },
-  {
-    "id": "p195",
-    "name": "oskar",
-    "country": "CZ",
-    "role": "lurker",
-    "team": "SINNERS",
-    "rating": 1.1,
-    "kd": 1.2,
-    "maps": 545,
-    "price": 74000
-  },
-  {
-    "id": "p196",
-    "name": "snav",
-    "country": "US",
-    "role": "igl",
-    "team": "Voca",
-    "rating": 1.1,
-    "kd": 1.06,
-    "maps": 682,
-    "price": 74000
-  },
-  {
-    "id": "p197",
-    "name": "thamlike",
-    "country": "DK",
-    "role": "awp",
-    "team": "WOPA",
-    "rating": 1.1,
-    "kd": 1.07,
-    "maps": 314,
-    "price": 74000
-  },
-  {
-    "id": "p198",
-    "name": "Zyphon",
-    "country": "DK",
-    "role": "entry",
-    "team": "Sashi",
-    "rating": 1.1,
-    "kd": 1.04,
-    "maps": 752,
-    "price": 74000
-  },
-  {
-    "id": "p199",
-    "name": "Plopski",
-    "country": "SE",
-    "role": "support",
-    "team": "Metizport",
-    "rating": 1.09,
-    "kd": 1.04,
-    "maps": 537,
-    "price": 48000
-  },
-  {
-    "id": "p200",
-    "name": "oz1k",
-    "country": "RU",
-    "role": "lurker",
-    "team": "1win",
-    "rating": 1.09,
-    "kd": 1.04,
-    "maps": 381,
-    "price": 48000
-  },
-  {
-    "id": "p201",
-    "name": "Markoś",
-    "country": "PL",
-    "role": "igl",
-    "team": "los kogutos",
-    "rating": 1.09,
-    "kd": 1.18,
-    "maps": 430,
-    "price": 48000
-  },
-  {
-    "id": "p202",
-    "name": "Drox",
-    "country": "AU",
-    "role": "awp",
-    "team": "Vantage",
-    "rating": 1.09,
-    "kd": 1.09,
-    "maps": 205,
-    "price": 48000
-  },
-  {
-    "id": "p203",
-    "name": "draken",
-    "country": "SE",
-    "role": "awp",
-    "team": "Johnny Speeds",
-    "rating": 1.09,
-    "kd": 1.21,
-    "maps": 628,
-    "price": 48000
-  },
-  {
-    "id": "p204",
-    "name": "Maka",
-    "country": "FR",
-    "role": "entry",
-    "team": "3DMAX",
-    "rating": 1.09,
-    "kd": 1.15,
-    "maps": 698,
-    "price": 48000
-  },
-  {
-    "id": "p205",
-    "name": "jocab",
-    "country": "SE",
-    "role": "support",
-    "team": "Johnny Speeds",
-    "rating": 1.09,
-    "kd": 1.1,
-    "maps": 446,
-    "price": 48000
-  },
-  {
-    "id": "p206",
-    "name": "lux",
-    "country": "BR",
-    "role": "lurker",
-    "team": "paiN",
-    "rating": 1.09,
-    "kd": 1.05,
-    "maps": 634,
-    "price": 48000
-  },
-  {
-    "id": "p207",
-    "name": "glowiing",
-    "country": "RU",
-    "role": "igl",
-    "team": "CYBERSHOKE",
-    "rating": 1.09,
-    "kd": 1.04,
-    "maps": 913,
-    "price": 48000
-  },
-  {
-    "id": "p208",
-    "name": "aNdu",
-    "country": "EE",
-    "role": "awp",
-    "team": "ALGO",
-    "rating": 1.09,
-    "kd": 1,
-    "maps": 477,
-    "price": 48000
-  },
-  {
-    "id": "p209",
-    "name": "coldzera",
-    "country": "BR",
-    "role": "entry",
-    "team": "RED Canids",
-    "rating": 1.09,
-    "kd": 1.12,
-    "maps": 550,
-    "price": 48000
-  },
-  {
-    "id": "p210",
-    "name": "Jee",
-    "country": "CN",
-    "role": "awp",
-    "team": "TYLOO",
-    "rating": 1.09,
-    "kd": 1.22,
-    "maps": 375,
-    "price": 48000
-  },
-  {
-    "id": "p211",
-    "name": "Terryyy",
-    "country": "HK",
-    "role": "support",
-    "team": "Rooster",
-    "rating": 1.09,
-    "kd": 1.09,
-    "maps": 230,
-    "price": 48000
-  },
-  {
-    "id": "p212",
-    "name": "HUASOPEEK",
-    "country": "CL",
-    "role": "lurker",
-    "team": "9z",
-    "rating": 1.09,
-    "kd": 1.05,
-    "maps": 595,
-    "price": 48000
-  },
-  {
-    "id": "p213",
-    "name": "br0",
-    "country": "DK",
-    "role": "igl",
-    "team": "NRG",
-    "rating": 1.09,
-    "kd": 1.04,
-    "maps": 458,
-    "price": 48000
-  },
-  {
-    "id": "p214",
-    "name": "bnox",
-    "country": "PL",
-    "role": "awp",
-    "team": "Permitta",
-    "rating": 1.09,
-    "kd": 1.04,
-    "maps": 912,
-    "price": 48000
-  },
-  {
-    "id": "p215",
-    "name": "misutaaa",
-    "country": "FR",
-    "role": "entry",
-    "team": "3DMAX9INEGen",
-    "rating": 1.09,
-    "kd": 1.03,
-    "maps": 560,
-    "price": 48000
-  },
-  {
-    "id": "p216",
-    "name": "Jimpphat",
-    "country": "FI",
-    "role": "support",
-    "team": "MOUZ",
-    "rating": 1.09,
-    "kd": 1.12,
-    "maps": 436,
-    "price": 48000
-  },
-  {
-    "id": "p217",
-    "name": "saadzin",
-    "country": "BR",
-    "role": "lurker",
-    "team": "Legacy",
-    "rating": 1.09,
-    "kd": 1.21,
-    "maps": 631,
-    "price": 48000
-  },
-  {
-    "id": "p218",
-    "name": "sl3nd",
-    "country": "HU",
-    "role": "igl",
-    "team": "INFINITEGamer",
-    "rating": 1.09,
-    "kd": 1.18,
-    "maps": 407,
-    "price": 48000
-  },
-  {
-    "id": "p219",
-    "name": "chengking",
-    "country": "CN",
-    "role": "awp",
-    "team": "Rare Atom",
-    "rating": 1.09,
-    "kd": 1.06,
-    "maps": 204,
-    "price": 48000
-  },
-  {
-    "id": "p220",
-    "name": "hazr",
-    "country": "AU",
-    "role": "entry",
-    "team": "SemperFi",
-    "rating": 1.09,
-    "kd": 1.02,
-    "maps": 368,
-    "price": 48000
-  },
-  {
-    "id": "p221",
-    "name": "dem0n",
-    "country": "UA",
-    "role": "support",
-    "team": "FUTNAVI Junior",
-    "rating": 1.09,
-    "kd": 1.07,
-    "maps": 626,
-    "price": 48000
-  },
-  {
-    "id": "p222",
-    "name": "j3kie",
-    "country": "UA",
-    "role": "lurker",
-    "team": "FAVBET",
-    "rating": 1.09,
-    "kd": 1.04,
-    "maps": 668,
-    "price": 48000
-  },
-  {
-    "id": "p223",
-    "name": "REDSTAR",
-    "country": "BG",
-    "role": "igl",
-    "team": "Acend500Into the B",
-    "rating": 1.09,
-    "kd": 1.13,
-    "maps": 601,
-    "price": 48000
-  },
-  {
-    "id": "p224",
-    "name": "tex1y",
-    "country": "RU",
-    "role": "awp",
-    "team": "Nemesis",
-    "rating": 1.09,
-    "kd": 1.06,
-    "maps": 719,
-    "price": 48000
-  },
-  {
-    "id": "p225",
-    "name": "device",
-    "country": "DK",
-    "role": "awp",
-    "team": "100 Thieves",
-    "rating": 1.09,
-    "kd": 1.19,
-    "maps": 467,
-    "price": 48000
-  },
-  {
-    "id": "p226",
-    "name": "qw1nk1",
-    "country": "RU",
-    "role": "entry",
-    "team": "K27",
-    "rating": 1.09,
-    "kd": 1.02,
-    "maps": 369,
-    "price": 48000
-  },
-  {
-    "id": "p227",
-    "name": "hardzao",
-    "country": "BR",
-    "role": "support",
-    "team": "Fake do Biru",
-    "rating": 1.09,
-    "kd": 1.09,
-    "maps": 592,
-    "price": 48000
-  },
-  {
-    "id": "p228",
-    "name": "frontales",
-    "country": "RU",
-    "role": "lurker",
-    "team": "HOTU",
-    "rating": 1.09,
-    "kd": 1.17,
-    "maps": 281,
-    "price": 48000
-  },
-  {
-    "id": "p229",
-    "name": "XELLOW",
-    "country": "RO",
-    "role": "igl",
-    "team": "Nexus",
-    "rating": 1.09,
-    "kd": 1.13,
-    "maps": 770,
-    "price": 48000
-  },
-  {
-    "id": "p230",
-    "name": "ksloks",
-    "country": "BR",
-    "role": "awp",
-    "team": "ODDIK",
-    "rating": 1.09,
-    "kd": 1.1,
-    "maps": 536,
-    "price": 48000
-  },
-  {
-    "id": "p231",
-    "name": "laxiee",
-    "country": "MN",
-    "role": "entry",
-    "team": "Akimbo",
-    "rating": 1.09,
-    "kd": 1.04,
-    "maps": 330,
-    "price": 48000
-  },
-  {
-    "id": "p232",
-    "name": "SHOCK",
-    "country": "CZ",
-    "role": "support",
-    "team": "SINNERS",
-    "rating": 1.09,
-    "kd": 1.05,
-    "maps": 919,
-    "price": 48000
-  },
-  {
-    "id": "p233",
-    "name": "Cxzi",
-    "country": "US",
-    "role": "lurker",
-    "team": "Party Astronauts",
-    "rating": 1.09,
-    "kd": 0.99,
-    "maps": 505,
-    "price": 48000
-  },
-  {
-    "id": "p234",
-    "name": "dpr",
-    "country": "AU",
-    "role": "igl",
-    "team": "Mindfreak",
-    "rating": 1.09,
-    "kd": 1.11,
-    "maps": 285,
-    "price": 48000
-  },
-  {
-    "id": "p235",
-    "name": "atarax1a",
-    "country": "AR",
-    "role": "awp",
-    "team": "Isurus",
-    "rating": 1.09,
-    "kd": 1.1,
-    "maps": 417,
-    "price": 48000
-  },
-  {
-    "id": "p236",
-    "name": "swiz",
-    "country": "PL",
-    "role": "entry",
-    "team": "ASTRALBetclicbrazy",
-    "rating": 1.09,
-    "kd": 1.03,
-    "maps": 344,
-    "price": 48000
-  },
-  {
-    "id": "p237",
-    "name": "aidKiT",
-    "country": "MK",
-    "role": "support",
-    "team": "Partizanmegoshort",
-    "rating": 1.09,
-    "kd": 1.2,
-    "maps": 239,
-    "price": 48000
-  },
-  {
-    "id": "p238",
-    "name": "nut nut",
-    "country": "DK",
-    "role": "lurker",
-    "team": "ECSTATIC",
-    "rating": 1.09,
-    "kd": 1.04,
-    "maps": 668,
-    "price": 48000
-  },
-  {
-    "id": "p239",
-    "name": "mopoz",
-    "country": "ES",
-    "role": "igl",
-    "team": "Gentle Mates",
-    "rating": 1.09,
-    "kd": 0.98,
-    "maps": 690,
-    "price": 48000
-  },
-  {
-    "id": "p240",
-    "name": "relaxxie",
-    "country": "RU",
-    "role": "awp",
-    "team": "K27",
-    "rating": 1.09,
-    "kd": 1.04,
-    "maps": 482,
-    "price": 48000
-  },
-  {
-    "id": "p241",
-    "name": "clax",
-    "country": "RU",
-    "role": "entry",
-    "team": "Sangal9 Pandas",
-    "rating": 1.09,
-    "kd": 1.08,
-    "maps": 845,
-    "price": 48000
-  },
-  {
-    "id": "p242",
-    "name": "Alkaren",
-    "country": "KZ",
-    "role": "support",
-    "team": "Spirit Academy",
-    "rating": 1.09,
-    "kd": 1.15,
-    "maps": 341,
-    "price": 48000
-  },
-  {
-    "id": "p243",
-    "name": "kisserek",
-    "country": "PL",
-    "role": "lurker",
-    "team": "SINNERS",
-    "rating": 1.09,
-    "kd": 1.01,
-    "maps": 597,
-    "price": 48000
-  },
-  {
-    "id": "p244",
-    "name": "drac",
-    "country": "FR",
-    "role": "igl",
-    "team": "GenOne",
-    "rating": 1.09,
-    "kd": 1.03,
-    "maps": 364,
-    "price": 48000
-  },
-  {
-    "id": "p245",
-    "name": "xerolte",
-    "country": "MN",
-    "role": "awp",
-    "team": "The Huns",
-    "rating": 1.09,
-    "kd": 1.05,
-    "maps": 363,
-    "price": 48000
-  },
-  {
-    "id": "p246",
-    "name": "JOTA",
-    "country": "BR",
-    "role": "entry",
-    "team": "Gaimin Gladiators",
-    "rating": 1.09,
-    "kd": 1.06,
-    "maps": 268,
-    "price": 48000
-  },
-  {
-    "id": "p247",
-    "name": "Woro2k",
-    "country": "UA",
-    "role": "support",
-    "team": "Monte",
-    "rating": 1.09,
-    "kd": 1.18,
-    "maps": 608,
-    "price": 48000
-  },
-  {
-    "id": "p248",
-    "name": "m1N1",
-    "country": "LB",
-    "role": "lurker",
-    "team": "JiJieHao",
-    "rating": 1.09,
-    "kd": 1.22,
-    "maps": 347,
-    "price": 48000
-  },
-  {
-    "id": "p249",
-    "name": "ogwizard",
-    "country": "US",
-    "role": "igl",
-    "team": "Marsborne",
-    "rating": 1.09,
-    "kd": 1.18,
-    "maps": 386,
-    "price": 48000
-  },
-  {
-    "id": "p250",
-    "name": "suonko",
-    "country": "PL",
-    "role": "awp",
-    "team": "Oramond",
-    "rating": 1.09,
-    "kd": 0.99,
-    "maps": 398,
-    "price": 48000
+    "price": 124000,
+    "rarity": "common"
   }
 ]

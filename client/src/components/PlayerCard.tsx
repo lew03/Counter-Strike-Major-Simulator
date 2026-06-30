@@ -1,4 +1,4 @@
-import type { Player, DraftSlot } from "../types";
+import type { Player, DraftSlot, Rarity } from "../types";
 import Flag from "./Flag";
 
 const ROLE_ICONS: Record<DraftSlot, string> = {
@@ -8,6 +8,13 @@ const ROLE_ICONS: Record<DraftSlot, string> = {
   lurker: "🕵️",
   igl: "🧠",
   coach: "📋",
+};
+
+const RARITY_LABEL: Record<Rarity, string> = {
+  common: "Common",
+  rare: "Rare",
+  epic: "Epic",
+  legendary: "Legendary",
 };
 
 function initials(name: string) {
@@ -27,8 +34,10 @@ export default function PlayerCard({
 }) {
   // Rating delivered per $100k spent — higher = better value for money.
   const valuePer100k = player.price > 0 ? (player.rating / (player.price / 100000)) : 0;
+  const rarity = player.rarity || "common";
   return (
-    <button className={`player-card ${selected ? "selected" : ""}`} onClick={onClick}>
+    <button className={`player-card rarity-${rarity} ${selected ? "selected" : ""}`} onClick={onClick}>
+      <span className="rarity-badge">{RARITY_LABEL[rarity]}</span>
       <div className="player-avatar">
         <span className="player-initials">{initials(player.name)}</span>
         <span className="player-role-icon" aria-label={player.role} title={player.role}>

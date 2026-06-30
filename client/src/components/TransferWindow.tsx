@@ -138,7 +138,7 @@ export default function TransferWindow({
           const p = pending[slot];
           const changed = p.id !== original[slot].id;
           return (
-            <div key={slot} className={`transfer-slot ${changed ? "changed" : ""}`}>
+            <div key={slot} className={`transfer-slot rarity-${p.rarity || "common"} ${changed ? "changed" : ""}`}>
               <div className="transfer-slot-main">
                 <span className="transfer-slot-role">{ROLE_LABELS[slot]}</span>
                 <span className="transfer-slot-name">
@@ -166,7 +166,11 @@ export default function TransferWindow({
                     <div className="hint">No affordable replacements for this slot.</div>
                   ) : (
                     options.map((o) => (
-                      <button key={o.id} className="transfer-option" onClick={() => choose(slot, o)}>
+                      <button
+                        key={o.id}
+                        className={`transfer-option rarity-${o.rarity || "common"}`}
+                        onClick={() => choose(slot, o)}
+                      >
                         <span className="transfer-option-name">
                           <Flag country={o.country} size={14} /> {o.name}
                         </span>

@@ -3,7 +3,7 @@ const path = require("path");
 
 const SRC = path.join(__dirname, "..", "players.txt");
 const OUT = path.join(__dirname, "data", "players.json");
-const TOP_N = 250;
+const TOP_N = 100;
 
 // --- Country name -> ISO2 (for flag rendering) ---
 const COUNTRIES = {
@@ -131,6 +131,31 @@ for (const p of pool) {
   }
 }
 
+// --- Rarity: how "known" a player is, blending pure stats (rating) with recognition
+//     (being in the curated real-role list — i.e. someone the dataset curator could
+//     actually name) and longevity/exposure (maps played, capped so one grinder doesn't
+//     dominate). Within this top-100-only pool, ratings are already tightly clustered at
+//     the high end, so fame score is what spreads them into a meaningful tier curve rather
+//     than rating alone (which would cluster almost everyone into the same bracket). ---
+const ratings = pool.map((p) => p.rating);
+const minRating = Math.min(...ratings);
+const maxRating = Math.max(...ratings);
+const MAPS_CAP = 500;
+for (const p of pool) {
+  const normRating = maxRating > minRating ? (p.rating - minRating) / (maxRating - minRating) : 1;
+  const normMaps = Math.min(1, (p.maps || 0) / MAPS_CAP);
+  const curatedBonus = CURATED_MAP[p.name.toLowerCase()] ? 1 : 0;
+  p.fameScore = normRating * 0.55 + normMaps * 0.2 + curatedBonus * 0.25;
+}
+const byFame = [...pool].sort((a, b) => b.fameScore - a.fameScore);
+const RARITY_CUTS = { legendary: 8, epic: 17, rare: 30 }; // remainder -> common
+byFame.forEach((p, i) => {
+  if (i < RARITY_CUTS.legendary) p.rarity = "legendary";
+  else if (i < RARITY_CUTS.legendary + RARITY_CUTS.epic) p.rarity = "epic";
+  else if (i < RARITY_CUTS.legendary + RARITY_CUTS.epic + RARITY_CUTS.rare) p.rarity = "rare";
+  else p.rarity = "common";
+});
+
 // --- Pricing: near-linear in rating with a mild convex boost, tuned so mid-tier
 //     stars (1.15-1.25) cost real money instead of collapsing to the floor, while
 //     the elite (1.35+) stay clearly premium. ---
@@ -156,6 +181,7 @@ const out = pool.map((p, i) => ({
   kd: p.kd,
   maps: p.maps,
   price: p.price,
+  rarity: p.rarity,
 }));
 
 fs.writeFileSync(OUT, JSON.stringify(out, null, 2) + "\n");
@@ -166,6 +192,11 @@ console.log(`Rating range kept: ${out[out.length - 1].rating} .. ${out[0].rating
 const roleCounts = {};
 for (const p of out) roleCounts[p.role] = (roleCounts[p.role] || 0) + 1;
 console.log("Role counts:", roleCounts);
+const rarityCounts = {};
+for (const p of out) rarityCounts[p.rarity] = (rarityCounts[p.rarity] || 0) + 1;
+console.log("Rarity counts:", rarityCounts);
+console.log("\nLegendary roster:");
+out.filter((p) => p.rarity === "legendary").forEach((p) => console.log(`  ${p.name} (${p.role}, r=${p.rating}) $${p.price.toLocaleString()}`));
 console.log("\nMin/Max price per role:");
 for (const role of ["entry", "awp", "support", "lurker", "igl"]) {
   const rp = out.filter((p) => p.role === role).map((p) => p.price);

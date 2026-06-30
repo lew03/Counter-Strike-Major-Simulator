@@ -1,6 +1,7 @@
 export type Role = "entry" | "awp" | "support" | "lurker" | "igl";
 export type DraftSlot = Role | "coach";
 export type Difficulty = "easy" | "normal" | "hard";
+export type Rarity = "common" | "rare" | "epic" | "legendary";
 
 export interface Player {
   id: string;
@@ -13,6 +14,7 @@ export interface Player {
   price: number;
   maps?: number;
   era?: string;
+  rarity: Rarity;
 }
 
 export type DraftOptions = Record<Role, Player[]>;

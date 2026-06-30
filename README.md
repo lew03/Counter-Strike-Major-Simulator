@@ -5,9 +5,12 @@ randomized affordable candidates — then run it through a full Valve-style Majo
 (Swiss opening stage + single-elimination playoffs), watching every one of your
 matches play out live, round by round. Iterate until you lift the trophy.
 
-The draftable pool is ~250 real players sourced from public HLTV stats
-(`server/data/players.json`), each priced by their rating so star players cost
-real money. It's a static dataset, not a live scrape.
+The draftable pool is the top 100 real players by rating, sourced from public
+HLTV stats (`server/data/players.json`), each priced by their rating so star
+players cost real money. It's a static dataset, not a live scrape. Every
+player (and coach) has a rarity tier — Common, Rare, Epic, or Legendary —
+blending their stats with how recognizable they are, which weights how often
+they show up as a draft candidate (Legendary names are rare pulls).
 
 ## Requirements
 
@@ -65,8 +68,9 @@ npm test
 - **Difficulty** (Easy/Normal/Hard) sets your salary-cap budget and how strong
   the AI opponents are.
 - **Draft**: for each of 5 roles (Entry, AWP, Support, Lurker, IGL) plus a Coach,
-  you're shown 6 randomized candidates you can afford. Pricier picks leave less
-  for later slots. One $50k re-roll per role is available.
+  you're shown 6 randomized candidates you can afford, drawn with rarity-weighted
+  odds (Common players are common; Legendary names are a rare pull). Pricier
+  picks leave less for later slots. One $50k re-roll per role is available.
 - **Team rating**: a role-weighted average of your players' HLTV ratings, nudged
   by a coach multiplier and per-map proficiency.
 - **The Major**: 16 teams (you + 15 real team-eras) play a Swiss opening stage

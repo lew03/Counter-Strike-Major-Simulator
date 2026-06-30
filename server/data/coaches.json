@@ -8,7 +8,8 @@
     "team": "Astralis",
     "rating": 1.06,
     "kd": 4,
-    "price": 138000
+    "price": 138000,
+    "rarity": "legendary"
   },
   {
     "id": "c02",
@@ -19,7 +20,8 @@
     "team": "Vitality",
     "rating": 1.06,
     "kd": 3,
-    "price": 138000
+    "price": 138000,
+    "rarity": "legendary"
   },
   {
     "id": "c03",
@@ -30,7 +32,8 @@
     "team": "Natus Vincere",
     "rating": 1.05,
     "kd": 2,
-    "price": 105000
+    "price": 105000,
+    "rarity": "epic"
   },
   {
     "id": "c04",
@@ -41,7 +44,8 @@
     "team": "SK Gaming / MIBR",
     "rating": 1.05,
     "kd": 1,
-    "price": 105000
+    "price": 105000,
+    "rarity": "epic"
   },
   {
     "id": "c05",
@@ -52,7 +56,8 @@
     "team": "TYLOO / Liquid",
     "rating": 1.04,
     "kd": 1,
-    "price": 80000
+    "price": 80000,
+    "rarity": "epic"
   },
   {
     "id": "c06",
@@ -63,7 +68,8 @@
     "team": "Liquid / Cloud9",
     "rating": 1.03,
     "kd": 0,
-    "price": 60000
+    "price": 60000,
+    "rarity": "rare"
   },
   {
     "id": "c07",
@@ -74,7 +80,8 @@
     "team": "Evil Geniuses",
     "rating": 1.03,
     "kd": 0,
-    "price": 60000
+    "price": 60000,
+    "rarity": "rare"
   },
   {
     "id": "c08",
@@ -85,7 +92,8 @@
     "team": "North / Heroic",
     "rating": 1.02,
     "kd": 0,
-    "price": 46000
+    "price": 46000,
+    "rarity": "rare"
   },
   {
     "id": "c09",
@@ -96,7 +104,8 @@
     "team": "MOUZ / G2",
     "rating": 1.02,
     "kd": 0,
-    "price": 46000
+    "price": 46000,
+    "rarity": "rare"
   },
   {
     "id": "c10",
@@ -107,7 +116,8 @@
     "team": "Ninjas in Pyjamas",
     "rating": 1.01,
     "kd": 0,
-    "price": 35000
+    "price": 35000,
+    "rarity": "rare"
   },
   {
     "id": "c11",
@@ -118,7 +128,8 @@
     "team": "Vitality",
     "rating": 1.01,
     "kd": 0,
-    "price": 35000
+    "price": 35000,
+    "rarity": "common"
   },
   {
     "id": "c12",
@@ -129,7 +140,8 @@
     "team": "G2 Esports",
     "rating": 1,
     "kd": 0,
-    "price": 26000
+    "price": 26000,
+    "rarity": "common"
   },
   {
     "id": "c13",
@@ -140,7 +152,8 @@
     "team": "Heroic",
     "rating": 1,
     "kd": 0,
-    "price": 26000
+    "price": 26000,
+    "rarity": "common"
   },
   {
     "id": "c14",
@@ -151,7 +164,8 @@
     "team": "ENCE / Heroic",
     "rating": 0.99,
     "kd": 0,
-    "price": 20000
+    "price": 20000,
+    "rarity": "common"
   },
   {
     "id": "c15",
@@ -162,6 +176,7 @@
     "team": "Forze / HellRaisers",
     "rating": 0.99,
     "kd": 0,
-    "price": 20000
+    "price": 20000,
+    "rarity": "common"
   }
 ]
