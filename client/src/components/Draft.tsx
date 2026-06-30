@@ -34,8 +34,10 @@ export default function Draft({
   const [rerolling, setRerolling] = useState(false);
   const [rerolledRoles, setRerolledRoles] = useState<Set<DraftSlot>>(new Set());
   const [error, setError] = useState<string | null>(null);
+  const [retryNonce, setRetryNonce] = useState(0);
 
   useEffect(() => {
+    setError(null);
     fetchConfig(difficulty)
       .then((cfg) => {
         setDraftOrder(cfg.draftOrder);
@@ -44,20 +46,30 @@ export default function Draft({
         setRemainingBudget(cfg.budget);
       })
       .catch((e) => setError(e.message));
-  }, [difficulty]);
+  }, [difficulty, retryNonce]);
 
   useEffect(() => {
     if (!draftOrder) return;
     const role = draftOrder[stepIndex];
     setLoading(true);
+    setError(null);
     fetchRoleOptions(role, remainingBudget, POOL_SIZE)
       .then(setCandidates)
       .catch((e) => setError(e.message))
       .finally(() => setLoading(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [draftOrder, stepIndex]);
+  }, [draftOrder, stepIndex, retryNonce]);
 
-  if (error) return <div className="panel error">{error}</div>;
+  if (error) {
+    return (
+      <div className="panel error retry-error">
+        <span>Couldn't reach the server: {error}</span>
+        <button className="secondary-btn small" onClick={() => setRetryNonce((n) => n + 1)}>
+          Retry
+        </button>
+      </div>
+    );
+  }
   if (!draftOrder || !minPrices || loading) return <div className="panel">Loading draft pool...</div>;
 
   const role = draftOrder[stepIndex];
