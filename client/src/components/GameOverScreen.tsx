@@ -206,16 +206,16 @@ export default function GameOverScreen({
         </div>
       )}
 
-      <div className="game-over-actions">
-        <div className="game-over-actions-row">
+      <div className="actions-stack">
+        <div className="actions-row">
           <button className="run-again-btn" onClick={onRestart}>
             🔁 Run Another Major
           </button>
-          <button className="secondary-btn game-over-btn" onClick={onGoHome}>
+          <button className="secondary-btn actions-btn" onClick={onGoHome}>
             🏠 Home
           </button>
         </div>
-        <button className="danger-btn game-over-btn" onClick={onNewDraft}>
+        <button className="danger-btn actions-btn" onClick={onNewDraft}>
           🗑️ Start New Draft
         </button>
       </div>

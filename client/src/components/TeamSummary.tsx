@@ -22,6 +22,7 @@ export default function TeamSummary({
   simulating,
   hasActiveRun,
   onResume,
+  onNewDraft,
 }: {
   teamName: string;
   players: Player[];
@@ -36,6 +37,7 @@ export default function TeamSummary({
   simulating: boolean;
   hasActiveRun: boolean;
   onResume: () => void;
+  onNewDraft: () => void;
 }) {
   const attempts = history.length;
   return (
@@ -60,18 +62,23 @@ export default function TeamSummary({
           <PlayerCard player={coach} selected />
         </div>
       </div>
-      <div className="team-summary-actions">
-        {hasActiveRun ? (
-          <button className="primary-btn" onClick={onResume}>
-            ▶️ Resume Tournament
+      <div className="actions-stack">
+        <div className="actions-row">
+          {hasActiveRun ? (
+            <button className="run-again-btn" onClick={onResume}>
+              ▶️ Resume Tournament
+            </button>
+          ) : (
+            <button className="run-again-btn" onClick={onSimulate} disabled={simulating}>
+              {simulating ? "Simulating..." : attempts === 0 ? "🔁 Run the Major" : "🔁 Run Another Major"}
+            </button>
+          )}
+          <button className="secondary-btn actions-btn" onClick={onOpenTransfer}>
+            🔁 Transfer Window
           </button>
-        ) : (
-          <button className="primary-btn" onClick={onSimulate} disabled={simulating}>
-            {simulating ? "Simulating..." : attempts === 0 ? "Run the Major" : "Run Another Major"}
-          </button>
-        )}
-        <button className="secondary-btn" onClick={onOpenTransfer}>
-          🔁 Transfer Window
+        </div>
+        <button className="danger-btn actions-btn" onClick={onNewDraft}>
+          🗑️ Start New Draft
         </button>
       </div>
     </div>

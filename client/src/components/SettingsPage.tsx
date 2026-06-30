@@ -1,10 +1,10 @@
 export default function SettingsPage({
   onBack,
-  onStartNewDraft,
+  onWipeData,
   hasTeam,
 }: {
   onBack: () => void;
-  onStartNewDraft: () => void;
+  onWipeData: () => void;
   hasTeam: boolean;
 }) {
   return (
@@ -17,14 +17,14 @@ export default function SettingsPage({
       </div>
 
       <div className="settings-section">
-        <h3>Draft</h3>
+        <h3>Data</h3>
         <p className="hint">
           {hasTeam
-            ? "Starting a new draft clears your current roster and career history for this team. This can't be undone."
-            : "Begin drafting a fresh roster."}
+            ? "Wipes your roster, budget spend, and career history for this team, and returns you to the welcome screen. This can't be undone."
+            : "There's no saved team yet — draft a roster to get started."}
         </p>
-        <button className="danger-btn" onClick={onStartNewDraft}>
-          🗑️ Start New Draft
+        <button className="danger-btn" onClick={onWipeData} disabled={!hasTeam}>
+          🧹 Wipe All Save Data
         </button>
       </div>
 

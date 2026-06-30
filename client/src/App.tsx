@@ -79,7 +79,7 @@ export default function App() {
   };
 
   const handleRestart = () => {
-    if (state.team && !window.confirm("Start a new draft? This clears your current roster and career history.")) {
+    if (state.team && !window.confirm("This will permanently clear your roster and career history. Continue?")) {
       return;
     }
     localStorage.removeItem(SAVED_TEAM_KEY);
@@ -154,7 +154,7 @@ export default function App() {
           {showSettings ? (
             <SettingsPage
               onBack={() => dispatch({ type: "SET_SHOW_SETTINGS", open: false })}
-              onStartNewDraft={handleRestart}
+              onWipeData={handleRestart}
               hasTeam={!!team}
             />
           ) : (
@@ -187,6 +187,7 @@ export default function App() {
                   simulating={false}
                   hasActiveRun={hasActiveRun}
                   onResume={handleResumeTournament}
+                  onNewDraft={handleRestart}
                 />
               )}
 

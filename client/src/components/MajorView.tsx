@@ -82,13 +82,29 @@ export default function MajorView({
   }, [revealedCount, run.finished]);
 
   const swissRounds = revealedRounds.filter((r) => r.type === "swiss_round");
-  const playoffRounds = revealedRounds.filter((r) => r.type === "playoff_round");
+  const fullyRevealedAndFinished = run.finished && revealedCount === roundLog.length && roundLog.length > 0;
+  // While the major is still live, only show playoff rounds the user actually watched
+  // (roundLog), to avoid spoiling rounds being fast-forwarded in the background. But once
+  // the run is finished, switch to the backend's full run.playoff.rounds — the authoritative,
+  // complete bracket. This matters for an early playoff exit: if eliminated in the
+  // Quarterfinal, the Semifinal and Final still get simulated server-side but the user never
+  // personally "watches" them, so roundLog alone would only ever show the QF box. Swiss
+  // eliminations don't have this gap because the standings table is always a full snapshot;
+  // this keeps the playoff bracket equally complete on elimination, for consistency.
+  const playoffRounds =
+    fullyRevealedAndFinished && run.playoff
+      ? run.playoff.rounds.map((r) => ({
+          type: "playoff_round" as const,
+          roundName: r.name,
+          matches: r.matches,
+          userEliminated: false,
+        }))
+      : revealedRounds.filter((r) => r.type === "playoff_round");
   // Only ever show standings as of the last fully-revealed round — run.standings reflects
   // the backend's already-resolved current round, which would spoil a match still playing live.
   const displayStandings = swissRounds.length > 0 ? swissRounds[swissRounds.length - 1].standings || [] : [];
 
   const canAdvance = !activeRound && !run.finished && !viewingRound;
-  const fullyRevealedAndFinished = run.finished && revealedCount === roundLog.length && roundLog.length > 0;
   const isFirstRound = canAdvance && roundLog.length === 0;
   const lastMatch = fullyRevealedAndFinished
     ? roundLog[roundLog.length - 1].matches.find((m) => m.isUserMatch) || null
