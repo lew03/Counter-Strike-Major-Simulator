@@ -231,6 +231,74 @@ app.get("/api/team/:teamId", (req, res) => {
   res.json(teamView(team, req.params.teamId));
 });
 
+// Candidate replacements for one slot during a transfer window: any same-role player
+// (or coach) priced within `maxPrice` and not already on the roster. Sorted best-first
+// so the window reads as "who can I upgrade to with the money I've freed up".
+app.get("/api/transfer-options", (req, res) => {
+  const { role, maxPrice, exclude } = req.query;
+  if (!DRAFT_ORDER.includes(role)) {
+    return res.status(400).json({ error: "Invalid role: " + role });
+  }
+  const cap = Number(maxPrice);
+  if (!Number.isFinite(cap)) return res.status(400).json({ error: "maxPrice must be a number" });
+  const excludeIds = new Set(String(exclude || "").split(",").filter(Boolean));
+  const options = poolForRole(role)
+    .filter((p) => p.price <= cap && !excludeIds.has(p.id))
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, 24);
+  res.json({ options });
+});
+
+// Apply a transfer window: the client submits the full intended roster + coach. The
+// server validates roles, enforces a max of 2 changes vs the saved roster, and keeps
+// total spend within the team's budget. Idempotent — re-submitting the same roster is a no-op.
+const MAX_TRANSFERS = 2;
+app.post("/api/team/:teamId/transfer", (req, res) => {
+  const team = teams.get(req.params.teamId);
+  if (!team) return res.status(404).json({ error: "Team not found" });
+  const { picks, coachId } = req.body;
+  if (!picks || ROLES.some((r) => !picks[r]) || !coachId) {
+    return res.status(400).json({ error: "Must provide a pick for every role plus a coach" });
+  }
+
+  let roster, coach;
+  try {
+    roster = ROLES.map((role) => {
+      const player = players.find((p) => p.id === picks[role] && p.role === role);
+      if (!player) throw new Error(`Invalid pick for role ${role}`);
+      return player;
+    });
+    coach = coaches.find((c) => c.id === coachId);
+    if (!coach) throw new Error("Invalid coach pick");
+  } catch (e) {
+    return res.status(400).json({ error: e.message });
+  }
+
+  let changes = 0;
+  ROLES.forEach((role) => {
+    const prev = team.players.find((p) => p.role === role);
+    if (!prev || prev.id !== picks[role]) changes++;
+  });
+  if (coach.id !== team.coach.id) changes++;
+  if (changes > MAX_TRANSFERS) {
+    return res.status(400).json({ error: `At most ${MAX_TRANSFERS} changes per transfer window (got ${changes})` });
+  }
+
+  const totalSpend = roster.reduce((sum, p) => sum + p.price, 0) + coach.price;
+  if (totalSpend > team.budget) {
+    return res.status(400).json({ error: `Roster costs $${totalSpend.toLocaleString()}, over the $${team.budget.toLocaleString()} budget` });
+  }
+
+  team.players = roster;
+  team.coach = coach;
+  team.totalSpend = totalSpend;
+  team.overall = applyCoach(teamOverallRating(roster), coach);
+  team.currentRun = null; // a roster change invalidates any in-progress major
+  saveTeams();
+
+  res.json(teamView(team, req.params.teamId));
+});
+
 app.post("/api/major/:teamId/start", (req, res) => {
   const team = teams.get(req.params.teamId);
   if (!team) return res.status(404).json({ error: "Team not found" });

@@ -54,6 +54,36 @@ export async function createTeam(
   return res.json();
 }
 
+export async function fetchTransferOptions(
+  role: DraftSlot,
+  maxPrice: number,
+  excludeIds: string[]
+): Promise<Player[]> {
+  const res = await fetch(
+    `${BASE}/transfer-options?role=${role}&maxPrice=${Math.floor(maxPrice)}&exclude=${excludeIds.join(",")}`
+  );
+  if (!res.ok) throw new Error("Failed to fetch transfer options");
+  const data = await res.json();
+  return data.options;
+}
+
+export async function submitTransfer(
+  teamId: string,
+  picks: Record<Role, string>,
+  coachId: string
+): Promise<TeamResponse> {
+  const res = await fetch(`${BASE}/team/${teamId}/transfer`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ picks, coachId }),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ error: "Failed to apply transfers" }));
+    throw new Error(err.error || "Failed to apply transfers");
+  }
+  return res.json();
+}
+
 export async function startMajor(teamId: string): Promise<StartMajorResponse> {
   const res = await fetch(`${BASE}/major/${teamId}/start`, { method: "POST" });
   if (!res.ok) throw new Error("Failed to start major");

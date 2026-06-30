@@ -18,6 +18,7 @@ export default function TeamSummary({
   difficulty,
   history,
   onSimulate,
+  onOpenTransfer,
   simulating,
 }: {
   teamName: string;
@@ -29,6 +30,7 @@ export default function TeamSummary({
   difficulty: Difficulty;
   history: HistoryEntry[];
   onSimulate: () => void;
+  onOpenTransfer: () => void;
   simulating: boolean;
 }) {
   const attempts = history.length;
@@ -54,9 +56,14 @@ export default function TeamSummary({
           <PlayerCard player={coach} selected />
         </div>
       </div>
-      <button className="primary-btn" onClick={onSimulate} disabled={simulating}>
-        {simulating ? "Simulating..." : attempts === 0 ? "Run the Major" : "Run Another Major"}
-      </button>
+      <div className="team-summary-actions">
+        <button className="primary-btn" onClick={onSimulate} disabled={simulating}>
+          {simulating ? "Simulating..." : attempts === 0 ? "Run the Major" : "Run Another Major"}
+        </button>
+        <button className="secondary-btn" onClick={onOpenTransfer}>
+          🔁 Transfer Window
+        </button>
+      </div>
     </div>
   );
 }

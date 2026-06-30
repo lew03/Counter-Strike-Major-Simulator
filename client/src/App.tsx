@@ -1,10 +1,19 @@
 import { useEffect, useState } from "react";
-import type { Player, Role, MajorRun, RoundResult, HistoryEntry, Difficulty } from "./types";
+import type {
+  Player,
+  Role,
+  MajorRun,
+  RoundResult,
+  HistoryEntry,
+  Difficulty,
+  TeamResponse,
+} from "./types";
 import { createTeam, startMajor, advanceMajor as advanceMajorApi, fetchTeam } from "./api";
 import Welcome from "./components/Welcome";
 import TeamName from "./components/TeamName";
 import Draft from "./components/Draft";
 import TeamSummary from "./components/TeamSummary";
+import TransferWindow from "./components/TransferWindow";
 import MajorView from "./components/MajorView";
 import { isMuted, setMuted } from "./sound";
 
@@ -31,6 +40,20 @@ export default function App() {
   const [error, setError] = useState<string | null>(null);
   const [muted, setMutedState] = useState(isMuted());
   const [runAttempt, setRunAttempt] = useState(0);
+  const [showTransfer, setShowTransfer] = useState(false);
+
+  // Mirror a team payload (from draft, resume or a transfer) into local state.
+  const applyTeamResponse = (res: TeamResponse) => {
+    setTeamId(res.teamId);
+    setTeamName(res.name);
+    setPlayers(res.players);
+    setCoach(res.coach);
+    setOverall(res.overall);
+    setTotalSpend(res.totalSpend);
+    setBudget(res.budget);
+    setDifficulty(res.difficulty);
+    setHistory(res.history);
+  };
 
   // On load, resume a previously-drafted team if one is saved and still on the server.
   useEffect(() => {
@@ -41,15 +64,7 @@ export default function App() {
     }
     fetchTeam(savedId)
       .then((res) => {
-        setTeamId(res.teamId);
-        setTeamName(res.name);
-        setPlayers(res.players);
-        setCoach(res.coach);
-        setOverall(res.overall);
-        setTotalSpend(res.totalSpend);
-        setBudget(res.budget);
-        setDifficulty(res.difficulty);
-        setHistory(res.history);
+        applyTeamResponse(res);
         setStage("team");
       })
       .catch(() => localStorage.removeItem(SAVED_TEAM_KEY))
@@ -70,15 +85,7 @@ export default function App() {
     setError(null);
     try {
       const res = await createTeam(picks, coachId, pendingTeamName, difficulty);
-      setTeamId(res.teamId);
-      setTeamName(res.name);
-      setPlayers(res.players);
-      setCoach(res.coach);
-      setOverall(res.overall);
-      setTotalSpend(res.totalSpend);
-      setBudget(res.budget);
-      setDifficulty(res.difficulty);
-      setHistory(res.history);
+      applyTeamResponse(res);
       localStorage.setItem(SAVED_TEAM_KEY, res.teamId);
       setStage("team");
     } catch (e: any) {
@@ -86,9 +93,15 @@ export default function App() {
     }
   };
 
+  const handleTransferComplete = (updated: TeamResponse) => {
+    applyTeamResponse(updated);
+    setShowTransfer(false);
+  };
+
   const handleStartMajor = async () => {
     if (!teamId) return;
     setError(null);
+    setShowTransfer(false);
     try {
       const res = await startMajor(teamId);
       setRun(res.run);
@@ -128,6 +141,7 @@ export default function App() {
 
   const handleRestart = () => {
     localStorage.removeItem(SAVED_TEAM_KEY);
+    setShowTransfer(false);
     setStage("welcome");
     setTeamId(null);
     setTeamName("Your Team");
@@ -182,7 +196,18 @@ export default function App() {
 
           {stage === "draft" && <Draft difficulty={difficulty} onComplete={handleDraftComplete} />}
 
-          {stage === "team" && coach && (
+          {stage === "team" && coach && teamId && showTransfer && (
+            <TransferWindow
+              teamId={teamId}
+              players={players}
+              coach={coach}
+              budget={budget}
+              onComplete={handleTransferComplete}
+              onClose={() => setShowTransfer(false)}
+            />
+          )}
+
+          {stage === "team" && coach && !showTransfer && (
             <TeamSummary
               teamName={teamName}
               players={players}
@@ -193,6 +218,7 @@ export default function App() {
               difficulty={difficulty}
               history={history}
               onSimulate={handleStartMajor}
+              onOpenTransfer={() => setShowTransfer(true)}
               simulating={false}
             />
           )}
