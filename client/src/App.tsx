@@ -1,6 +1,6 @@
 import { useEffect, useReducer, useState } from "react";
 import type { Difficulty, Role, TeamResponse } from "./types";
-import { createTeam, startMajor, advanceMajor as advanceMajorApi, fetchTeam } from "./api";
+import { createTeam, rebuildTeam, startMajor, advanceMajor as advanceMajorApi, fetchTeam } from "./api";
 import { appReducer, initialState } from "./appState";
 import Welcome from "./components/Welcome";
 import TeamName from "./components/TeamName";
@@ -50,7 +50,9 @@ export default function App() {
   const handleDraftComplete = async (picks: Record<Role, string>, coachId: string) => {
     dispatch({ type: "SET_ERROR", error: null });
     try {
-      const res = await createTeam(picks, coachId, state.pendingTeamName, state.difficulty);
+      const res = state.rebuilding && state.team
+        ? await rebuildTeam(state.team.teamId, picks, coachId)
+        : await createTeam(picks, coachId, state.pendingTeamName, state.difficulty);
       localStorage.setItem(SAVED_TEAM_KEY, res.teamId);
       dispatch({ type: "TEAM_READY", team: res, persist: true });
     } catch (e: any) {
@@ -78,7 +80,10 @@ export default function App() {
     dispatch({ type: "ADVANCE_REQUEST" });
     try {
       const res = await advanceMajorApi(state.team.teamId);
-      dispatch({ type: "ADVANCE_RESULT", run: res.run, roundResult: res.roundResult });
+      // A finished major changes budget (prize money), loss streak, and difficulty escalation
+      // server-side — re-fetch the team so the client doesn't have to re-derive those formulas.
+      const updatedTeam = res.run.finished ? await fetchTeam(state.team.teamId) : undefined;
+      dispatch({ type: "ADVANCE_RESULT", run: res.run, roundResult: res.roundResult, prizeMoney: res.prizeMoney, updatedTeam });
     } catch (e: any) {
       dispatch({ type: "SET_ERROR", error: e.message });
       dispatch({ type: "ADVANCE_FAILED" });
@@ -101,6 +106,10 @@ export default function App() {
     dispatch({ type: "RESUME_TOURNAMENT" });
   };
 
+  const handleStartRebuild = () => {
+    dispatch({ type: "START_REBUILD" });
+  };
+
   const toggleMute = () => {
     const next = !muted;
     setMuted(next);
@@ -115,7 +124,20 @@ export default function App() {
     );
   }
 
-  const { stage, team, difficulty, run, roundLog, error, advancing, runAttempt, showTransfer, showSettings } = state;
+  const {
+    stage,
+    team,
+    difficulty,
+    run,
+    roundLog,
+    error,
+    advancing,
+    runAttempt,
+    showTransfer,
+    showSettings,
+    rebuilding,
+    lastPrizeMoney,
+  } = state;
   const hasActiveRun = !!run && !run.finished;
 
   return (
@@ -191,7 +213,14 @@ export default function App() {
             />
           ) : (
             <>
-              {stage === "draft" && <Draft difficulty={difficulty} onComplete={handleDraftComplete} />}
+              {stage === "draft" && (
+                <Draft
+                  difficulty={difficulty}
+                  onComplete={handleDraftComplete}
+                  overrideBudget={rebuilding ? team?.budget : undefined}
+                  rebuilding={rebuilding}
+                />
+              )}
 
               {stage === "team" && team && showTransfer && (
                 <TransferWindow
@@ -216,6 +245,8 @@ export default function App() {
                   difficulty={team.difficulty}
                   difficultyLevel={team.difficultyLevel}
                   escalationBonus={team.escalationBonus}
+                  lossStreak={team.lossStreak}
+                  moraleMultiplier={team.moraleMultiplier}
                   history={team.history}
                   onSimulate={handleStartMajor}
                   onOpenTransfer={() => dispatch({ type: "SET_SHOW_TRANSFER", open: true })}
@@ -223,6 +254,7 @@ export default function App() {
                   hasActiveRun={hasActiveRun}
                   onResume={handleResumeTournament}
                   onNewDraft={handleRestart}
+                  onRebuild={handleStartRebuild}
                 />
               )}
 
@@ -236,6 +268,8 @@ export default function App() {
                   onRestart={handleStartMajor}
                   onNewDraft={handleRestart}
                   onGoHome={handleGoHome}
+                  onRebuild={handleStartRebuild}
+                  prizeMoney={lastPrizeMoney}
                   advancing={advancing}
                 />
               )}

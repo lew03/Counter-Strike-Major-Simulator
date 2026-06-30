@@ -515,6 +515,38 @@ function advanceMajor(run) {
   return null;
 }
 
+// --- Career progression: prize money + a consecutive-loss morale penalty ---
+//
+// Prize money grows your budget based on how far you actually got, so a Transfer Window can
+// eventually afford a genuine upgrade instead of only lateral swaps. Reaching the Swiss stage
+// only (never playoffs) earns nothing — money is tied to real results, not just attempts.
+const PRIZE_MONEY = {
+  champion: 150000,
+  "Grand Final": 90000,
+  Semifinal: 50000,
+  Quarterfinal: 25000,
+};
+
+// `run` is a finished major run (run.finished === true).
+function prizeForResult(run) {
+  if (run.userWon) return PRIZE_MONEY.champion;
+  return PRIZE_MONEY[run.userEliminatedAt] || 0;
+}
+
+// Losing streak penalty: running majors costs nothing, so without a counterweight a player
+// could just spam "Run Another Major" until they get a lucky deep run, farming prize money for
+// free. After 2 losses in a row (any elimination, including a deep playoff run), each further
+// consecutive loss shaves a bit off the team's effective rating for the NEXT major — small at
+// first, capped so it's a real "you need to fix something" nudge rather than a death spiral.
+// A win (or making a transfer) resets the streak and the penalty along with it.
+const MORALE_PENALTY_FREE_LOSSES = 2; // first 2 consecutive losses are penalty-free
+const MORALE_PENALTY_STEP = 0.01;
+const MORALE_PENALTY_CAP = 0.06;
+function moraleMultiplier(lossStreak) {
+  const extra = Math.max(0, (lossStreak || 0) - MORALE_PENALTY_FREE_LOSSES);
+  return 1 - Math.min(extra * MORALE_PENALTY_STEP, MORALE_PENALTY_CAP);
+}
+
 module.exports = {
   ROLES,
   ROLE_WEIGHTS,
@@ -527,4 +559,6 @@ module.exports = {
   buildMajorRun,
   advanceMajor,
   standingsView,
+  prizeForResult,
+  moraleMultiplier,
 };

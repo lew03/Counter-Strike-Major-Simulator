@@ -15,6 +15,10 @@ export interface AppState {
   runAttempt: number;
   showTransfer: boolean;
   showSettings: boolean;
+  // True while drafting as a Rebuild (full re-draft of an existing team) rather than a brand
+  // new team — changes which API handleDraftComplete calls and skips the team-naming screen.
+  rebuilding: boolean;
+  lastPrizeMoney: number;
 }
 
 export const initialState: AppState = {
@@ -30,6 +34,8 @@ export const initialState: AppState = {
   runAttempt: 0,
   showTransfer: false,
   showSettings: false,
+  rebuilding: false,
+  lastPrizeMoney: 0,
 };
 
 // Pulls the resumable run + round log (if any) off a freshly-fetched team payload.
@@ -46,11 +52,12 @@ export type AppAction =
   | { type: "START_MAJOR_REQUEST" }
   | { type: "MAJOR_STARTED"; run: MajorRun }
   | { type: "ADVANCE_REQUEST" }
-  | { type: "ADVANCE_RESULT"; run: MajorRun; roundResult: RoundResult | null }
+  | { type: "ADVANCE_RESULT"; run: MajorRun; roundResult: RoundResult | null; prizeMoney: number; updatedTeam?: TeamResponse }
   | { type: "ADVANCE_FAILED" }
   | { type: "RESTART" }
   | { type: "GO_HOME" }
   | { type: "RESUME_TOURNAMENT" }
+  | { type: "START_REBUILD" }
   | { type: "SET_SHOW_TRANSFER"; open: boolean }
   | { type: "SET_SHOW_SETTINGS"; open: boolean };
 
@@ -81,6 +88,7 @@ export function appReducer(state: AppState, action: AppAction): AppState {
         difficulty: action.team.difficulty,
         showTransfer: false,
         showSettings: false,
+        rebuilding: false,
         error: null,
         stage: "team",
         ...activeRunFields(action.team),
@@ -98,6 +106,7 @@ export function appReducer(state: AppState, action: AppAction): AppState {
         run: action.run,
         roundLog: [],
         runAttempt: state.runAttempt + 1,
+        lastPrizeMoney: 0,
         stage: "major",
       };
 
@@ -106,24 +115,18 @@ export function appReducer(state: AppState, action: AppAction): AppState {
 
     case "ADVANCE_RESULT": {
       const roundLog = action.roundResult ? [...state.roundLog, action.roundResult] : state.roundLog;
-      const history =
-        action.run.finished && state.team
-          ? [
-              ...state.team.history,
-              {
-                timestamp: Date.now(),
-                userWon: action.run.userWon,
-                eliminatedAt: action.run.userEliminatedAt,
-                champion: action.run.champion || "",
-              },
-            ]
-          : state.team?.history ?? [];
+      // On a finished major, prefer a fresh team fetch (updatedTeam) over hand-patching —
+      // budget (prize money), loss streak, difficulty escalation, and morale all change
+      // server-side on completion, and re-deriving every one of those formulas client-side
+      // would just be a second place for them to drift out of sync.
+      const team = action.updatedTeam ?? state.team;
       return {
         ...state,
         advancing: false,
         run: action.run,
         roundLog,
-        team: state.team ? { ...state.team, history } : state.team,
+        team,
+        lastPrizeMoney: action.prizeMoney || 0,
       };
     }
 
@@ -138,6 +141,11 @@ export function appReducer(state: AppState, action: AppAction): AppState {
 
     case "RESUME_TOURNAMENT":
       return state.run && !state.run.finished ? { ...state, stage: "major", showSettings: false } : state;
+
+    case "START_REBUILD":
+      return state.team
+        ? { ...state, stage: "draft", rebuilding: true, showTransfer: false, showSettings: false, error: null }
+        : state;
 
     case "SET_SHOW_TRANSFER":
       return { ...state, showTransfer: action.open };

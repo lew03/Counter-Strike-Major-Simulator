@@ -125,6 +125,8 @@ export default function GameOverScreen({
   onRestart,
   onNewDraft,
   onGoHome,
+  onRebuild,
+  prizeMoney,
 }: {
   run: MajorRun;
   history: HistoryEntry[];
@@ -132,11 +134,14 @@ export default function GameOverScreen({
   onRestart: () => void;
   onNewDraft: () => void;
   onGoHome: () => void;
+  onRebuild: () => void;
+  prizeMoney: number;
 }) {
   const wins = history.filter((h) => h.userWon).length;
   const won = run.userWon;
   const tips = !won && lastMatch ? buildTips(lastMatch) : [];
   const userSide = lastMatch?.teamAIsUser ? "A" : "B";
+  const prizeReason = won ? "winning the Major" : `reaching the ${run.userEliminatedAt}`;
 
   return (
     <div className={`game-over-screen ${won ? "win" : "loss"} pop-in`}>
@@ -150,6 +155,12 @@ export default function GameOverScreen({
       <div className="game-over-record">
         Majors won: <strong>{wins}</strong> / {history.length} attempts
       </div>
+
+      {prizeMoney > 0 && (
+        <div className="prize-banner">
+          💰 Earned ${prizeMoney.toLocaleString()} for {prizeReason} — added to your budget.
+        </div>
+      )}
 
       {tips.length > 0 && (
         <div className="game-over-tips">
@@ -215,9 +226,14 @@ export default function GameOverScreen({
             🏠 Home
           </button>
         </div>
-        <button className="danger-btn actions-btn" onClick={onNewDraft}>
-          🗑️ Start New Draft
-        </button>
+        <div className="actions-row">
+          <button className="secondary-btn actions-btn" onClick={onRebuild}>
+            🛠️ Rebuild Roster
+          </button>
+          <button className="danger-btn actions-btn" onClick={onNewDraft}>
+            🗑️ Start New Draft
+          </button>
+        </div>
       </div>
     </div>
   );

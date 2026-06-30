@@ -9,6 +9,8 @@ const {
   buildMajorRun,
   advanceMajor,
   standingsView,
+  prizeForResult,
+  moraleMultiplier,
 } = require("../simulation");
 
 const players = require("../data/players.json");
@@ -189,4 +191,23 @@ test("chemistry never triggers a same-team bonus for AI eras (no team field on e
     const c = chemistryBreakdown(era.players);
     assert.strictEqual(c.sameTeamPairs, 0, `${era.name} '${era.year}' should have 0 same-team pairs (no team field)`);
   }
+});
+
+test("prizeForResult pays out by how far the user got, nothing for a Swiss-only exit", () => {
+  assert.strictEqual(prizeForResult({ userWon: true }), 150000);
+  assert.strictEqual(prizeForResult({ userWon: false, userEliminatedAt: "Grand Final" }), 90000);
+  assert.strictEqual(prizeForResult({ userWon: false, userEliminatedAt: "Semifinal" }), 50000);
+  assert.strictEqual(prizeForResult({ userWon: false, userEliminatedAt: "Quarterfinal" }), 25000);
+  assert.strictEqual(prizeForResult({ userWon: false, userEliminatedAt: "Swiss Stage" }), 0);
+});
+
+test("moraleMultiplier: first 2 consecutive losses are free, then it steps down and caps", () => {
+  assert.strictEqual(moraleMultiplier(0), 1);
+  assert.strictEqual(moraleMultiplier(1), 1);
+  assert.strictEqual(moraleMultiplier(2), 1);
+  assert.ok(Math.abs(moraleMultiplier(3) - 0.99) < 1e-9);
+  assert.ok(Math.abs(moraleMultiplier(4) - 0.98) < 1e-9);
+  // Cap at -6%, however long the streak gets.
+  assert.ok(Math.abs(moraleMultiplier(20) - 0.94) < 1e-9);
+  assert.ok(moraleMultiplier(100) >= moraleMultiplier(3) - 0.06 - 1e-9);
 });

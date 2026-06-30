@@ -20,6 +20,8 @@ export default function TeamSummary({
   difficulty,
   difficultyLevel,
   escalationBonus,
+  lossStreak,
+  moraleMultiplier,
   history,
   onSimulate,
   onOpenTransfer,
@@ -27,6 +29,7 @@ export default function TeamSummary({
   hasActiveRun,
   onResume,
   onNewDraft,
+  onRebuild,
 }: {
   teamName: string;
   players: Player[];
@@ -38,6 +41,8 @@ export default function TeamSummary({
   difficulty: Difficulty;
   difficultyLevel: number;
   escalationBonus: number;
+  lossStreak: number;
+  moraleMultiplier: number;
   history: HistoryEntry[];
   onSimulate: () => void;
   onOpenTransfer: () => void;
@@ -45,8 +50,10 @@ export default function TeamSummary({
   hasActiveRun: boolean;
   onResume: () => void;
   onNewDraft: () => void;
+  onRebuild: () => void;
 }) {
   const attempts = history.length;
+  const moralePenaltyPct = Math.round((1 - moraleMultiplier) * 100);
   return (
     <div className="panel fade-in">
       <h2>{teamName}</h2>
@@ -64,6 +71,12 @@ export default function TeamSummary({
         Budget spent: <strong>${totalSpend.toLocaleString()}</strong> / ${budget.toLocaleString()} (
         ${(budget - totalSpend).toLocaleString()} unspent)
       </p>
+      {moralePenaltyPct > 0 && (
+        <p className="hint loss-streak-note">
+          ⚠️ {lossStreak}-major losing streak — team confidence is down {moralePenaltyPct}%. A transfer or
+          rebuild resets it.
+        </p>
+      )}
 
       <CareerStats history={history} />
       <div className="card-grid">
@@ -92,9 +105,14 @@ export default function TeamSummary({
             🔁 Transfer Window
           </button>
         </div>
-        <button className="danger-btn actions-btn" onClick={onNewDraft}>
-          🗑️ Start New Draft
-        </button>
+        <div className="actions-row">
+          <button className="secondary-btn actions-btn" onClick={onRebuild}>
+            🛠️ Rebuild Roster
+          </button>
+          <button className="danger-btn actions-btn" onClick={onNewDraft}>
+            🗑️ Start New Draft
+          </button>
+        </div>
       </div>
     </div>
   );

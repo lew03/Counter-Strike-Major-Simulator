@@ -14,6 +14,8 @@ const {
   applyCoach,
   buildMajorRun,
   advanceMajor,
+  prizeForResult,
+  moraleMultiplier,
 } = require("./simulation");
 
 const app = express();
@@ -200,6 +202,8 @@ function teamView(team, teamId) {
     difficulty: team.difficulty,
     difficultyLevel: team.difficultyLevel || 0,
     escalationBonus: escalatedAiBoost(0, team.difficultyLevel), // the +X% on top of the base aiBoost
+    lossStreak: team.lossStreak || 0,
+    moraleMultiplier: moraleMultiplier(team.lossStreak),
     history: team.history,
     activeRun,
   };
@@ -271,6 +275,7 @@ app.post("/api/team", (req, res) => {
     budget,
     difficulty: diffKey,
     difficultyLevel: 0,
+    lossStreak: 0,
     bannedMap: validBannedMap,
     history: [],
     currentRun: null,
@@ -349,6 +354,51 @@ app.post("/api/team/:teamId/transfer", (req, res) => {
   team.totalSpend = totalSpend;
   team.overall = applyCoach(teamOverallRating(roster), coach);
   team.currentRun = null; // a roster change invalidates any in-progress major
+  // A transfer is exactly the "re-evaluation" a losing streak is meant to provoke — fresh
+  // faces wipe the morale penalty rather than requiring a win to clear it.
+  team.lossStreak = 0;
+  saveTeams();
+
+  res.json(teamView(team, req.params.teamId));
+});
+
+// Rebuild: a full re-draft for an EXISTING team — every slot can change (unlike the 2-change
+// Transfer Window), spent against the team's current (prize-money-grown) budget. Unlike
+// "Start New Draft", this keeps the team's identity: name, career history, trophy cabinet, and
+// difficulty escalation all carry over. Meant as the actual answer to "I lost and want to
+// retool" without nuking everything you've built.
+app.post("/api/team/:teamId/rebuild", (req, res) => {
+  const team = teams.get(req.params.teamId);
+  if (!team) return res.status(404).json({ error: "Team not found" });
+  const { picks, coachId } = req.body;
+  if (!picks || ROLES.some((r) => !picks[r]) || !coachId) {
+    return res.status(400).json({ error: "Must provide a pick for every role plus a coach" });
+  }
+
+  let roster, coach;
+  try {
+    roster = ROLES.map((role) => {
+      const player = players.find((p) => p.id === picks[role] && p.role === role);
+      if (!player) throw new Error(`Invalid pick for role ${role}`);
+      return player;
+    });
+    coach = coaches.find((c) => c.id === coachId);
+    if (!coach) throw new Error("Invalid coach pick");
+  } catch (e) {
+    return res.status(400).json({ error: e.message });
+  }
+
+  const totalSpend = roster.reduce((sum, p) => sum + p.price, 0) + coach.price;
+  if (totalSpend > team.budget) {
+    return res.status(400).json({ error: `Roster costs $${totalSpend.toLocaleString()}, over the $${team.budget.toLocaleString()} budget` });
+  }
+
+  team.players = roster;
+  team.coach = coach;
+  team.totalSpend = totalSpend;
+  team.overall = applyCoach(teamOverallRating(roster), coach);
+  team.currentRun = null;
+  team.lossStreak = 0; // a full rebuild is the ultimate "re-evaluation"
   saveTeams();
 
   res.json(teamView(team, req.params.teamId));
@@ -358,13 +408,19 @@ app.post("/api/major/:teamId/start", (req, res) => {
   const team = teams.get(req.params.teamId);
   if (!team) return res.status(404).json({ error: "Team not found" });
 
+  // A live losing streak (3+ in a row) shaves a little off effective ratings for this major —
+  // scaled into the player ratings here (same approach as AI's difficulty boost) rather than
+  // touching the pure rating functions in simulation.js.
+  const morale = moraleMultiplier(team.lossStreak);
+  const moraledPlayers = morale < 1 ? team.players.map((p) => ({ ...p, rating: p.rating * morale })) : team.players;
+
   const userTeam = {
     id: req.params.teamId,
     name: team.name,
     isUser: true,
-    players: team.players,
+    players: moraledPlayers,
     coach: team.coach,
-    overall: team.overall,
+    overall: team.overall * morale,
   };
 
   const { aiBoost } = difficultyConfig(team.difficulty);
@@ -389,6 +445,7 @@ app.post("/api/major/:teamId/advance", (req, res) => {
     (run.completedRounds = run.completedRounds || []).push(roundResult);
   }
 
+  let prizeMoney = 0;
   if (run.finished) {
     team.history.push({
       timestamp: Date.now(),
@@ -396,15 +453,26 @@ app.post("/api/major/:teamId/advance", (req, res) => {
       eliminatedAt: run.userEliminatedAt,
       champion: run.champion,
     });
+
+    // Prize money: grows the budget based on actual results, so the Transfer Window (and
+    // Rebuild) can eventually afford a real upgrade instead of only lateral swaps.
+    prizeMoney = prizeForResult(run);
+    if (prizeMoney > 0) team.budget += prizeMoney;
+
     // Difficulty escalation: each major actually won nudges AI strength up for next time,
     // so a roster that's solved the current tier has to keep adapting rather than coasting.
+    // Losing streak: any non-win extends it (and dents the next major's effective rating);
+    // a win clears it completely.
     if (run.userWon) {
       team.difficultyLevel = (team.difficultyLevel || 0) + 1;
+      team.lossStreak = 0;
+    } else {
+      team.lossStreak = (team.lossStreak || 0) + 1;
     }
     saveTeams();
   }
 
-  res.json({ roundResult, run: runView(run), attempts: team.history.length });
+  res.json({ roundResult, run: runView(run), attempts: team.history.length, prizeMoney });
 });
 
 // --- Production: serve the built client so the whole app runs as ONE process on

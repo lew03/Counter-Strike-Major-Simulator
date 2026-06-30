@@ -221,6 +221,32 @@ body {
   color: #ff9a5a;
 }
 
+.loss-streak-note {
+  color: #ff8a8a;
+}
+
+.rebuild-banner {
+  background: rgba(91, 141, 239, 0.1);
+  border: 1px solid #3a5a99;
+  color: #9fc0ff;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 14px;
+  font-size: 13px;
+}
+
+.prize-banner {
+  background: rgba(76, 175, 80, 0.12);
+  border: 1px solid #3d8b40;
+  color: #9fe09f;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin: 14px 0;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
+
 .result-banner {
   font-size: 16px;
   font-weight: 600;

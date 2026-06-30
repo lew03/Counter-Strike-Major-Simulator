@@ -84,6 +84,26 @@ export async function submitTransfer(
   return res.json();
 }
 
+// A full re-draft for an existing team (every slot, unlike the 2-change Transfer Window),
+// spent against the team's current budget. Keeps the team's identity — name, history,
+// difficulty escalation — unlike "Start New Draft" which wipes everything.
+export async function rebuildTeam(
+  teamId: string,
+  picks: Record<Role, string>,
+  coachId: string
+): Promise<TeamResponse> {
+  const res = await fetch(`${BASE}/team/${teamId}/rebuild`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ picks, coachId }),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ error: "Failed to rebuild roster" }));
+    throw new Error(err.error || "Failed to rebuild roster");
+  }
+  return res.json();
+}
+
 export async function startMajor(teamId: string): Promise<StartMajorResponse> {
   const res = await fetch(`${BASE}/major/${teamId}/start`, { method: "POST" });
   if (!res.ok) throw new Error("Failed to start major");

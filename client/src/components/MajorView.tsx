@@ -15,6 +15,8 @@ export default function MajorView({
   onRestart,
   onNewDraft,
   onGoHome,
+  onRebuild,
+  prizeMoney,
   advancing,
 }: {
   run: MajorRun;
@@ -24,6 +26,8 @@ export default function MajorView({
   onRestart: () => void;
   onNewDraft: () => void;
   onGoHome: () => void;
+  onRebuild: () => void;
+  prizeMoney: number;
   advancing: boolean;
 }) {
   // Lazy-initialized from the roundLog prop at mount time only: for a freshly-started major
@@ -291,6 +295,8 @@ export default function MajorView({
               onRestart={onRestart}
               onNewDraft={onNewDraft}
               onGoHome={onGoHome}
+              onRebuild={onRebuild}
+              prizeMoney={prizeMoney}
             />
           </div>
         </div>

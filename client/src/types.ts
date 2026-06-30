@@ -43,6 +43,8 @@ export interface TeamResponse {
   difficulty: Difficulty;
   difficultyLevel: number;
   escalationBonus: number;
+  lossStreak: number;
+  moraleMultiplier: number;
   history: HistoryEntry[];
   activeRun: { run: MajorRun; roundLog: RoundResult[] } | null;
 }
@@ -143,4 +145,5 @@ export interface AdvanceMajorResponse {
   roundResult: RoundResult | null;
   run: MajorRun;
   attempts: number;
+  prizeMoney: number;
 }

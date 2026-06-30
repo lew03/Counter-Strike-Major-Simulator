@@ -21,9 +21,15 @@ const REROLL_COST = 50000;
 export default function Draft({
   difficulty,
   onComplete,
+  overrideBudget,
+  rebuilding,
 }: {
   difficulty: Difficulty;
   onComplete: (picks: Record<Role, string>, coachId: string) => void;
+  // Rebuild mode: spend against the team's current (prize-money-grown) budget instead of the
+  // difficulty preset. Role order/min-prices still come from config — only the budget differs.
+  overrideBudget?: number;
+  rebuilding?: boolean;
 }) {
   const [draftOrder, setDraftOrder] = useState<DraftSlot[] | null>(null);
   const [minPrices, setMinPrices] = useState<Record<DraftSlot, number> | null>(null);
@@ -45,13 +51,15 @@ export default function Draft({
     setError(null);
     fetchConfig(difficulty)
       .then((cfg) => {
+        const effectiveBudget = overrideBudget ?? cfg.budget;
         setDraftOrder(cfg.draftOrder);
         setMinPrices(cfg.minPrices);
-        setBudget(cfg.budget);
-        setRemainingBudget(cfg.budget);
+        setBudget(effectiveBudget);
+        setRemainingBudget(effectiveBudget);
       })
       .catch((e) => setError(e.message));
-  }, [difficulty, retryNonce]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [difficulty, overrideBudget, retryNonce]);
 
   useEffect(() => {
     if (!draftOrder) return;
@@ -120,6 +128,9 @@ export default function Draft({
 
   return (
     <div className="panel fade-in tall-panel">
+      {rebuilding && (
+        <div className="rebuild-banner">🔁 Rebuilding your roster — your career history and trophies carry over.</div>
+      )}
       <div className="draft-progress">
         {draftOrder.map((r, i) => {
           const picked = pickedPlayers[r];
