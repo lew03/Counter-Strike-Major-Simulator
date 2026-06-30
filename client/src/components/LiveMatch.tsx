@@ -239,20 +239,27 @@ export default function LiveMatch({
     else playLossSound();
   };
 
+  // The action button (Skip / Play Next Round) always lives in this same top-right header
+  // slot in both states, so the user's mouse barely has to move between clicking "Skip to
+  // result" and the "Play Next Round" that follows it.
   if (finished) {
     return (
       <div className="live-match fade-in">
+        <div className="live-match-header">
+          <span className={`match-status-dot ${match.winnerIsUser ? "win" : "loss"}`} aria-hidden="true" />
+          <span>Match complete</span>
+          <button className="continue-btn" onClick={onContinue} disabled={advancing}>
+            {advancing ? "Simulating round..." : isLastRound ? "See Result" : "Play Next Round"}
+          </button>
+        </div>
         <MatchRecap match={match} />
-        <button className="primary-btn continue-btn" onClick={onContinue} disabled={advancing}>
-          {advancing ? "Simulating round..." : isLastRound ? "See Result" : "Play Next Round"}
-        </button>
       </div>
     );
   }
 
   return (
     <div className="live-match fade-in">
-      <div className="live-match-header">
+      <div className="live-match-header is-live">
         <span className="live-dot" aria-hidden="true" />
         <span>LIVE — Your Match</span>
         <button className="skip-btn" onClick={handleSkip}>

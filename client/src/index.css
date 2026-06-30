@@ -1458,8 +1458,12 @@ h2 + .live-match {
   gap: 8px;
   font-size: 13px;
   font-weight: 700;
-  color: #ff6b6b;
+  color: #c8cad6;
   margin-bottom: 8px;
+}
+
+.live-match-header.is-live {
+  color: #ff6b6b;
 }
 
 .live-dot {
@@ -1488,6 +1492,46 @@ h2 + .live-match {
   padding: 4px 10px;
   border-radius: 6px;
   cursor: pointer;
+}
+
+.continue-btn {
+  margin-left: auto;
+  background: #5b8def;
+  border: none;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.1s, background 0.15s;
+}
+
+.continue-btn:hover:not(:disabled) {
+  background: #6f9bf2;
+  transform: translateY(-1px);
+}
+
+.continue-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.match-status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.match-status-dot.win {
+  background: #5cd47e;
+  box-shadow: 0 0 6px rgba(92, 212, 126, 0.7);
+}
+
+.match-status-dot.loss {
+  background: #ff5a5a;
+  box-shadow: 0 0 6px rgba(255, 90, 90, 0.7);
 }
 
 .live-scoreline {

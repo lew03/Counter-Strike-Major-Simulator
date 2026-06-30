@@ -25,10 +25,12 @@ export default function MajorView({
   advancing: boolean;
 }) {
   // Lazy-initialized from the roundLog prop at mount time only: for a freshly-started major
-  // roundLog is empty (0), but when resuming an in-progress run (after Home, or a refresh)
-  // roundLog already contains every completed round — starting revealedCount there shows
-  // that full history immediately instead of re-animating the last round as if it were live.
-  const [revealedCount, setRevealedCount] = useState(() => roundLog.length);
+  // roundLog is empty (0). When resuming an in-progress run (after Home, or a refresh), every
+  // round EXCEPT the most recent one is already revealed immediately (no need to re-watch
+  // matches you'd already seen) — but the most recent round always replays from the start,
+  // since we have no way to know whether you'd actually finished watching it before leaving.
+  // That's what makes "Home" mid-match restart the current simulation instead of skipping it.
+  const [revealedCount, setRevealedCount] = useState(() => Math.max(0, roundLog.length - 1));
   const [viewingRound, setViewingRound] = useState<RoundResult | null>(null);
   const wins = history.filter((h) => h.userWon).length;
 
