@@ -185,6 +185,7 @@ export default function MajorView({
                 onContinue={handleContinueFromMatch}
                 advancing={advancing}
                 isLastRound={run.finished}
+                roundName={activeRound.roundName}
               />
             )}
 

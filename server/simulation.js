@@ -8,7 +8,7 @@ const ROLE_WEIGHTS = {
 
 const ROLES = ["entry", "awp", "support", "lurker", "igl"];
 
-const MAP_POOL = ["Mirage", "Anubis", "Dust2", "Overpass", "Ancient", "Nuke", "Cache"];
+const MAP_POOL = ["Mirage", "Anubis", "Dust2", "Overpass", "Ancient", "Nuke", "Inferno"];
 
 // --- Chemistry: rewards drafting players who'd actually play together in real life.
 // Every pair of players sharing a real-world team gets a synergy bump; every pair sharing a
@@ -349,10 +349,12 @@ function playOneSwissRound(run) {
 
   for (const [a, b] of pairs) {
     if (a === b) continue; // safety guard, never happens in a balanced bracket
-    const isDecider = a.wins === 2 && a.losses === 2 && b.wins === 2 && b.losses === 2;
-    const format = isDecider ? "Bo3" : "Bo1";
+    // Mirror the real CS Major Swiss format: matches where teams can clinch advancement
+    // (both at 2 wins) or face elimination (both at 2 losses) are Bo3. All others are Bo1.
+    const isHighStakes = (a.wins === 2 && b.wins === 2) || (a.losses === 2 && b.losses === 2);
+    const format = isHighStakes ? "Bo3" : "Bo1";
     const isUserMatch = a.team.isUser || b.team.isUser;
-    const result = playBoN(a.team, b.team, isDecider ? 2 : 1, isUserMatch, run.mapPool);
+    const result = playBoN(a.team, b.team, isHighStakes ? 2 : 1, isUserMatch, run.mapPool);
     matches.push(matchSummary(a.team, b.team, result, format));
 
     const winnerStanding = result.winner === a.team ? a : b;

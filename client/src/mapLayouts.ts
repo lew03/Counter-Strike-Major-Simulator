@@ -102,17 +102,18 @@ export const MAP_LAYOUTS: Record<string, MapLayout> = {
       { x1: 49, y1: 49, x2: 25, y2: 72 },
     ],
   },
-  Cache: {
-    siteA: zone(66, 40, 26, 22, "A Site"),
-    siteB: zone(8, 40, 26, 22, "B Site"),
-    mid: zone(40, 38, 20, 22, "Mid"),
-    tSpawn: zone(40, 74, 22, 14, "T Spawn"),
-    ctSpawn: zone(40, 6, 22, 12, "CT Spawn"),
+  Inferno: {
+    siteA: zone(64, 8, 28, 22, "A Site"),
+    siteB: zone(8, 64, 26, 22, "B Site"),
+    mid: zone(38, 38, 24, 22, "Banana/Mid"),
+    tSpawn: zone(40, 80, 22, 14, "T Spawn"),
+    ctSpawn: zone(40, 4, 22, 12, "CT Spawn"),
     paths: [
-      { x1: 50, y1: 76, x2: 50, y2: 50 },
-      { x1: 50, y1: 50, x2: 76, y2: 50 },
-      { x1: 50, y1: 50, x2: 21, y2: 50 },
-      { x1: 50, y1: 18, x2: 50, y2: 44 },
+      { x1: 50, y1: 84, x2: 50, y2: 50 },
+      { x1: 50, y1: 50, x2: 76, y2: 24 },
+      { x1: 50, y1: 50, x2: 21, y2: 70 },
+      { x1: 51, y1: 10, x2: 76, y2: 19 },
+      { x1: 21, y1: 70, x2: 14, y2: 80 },
     ],
   },
 };

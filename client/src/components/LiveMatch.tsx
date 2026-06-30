@@ -158,14 +158,16 @@ export default function LiveMatch({
   onContinue,
   advancing,
   isLastRound,
+  roundName,
 }: {
   match: MatchResult;
   onContinue: () => void;
   advancing: boolean;
   isLastRound: boolean;
+  roundName?: string;
 }) {
   const [mapIndex, setMapIndex] = useState(0);
-  const [roundIndex, setRoundIndex] = useState(-1); // -1 = not started
+  const [roundIndex, setRoundIndex] = useState(-2); // -2 = pre-match, -1 = starting
   const [finished, setFinished] = useState(false);
   const [feed, setFeed] = useState<FeedLine[]>([]);
 
@@ -182,6 +184,10 @@ export default function LiveMatch({
   );
 
   useEffect(() => {
+    if (roundIndex === -2) {
+      const t = setTimeout(() => setRoundIndex(-1), 1400);
+      return () => clearTimeout(t);
+    }
     if (!map || finished) return;
     if (roundIndex >= timeline.length - 1) {
       const userWonMap = (match.teamAIsUser && map.winner === match.teamA) || (match.teamBIsUser && map.winner === match.teamB);
@@ -234,10 +240,13 @@ export default function LiveMatch({
     match.maps.slice(0, mapIndex).filter((m) => m.winner === (team === "A" ? match.teamA : match.teamB)).length;
 
   const handleSkip = () => {
+    setRoundIndex(0); // clear pre-match state before jumping to finish
     setFinished(true);
     if (match.winnerIsUser) playWinSound();
     else playLossSound();
   };
+
+  const opponent = match.teamAIsUser ? match.teamB : match.teamA;
 
   // The action button (Skip / Play Next Round) always lives in this same top-right header
   // slot in both states, so the user's mouse barely has to move between clicking "Skip to
@@ -253,6 +262,22 @@ export default function LiveMatch({
           </button>
         </div>
         <MatchRecap match={match} />
+      </div>
+    );
+  }
+
+  // Pre-match interstitial: show who you face and the format before the simulation ticks.
+  if (roundIndex === -2) {
+    return (
+      <div className="live-match fade-in prematch-screen">
+        <div className="prematch-label">⚔️ Up Next</div>
+        {roundName && <div className="prematch-round">{roundName}</div>}
+        <div className="prematch-matchup">
+          <span className="prematch-you">★ Your Team</span>
+          <span className="prematch-vs">vs</span>
+          <span className="prematch-opp">{opponent}</span>
+        </div>
+        <div className="prematch-format">{match.format}</div>
       </div>
     );
   }

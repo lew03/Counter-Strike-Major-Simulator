@@ -1062,5 +1062,157 @@
         "rating": 1.06
       }
     ]
+  },
+  {
+    "id": "t29",
+    "name": "The MongolZ",
+    "year": "2024",
+    "logo": "MNGLZ",
+    "players": [
+      {
+        "name": "Techno4K",
+        "country": "MN",
+        "role": "igl",
+        "rating": 1.10
+      },
+      {
+        "name": "Senzu",
+        "country": "MN",
+        "role": "awp",
+        "rating": 1.20
+      },
+      {
+        "name": "buster",
+        "country": "RU",
+        "role": "entry",
+        "rating": 1.20
+      },
+      {
+        "name": "Neroz",
+        "country": "MN",
+        "role": "lurker",
+        "rating": 1.18
+      },
+      {
+        "name": "SANJI",
+        "country": "RU",
+        "role": "support",
+        "rating": 1.14
+      }
+    ]
+  },
+  {
+    "id": "t30",
+    "name": "Heroic",
+    "year": "2024",
+    "logo": "HER",
+    "players": [
+      {
+        "name": "cadiaN",
+        "country": "DK",
+        "role": "igl",
+        "rating": 1.07
+      },
+      {
+        "name": "nilo",
+        "country": "SE",
+        "role": "awp",
+        "rating": 1.18
+      },
+      {
+        "name": "k0nfig",
+        "country": "DK",
+        "role": "entry",
+        "rating": 1.18
+      },
+      {
+        "name": "stavn",
+        "country": "DK",
+        "role": "lurker",
+        "rating": 1.19
+      },
+      {
+        "name": "TeSeS",
+        "country": "DK",
+        "role": "support",
+        "rating": 1.13
+      }
+    ]
+  },
+  {
+    "id": "t31",
+    "name": "SAW",
+    "year": "2024",
+    "logo": "SAW",
+    "players": [
+      {
+        "name": "ewjerkz",
+        "country": "PT",
+        "role": "igl",
+        "rating": 1.12
+      },
+      {
+        "name": "MakkeN",
+        "country": "DK",
+        "role": "awp",
+        "rating": 1.14
+      },
+      {
+        "name": "story",
+        "country": "PT",
+        "role": "entry",
+        "rating": 1.13
+      },
+      {
+        "name": "arrozdoce",
+        "country": "PT",
+        "role": "support",
+        "rating": 1.10
+      },
+      {
+        "name": "roman",
+        "country": "PT",
+        "role": "lurker",
+        "rating": 1.09
+      }
+    ]
+  },
+  {
+    "id": "t32",
+    "name": "paiN Gaming",
+    "year": "2024",
+    "logo": "PAIN",
+    "players": [
+      {
+        "name": "vsm",
+        "country": "BR",
+        "role": "igl",
+        "rating": 1.17
+      },
+      {
+        "name": "piriajr",
+        "country": "BR",
+        "role": "awp",
+        "rating": 1.16
+      },
+      {
+        "name": "hardzao",
+        "country": "BR",
+        "role": "entry",
+        "rating": 1.14
+      },
+      {
+        "name": "nqz",
+        "country": "BR",
+        "role": "support",
+        "rating": 1.10
+      },
+      {
+        "name": "biguzera",
+        "country": "BR",
+        "role": "lurker",
+        "rating": 1.12
+      }
+    ]
   }
 ]

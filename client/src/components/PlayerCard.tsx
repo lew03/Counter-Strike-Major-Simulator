@@ -48,6 +48,9 @@ export default function PlayerCard({
       <div className="player-meta">
         <Flag country={player.country} size={20} /> {player.team}
       </div>
+      <div className="player-role-label">
+        {ROLE_ICONS[player.role]} {player.role === "coach" ? "Coach" : player.role.toUpperCase()}
+      </div>
       <div className="player-era">
         {player.role === "coach"
           ? player.era

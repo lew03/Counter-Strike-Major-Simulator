@@ -312,7 +312,7 @@ app.get("/api/transfer-options", (req, res) => {
 // Apply a transfer window: the client submits the full intended roster + coach. The
 // server validates roles, enforces a max of 2 changes vs the saved roster, and keeps
 // total spend within the team's budget. Idempotent — re-submitting the same roster is a no-op.
-const MAX_TRANSFERS = 2;
+const MAX_TRANSFERS = 3;
 app.post("/api/team/:teamId/transfer", (req, res) => {
   const team = teams.get(req.params.teamId);
   if (!team) return res.status(404).json({ error: "Team not found" });

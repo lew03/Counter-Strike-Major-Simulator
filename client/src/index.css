@@ -482,6 +482,15 @@ body {
   margin-top: 3px;
 }
 
+.player-role-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #6f7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 4px;
+}
+
 .player-stats {
   display: flex;
   justify-content: space-between;
@@ -1780,6 +1789,58 @@ tr.mvp-row {
 
 /* Live match — nested inside major-view's single panel, not its own box */
 
+/* Pre-match interstitial */
+.prematch-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 28px 20px 24px;
+  border-top: none !important;
+  margin-top: 0 !important;
+}
+.prematch-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #9a9aa8;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.prematch-round {
+  font-size: 13px;
+  color: #4a9eff;
+  font-weight: 600;
+}
+.prematch-matchup {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 4px;
+}
+.prematch-you {
+  font-size: 20px;
+  font-weight: 800;
+  color: #ffd700;
+}
+.prematch-vs {
+  font-size: 14px;
+  color: #6f7280;
+  font-weight: 600;
+}
+.prematch-opp {
+  font-size: 20px;
+  font-weight: 800;
+  color: #e8e8ec;
+}
+.prematch-format {
+  font-size: 13px;
+  color: #9a9aa8;
+  background: #1c1f28;
+  border: 1px solid #2a2d38;
+  border-radius: 6px;
+  padding: 3px 10px;
+}
+
 .live-match {
   border-top: 1px solid #2a2d38;
   margin-top: 16px;
@@ -2412,6 +2473,61 @@ h2 + .live-match {
   text-transform: uppercase;
   letter-spacing: 0.04em;
   margin-top: 4px;
+}
+
+/* Trophy cabinet */
+.trophy-cabinet {
+  margin-top: 16px;
+  border-top: 1px solid #2a2d38;
+  padding-top: 14px;
+}
+.trophy-cabinet-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #e8e8ec;
+  margin-bottom: 10px;
+}
+.trophy-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.trophy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  background: #22253280;
+  border: 1px solid #2a2d38;
+  border-radius: 8px;
+  padding: 8px 10px;
+  min-width: 72px;
+  text-align: center;
+  transition: border-color 0.15s;
+}
+.trophy.earned {
+  border-color: #4a9eff44;
+  background: #1a2235;
+}
+.trophy.earned:hover {
+  border-color: #4a9eff88;
+}
+.trophy.locked {
+  opacity: 0.38;
+}
+.trophy-icon {
+  font-size: 20px;
+  line-height: 1;
+}
+.trophy-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #9a9aa8;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.trophy.earned .trophy-label {
+  color: #cdd9ff;
 }
 
 /* Value-per-dollar badge on draft cards */
