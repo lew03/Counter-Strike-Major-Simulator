@@ -107,6 +107,12 @@ export default function App() {
   };
 
   const handleStartRebuild = () => {
+    if (
+      !window.confirm(
+        "Rebuild Roster wipes your entire lineup and costs $150,000 from your budget.\n\nYour career history and trophies are kept. Continue?"
+      )
+    )
+      return;
     dispatch({ type: "START_REBUILD" });
   };
 
@@ -228,6 +234,7 @@ export default function App() {
                   players={team.players}
                   coach={team.coach}
                   budget={team.budget}
+                  wins={team.difficultyLevel}
                   onComplete={handleTransferComplete}
                   onClose={() => dispatch({ type: "SET_SHOW_TRANSFER", open: false })}
                 />

@@ -1340,6 +1340,16 @@ tr.mvp-row {
   color: #ff8a8a;
 }
 
+.transfer-meta .sell-proceeds strong {
+  color: #5fd475;
+}
+
+.sell-value {
+  color: #5fd475;
+  font-size: 0.78em;
+  margin-left: 2px;
+}
+
 .transfer-error {
   background: rgba(170, 51, 68, 0.15);
   border: 1px solid #aa3344;

@@ -107,8 +107,11 @@ const RARITY_WEIGHT = { common: 100, rare: 35, epic: 10, legendary: 3 };
 // Weighted sample-without-replacement: repeatedly draws one item with probability
 // proportional to its rarity weight, removes it, and repeats until `count` is reached or
 // the pool runs out. Falls back to weight 1 for anything missing a rarity (defensive).
-function weightedSample(pool, count) {
-  const items = pool.map((p) => ({ p, w: RARITY_WEIGHT[p.rarity] || 1 }));
+// Pass customWeights to override the default RARITY_WEIGHT (used by the transfer window
+// to boost epic/legendary odds as the team accumulates major wins).
+function weightedSample(pool, count, customWeights) {
+  const weights = customWeights || RARITY_WEIGHT;
+  const items = pool.map((p) => ({ p, w: weights[p.rarity] || 1 }));
   const result = [];
   while (result.length < count && items.length > 0) {
     const total = items.reduce((sum, it) => sum + it.w, 0);
@@ -291,21 +294,40 @@ app.get("/api/team/:teamId", (req, res) => {
   res.json(teamView(team, req.params.teamId));
 });
 
-// Candidate replacements for one slot during a transfer window: any same-role player
-// (or coach) priced within `maxPrice` and not already on the roster. Sorted best-first
-// so the window reads as "who can I upgrade to with the money I've freed up".
+// How many candidates to surface per transfer slot — random draw like the draft,
+// not a full sorted list. Small enough that each slot feels like a scouting window.
+const TRANSFER_POOL_SIZE = 8;
+
+// Rarity weights for the transfer pool's weighted draw. Each major win gradually
+// nudges the odds toward higher-rarity players, so a veteran team is more likely
+// to see legendary names than a brand-new squad on their first window.
+function transferRarityWeights(wins) {
+  const w = Math.min(wins || 0, 6);
+  return {
+    common: 100,
+    rare: 35 + w * 8,       // 35 → 83 at 6 wins
+    epic: 10 + w * 5,       // 10 → 40 at 6 wins
+    legendary: 3 + w * 3,   // 3  → 21 at 6 wins
+  };
+}
+
+// Candidate replacements for one slot during a transfer window. Returns a random
+// weighted draw (like the draft) rather than a sorted-all slice, so each time you
+// open a slot you may see different options — scouting feels like scouting.
+// Sell-back: the client passes `sellingPrice` (the departing player's face value);
+// the server uses 60% of that when computing what the slot can actually afford.
 app.get("/api/transfer-options", (req, res) => {
-  const { role, maxPrice, exclude } = req.query;
+  const { role, maxPrice, exclude, wins } = req.query;
   if (!DRAFT_ORDER.includes(role)) {
     return res.status(400).json({ error: "Invalid role: " + role });
   }
   const cap = Number(maxPrice);
   if (!Number.isFinite(cap)) return res.status(400).json({ error: "maxPrice must be a number" });
   const excludeIds = new Set(String(exclude || "").split(",").filter(Boolean));
-  const options = poolForRole(role)
-    .filter((p) => p.price <= cap && !excludeIds.has(p.id))
-    .sort((a, b) => b.rating - a.rating)
-    .slice(0, 24);
+  const affordable = poolForRole(role).filter((p) => p.price <= cap && !excludeIds.has(p.id));
+  if (affordable.length === 0) return res.json({ options: [] });
+  const rarityWeights = transferRarityWeights(Number(wins) || 0);
+  const options = weightedSample(affordable, TRANSFER_POOL_SIZE, rarityWeights);
   res.json({ options });
 });
 
@@ -334,19 +356,31 @@ app.post("/api/team/:teamId/transfer", (req, res) => {
     return res.status(400).json({ error: e.message });
   }
 
+  // Count changes and accumulate sell-back value for swapped-out slots.
+  // Sell-back: replaced players return 60% of their face price. The net budget
+  // check is: new totalSpend + 0.4 × sellTotal ≤ team.budget (equivalent to
+  // "you get to spend budget + 0.6×sellTotal but we charge 100% for new buys").
   let changes = 0;
+  let sellTotal = 0;
   ROLES.forEach((role) => {
     const prev = team.players.find((p) => p.role === role);
-    if (!prev || prev.id !== picks[role]) changes++;
+    if (!prev || prev.id !== picks[role]) {
+      changes++;
+      if (prev) sellTotal += prev.price;
+    }
   });
-  if (coach.id !== team.coach.id) changes++;
+  if (coach.id !== team.coach.id) {
+    changes++;
+    sellTotal += team.coach.price;
+  }
   if (changes > MAX_TRANSFERS) {
     return res.status(400).json({ error: `At most ${MAX_TRANSFERS} changes per transfer window (got ${changes})` });
   }
 
   const totalSpend = roster.reduce((sum, p) => sum + p.price, 0) + coach.price;
-  if (totalSpend > team.budget) {
-    return res.status(400).json({ error: `Roster costs $${totalSpend.toLocaleString()}, over the $${team.budget.toLocaleString()} budget` });
+  const effectiveCap = team.budget + Math.floor(sellTotal * 0.6);
+  if (totalSpend > effectiveCap) {
+    return res.status(400).json({ error: `Roster costs $${totalSpend.toLocaleString()}, over the effective cap of $${effectiveCap.toLocaleString()} (budget + sell-back)` });
   }
 
   team.players = roster;
@@ -388,11 +422,19 @@ app.post("/api/team/:teamId/rebuild", (req, res) => {
     return res.status(400).json({ error: e.message });
   }
 
+  // Apply $150k rebuild fee first so the budget check is against the reduced cap.
+  // Floored at the original difficulty budget so you're never locked below the
+  // starting point — prize money above that is fair game to lose.
+  const REBUILD_FEE = 150000;
+  const baseBudget = difficultyConfig(team.difficulty).budget;
+  const budgetAfterFee = Math.max(baseBudget, team.budget - REBUILD_FEE);
+
   const totalSpend = roster.reduce((sum, p) => sum + p.price, 0) + coach.price;
-  if (totalSpend > team.budget) {
-    return res.status(400).json({ error: `Roster costs $${totalSpend.toLocaleString()}, over the $${team.budget.toLocaleString()} budget` });
+  if (totalSpend > budgetAfterFee) {
+    return res.status(400).json({ error: `Roster costs $${totalSpend.toLocaleString()}, over the $${budgetAfterFee.toLocaleString()} post-fee budget` });
   }
 
+  team.budget = budgetAfterFee;
   team.players = roster;
   team.coach = coach;
   team.totalSpend = totalSpend;

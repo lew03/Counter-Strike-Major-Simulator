@@ -57,10 +57,11 @@ export async function createTeam(
 export async function fetchTransferOptions(
   role: DraftSlot,
   maxPrice: number,
-  excludeIds: string[]
+  excludeIds: string[],
+  wins: number
 ): Promise<Player[]> {
   const res = await fetch(
-    `${BASE}/transfer-options?role=${role}&maxPrice=${Math.floor(maxPrice)}&exclude=${excludeIds.join(",")}`
+    `${BASE}/transfer-options?role=${role}&maxPrice=${Math.floor(maxPrice)}&exclude=${excludeIds.join(",")}&wins=${wins}`
   );
   if (!res.ok) throw new Error("Failed to fetch transfer options");
   const data = await res.json();

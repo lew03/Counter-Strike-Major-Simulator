@@ -12,13 +12,14 @@ const ROLE_LABELS: Record<DraftSlot, string> = {
   coach: "Coach",
 };
 
-const MAX_CHANGES = 2;
+const MAX_CHANGES = 3;
 
 export default function TransferWindow({
   teamId,
   players,
   coach,
   budget,
+  wins,
   onComplete,
   onClose,
 }: {
@@ -26,6 +27,7 @@ export default function TransferWindow({
   players: Player[];
   coach: Player;
   budget: number;
+  wins: number;
   onComplete: (updated: TeamResponse) => void;
   onClose: () => void;
 }) {
@@ -45,8 +47,15 @@ export default function TransferWindow({
 
   const slots: DraftSlot[] = ["entry", "awp", "support", "lurker", "igl", "coach"];
   const pendingSpend = slots.reduce((sum, s) => sum + pending[s].price, 0);
-  const remaining = budget - pendingSpend;
   const changes = slots.filter((s) => pending[s].id !== original[s].id).length;
+
+  // Sell-back: replaced players return 60% of their original face price.
+  // Effective remaining budget = base budget + sell proceeds - current roster spend.
+  const sellProceeds = slots.reduce(
+    (sum, s) => (pending[s].id !== original[s].id ? sum + Math.floor(original[s].price * 0.6) : sum),
+    0
+  );
+  const effectiveRemaining = budget + sellProceeds - pendingSpend;
 
   const openOptions = async (slot: DraftSlot) => {
     if (openSlot === slot) {
@@ -56,11 +65,19 @@ export default function TransferWindow({
     setError(null);
     setOpenSlot(slot);
     setLoadingOptions(true);
-    // Budget available for this slot = whatever's left if we drop the current occupant.
-    const maxPrice = remaining + pending[slot].price;
+    // Max price for the new player in this slot, matching the server's budget rule:
+    //   new_totalSpend + 0.4 × sellTotal ≤ budget
+    // ↔ newPrice ≤ budget + 0.6×sellTotalWithSlot - spendWithoutSlot
+    // sellTotalWithSlot always includes original[slot] (we're selling whoever's there).
+    const spendWithoutSlot = slots.reduce((sum, s) => (s !== slot ? sum + pending[s].price : sum), 0);
+    const sellTotalWithSlot = slots.reduce((sum, s) => {
+      if (s === slot) return sum + original[slot].price;
+      return pending[s].id !== original[s].id ? sum + original[s].price : sum;
+    }, 0);
+    const maxPrice = budget + Math.floor(sellTotalWithSlot * 0.6) - spendWithoutSlot;
     const excludeIds = slots.map((s) => pending[s].id);
     try {
-      const opts = await fetchTransferOptions(slot, maxPrice, excludeIds);
+      const opts = await fetchTransferOptions(slot, maxPrice, excludeIds, wins);
       setOptions(opts);
     } catch (e: any) {
       setError(e.message);
@@ -116,15 +133,21 @@ export default function TransferWindow({
         </button>
       </div>
       <p className="hint">
-        Swap up to {MAX_CHANGES} players or your coach, staying within your ${budget.toLocaleString()}{" "}
-        budget. Dropping a player frees their fee to spend on the replacement.
+        Swap up to {MAX_CHANGES} players or your coach. Selling a player returns{" "}
+        <strong>60% of their fee</strong> — use it toward a better replacement. Each slot shows a
+        random scouting pool; close and re-open to refresh the candidates.
       </p>
       <div className="transfer-meta">
         <span>
-          Spend: <strong>${pendingSpend.toLocaleString()}</strong> / ${budget.toLocaleString()}
+          Roster: <strong>${pendingSpend.toLocaleString()}</strong>
         </span>
-        <span className={remaining < 0 ? "over-budget" : ""}>
-          Remaining: <strong>${remaining.toLocaleString()}</strong>
+        {sellProceeds > 0 && (
+          <span className="sell-proceeds">
+            Sell-back: <strong>+${sellProceeds.toLocaleString()}</strong>
+          </span>
+        )}
+        <span className={effectiveRemaining < 0 ? "over-budget" : ""}>
+          Remaining: <strong>${effectiveRemaining.toLocaleString()}</strong>
         </span>
         <span>
           Changes: <strong>{changes}</strong> / {MAX_CHANGES}
@@ -145,7 +168,14 @@ export default function TransferWindow({
                   <Flag country={p.country} size={16} /> {p.name}
                 </span>
                 <span className="transfer-slot-rating">{p.rating.toFixed(2)}</span>
-                <span className="transfer-slot-price">${p.price.toLocaleString()}</span>
+                <span className="transfer-slot-price">
+                  ${p.price.toLocaleString()}
+                  {!changed && (
+                    <span className="sell-value" title="Sell-back value (60%)">
+                      {" "}→ ${Math.floor(original[slot].price * 0.6).toLocaleString()}
+                    </span>
+                  )}
+                </span>
                 <span className="transfer-slot-actions">
                   {changed && (
                     <button className="link-btn" onClick={() => revert(slot)}>
@@ -190,7 +220,7 @@ export default function TransferWindow({
       <button
         className="primary-btn"
         onClick={confirm}
-        disabled={submitting || changes === 0 || remaining < 0}
+        disabled={submitting || changes === 0 || effectiveRemaining < 0}
       >
         {submitting
           ? "Applying…"
