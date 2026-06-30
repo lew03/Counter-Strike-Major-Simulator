@@ -25,12 +25,19 @@ export interface DraftConfig {
   minPrices: Record<DraftSlot, number>;
 }
 
+export interface ChemistryBreakdown {
+  sameTeamPairs: number;
+  sameCountryPairs: number;
+  bonus: number;
+}
+
 export interface TeamResponse {
   teamId: string;
   name: string;
   players: Player[];
   coach: Player;
   overall: number;
+  chemistry: ChemistryBreakdown;
   totalSpend: number;
   budget: number;
   difficulty: Difficulty;

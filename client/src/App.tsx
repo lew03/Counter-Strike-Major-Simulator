@@ -178,6 +178,7 @@ export default function App() {
                   players={team.players}
                   coach={team.coach}
                   overall={team.overall}
+                  chemistry={team.chemistry}
                   totalSpend={team.totalSpend}
                   budget={team.budget}
                   difficulty={team.difficulty}

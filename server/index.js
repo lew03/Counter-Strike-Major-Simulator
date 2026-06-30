@@ -6,7 +6,15 @@ const path = require("path");
 const players = require("./data/players.json");
 const coaches = require("./data/coaches.json");
 const teamEras = require("./data/teams.json");
-const { ROLES, MAP_POOL, teamOverallRating, applyCoach, buildMajorRun, advanceMajor } = require("./simulation");
+const {
+  ROLES,
+  MAP_POOL,
+  teamOverallRating,
+  chemistryBreakdown,
+  applyCoach,
+  buildMajorRun,
+  advanceMajor,
+} = require("./simulation");
 
 const app = express();
 app.use(cors());
@@ -176,6 +184,7 @@ function teamView(team, teamId) {
     players: team.players,
     coach: team.coach,
     overall: team.overall,
+    chemistry: chemistryBreakdown(team.players),
     totalSpend: team.totalSpend,
     budget: team.budget,
     difficulty: team.difficulty,

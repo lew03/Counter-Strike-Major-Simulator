@@ -10,6 +10,38 @@ const ROLES = ["entry", "awp", "support", "lurker", "igl"];
 
 const MAP_POOL = ["Mirage", "Anubis", "Dust2", "Overpass", "Ancient", "Nuke", "Cache"];
 
+// --- Chemistry: rewards drafting players who'd actually play together in real life.
+// Every pair of players sharing a real-world team gets a synergy bump; every pair sharing a
+// country gets a smaller one. Capped so it's a meaningful drafting incentive (worth chasing
+// for a strong roster) without being able to outweigh raw rating. Only meaningfully applies
+// to the user's own draft: AI rosters are historical team eras, so their players don't carry
+// a `team` field at all (they're already implicitly "the same team"), and their real chemistry
+// is already baked into the historical rating that made them famous in the first place —
+// adding a same-team bonus on top would double-count it. Same-country chemistry still applies
+// to AI teams where it naturally arises (e.g. an all-Danish lineup), since that's real,
+// data-driven signal rather than a structural artefact.
+const CHEMISTRY_SAME_TEAM_BONUS = 0.015;
+const CHEMISTRY_SAME_COUNTRY_BONUS = 0.006;
+const CHEMISTRY_CAP = 0.08;
+
+function chemistryBreakdown(players) {
+  let sameTeamPairs = 0;
+  let sameCountryPairs = 0;
+  for (let i = 0; i < players.length; i++) {
+    for (let j = i + 1; j < players.length; j++) {
+      if (players[i].team && players[i].team === players[j].team) sameTeamPairs++;
+      if (players[i].country && players[i].country === players[j].country) sameCountryPairs++;
+    }
+  }
+  const raw = sameTeamPairs * CHEMISTRY_SAME_TEAM_BONUS + sameCountryPairs * CHEMISTRY_SAME_COUNTRY_BONUS;
+  const bonus = Math.min(raw, CHEMISTRY_CAP);
+  return { sameTeamPairs, sameCountryPairs, bonus };
+}
+
+function chemistryMultiplier(players) {
+  return 1 + chemistryBreakdown(players).bonus;
+}
+
 function teamOverallRating(players) {
   let weighted = 0;
   let weightSum = 0;
@@ -18,7 +50,7 @@ function teamOverallRating(players) {
     weighted += p.rating * w;
     weightSum += w;
   }
-  return weighted / weightSum;
+  return (weighted / weightSum) * chemistryMultiplier(players);
 }
 
 // Deterministic per-player map proficiency multiplier (~0.9-1.12), stable across a session
@@ -41,7 +73,7 @@ function teamMapRating(players, mapName) {
     weighted += p.rating * mapModifier(p.name, mapName) * w;
     weightSum += w;
   }
-  return weighted / weightSum;
+  return (weighted / weightSum) * chemistryMultiplier(players);
 }
 
 // A coach's rating is a small (~0.99-1.06) multiplier applied on top of the 5-player
@@ -489,6 +521,7 @@ module.exports = {
   MAP_POOL,
   teamOverallRating,
   teamMapRating,
+  chemistryBreakdown,
   applyCoach,
   winProbability,
   buildMajorRun,

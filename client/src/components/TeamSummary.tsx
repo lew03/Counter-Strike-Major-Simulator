@@ -1,6 +1,7 @@
-import type { Player, HistoryEntry, Difficulty } from "../types";
+import type { Player, HistoryEntry, Difficulty, ChemistryBreakdown } from "../types";
 import PlayerCard from "./PlayerCard";
 import CareerStats from "./CareerStats";
+import ChemistryPanel from "./ChemistryPanel";
 
 const DIFFICULTY_LABEL: Record<Difficulty, string> = {
   easy: "Easy",
@@ -13,6 +14,7 @@ export default function TeamSummary({
   players,
   coach,
   overall,
+  chemistry,
   totalSpend,
   budget,
   difficulty,
@@ -28,6 +30,7 @@ export default function TeamSummary({
   players: Player[];
   coach: Player;
   overall: number;
+  chemistry: ChemistryBreakdown;
   totalSpend: number;
   budget: number;
   difficulty: Difficulty;
@@ -51,6 +54,7 @@ export default function TeamSummary({
         ${(budget - totalSpend).toLocaleString()} unspent)
       </p>
 
+      <ChemistryPanel chemistry={chemistry} />
       <CareerStats history={history} />
       <div className="card-grid">
         {players.map((p, i) => (

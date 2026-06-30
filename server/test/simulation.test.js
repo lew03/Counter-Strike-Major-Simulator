@@ -3,6 +3,7 @@ const assert = require("node:assert");
 
 const {
   teamOverallRating,
+  chemistryBreakdown,
   applyCoach,
   winProbability,
   buildMajorRun,
@@ -136,4 +137,56 @@ test("higher difficulty (AI boost) lowers the user's championship rate", () => {
   const easy = champRate(1.0, 120);
   const hard = champRate(1.08, 120);
   assert.ok(easy >= hard, `easy (${easy}) should be >= hard (${hard})`);
+});
+
+test("chemistry: no bonus when nobody shares a real team or country", () => {
+  const roster = [
+    { role: "entry", rating: 1.2, team: "Vitality", country: "FR" },
+    { role: "awp", rating: 1.2, team: "Spirit", country: "RU" },
+    { role: "support", rating: 1.2, team: "FaZe", country: "DK" },
+    { role: "lurker", rating: 1.2, team: "G2", country: "BA" },
+    { role: "igl", rating: 1.2, team: "MOUZ", country: "DE" },
+  ];
+  const c = chemistryBreakdown(roster);
+  assert.strictEqual(c.sameTeamPairs, 0);
+  assert.strictEqual(c.sameCountryPairs, 0);
+  assert.strictEqual(c.bonus, 0);
+  // No bonus -> overall rating equals the plain weighted average.
+  assert.ok(Math.abs(teamOverallRating(roster) - 1.2) < 1e-9);
+});
+
+test("chemistry: same-team and same-country pairs each add a bonus, capped", () => {
+  const allSameTeamAndCountry = [
+    { role: "entry", rating: 1.2, team: "Vitality", country: "FR" },
+    { role: "awp", rating: 1.2, team: "Vitality", country: "FR" },
+    { role: "support", rating: 1.2, team: "Vitality", country: "FR" },
+    { role: "lurker", rating: 1.2, team: "Vitality", country: "FR" },
+    { role: "igl", rating: 1.2, team: "Vitality", country: "FR" },
+  ];
+  const c = chemistryBreakdown(allSameTeamAndCountry);
+  assert.strictEqual(c.sameTeamPairs, 10); // C(5,2)
+  assert.strictEqual(c.sameCountryPairs, 10);
+  assert.ok(c.bonus > 0, "expected a positive chemistry bonus");
+  assert.ok(c.bonus <= 0.08 + 1e-9, `bonus ${c.bonus} should be capped at 0.08`);
+  // The boosted overall rating must exceed the un-boosted weighted average (1.2).
+  assert.ok(teamOverallRating(allSameTeamAndCountry) > 1.2);
+
+  const onePair = [
+    { role: "entry", rating: 1.2, team: "Vitality", country: "FR" },
+    { role: "awp", rating: 1.2, team: "Vitality", country: "BR" },
+    { role: "support", rating: 1.2, team: "Spirit", country: "RU" },
+    { role: "lurker", rating: 1.2, team: "G2", country: "BA" },
+    { role: "igl", rating: 1.2, team: "MOUZ", country: "DE" },
+  ];
+  const c2 = chemistryBreakdown(onePair);
+  assert.strictEqual(c2.sameTeamPairs, 1);
+  assert.strictEqual(c2.sameCountryPairs, 0);
+  assert.ok(c2.bonus > 0 && c2.bonus < c.bonus, "one pair should give a smaller bonus than five-way synergy");
+});
+
+test("chemistry never triggers a same-team bonus for AI eras (no team field on era players)", () => {
+  for (const era of teamEras) {
+    const c = chemistryBreakdown(era.players);
+    assert.strictEqual(c.sameTeamPairs, 0, `${era.name} '${era.year}' should have 0 same-team pairs (no team field)`);
+  }
 });
