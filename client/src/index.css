@@ -1824,3 +1824,81 @@ tr.mvp-row {
   border-radius: 6px;
   padding: 1px 6px;
 }
+
+/* --- Responsive / mobile --- */
+
+@media (max-width: 640px) {
+  .app {
+    padding: 14px 12px;
+  }
+
+  .hero-card {
+    padding: 28px 22px;
+  }
+
+  .panel {
+    padding: 20px 16px;
+  }
+
+  .app-header-bar {
+    flex-wrap: wrap;
+    padding: 10px 14px;
+    gap: 10px;
+  }
+
+  .logo-text {
+    font-size: 16px;
+  }
+
+  .header-actions {
+    flex-wrap: wrap;
+  }
+
+  .difficulty-options {
+    grid-template-columns: 1fr;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Transfer slots/options: drop the rigid column grid for a stacked layout. */
+  .transfer-slot-main {
+    grid-template-columns: 1fr;
+    row-gap: 6px;
+  }
+
+  .transfer-slot-actions {
+    justify-self: start;
+  }
+
+  .transfer-option {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 4px;
+  }
+
+  .transfer-meta {
+    gap: 10px 16px;
+  }
+
+  .scoreboard-pair {
+    grid-template-columns: 1fr;
+  }
+
+  .live-match-main {
+    grid-template-columns: 1fr;
+  }
+
+  .live-match-main .minimap {
+    grid-column: auto;
+  }
+
+  .team-summary-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .team-summary-actions button {
+    width: 100%;
+  }
+}
