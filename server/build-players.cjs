@@ -61,12 +61,14 @@ const CURATED = {
   awp: ["ZywOo", "m0NESY", "sh1ro", "device", "broky", "torzsi", "w0nderful", "smooya",
     "Jame", "nawwk", "nicoodoz", "deko", "Senzu", "JamYoung", "Luken", "ADDICT",
     "Magnojez", "SunPayus", "zorte", "woxic", "allu", "oSee", "draken", "kraghen",
-    "mantuu", "kaze", "iM", "Wicadia", "jottAAA"],
-  igl: ["blameF", "nexa", "KAISER", "Maden", "Lake", "kRaSnaL", "tN1R", "Aleksib", "siuhy"],
+    "mantuu", "kaze", "iM", "molodoy", "Jee", "sh1ro", "broky", "torzsi"],
+  igl: ["blameF", "nexa", "KAISER", "Maden", "Lake", "kRaSnaL", "tN1R", "Aleksib", "siuhy",
+    "Snappi", "Aleksib"],
   entry: ["donk", "NiKo", "XANTARES", "jL", "b1t", "ArtFr0st", "headtr1ck", "jambo",
-    "Ax1Le", "kyousuke"],
-  lurker: ["ropz", "KSCERATO", "frozen", "Spinx", "YEKINDAR", "FL1T", "Twistzz", "KSCERATO"],
-  support: ["mezii", "EliGE", "NAF", "flameZ", "JACKZ", "Krimbo", "magixx"],
+    "Ax1Le", "kyousuke", "junior", "latto", "Jeorge", "cairne"],
+  lurker: ["ropz", "KSCERATO", "frozen", "Spinx", "YEKINDAR", "FL1T", "Twistzz", "HexT",
+    "tomaszin"],
+  support: ["mezii", "EliGE", "NAF", "flameZ", "JACKZ", "Krimbo", "magixx", "nettik"],
 };
 const CURATED_MAP = {};
 for (const [role, names] of Object.entries(CURATED)) {
