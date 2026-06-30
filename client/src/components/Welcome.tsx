@@ -4,7 +4,7 @@ import type { Difficulty } from "../types";
 const DIFFICULTIES: { key: Difficulty; label: string; blurb: string }[] = [
   { key: "easy", label: "Easy", blurb: "$1.05M budget · weaker opponents" },
   { key: "normal", label: "Normal", blurb: "$850k budget · standard opponents" },
-  { key: "hard", label: "Hard", blurb: "$680k budget · stronger opponents" },
+  { key: "hard", label: "Hard", blurb: "$750k budget · stronger opponents" },
 ];
 
 export default function Welcome({ onStart }: { onStart: (difficulty: Difficulty) => void }) {

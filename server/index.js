@@ -15,10 +15,18 @@ app.use(express.json());
 const DRAFT_ORDER = [...ROLES, "coach"];
 
 // Difficulty presets — more money + weaker opponents = easier.
+//
+// aiBoost < 1.0 genuinely weakens AI rosters below their historical rating; >1.0 strengthens
+// them. These were originally 1.0/1.03/1.06 (i.e. "easy" never actually weakened anyone, just
+// skipped the bonus normal/hard apply) which, combined with how little headroom the budget
+// curve leaves even on a maximally-optimized draft, made majors nearly unwinnable at every
+// tier (empirically ~2-4% on easy, <1% on normal, 0% on hard over hundreds of simulated runs
+// with a near-best-possible roster). Recalibrated against simulated win rates for an
+// optimally-drafted team at each budget: easy ~40-45%, normal ~15-17%, hard ~6-9%.
 const DIFFICULTIES = {
-  easy: { budget: 1050000, aiBoost: 1.0 },
-  normal: { budget: 850000, aiBoost: 1.03 },
-  hard: { budget: 680000, aiBoost: 1.06 },
+  easy: { budget: 1050000, aiBoost: 0.9 },
+  normal: { budget: 850000, aiBoost: 0.94 },
+  hard: { budget: 750000, aiBoost: 0.95 },
 };
 function difficultyConfig(d) {
   return DIFFICULTIES[d] || DIFFICULTIES.normal;
