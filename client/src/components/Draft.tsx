@@ -132,6 +132,7 @@ export default function Draft({
           return (
             <Tooltip
               key={r}
+              placement="bottom"
               content={
                 <span className="progress-step-tooltip">
                   <Flag country={picked.country} size={14} /> <strong>{picked.name}</strong>

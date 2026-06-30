@@ -65,7 +65,6 @@ export default function TeamSummary({
         ${(budget - totalSpend).toLocaleString()} unspent)
       </p>
 
-      <ChemistryPanel chemistry={chemistry} players={players} />
       <CareerStats history={history} />
       <div className="card-grid">
         {players.map((p, i) => (
@@ -77,6 +76,7 @@ export default function TeamSummary({
           <PlayerCard player={coach} selected />
         </div>
       </div>
+      <ChemistryPanel chemistry={chemistry} players={players} />
       <div className="actions-stack">
         <div className="actions-row">
           {hasActiveRun ? (

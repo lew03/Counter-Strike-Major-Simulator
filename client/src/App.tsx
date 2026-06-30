@@ -9,6 +9,7 @@ import TeamSummary from "./components/TeamSummary";
 import TransferWindow from "./components/TransferWindow";
 import MajorView from "./components/MajorView";
 import SettingsPage from "./components/SettingsPage";
+import Tooltip from "./components/Tooltip";
 import { isMuted, setMuted } from "./sound";
 
 const SAVED_TEAM_KEY = "csmajor_teamId";
@@ -126,19 +127,41 @@ export default function App() {
       ) : (
         <div className="app">
           <header className="app-header-bar">
-            <div className="logo-block">
-              <span className="logo-icon">🏆</span>
-              <span className="logo-text">Major Simulator</span>
-            </div>
+            <button
+              className="logo-block logo-block-btn"
+              onClick={handleGoHome}
+              aria-label="Home"
+              title="Home"
+            >
+              <span className="logo-icon">🎯</span>
+              <span className="logo-text">Frag GM</span>
+            </button>
             <div className="header-actions">
               {team && stage === "major" && (
                 <button className="secondary-btn" onClick={handleGoHome}>
                   🏠 Home
                 </button>
               )}
-              <span className="difficulty-badge" title="Baseline difficulty chosen at draft time">
-                🎚️ {DIFFICULTY_LABEL[difficulty]}
-              </span>
+              <Tooltip
+                placement="bottom"
+                content={
+                  <span>
+                    Baseline difficulty chosen at draft time.
+                    {team && team.difficultyLevel > 0 && (
+                      <>
+                        <br />
+                        🔺 Increased after {team.difficultyLevel} major win{team.difficultyLevel > 1 ? "s" : ""} — AI
+                        is now +{(team.escalationBonus * 100).toFixed(0)}% stronger than baseline.
+                      </>
+                    )}
+                  </span>
+                }
+              >
+                <span className="difficulty-badge">
+                  🎚️ {DIFFICULTY_LABEL[difficulty]}
+                  {team && team.difficultyLevel > 0 && <span className="difficulty-badge-up">▲</span>}
+                </span>
+              </Tooltip>
               <button
                 className="secondary-btn"
                 onClick={() => dispatch({ type: "SET_SHOW_SETTINGS", open: !showSettings })}
