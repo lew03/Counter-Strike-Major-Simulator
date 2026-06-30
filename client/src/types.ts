@@ -41,6 +41,8 @@ export interface TeamResponse {
   totalSpend: number;
   budget: number;
   difficulty: Difficulty;
+  difficultyLevel: number;
+  escalationBonus: number;
   history: HistoryEntry[];
   activeRun: { run: MajorRun; roundLog: RoundResult[] } | null;
 }

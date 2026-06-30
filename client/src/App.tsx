@@ -13,6 +13,12 @@ import { isMuted, setMuted } from "./sound";
 
 const SAVED_TEAM_KEY = "csmajor_teamId";
 
+const DIFFICULTY_LABEL: Record<Difficulty, string> = {
+  easy: "Easy",
+  normal: "Normal",
+  hard: "Hard",
+};
+
 export default function App() {
   const [state, dispatch] = useReducer(appReducer, initialState);
   const [muted, setMutedState] = useState(isMuted());
@@ -130,6 +136,9 @@ export default function App() {
                   🏠 Home
                 </button>
               )}
+              <span className="difficulty-badge" title="Baseline difficulty chosen at draft time">
+                🎚️ {DIFFICULTY_LABEL[difficulty]}
+              </span>
               <button
                 className="secondary-btn"
                 onClick={() => dispatch({ type: "SET_SHOW_SETTINGS", open: !showSettings })}
@@ -182,6 +191,8 @@ export default function App() {
                   totalSpend={team.totalSpend}
                   budget={team.budget}
                   difficulty={team.difficulty}
+                  difficultyLevel={team.difficultyLevel}
+                  escalationBonus={team.escalationBonus}
                   history={team.history}
                   onSimulate={handleStartMajor}
                   onOpenTransfer={() => dispatch({ type: "SET_SHOW_TRANSFER", open: true })}

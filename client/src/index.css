@@ -203,6 +203,10 @@ body {
   font-size: 14px;
 }
 
+.escalation-note {
+  color: #ff9a5a;
+}
+
 .result-banner {
   font-size: 16px;
   font-weight: 600;
@@ -573,6 +577,21 @@ body {
   border-radius: 8px;
   cursor: pointer;
   margin-bottom: 12px;
+}
+
+.difficulty-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(91, 141, 239, 0.1);
+  border: 1px solid #3a5a99;
+  color: #9fc0ff;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 7px 12px;
+  border-radius: 8px;
+  white-space: nowrap;
+  cursor: default;
 }
 
 .secondary-btn:disabled {
@@ -2231,6 +2250,75 @@ h2 + .live-match {
 
 .chemistry-detail.muted {
   color: #6f7280;
+}
+
+.chemistry-web {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chemistry-web-svg {
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+}
+
+.chemistry-node-circle {
+  fill: #20232d;
+  stroke: #44485a;
+  stroke-width: 1.5;
+}
+
+.chemistry-node-initials {
+  fill: #cdd6f4;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.chemistry-node-name {
+  fill: #9a9aa8;
+  font-size: 9px;
+}
+
+.chemistry-web-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 4px;
+  font-size: 11px;
+  color: #9a9aa8;
+}
+
+.chemistry-web-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.chemistry-web-swatch {
+  display: inline-block;
+  width: 16px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.chemistry-web-swatch.team {
+  background: #f0b429;
+}
+
+.chemistry-web-swatch.country {
+  background: #4a7fd6;
+  background-image: repeating-linear-gradient(90deg, #4a7fd6 0 4px, transparent 4px 7px);
+}
+
+/* Draft progress-step hover tooltip */
+.progress-step-tooltip {
+  display: inline-block;
+  text-align: left;
+  line-height: 1.5;
 }
 
 /* Career stats / trophy cabinet */

@@ -18,6 +18,8 @@ export default function TeamSummary({
   totalSpend,
   budget,
   difficulty,
+  difficultyLevel,
+  escalationBonus,
   history,
   onSimulate,
   onOpenTransfer,
@@ -34,6 +36,8 @@ export default function TeamSummary({
   totalSpend: number;
   budget: number;
   difficulty: Difficulty;
+  difficultyLevel: number;
+  escalationBonus: number;
   history: HistoryEntry[];
   onSimulate: () => void;
   onOpenTransfer: () => void;
@@ -48,13 +52,20 @@ export default function TeamSummary({
       <h2>{teamName}</h2>
       <p className="hint">
         Overall team rating: {overall.toFixed(2)} · Difficulty: {DIFFICULTY_LABEL[difficulty]}
+        {difficultyLevel > 0 && (
+          <span className="escalation-note">
+            {" "}
+            · 🔺 {difficultyLevel} major win{difficultyLevel > 1 ? "s" : ""} — AI is +
+            {(escalationBonus * 100).toFixed(0)}% stronger than baseline
+          </span>
+        )}
       </p>
       <p className="hint">
         Budget spent: <strong>${totalSpend.toLocaleString()}</strong> / ${budget.toLocaleString()} (
         ${(budget - totalSpend).toLocaleString()} unspent)
       </p>
 
-      <ChemistryPanel chemistry={chemistry} />
+      <ChemistryPanel chemistry={chemistry} players={players} />
       <CareerStats history={history} />
       <div className="card-grid">
         {players.map((p, i) => (

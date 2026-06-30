@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import type { DraftSlot, Player, Role, Difficulty } from "../types";
 import { fetchConfig, fetchRoleOptions } from "../api";
 import PlayerCard from "./PlayerCard";
+import Tooltip from "./Tooltip";
+import Flag from "./Flag";
 import { playPickSound } from "../sound";
 
 const ROLE_LABELS: Record<DraftSlot, string> = {
@@ -30,6 +32,9 @@ export default function Draft({
   const [stepIndex, setStepIndex] = useState(0);
   const [candidates, setCandidates] = useState<Player[]>([]);
   const [picks, setPicks] = useState<Partial<Record<DraftSlot, string>>>({});
+  // Full player objects for already-picked slots, kept alongside `picks` (which only holds
+  // ids) purely so the progress steps can show who you picked on hover without a re-fetch.
+  const [pickedPlayers, setPickedPlayers] = useState<Partial<Record<DraftSlot, Player>>>({});
   const [loading, setLoading] = useState(true);
   const [rerolling, setRerolling] = useState(false);
   const [rerolledRoles, setRerolledRoles] = useState<Set<DraftSlot>>(new Set());
@@ -87,6 +92,7 @@ export default function Draft({
     const next = { ...picks, [role]: player.id };
     const nextRemaining = Math.max(0, remainingBudget - player.price);
     setPicks(next);
+    setPickedPlayers((prev) => ({ ...prev, [role]: player }));
     setRemainingBudget(nextRemaining);
     if (stepIndex < draftOrder.length - 1) {
       setStepIndex(stepIndex + 1);
@@ -115,14 +121,29 @@ export default function Draft({
   return (
     <div className="panel fade-in tall-panel">
       <div className="draft-progress">
-        {draftOrder.map((r, i) => (
-          <div
-            key={r}
-            className={`progress-step ${i === stepIndex ? "active" : ""} ${picks[r] ? "done" : ""}`}
-          >
-            {ROLE_LABELS[r]}
-          </div>
-        ))}
+        {draftOrder.map((r, i) => {
+          const picked = pickedPlayers[r];
+          const pill = (
+            <div className={`progress-step ${i === stepIndex ? "active" : ""} ${picks[r] ? "done" : ""}`}>
+              {ROLE_LABELS[r]}
+            </div>
+          );
+          if (!picked) return <span key={r}>{pill}</span>;
+          return (
+            <Tooltip
+              key={r}
+              content={
+                <span className="progress-step-tooltip">
+                  <Flag country={picked.country} size={14} /> <strong>{picked.name}</strong>
+                  <br />
+                  {picked.team} · Rating {picked.rating.toFixed(2)}
+                </span>
+              }
+            >
+              {pill}
+            </Tooltip>
+          );
+        })}
       </div>
 
       <div className="budget-bar">

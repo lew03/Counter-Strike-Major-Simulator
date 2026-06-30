@@ -40,6 +40,16 @@ function difficultyConfig(d) {
   return DIFFICULTIES[d] || DIFFICULTIES.normal;
 }
 
+// --- Difficulty escalation: each major you WIN nudges AI strength up for next time, so a
+// roster that solved one difficulty tier doesn't just keep steamrolling it forever — you have
+// to adapt (transfer, chase chemistry, etc.) to keep winning. Capped well short of pushing a
+// good roster into "unwinnable" territory (see the difficulty-calibration notes above). ---
+const ESCALATION_STEP = 0.01;
+const ESCALATION_MAX_WINS = 6; // caps the extra AI strength at +6%
+function escalatedAiBoost(baseAiBoost, difficultyLevel) {
+  return baseAiBoost + Math.min(difficultyLevel || 0, ESCALATION_MAX_WINS) * ESCALATION_STEP;
+}
+
 // --- Disk persistence: durable team rosters + career history survive restarts.
 //     In-progress major runs are intentionally NOT persisted (they're cheap to
 //     re-start and fragile to serialise) — only the roster and history are. ---
@@ -188,6 +198,8 @@ function teamView(team, teamId) {
     totalSpend: team.totalSpend,
     budget: team.budget,
     difficulty: team.difficulty,
+    difficultyLevel: team.difficultyLevel || 0,
+    escalationBonus: escalatedAiBoost(0, team.difficultyLevel), // the +X% on top of the base aiBoost
     history: team.history,
     activeRun,
   };
@@ -258,6 +270,7 @@ app.post("/api/team", (req, res) => {
     totalSpend,
     budget,
     difficulty: diffKey,
+    difficultyLevel: 0,
     bannedMap: validBannedMap,
     history: [],
     currentRun: null,
@@ -355,7 +368,7 @@ app.post("/api/major/:teamId/start", (req, res) => {
   };
 
   const { aiBoost } = difficultyConfig(team.difficulty);
-  const run = buildMajorRun(userTeam, teamEras, team.bannedMap, coaches, aiBoost);
+  const run = buildMajorRun(userTeam, teamEras, team.bannedMap, coaches, escalatedAiBoost(aiBoost, team.difficultyLevel));
   run.completedRounds = [];
   team.currentRun = run;
 
@@ -383,6 +396,11 @@ app.post("/api/major/:teamId/advance", (req, res) => {
       eliminatedAt: run.userEliminatedAt,
       champion: run.champion,
     });
+    // Difficulty escalation: each major actually won nudges AI strength up for next time,
+    // so a roster that's solved the current tier has to keep adapting rather than coasting.
+    if (run.userWon) {
+      team.difficultyLevel = (team.difficultyLevel || 0) + 1;
+    }
     saveTeams();
   }
 
