@@ -6,7 +6,7 @@ export default function GameDetail({ round, onBack }: { round: RoundResult; onBa
   const otherMatches = round.matches.filter((m) => !m.isUserMatch);
 
   return (
-    <div className="game-detail panel fade-in">
+    <div className="game-detail fade-in">
       <div className="game-detail-header">
         <button className="secondary-btn" onClick={onBack}>
           ← Back to Live

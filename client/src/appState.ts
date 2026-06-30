@@ -42,6 +42,7 @@ export type AppAction =
   | { type: "ADVANCE_RESULT"; run: MajorRun; roundResult: RoundResult | null }
   | { type: "ADVANCE_FAILED" }
   | { type: "RESTART" }
+  | { type: "GO_HOME" }
   | { type: "SET_SHOW_TRANSFER"; open: boolean };
 
 export function appReducer(state: AppState, action: AppAction): AppState {
@@ -113,6 +114,9 @@ export function appReducer(state: AppState, action: AppAction): AppState {
 
     case "RESTART":
       return { ...initialState, booting: false };
+
+    case "GO_HOME":
+      return state.team ? { ...state, stage: "team", showTransfer: false } : state;
 
     case "SET_SHOW_TRANSFER":
       return { ...state, showTransfer: action.open };

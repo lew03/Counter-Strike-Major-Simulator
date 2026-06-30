@@ -731,6 +731,20 @@ body {
   box-shadow: 0 0 0 1px rgba(91, 141, 239, 0.25);
 }
 
+.pending-bracket {
+  margin-top: 16px;
+}
+
+.pending-bracket .bracket-matches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.bracket-match-box.pending .bracket-team-row {
+  padding: 6px 8px;
+}
+
 .bracket-team-row {
   display: flex;
   justify-content: space-between;
@@ -897,31 +911,32 @@ tr.mvp-row {
 /* Live kill feed */
 
 .kill-feed {
-  margin-top: 10px;
+  margin-top: 12px;
   background: #14161c;
   border: 1px solid #2a2d38;
   border-radius: 8px;
-  padding: 8px 10px;
+  padding: 10px 14px;
 }
 
 .kill-feed-title {
-  font-size: 11px;
+  font-size: 12px;
   color: #6f7280;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .kill-feed-list {
-  max-height: 88px;
+  max-height: 240px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 5px;
 }
 
 .kill-feed-line {
-  font-size: 12px;
+  font-size: 13.5px;
+  line-height: 1.4;
   color: #c8cad6;
   font-family: "Consolas", "SFMono-Regular", monospace;
 }
@@ -1353,10 +1368,20 @@ tr.mvp-row {
   font-size: 13px;
 }
 
-/* Live match */
+/* Live match — nested inside major-view's single panel, not its own box */
 
 .live-match {
-  border-color: #5b8def;
+  border-top: 1px solid #2a2d38;
+  margin-top: 16px;
+  padding-top: 16px;
+}
+
+/* The live match always follows the round's <h2> heading directly — that heading
+   already provides the visual separation, so skip the redundant divider there. */
+h2 + .live-match {
+  border-top: none;
+  margin-top: 0;
+  padding-top: 0;
 }
 
 .live-match-header {
@@ -1465,12 +1490,12 @@ tr.mvp-row {
 
 .live-match-main {
   display: grid;
-  grid-template-columns: minmax(160px, 200px) 1fr 1fr;
-  gap: 10px;
+  grid-template-columns: minmax(280px, 360px) 1fr 1fr;
+  gap: 14px;
   align-items: start;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   .live-match-main {
     grid-template-columns: 1fr 1fr;
   }
@@ -1585,7 +1610,13 @@ tr.mvp-row {
   color: #c8cad6;
 }
 
-/* Saved game detail view */
+/* Saved game detail view — nested inside major-view's single panel */
+
+.game-detail {
+  border-top: 1px solid #2a2d38;
+  margin-top: 16px;
+  padding-top: 16px;
+}
 
 .game-detail-header {
   display: flex;
@@ -1681,12 +1712,63 @@ tr.mvp-row {
 .minimap-canvas {
   position: relative;
   width: 100%;
-  max-width: 170px;
+  max-width: 340px;
   aspect-ratio: 1;
   margin: 0 auto;
   background: #1b1e27;
   border-radius: 6px;
   overflow: hidden;
+}
+
+.minimap-dot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: left 0.55s ease, top 0.55s ease;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  z-index: 2;
+}
+
+.minimap-dot.ct {
+  background: #4a90e2;
+  box-shadow: 0 0 6px rgba(74, 144, 226, 0.85);
+}
+
+.minimap-dot.t {
+  background: #e2962f;
+  box-shadow: 0 0 6px rgba(226, 150, 47, 0.85);
+}
+
+.minimap-legend {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #9a9aa8;
+}
+
+.minimap-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.minimap-dot-sample {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.minimap-dot-sample.ct {
+  background: #4a90e2;
+}
+
+.minimap-dot-sample.t {
+  background: #e2962f;
 }
 
 .minimap-svg {
@@ -1718,7 +1800,7 @@ tr.mvp-row {
 .minimap-zone-label {
   position: absolute;
   transform: translate(-50%, -50%);
-  font-size: 7px;
+  font-size: 9px;
   color: #6f7280;
   text-transform: uppercase;
   letter-spacing: 0.02em;

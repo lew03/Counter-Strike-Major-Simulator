@@ -241,7 +241,7 @@ export default function LiveMatch({
 
   if (finished) {
     return (
-      <div className="live-match panel fade-in tall-panel">
+      <div className="live-match fade-in">
         <MatchRecap match={match} />
         <button className="primary-btn continue-btn" onClick={onContinue} disabled={advancing}>
           {advancing ? "Simulating round..." : isLastRound ? "See Result" : "Play Next Round"}
@@ -251,7 +251,7 @@ export default function LiveMatch({
   }
 
   return (
-    <div className="live-match panel fade-in tall-panel">
+    <div className="live-match fade-in">
       <div className="live-match-header">
         <span className="live-dot" aria-hidden="true" />
         <span>LIVE — Your Match</span>
@@ -292,7 +292,7 @@ export default function LiveMatch({
           </div>
 
           <div className="live-match-main">
-            <MiniMap mapName={map.name} />
+            <MiniMap mapName={map.name} roundIndex={roundIndex} totalRounds={timeline.length} />
 
             {scheduleA.length > 0 && scheduleB.length > 0 && (
               <>

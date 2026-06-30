@@ -82,6 +82,10 @@ export default function App() {
     dispatch({ type: "RESTART" });
   };
 
+  const handleGoHome = () => {
+    dispatch({ type: "GO_HOME" });
+  };
+
   const toggleMute = () => {
     const next = !muted;
     setMuted(next);
@@ -112,6 +116,11 @@ export default function App() {
               <span className="logo-text">Major Simulator</span>
             </div>
             <div className="header-actions">
+              {team && stage === "major" && (
+                <button className="secondary-btn" onClick={handleGoHome}>
+                  🏠 Home
+                </button>
+              )}
               <button className="secondary-btn" onClick={handleRestart}>
                 Start New Draft
               </button>

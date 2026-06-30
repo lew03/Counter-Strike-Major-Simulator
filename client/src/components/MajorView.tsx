@@ -50,11 +50,16 @@ export default function MajorView({
   }, [activeRound, userMatch]);
 
   // Fired by the "Play Next Round" button living inside the just-finished LiveMatch view.
-  // Fetches the next round (if any) before revealing this one, so the live match stays on
-  // screen the whole time instead of bouncing through an empty "between rounds" panel.
+  // Normally fetches the next round immediately (if any) before revealing this one, so the
+  // live match stays on screen the whole time instead of bouncing through an empty
+  // "between rounds" panel. EXCEPTION: the round that clinches Playoff qualification pauses
+  // here instead — the user should see the seeded bracket before the Quarterfinal auto-plays,
+  // rather than being swept straight into a Bo3 and landing in the Semifinal with no warning.
   const handleContinueFromMatch = async () => {
     const justWatchedCount = roundLog.length;
-    if (!run.finished) {
+    const justWatched = roundLog[justWatchedCount - 1];
+    const isStageTransition = !!justWatched?.advancedToPlayoffs;
+    if (!run.finished && !isStageTransition) {
       await onAdvance();
     }
     setRevealedCount(justWatchedCount);
@@ -116,11 +121,26 @@ export default function MajorView({
   }
 
   const bracketVisible = swissRounds.length > 0 || playoffRounds.length > 0;
+  // Once the backend has flipped to playoffs but no Quarterfinal has been played/revealed
+  // yet, show the seeded bracket so the user sees who they're about to face before clicking in.
+  // Gated on !activeRound: the backend resolves the deciding Swiss round (and flips run.playoff)
+  // in the same call that returns it, so without this check the bracket — and the fact the user
+  // just advanced — would spoil the still-playing live replay of that final Swiss match.
+  const showPendingBracket = !activeRound && playoffRounds.length === 0 && !!run.playoff;
+  const pendingPairs: { name: string; isUser: boolean }[][] = [];
+  if (showPendingBracket && run.playoff) {
+    for (let i = 0; i < run.playoff.remaining.length; i += 2) {
+      pendingPairs.push([run.playoff.remaining[i], run.playoff.remaining[i + 1]]);
+    }
+  }
 
+  // Single bordered "window" for the whole round: bracket/standings recap up top, the
+  // live match (or game-over / saved-round detail) below — all inside one scroll region,
+  // so re-running a major doesn't stack a second box above the live simulation.
   return (
-    <>
+    <div className="panel fade-in major-view tall-panel">
       {bracketVisible && (
-        <div className="panel fade-in major-view">
+        <div className="major-bracket-summary">
           <p className="hint">
             Majors won: {wins} / {history.length} attempts
             {revealedRounds.length > 0 && " — click any round below to revisit its saved result"}
@@ -138,6 +158,33 @@ export default function MajorView({
           )}
 
           {playoffRounds.length > 0 && <PlayoffTree rounds={playoffRounds} onSelect={setViewingRound} />}
+
+          {showPendingBracket && pendingPairs.length > 0 && (
+            <div className="pending-bracket">
+              <div className="bracket-round-title">Quarterfinal Matchups</div>
+              <div className="bracket-matches">
+                {pendingPairs.map((pair, i) => (
+                  <div
+                    key={i}
+                    className={`bracket-match-box pending ${pair.some((p) => p.isUser) ? "match-user" : ""}`}
+                  >
+                    {pair.map((t) => (
+                      <div key={t.name} className={`bracket-team-row ${t.isUser ? "is-user" : ""}`}>
+                        <span className="bracket-team-name">
+                          {t.isUser && (
+                            <span className="user-star" aria-hidden="true">
+                              ★{" "}
+                            </span>
+                          )}
+                          {t.name}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {displayStandings.length > 0 && (
             <details className="standings-details">
@@ -181,21 +228,11 @@ export default function MajorView({
       )}
 
       {viewingRound ? (
-        <div className="panel fade-in tall-panel">
-          <GameDetail round={viewingRound} onBack={() => setViewingRound(null)} />
-        </div>
+        <GameDetail round={viewingRound} onBack={() => setViewingRound(null)} />
       ) : fullyRevealedAndFinished ? (
-        <div className="panel fade-in tall-panel game-over-panel">
-          <GameOverScreen
-            run={run}
-            history={history}
-            lastMatch={lastMatch}
-            onRestart={onRestart}
-            onNewDraft={onNewDraft}
-          />
-        </div>
+        <GameOverScreen run={run} history={history} lastMatch={lastMatch} onRestart={onRestart} onNewDraft={onNewDraft} />
       ) : (
-        <div className="panel fade-in major-view tall-panel">
+        <>
           <h2>
             {headerStage === "swiss_round" && `Swiss Stage — Round ${swissRounds.length + 1} / 5`}
             {headerStage === "playoff_round" && "Playoffs"}
@@ -216,8 +253,8 @@ export default function MajorView({
               {advancing ? "Simulating round..." : "Play Next Round"}
             </button>
           )}
-        </div>
+        </>
       )}
-    </>
+    </div>
   );
 }
