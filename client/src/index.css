@@ -1513,6 +1513,185 @@ tr.mvp-row {
   font-size: 13px;
 }
 
+/* ── Infinite Mode ─────────────────────────────────────────────────────────── */
+
+.infinite-mode-btn {
+  background: linear-gradient(135deg, #3a1a6e 0%, #1e3a7a 100%);
+  border: 1px solid #6a4aae;
+  color: #d0c0ff;
+  font-weight: 600;
+}
+.infinite-mode-btn:hover {
+  background: linear-gradient(135deg, #4a2a8e 0%, #2e4a9a 100%);
+  border-color: #9a7aee;
+  color: #fff;
+}
+
+.inf-menu {
+  max-width: 640px;
+}
+
+.inf-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #d0c0ff;
+  margin-bottom: 4px;
+}
+
+.inf-subtitle {
+  margin-bottom: 20px;
+}
+
+/* Stats row */
+.inf-stats-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.inf-stat {
+  flex: 1;
+  min-width: 80px;
+  background: #1a1a2e;
+  border: 1px solid #2a2a4a;
+  border-radius: 8px;
+  padding: 10px 12px;
+  text-align: center;
+}
+.inf-stat-val {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #d0c0ff;
+}
+.inf-stat-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6a6a8a;
+  margin-top: 2px;
+}
+
+/* Difficulty bar */
+.inf-difficulty {
+  margin-bottom: 16px;
+}
+.inf-difficulty-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #9a9ab8;
+  display: block;
+  margin-bottom: 6px;
+}
+.inf-difficulty-bar {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 4px;
+}
+.inf-difficulty-seg {
+  flex: 1;
+  height: 8px;
+  border-radius: 2px;
+  background: #2a2a3e;
+  transition: background 0.3s;
+}
+.inf-difficulty-game {
+  font-size: 0.75rem;
+  color: #6a6a8a;
+}
+
+/* Transfer countdown */
+.inf-transfer-countdown {
+  font-size: 0.85rem;
+  color: #9a9ab8;
+  margin-bottom: 16px;
+  padding: 8px 12px;
+  background: #1a1a2e;
+  border: 1px solid #2a2a4a;
+  border-radius: 6px;
+}
+.inf-transfer-countdown strong {
+  color: #d0c0ff;
+}
+
+/* History list */
+.inf-history {
+  margin-bottom: 20px;
+}
+.inf-history-title {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #6a6a8a;
+  margin-bottom: 6px;
+}
+.inf-hist-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 8px;
+  border-radius: 5px;
+  font-size: 0.82rem;
+  margin-bottom: 2px;
+}
+.inf-hist-row.inf-won  { background: rgba(95, 212, 117, 0.07); }
+.inf-hist-row.inf-lost { background: rgba(220, 80, 80, 0.10); }
+.inf-hist-num  { color: #5a5a7a; font-size: 0.72rem; width: 28px; flex-shrink: 0; }
+.inf-hist-opp  { flex: 1; color: #c8c8e0; }
+.inf-hist-result { font-weight: 600; white-space: nowrap; }
+.inf-hist-row.inf-won  .inf-hist-result { color: #5fd475; }
+.inf-hist-row.inf-lost .inf-hist-result { color: #e07070; }
+
+/* Actions */
+.inf-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.inf-start-btn {
+  flex: 1;
+  min-width: 140px;
+  font-size: 1rem;
+  padding: 14px 20px;
+}
+
+/* Game over */
+.inf-gameover {
+  text-align: center;
+  max-width: 500px;
+}
+.inf-gameover-icon {
+  font-size: 3rem;
+  margin-bottom: 8px;
+}
+.inf-gameover-score {
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: #d0c0ff;
+  line-height: 1;
+}
+.inf-gameover-score-label {
+  font-size: 0.85rem;
+  color: #6a6a8a;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.inf-gameover-sub {
+  font-size: 0.9rem;
+  color: #9a9ab8;
+  margin-bottom: 20px;
+}
+.inf-gameover-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+.inf-gameover .inf-history {
+  text-align: left;
+}
+
 /* Game over screen */
 
 .game-over-screen {

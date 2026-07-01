@@ -16,6 +16,9 @@ const {
   advanceMajor,
   prizeForResult,
   moraleMultiplier,
+  infiniteOpponentBoost,
+  infinitePrizePerWin,
+  playInfiniteGame,
 } = require("./simulation");
 
 const app = express();
@@ -63,7 +66,7 @@ function loadTeams() {
     const raw = fs.readFileSync(STATE_FILE, "utf8");
     const obj = JSON.parse(raw);
     for (const [id, t] of Object.entries(obj)) {
-      teams.set(id, { ...t, currentRun: null });
+      teams.set(id, { ...t, currentRun: null, infiniteRun: null });
     }
     console.log(`Loaded ${teams.size} saved team(s) from disk.`);
   } catch {
@@ -79,7 +82,8 @@ function saveTeams() {
     saveQueued = false;
     const obj = {};
     for (const [id, t] of teams.entries()) {
-      const { currentRun, ...durable } = t;
+      // eslint-disable-next-line no-unused-vars
+      const { currentRun, infiniteRun, ...durable } = t;
       obj[id] = durable;
     }
     try {
@@ -209,6 +213,22 @@ function teamView(team, teamId) {
     moraleMultiplier: moraleMultiplier(team.lossStreak),
     history: team.history,
     activeRun,
+    infiniteBestScore: team.infiniteBestScore || 0,
+  };
+}
+
+function infiniteRunView(run) {
+  return {
+    gamesPlayed: run.gamesPlayed,
+    gamesWon: run.gamesWon,
+    pendingPrize: run.pendingPrize,
+    totalEarned: run.totalEarned,
+    eliminated: run.eliminated,
+    pendingTransfer: run.pendingTransfer,
+    nextTransferAt: run.nextTransferAt,
+    currentMatch: run.currentMatch || null,
+    history: run.history || [],
+    opponentBoost: infiniteOpponentBoost(run.gamesWon),
   };
 }
 
@@ -444,6 +464,91 @@ app.post("/api/team/:teamId/rebuild", (req, res) => {
   saveTeams();
 
   res.json(teamView(team, req.params.teamId));
+});
+
+// --- Infinite Mode endpoints ---
+
+// Start (or restart) an infinite run. The run is in-memory only (like currentRun) so a
+// refresh or Home → back resets it — that's intentional; the best-score is what persists.
+app.post("/api/infinite/:teamId/start", (req, res) => {
+  const team = teams.get(req.params.teamId);
+  if (!team) return res.status(404).json({ error: "Team not found" });
+  team.infiniteRun = {
+    gamesPlayed: 0,
+    gamesWon: 0,
+    pendingPrize: 0,
+    totalEarned: 0,
+    eliminated: false,
+    pendingTransfer: false,
+    nextTransferAt: 5,
+    currentMatch: null,
+    history: [],
+  };
+  res.json({ run: infiniteRunView(team.infiniteRun) });
+});
+
+// Advance to the next game: pick a random era opponent, simulate a Bo1, update state.
+// Every 5 consecutive wins the prize pool is flushed into the team budget and a transfer
+// window is opened. A loss ends the run.
+app.post("/api/infinite/:teamId/advance", (req, res) => {
+  const team = teams.get(req.params.teamId);
+  if (!team || !team.infiniteRun) return res.status(404).json({ error: "No active infinite run" });
+  const run = team.infiniteRun;
+  if (run.eliminated) return res.status(400).json({ error: "Run is over — start a new one" });
+  if (run.pendingTransfer) return res.status(400).json({ error: "Resolve the transfer window first" });
+
+  // Avoid repeating the last 4 opponents to keep variety.
+  const recentEraIds = new Set(run.history.slice(-4).map((h) => h.opponentEraId));
+  const freshPool = teamEras.filter((e) => !recentEraIds.has(e.id));
+  const pool = freshPool.length >= 3 ? freshPool : teamEras;
+  const era = pool[Math.floor(Math.random() * pool.length)];
+
+  const { won, match, opponentName } = playInfiniteGame(
+    { name: team.name, players: team.players, coach: team.coach, isUser: true },
+    era,
+    run.gamesWon,
+    coaches
+  );
+
+  run.gamesPlayed++;
+  run.currentMatch = match;
+
+  if (won) {
+    run.gamesWon++;
+    const prize = infinitePrizePerWin(run.gamesWon);
+    run.pendingPrize += prize;
+    run.totalEarned += prize;
+    run.history.push({ gameNum: run.gamesPlayed, opponentName, opponentEraId: era.id, won: true, prize });
+
+    if (run.gamesWon % 5 === 0) {
+      // Flush prize money into the team's permanent budget and open the transfer window.
+      team.budget += run.pendingPrize;
+      run.pendingTransfer = true;
+      run.nextTransferAt = run.gamesWon + 5;
+      run.pendingPrize = 0;
+      saveTeams();
+    }
+  } else {
+    run.eliminated = true;
+    run.history.push({ gameNum: run.gamesPlayed, opponentName, opponentEraId: era.id, won: false, prize: 0 });
+    // Persist best score and a short run history.
+    if ((team.infiniteBestScore || 0) < run.gamesWon) team.infiniteBestScore = run.gamesWon;
+    if (!team.infiniteHistory) team.infiniteHistory = [];
+    team.infiniteHistory.unshift({ timestamp: Date.now(), gamesWon: run.gamesWon, totalEarned: run.totalEarned });
+    team.infiniteHistory = team.infiniteHistory.slice(0, 5);
+    saveTeams();
+  }
+
+  res.json({ run: infiniteRunView(run), team: teamView(team, req.params.teamId) });
+});
+
+// Mark the transfer window as resolved (called after the player either commits a transfer
+// or explicitly skips it). Clears pendingTransfer so advance can be called again.
+app.post("/api/infinite/:teamId/confirm-transfer", (req, res) => {
+  const team = teams.get(req.params.teamId);
+  if (!team || !team.infiniteRun) return res.status(404).json({ error: "No active infinite run" });
+  team.infiniteRun.pendingTransfer = false;
+  res.json({ run: infiniteRunView(team.infiniteRun) });
 });
 
 app.post("/api/major/:teamId/start", (req, res) => {

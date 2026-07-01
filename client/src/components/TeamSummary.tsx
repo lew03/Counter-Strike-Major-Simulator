@@ -25,6 +25,7 @@ export default function TeamSummary({
   history,
   onSimulate,
   onOpenTransfer,
+  onPlayInfinite,
   simulating,
   hasActiveRun,
   onResume,
@@ -46,6 +47,7 @@ export default function TeamSummary({
   history: HistoryEntry[];
   onSimulate: () => void;
   onOpenTransfer: () => void;
+  onPlayInfinite: () => void;
   simulating: boolean;
   hasActiveRun: boolean;
   onResume: () => void;
@@ -101,14 +103,19 @@ export default function TeamSummary({
               {simulating ? "Simulating..." : attempts === 0 ? "🔁 Run the Major" : "🔁 Run Another Major"}
             </button>
           )}
-          <button className="secondary-btn actions-btn" onClick={onOpenTransfer}>
-            🔁 Transfer Window
+          <button className="infinite-mode-btn actions-btn" onClick={onPlayInfinite}>
+            ♾️ Infinite Mode
           </button>
         </div>
         <div className="actions-row">
+          <button className="secondary-btn actions-btn" onClick={onOpenTransfer}>
+            🔁 Transfer Window
+          </button>
           <button className="secondary-btn actions-btn" onClick={onRebuild}>
             🛠️ Rebuild Roster
           </button>
+        </div>
+        <div className="actions-row">
           <button className="danger-btn actions-btn" onClick={onNewDraft}>
             🗑️ Start New Draft
           </button>

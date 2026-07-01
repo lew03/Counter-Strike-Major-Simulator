@@ -1,6 +1,6 @@
 import { useEffect, useReducer, useState } from "react";
 import type { Difficulty, Role, TeamResponse } from "./types";
-import { createTeam, rebuildTeam, startMajor, advanceMajor as advanceMajorApi, fetchTeam } from "./api";
+import { createTeam, rebuildTeam, startMajor, advanceMajor as advanceMajorApi, fetchTeam, startInfinite, advanceInfinite, confirmInfiniteTransfer } from "./api";
 import { appReducer, initialState } from "./appState";
 import Welcome from "./components/Welcome";
 import TeamName from "./components/TeamName";
@@ -8,6 +8,7 @@ import Draft from "./components/Draft";
 import TeamSummary from "./components/TeamSummary";
 import TransferWindow from "./components/TransferWindow";
 import MajorView from "./components/MajorView";
+import InfiniteMode from "./components/InfiniteMode";
 import SettingsPage from "./components/SettingsPage";
 import Tooltip from "./components/Tooltip";
 import { isMuted, setMuted } from "./sound";
@@ -116,6 +117,56 @@ export default function App() {
     dispatch({ type: "START_REBUILD" });
   };
 
+  const handleStartInfinite = async () => {
+    if (!state.team) return;
+    try {
+      const res = await startInfinite(state.team.teamId);
+      dispatch({ type: "INFINITE_STARTED", run: res.run });
+    } catch (e: any) {
+      dispatch({ type: "SET_ERROR", error: e.message });
+    }
+  };
+
+  const handleAdvanceInfinite = async () => {
+    if (!state.team) return;
+    dispatch({ type: "INFINITE_ADVANCE_REQUEST" });
+    try {
+      const res = await advanceInfinite(state.team.teamId);
+      dispatch({ type: "INFINITE_ADVANCE_RESULT", run: res.run, team: res.team });
+    } catch (e: any) {
+      dispatch({ type: "SET_ERROR", error: e.message });
+      dispatch({ type: "INFINITE_ADVANCE_FAILED" });
+    }
+  };
+
+  const handleInfiniteTransferComplete = async (updated: import("./types").TeamResponse) => {
+    dispatch({ type: "UPDATE_TEAM", team: updated });
+    if (state.team) {
+      try {
+        const res = await confirmInfiniteTransfer(state.team.teamId);
+        dispatch({ type: "INFINITE_TRANSFER_CONFIRMED", run: res.run });
+      } catch { /* non-critical — run state will be cleaned up on next advance */ }
+    }
+  };
+
+  const handleInfiniteSkipTransfer = async () => {
+    if (!state.team) return;
+    try {
+      const res = await confirmInfiniteTransfer(state.team.teamId);
+      dispatch({ type: "INFINITE_TRANSFER_CONFIRMED", run: res.run });
+    } catch { /* non-critical */ }
+  };
+
+  const handleRestartInfinite = async () => {
+    if (!state.team) return;
+    try {
+      const res = await startInfinite(state.team.teamId);
+      dispatch({ type: "INFINITE_STARTED", run: res.run });
+    } catch (e: any) {
+      dispatch({ type: "SET_ERROR", error: e.message });
+    }
+  };
+
   const toggleMute = () => {
     const next = !muted;
     setMuted(next);
@@ -143,6 +194,8 @@ export default function App() {
     showSettings,
     rebuilding,
     lastPrizeMoney,
+    infiniteRun,
+    infiniteAdvancing,
   } = state;
   const hasActiveRun = !!run && !run.finished;
 
@@ -165,7 +218,7 @@ export default function App() {
               <span className="logo-text">Frag GM</span>
             </button>
             <div className="header-actions">
-              {team && stage === "major" && (
+              {team && (stage === "major" || stage === "infinite") && (
                 <button className="secondary-btn" onClick={handleGoHome}>
                   🏠 Home
                 </button>
@@ -257,11 +310,25 @@ export default function App() {
                   history={team.history}
                   onSimulate={handleStartMajor}
                   onOpenTransfer={() => dispatch({ type: "SET_SHOW_TRANSFER", open: true })}
+                  onPlayInfinite={handleStartInfinite}
                   simulating={false}
                   hasActiveRun={hasActiveRun}
                   onResume={handleResumeTournament}
                   onNewDraft={handleRestart}
                   onRebuild={handleStartRebuild}
+                />
+              )}
+
+              {stage === "infinite" && infiniteRun && team && (
+                <InfiniteMode
+                  run={infiniteRun}
+                  team={team}
+                  onAdvance={handleAdvanceInfinite}
+                  onTransferComplete={handleInfiniteTransferComplete}
+                  onSkipTransfer={handleInfiniteSkipTransfer}
+                  onRestart={handleRestartInfinite}
+                  onGoHome={handleGoHome}
+                  advancing={infiniteAdvancing}
                 />
               )}
 

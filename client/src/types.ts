@@ -47,6 +47,37 @@ export interface TeamResponse {
   moraleMultiplier: number;
   history: HistoryEntry[];
   activeRun: { run: MajorRun; roundLog: RoundResult[] } | null;
+  infiniteBestScore: number;
+}
+
+export interface InfiniteMatchEntry {
+  gameNum: number;
+  opponentName: string;
+  opponentEraId: string;
+  won: boolean;
+  prize: number;
+}
+
+export interface InfiniteRunView {
+  gamesPlayed: number;
+  gamesWon: number;
+  pendingPrize: number;
+  totalEarned: number;
+  eliminated: boolean;
+  pendingTransfer: boolean;
+  nextTransferAt: number;
+  currentMatch: MatchResult | null;
+  history: InfiniteMatchEntry[];
+  opponentBoost: number;
+}
+
+export interface StartInfiniteResponse {
+  run: InfiniteRunView;
+}
+
+export interface AdvanceInfiniteResponse {
+  run: InfiniteRunView;
+  team: TeamResponse;
 }
 
 export interface ScoreboardRow {

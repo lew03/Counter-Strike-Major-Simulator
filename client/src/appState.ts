@@ -1,6 +1,6 @@
-import type { Difficulty, MajorRun, RoundResult, TeamResponse } from "./types";
+import type { Difficulty, MajorRun, RoundResult, TeamResponse, InfiniteRunView } from "./types";
 
-export type Stage = "welcome" | "name" | "draft" | "team" | "major";
+export type Stage = "welcome" | "name" | "draft" | "team" | "major" | "infinite";
 
 export interface AppState {
   booting: boolean;
@@ -19,6 +19,8 @@ export interface AppState {
   // new team — changes which API handleDraftComplete calls and skips the team-naming screen.
   rebuilding: boolean;
   lastPrizeMoney: number;
+  infiniteRun: InfiniteRunView | null;
+  infiniteAdvancing: boolean;
 }
 
 export const initialState: AppState = {
@@ -36,6 +38,8 @@ export const initialState: AppState = {
   showSettings: false,
   rebuilding: false,
   lastPrizeMoney: 0,
+  infiniteRun: null,
+  infiniteAdvancing: false,
 };
 
 // Pulls the resumable run + round log (if any) off a freshly-fetched team payload.
@@ -59,7 +63,13 @@ export type AppAction =
   | { type: "RESUME_TOURNAMENT" }
   | { type: "START_REBUILD" }
   | { type: "SET_SHOW_TRANSFER"; open: boolean }
-  | { type: "SET_SHOW_SETTINGS"; open: boolean };
+  | { type: "SET_SHOW_SETTINGS"; open: boolean }
+  | { type: "INFINITE_STARTED"; run: InfiniteRunView }
+  | { type: "INFINITE_ADVANCE_REQUEST" }
+  | { type: "INFINITE_ADVANCE_RESULT"; run: InfiniteRunView; team: TeamResponse }
+  | { type: "INFINITE_ADVANCE_FAILED" }
+  | { type: "INFINITE_TRANSFER_CONFIRMED"; run: InfiniteRunView }
+  | { type: "UPDATE_TEAM"; team: TeamResponse };
 
 export function appReducer(state: AppState, action: AppAction): AppState {
   switch (action.type) {
@@ -137,7 +147,27 @@ export function appReducer(state: AppState, action: AppAction): AppState {
       return { ...initialState, booting: false };
 
     case "GO_HOME":
-      return state.team ? { ...state, stage: "team", showTransfer: false, showSettings: false } : state;
+      return state.team
+        ? { ...state, stage: "team", showTransfer: false, showSettings: false, infiniteRun: null }
+        : state;
+
+    case "UPDATE_TEAM":
+      return { ...state, team: action.team };
+
+    case "INFINITE_STARTED":
+      return { ...state, infiniteRun: action.run, infiniteAdvancing: false, stage: "infinite", error: null };
+
+    case "INFINITE_ADVANCE_REQUEST":
+      return { ...state, infiniteAdvancing: true, error: null };
+
+    case "INFINITE_ADVANCE_RESULT":
+      return { ...state, infiniteAdvancing: false, infiniteRun: action.run, team: action.team };
+
+    case "INFINITE_ADVANCE_FAILED":
+      return { ...state, infiniteAdvancing: false };
+
+    case "INFINITE_TRANSFER_CONFIRMED":
+      return { ...state, infiniteRun: action.run };
 
     case "RESUME_TOURNAMENT":
       return state.run && !state.run.finished ? { ...state, stage: "major", showSettings: false } : state;

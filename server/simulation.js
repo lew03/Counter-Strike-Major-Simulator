@@ -549,6 +549,46 @@ function moraleMultiplier(lossStreak) {
   return 1 - Math.min(extra * MORALE_PENALTY_STEP, MORALE_PENALTY_CAP);
 }
 
+// --- Infinite Mode ---
+
+// Difficulty ramps from 0.72x (very gentle, game 1) to 1.15x (brutal, game 25+).
+// Returned boost is applied to every AI player on the opponent team.
+function infiniteOpponentBoost(gamesWon) {
+  if (gamesWon <= 5)  return 0.72 + (gamesWon / 5) * 0.10;          // 0.72 → 0.82
+  if (gamesWon <= 10) return 0.82 + ((gamesWon - 5)  / 5) * 0.10;   // 0.82 → 0.92
+  if (gamesWon <= 15) return 0.92 + ((gamesWon - 10) / 5) * 0.06;   // 0.92 → 0.98
+  if (gamesWon <= 20) return 0.98 + ((gamesWon - 15) / 5) * 0.04;   // 0.98 → 1.02
+  return Math.min(1.15, 1.02 + (gamesWon - 20) * 0.013);            // 1.02 → 1.15
+}
+
+// Prize per win escalates with depth — early wins are cheap, deep wins pay big.
+function infinitePrizePerWin(gamesWon) {
+  if (gamesWon <= 5)  return 30000;
+  if (gamesWon <= 10) return 50000;
+  if (gamesWon <= 15) return 70000;
+  if (gamesWon <= 20) return 100000;
+  return 130000;
+}
+
+// Simulate one Infinite Mode game (always Bo1). The user faces a randomly-chosen era
+// team boosted to match the current difficulty tier, with fresh per-game form applied
+// to both rosters.
+function playInfiniteGame(userTeam, opponentEra, gamesWon, coachesPool) {
+  const boost = infiniteOpponentBoost(gamesWon);
+  const opponent = teamFromEra(opponentEra, coachesPool, boost);
+  const formedPlayers = applyForm(userTeam.players);
+  const formedUser = {
+    ...userTeam,
+    isUser: true,
+    players: formedPlayers,
+    overall: applyCoach(teamOverallRating(formedPlayers), userTeam.coach),
+  };
+  const result = playBoN(formedUser, opponent, 1, true, MAP_POOL);
+  const won = !!result.winner.isUser;
+  const summary = matchSummary(formedUser, opponent, result, "Bo1");
+  return { won, match: summary, opponentName: opponent.name };
+}
+
 module.exports = {
   ROLES,
   ROLE_WEIGHTS,
@@ -563,4 +603,7 @@ module.exports = {
   standingsView,
   prizeForResult,
   moraleMultiplier,
+  infiniteOpponentBoost,
+  infinitePrizePerWin,
+  playInfiniteGame,
 };

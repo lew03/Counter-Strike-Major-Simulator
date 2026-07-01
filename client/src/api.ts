@@ -7,6 +7,9 @@ import type {
   TeamResponse,
   StartMajorResponse,
   AdvanceMajorResponse,
+  StartInfiniteResponse,
+  AdvanceInfiniteResponse,
+  InfiniteRunView,
 } from "./types";
 
 const BASE = "/api";
@@ -102,6 +105,27 @@ export async function rebuildTeam(
     const err = await res.json().catch(() => ({ error: "Failed to rebuild roster" }));
     throw new Error(err.error || "Failed to rebuild roster");
   }
+  return res.json();
+}
+
+export async function startInfinite(teamId: string): Promise<StartInfiniteResponse> {
+  const res = await fetch(`${BASE}/infinite/${teamId}/start`, { method: "POST" });
+  if (!res.ok) throw new Error("Failed to start infinite run");
+  return res.json();
+}
+
+export async function advanceInfinite(teamId: string): Promise<AdvanceInfiniteResponse> {
+  const res = await fetch(`${BASE}/infinite/${teamId}/advance`, { method: "POST" });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ error: "Failed to advance" }));
+    throw new Error(err.error || "Failed to advance");
+  }
+  return res.json();
+}
+
+export async function confirmInfiniteTransfer(teamId: string): Promise<{ run: InfiniteRunView }> {
+  const res = await fetch(`${BASE}/infinite/${teamId}/confirm-transfer`, { method: "POST" });
+  if (!res.ok) throw new Error("Failed to confirm transfer");
   return res.json();
 }
 
