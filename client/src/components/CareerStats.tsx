@@ -1,4 +1,5 @@
 import type { HistoryEntry } from "../types";
+import Icon from "./Icon";
 
 const FINISH_RANK = ["Champion", "Grand Final", "Semifinal", "Quarterfinal", "Swiss Stage"];
 
@@ -25,7 +26,7 @@ export default function CareerStats({ history }: { history: HistoryEntry[] }) {
 
   return (
     <div className="career-stats">
-      <div className="career-stats-title">🏆 Career</div>
+      <div className="career-stats-title"><Icon name="trophy" size={16} /> Career</div>
       <div className="career-stats-grid">
         <div className="career-stat">
           <div className="career-stat-value">{wins}</div>

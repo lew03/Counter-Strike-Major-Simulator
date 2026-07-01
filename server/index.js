@@ -220,6 +220,7 @@ function teamView(team, teamId) {
     history: team.history,
     activeRun,
     infiniteBestScore: team.infiniteBestScore || 0,
+    infiniteHistory: team.infiniteHistory || [],
     gameMode: team.gameMode || "major",
   };
 }
@@ -426,58 +427,6 @@ app.post("/api/team/:teamId/transfer", (req, res) => {
   res.json(teamView(team, req.params.teamId));
 });
 
-// Rebuild: a full re-draft for an EXISTING team — every slot can change (unlike the 2-change
-// Transfer Window), spent against the team's current (prize-money-grown) budget. Unlike
-// "Start New Draft", this keeps the team's identity: name, career history, trophy cabinet, and
-// difficulty escalation all carry over. Meant as the actual answer to "I lost and want to
-// retool" without nuking everything you've built.
-app.post("/api/team/:teamId/rebuild", (req, res) => {
-  const team = teams.get(req.params.teamId);
-  if (!team) return res.status(404).json({ error: "Team not found" });
-  const { picks, coachId } = req.body;
-  if (!picks || ROLES.some((r) => !picks[r]) || !coachId) {
-    return res.status(400).json({ error: "Must provide a pick for every role plus a coach" });
-  }
-
-  let roster, coach;
-  try {
-    roster = ROLES.map((role) => {
-      const player = players.find((p) => p.id === picks[role] && p.role === role);
-      if (!player) throw new Error(`Invalid pick for role ${role}`);
-      return player;
-    });
-    coach = coaches.find((c) => c.id === coachId);
-    if (!coach) throw new Error("Invalid coach pick");
-  } catch (e) {
-    return res.status(400).json({ error: e.message });
-  }
-
-  // Apply $150k rebuild fee first so the budget check is against the reduced cap.
-  // Floored at the original difficulty budget so you're never locked below the
-  // starting point — prize money above that is fair game to lose.
-  const REBUILD_FEE = 150000;
-  // Floor against the team's OWN mode budget — using the Major table for an Infinite team
-  // would raise its floor above its actual starting budget, handing out free money on rebuild.
-  const baseBudget = difficultyConfig(team.difficulty, team.gameMode).budget;
-  const budgetAfterFee = Math.max(baseBudget, team.budget - REBUILD_FEE);
-
-  const totalSpend = roster.reduce((sum, p) => sum + p.price, 0) + coach.price;
-  if (totalSpend > budgetAfterFee) {
-    return res.status(400).json({ error: `Roster costs $${totalSpend.toLocaleString()}, over the $${budgetAfterFee.toLocaleString()} post-fee budget` });
-  }
-
-  team.budget = budgetAfterFee;
-  team.players = roster;
-  team.coach = coach;
-  team.totalSpend = totalSpend;
-  team.overall = applyCoach(teamOverallRating(roster), coach);
-  team.currentRun = null;
-  team.lossStreak = 0; // a full rebuild is the ultimate "re-evaluation"
-  saveTeams();
-
-  res.json(teamView(team, req.params.teamId));
-});
-
 // --- Infinite Mode endpoints ---
 
 // Start (or restart) an infinite run. The run is in-memory only (like currentRun) so a
@@ -619,8 +568,8 @@ app.post("/api/major/:teamId/advance", (req, res) => {
       champion: run.champion,
     });
 
-    // Prize money: grows the budget based on actual results, so the Transfer Window (and
-    // Rebuild) can eventually afford a real upgrade instead of only lateral swaps.
+    // Prize money: grows the budget based on actual results, so the Transfer Window can
+    // eventually afford a real upgrade instead of only lateral swaps.
     prizeMoney = prizeForResult(run);
     if (prizeMoney > 0) team.budget += prizeMoney;
 

@@ -2,6 +2,7 @@ import type { Player, HistoryEntry, Difficulty, ChemistryBreakdown } from "../ty
 import PlayerCard from "./PlayerCard";
 import CareerStats from "./CareerStats";
 import ChemistryPanel from "./ChemistryPanel";
+import Icon from "./Icon";
 
 const DIFFICULTY_LABEL: Record<Difficulty, string> = {
   easy: "Easy",
@@ -29,7 +30,6 @@ export default function TeamSummary({
   hasActiveRun,
   onResume,
   onNewDraft,
-  onRebuild,
 }: {
   teamName: string;
   players: Player[];
@@ -50,7 +50,6 @@ export default function TeamSummary({
   hasActiveRun: boolean;
   onResume: () => void;
   onNewDraft: () => void;
-  onRebuild: () => void;
 }) {
   const attempts = history.length;
   const moralePenaltyPct = Math.round((1 - moraleMultiplier) * 100);
@@ -62,7 +61,7 @@ export default function TeamSummary({
         {difficultyLevel > 0 && (
           <span className="escalation-note">
             {" "}
-            · 🔺 {difficultyLevel} major win{difficultyLevel > 1 ? "s" : ""} — AI is +
+            · {difficultyLevel} major win{difficultyLevel > 1 ? "s" : ""} — AI is +
             {(escalationBonus * 100).toFixed(0)}% stronger than baseline
           </span>
         )}
@@ -73,8 +72,8 @@ export default function TeamSummary({
       </p>
       {moralePenaltyPct > 0 && (
         <p className="hint loss-streak-note">
-          ⚠️ {lossStreak}-major losing streak — team confidence is down {moralePenaltyPct}%. A transfer or
-          rebuild resets it.
+          <Icon name="alert" size={14} /> {lossStreak}-major losing streak — team confidence is down {moralePenaltyPct}%. A transfer
+          resets it.
         </p>
       )}
 
@@ -91,30 +90,22 @@ export default function TeamSummary({
       </div>
       <ChemistryPanel chemistry={chemistry} players={players} />
       <div className="actions-stack">
-        <div className="actions-row">
-          {hasActiveRun ? (
-            <button className="run-again-btn" onClick={onResume}>
-              ▶️ Resume Tournament
-            </button>
-          ) : (
-            <button className="run-again-btn" onClick={onSimulate} disabled={simulating}>
-              {simulating ? "Simulating..." : attempts === 0 ? "🔁 Run the Major" : "🔁 Run Another Major"}
-            </button>
-          )}
-        </div>
-        <div className="actions-row">
-          <button className="secondary-btn actions-btn" onClick={onOpenTransfer}>
-            🔁 Transfer Window
+        {hasActiveRun ? (
+          <button className="run-again-btn action-lg" onClick={onResume}>
+            <Icon name="play" size={18} /> Resume Tournament
           </button>
-          <button className="secondary-btn actions-btn" onClick={onRebuild}>
-            🛠️ Rebuild Roster
+        ) : (
+          <button className="run-again-btn action-lg" onClick={onSimulate} disabled={simulating}>
+            <Icon name="refresh" size={18} />
+            {simulating ? "Simulating..." : attempts === 0 ? "Run the Major" : "Run Another Major"}
           </button>
-        </div>
-        <div className="actions-row">
-          <button className="danger-btn actions-btn" onClick={onNewDraft}>
-            🗑️ Start New Draft
-          </button>
-        </div>
+        )}
+        <button className="transfer-btn action-md" onClick={onOpenTransfer}>
+          <Icon name="swap" size={16} /> Transfer Window
+        </button>
+        <button className="danger-btn action-sm" onClick={onNewDraft}>
+          <Icon name="trash" size={14} /> Start New Draft
+        </button>
       </div>
     </div>
   );

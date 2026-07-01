@@ -3,17 +3,10 @@ import type { MatchResult, Role, ScoreboardRow } from "../types";
 import Flag from "./Flag";
 import MiniMap from "./MiniMap";
 import MatchRecap from "./MatchRecap";
+import Icon, { ROLE_ICON } from "./Icon";
 import { playWinSound, playLossSound } from "../sound";
 
 const ROUND_DELAY_MS = 650;
-
-const ROLE_ICONS: Record<string, string> = {
-  entry: "🎯",
-  awp: "🔭",
-  support: "🛡️",
-  lurker: "🕵️",
-  igl: "🧠",
-};
 
 const WEAPON_POOL: Record<Role, string[]> = {
   awp: ["AWP"],
@@ -77,13 +70,13 @@ function buildRoundFeed(
   const loserName = winnerLetter === "A" ? teamBName : teamAName;
   const roll = Math.random();
   if (roll < 0.18) {
-    lines.push({ text: "💣 Bomb planted", kind: "bomb" });
-    lines.push({ text: `💥 Bomb detonates — ${winnerName} win the round`, kind: "win" });
+    lines.push({ text: "Bomb planted", kind: "bomb" });
+    lines.push({ text: `Bomb detonates — ${winnerName} win the round`, kind: "win" });
   } else if (roll < 0.32) {
-    lines.push({ text: "💣 Bomb planted", kind: "bomb" });
-    lines.push({ text: `🛡️ Bomb defused — ${winnerName} win the round`, kind: "win" });
+    lines.push({ text: "Bomb planted", kind: "bomb" });
+    lines.push({ text: `Bomb defused — ${winnerName} win the round`, kind: "win" });
   } else if (roll < 0.45) {
-    lines.push({ text: `🏃 ${loserName} save their weapons`, kind: "bomb" });
+    lines.push({ text: `${loserName} save their weapons`, kind: "bomb" });
     lines.push({ text: `${winnerName} win the round`, kind: "win" });
   } else {
     lines.push({ text: `${winnerName} win the round — Elimination`, kind: "win" });
@@ -108,7 +101,7 @@ function Scoreboard({ title, rows }: { title: string; rows: ReturnType<typeof ki
             <tr key={r.name}>
               <td>
                 <Flag country={r.country} size={16} /> {r.name}{" "}
-                <span className="sb-role-icon">{ROLE_ICONS[r.role]}</span>
+                <span className="sb-role-icon"><Icon name={ROLE_ICON[r.role]} size={12} /></span>
               </td>
               <td className="sb-kills">
                 <span key={r.liveKills} className="score-tick">
@@ -270,10 +263,10 @@ export default function LiveMatch({
   if (roundIndex === -2) {
     return (
       <div className="live-match fade-in prematch-screen">
-        <div className="prematch-label">⚔️ Up Next</div>
+        <div className="prematch-label">Up Next</div>
         {roundName && <div className="prematch-round">{roundName}</div>}
         <div className="prematch-matchup">
-          <span className="prematch-you">★ Your Team</span>
+          <span className="prematch-you"><Icon name="star" size={14} /> Your Team</span>
           <span className="prematch-vs">vs</span>
           <span className="prematch-opp">{opponent}</span>
         </div>
@@ -294,7 +287,7 @@ export default function LiveMatch({
 
       <div className="live-scoreline">
         <div className={`live-team ${match.teamAIsUser ? "is-user" : ""}`}>
-          {match.teamAIsUser && <span className="user-star">★ </span>}
+          {match.teamAIsUser && <span className="user-star"><Icon name="star" size={13} /> </span>}
           {match.teamA}
         </div>
         <div className="live-map-score">
@@ -303,7 +296,7 @@ export default function LiveMatch({
           <span className="big-score">{prevMapWins("B")}</span>
         </div>
         <div className={`live-team ${match.teamBIsUser ? "is-user" : ""}`}>
-          {match.teamBIsUser && <span className="user-star">★ </span>}
+          {match.teamBIsUser && <span className="user-star"><Icon name="star" size={13} /> </span>}
           {match.teamB}
         </div>
       </div>

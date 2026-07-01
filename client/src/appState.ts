@@ -16,9 +16,6 @@ export interface AppState {
   runAttempt: number;
   showTransfer: boolean;
   showSettings: boolean;
-  // True while drafting as a Rebuild (full re-draft of an existing team) rather than a brand
-  // new team — changes which API handleDraftComplete calls and skips the team-naming screen.
-  rebuilding: boolean;
   lastPrizeMoney: number;
   infiniteRun: InfiniteRunView | null;
   infiniteAdvancing: boolean;
@@ -41,7 +38,6 @@ export const initialState: AppState = {
   runAttempt: 0,
   showTransfer: false,
   showSettings: false,
-  rebuilding: false,
   lastPrizeMoney: 0,
   infiniteRun: null,
   infiniteAdvancing: false,
@@ -67,7 +63,6 @@ export type AppAction =
   | { type: "RESTART" }
   | { type: "GO_HOME" }
   | { type: "RESUME_TOURNAMENT" }
-  | { type: "START_REBUILD" }
   | { type: "SET_SHOW_TRANSFER"; open: boolean }
   | { type: "SET_SHOW_SETTINGS"; open: boolean }
   | { type: "INFINITE_STARTED"; run: InfiniteRunView }
@@ -108,7 +103,6 @@ export function appReducer(state: AppState, action: AppAction): AppState {
         mode: action.team.gameMode || state.mode,
         showTransfer: false,
         showSettings: false,
-        rebuilding: false,
         error: null,
         stage: action.infiniteRun ? "infinite" : "team",
         infiniteRun: action.infiniteRun ?? null,
@@ -189,11 +183,6 @@ export function appReducer(state: AppState, action: AppAction): AppState {
 
     case "RESUME_TOURNAMENT":
       return state.run && !state.run.finished ? { ...state, stage: "major", showSettings: false } : state;
-
-    case "START_REBUILD":
-      return state.team
-        ? { ...state, stage: "draft", rebuilding: true, showTransfer: false, showSettings: false, error: null }
-        : state;
 
     case "SET_SHOW_TRANSFER":
       return { ...state, showTransfer: action.open };

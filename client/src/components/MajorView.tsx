@@ -5,6 +5,7 @@ import SwissLadder from "./SwissLadder";
 import PlayoffTree from "./PlayoffTree";
 import GameDetail from "./GameDetail";
 import GameOverScreen from "./GameOverScreen";
+import Icon from "./Icon";
 import { playChampionSound, playEliminatedSound } from "../sound";
 
 export default function MajorView({
@@ -15,7 +16,6 @@ export default function MajorView({
   onRestart,
   onNewDraft,
   onGoHome,
-  onRebuild,
   prizeMoney,
   advancing,
 }: {
@@ -26,7 +26,6 @@ export default function MajorView({
   onRestart: () => void;
   onNewDraft: () => void;
   onGoHome: () => void;
-  onRebuild: () => void;
   prizeMoney: number;
   advancing: boolean;
 }) {
@@ -119,10 +118,10 @@ export default function MajorView({
   const headerStage = activeRound ? activeRound.type : run.stage === "playoffs" ? "playoff_round" : run.stage;
 
   if (isFirstRound) {
-    const FORM_ICON = { hot: "🔥", cold: "❄️", steady: "➖" } as const;
+    const FORM_ICON = { hot: "flame", cold: "snowflake", steady: "minus" } as const;
     return (
       <div className="panel fade-in major-view tall-panel major-start-screen">
-        <div className="major-start-title">🏆 The Major Begins</div>
+        <div className="major-start-title"><Icon name="trophy" size={30} strokeWidth={2} /> The Major Begins</div>
         <p className="hint major-start-text">
           Your roster is locked in. First stop: the Swiss Stage — five rounds standing between you and
           the Playoffs.
@@ -133,7 +132,7 @@ export default function MajorView({
             <div className="form-strip-players">
               {run.userForm.map((f) => (
                 <div key={f.name} className={`form-chip form-${f.form}`}>
-                  <span className="form-chip-icon">{FORM_ICON[f.form]}</span>
+                  <span className="form-chip-icon"><Icon name={FORM_ICON[f.form]} size={16} /></span>
                   <span className="form-chip-name">{f.name}</span>
                   <span className="form-chip-state">{f.form}</span>
                 </div>
@@ -231,7 +230,7 @@ export default function MajorView({
                           <span className="bracket-team-name">
                             {t.isUser && (
                               <span className="user-star" aria-hidden="true">
-                                ★{" "}
+                                <Icon name="star" size={11} />{" "}
                               </span>
                             )}
                             {t.name}
@@ -262,7 +261,7 @@ export default function MajorView({
                           <td>
                             {t.isUser && (
                               <span className="user-star" aria-hidden="true">
-                                ★{" "}
+                                <Icon name="star" size={11} />{" "}
                               </span>
                             )}
                             {t.name}
@@ -271,8 +270,8 @@ export default function MajorView({
                             {t.wins}-{t.losses}
                           </td>
                           <td>
-                            {t.resolved === "advanced" && <span className="status-pill advanced">✓ Advanced</span>}
-                            {t.resolved === "eliminated" && <span className="status-pill eliminated">✗ Eliminated</span>}
+                            {t.resolved === "advanced" && <span className="status-pill advanced"><Icon name="check" size={12} strokeWidth={2.4} /> Advanced</span>}
+                            {t.resolved === "eliminated" && <span className="status-pill eliminated"><Icon name="x" size={12} strokeWidth={2.4} /> Eliminated</span>}
                             {t.resolved === "playing" && <span className="status-pill playing">Playing</span>}
                           </td>
                         </tr>
@@ -296,7 +295,6 @@ export default function MajorView({
               onRestart={onRestart}
               onNewDraft={onNewDraft}
               onGoHome={onGoHome}
-              onRebuild={onRebuild}
               prizeMoney={prizeMoney}
             />
           </div>

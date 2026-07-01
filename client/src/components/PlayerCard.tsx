@@ -1,14 +1,6 @@
-import type { Player, DraftSlot, Rarity } from "../types";
+import type { Player, Rarity } from "../types";
 import Flag from "./Flag";
-
-const ROLE_ICONS: Record<DraftSlot, string> = {
-  entry: "🎯",
-  awp: "🔭",
-  support: "🛡️",
-  lurker: "🕵️",
-  igl: "🧠",
-  coach: "📋",
-};
+import Icon, { ROLE_ICON } from "./Icon";
 
 const RARITY_LABEL: Record<Rarity, string> = {
   common: "Common",
@@ -41,7 +33,7 @@ export default function PlayerCard({
       <div className="player-avatar">
         <span className="player-initials">{initials(player.name)}</span>
         <span className="player-role-icon" aria-label={player.role} title={player.role}>
-          {ROLE_ICONS[player.role]}
+          <Icon name={ROLE_ICON[player.role]} size={15} />
         </span>
       </div>
       <div className="player-name">{player.name}</div>
@@ -49,7 +41,7 @@ export default function PlayerCard({
         <Flag country={player.country} size={20} /> {player.team}
       </div>
       <div className="player-role-label">
-        {ROLE_ICONS[player.role]} {player.role === "coach" ? "Coach" : player.role.toUpperCase()}
+        {player.role === "coach" ? "Coach" : player.role.toUpperCase()}
       </div>
       <div className="player-era">
         {player.role === "coach"

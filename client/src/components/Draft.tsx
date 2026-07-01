@@ -21,14 +21,10 @@ const REROLL_COST = 50000;
 export default function Draft({
   difficulty,
   onComplete,
-  overrideBudget,
-  rebuilding,
   mode,
 }: {
   difficulty: Difficulty;
   onComplete: (picks: Record<Role, string>, coachId: string) => void;
-  overrideBudget?: number;
-  rebuilding?: boolean;
   mode?: "major" | "infinite";
 }) {
   const [draftOrder, setDraftOrder] = useState<DraftSlot[] | null>(null);
@@ -51,15 +47,14 @@ export default function Draft({
     setError(null);
     fetchConfig(difficulty, mode)
       .then((cfg) => {
-        const effectiveBudget = overrideBudget ?? cfg.budget;
         setDraftOrder(cfg.draftOrder);
         setMinPrices(cfg.minPrices);
-        setBudget(effectiveBudget);
-        setRemainingBudget(effectiveBudget);
+        setBudget(cfg.budget);
+        setRemainingBudget(cfg.budget);
       })
       .catch((e) => setError(e.message));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [difficulty, mode, overrideBudget, retryNonce]);
+  }, [difficulty, mode, retryNonce]);
 
   useEffect(() => {
     if (!draftOrder) return;
@@ -128,9 +123,6 @@ export default function Draft({
 
   return (
     <div className="panel fade-in tall-panel">
-      {rebuilding && (
-        <div className="rebuild-banner">🔁 Rebuilding your roster — your career history and trophies carry over.</div>
-      )}
       <div className="draft-progress">
         {draftOrder.map((r, i) => {
           const picked = pickedPlayers[r];
@@ -209,7 +201,7 @@ export default function Draft({
           ? "Re-rolling..."
           : alreadyRerolled
           ? "Re-roll used for this role"
-          : `🎲 Re-roll candidates ($${REROLL_COST.toLocaleString()})`}
+          : `Re-roll candidates ($${REROLL_COST.toLocaleString()})`}
       </button>
     </div>
   );

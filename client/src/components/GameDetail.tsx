@@ -1,5 +1,6 @@
 import type { RoundResult } from "../types";
 import MatchRecap from "./MatchRecap";
+import Icon from "./Icon";
 
 export default function GameDetail({ round, onBack }: { round: RoundResult; onBack: () => void }) {
   const userMatch = round.matches.find((m) => m.isUserMatch);
@@ -9,7 +10,7 @@ export default function GameDetail({ round, onBack }: { round: RoundResult; onBa
     <div className="game-detail fade-in">
       <div className="game-detail-header">
         <button className="secondary-btn" onClick={onBack}>
-          ← Back to Live
+          <Icon name="chevronLeft" size={16} /> Back to Live
         </button>
         <h3>{round.roundName} (saved result)</h3>
       </div>

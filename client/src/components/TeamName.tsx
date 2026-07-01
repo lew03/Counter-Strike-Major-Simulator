@@ -17,7 +17,7 @@ export default function TeamName({ onSubmit }: { onSubmit: (name: string) => voi
     <div className="hero-screen">
       <div className="hero-card fade-in">
         <h2>Name Your Org</h2>
-        <p className="hint">This is the name your team will compete under at the Major.</p>
+        <p className="hint">This is the name your team will compete under.</p>
         <div className="team-name-row">
           <input
             className={`team-name-input ${touched && !isValid ? "input-error" : ""}`}

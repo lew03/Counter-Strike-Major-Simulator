@@ -1,19 +1,20 @@
 import { useState } from "react";
 import type { Difficulty } from "../types";
+import Icon, { type IconName } from "./Icon";
 
 type GameMode = "major" | "infinite";
 
-const MODES: { key: GameMode; icon: string; title: string; tagline: string; bullets: string[] }[] = [
+const MODES: { key: GameMode; icon: IconName; title: string; tagline: string; bullets: string[] }[] = [
   {
     key: "major",
-    icon: "🏆",
+    icon: "trophy",
     title: "Major Mode",
     tagline: "Draft a roster and conquer the Major bracket.",
     bullets: ["Swiss-stage Opening + single-elimination Playoffs", "Real team eras as opponents", "Earn prize money and build a trophy cabinet"],
   },
   {
     key: "infinite",
-    icon: "♾️",
+    icon: "infinity",
     title: "Infinite Mode",
     tagline: "Survive as many Bo1 matches as possible. One loss ends the run.",
     bullets: ["Opponents get progressively harder", "Every 5 wins earns prize money + a transfer window", "How far can you go?"],
@@ -51,7 +52,7 @@ export default function Welcome({ onStart }: { onStart: (difficulty: Difficulty,
               className={`mode-card ${selectedMode === m.key ? "active" : ""}`}
               onClick={() => setSelectedMode(m.key)}
             >
-              <div className="mode-card-icon">{m.icon}</div>
+              <div className="mode-card-icon"><Icon name={m.icon} size={26} strokeWidth={2} /></div>
               <div className="mode-card-title">{m.title}</div>
               <div className="mode-card-tagline">{m.tagline}</div>
               <ul className="mode-card-bullets">

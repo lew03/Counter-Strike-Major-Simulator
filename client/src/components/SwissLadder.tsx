@@ -1,4 +1,5 @@
 import type { RoundResult } from "../types";
+import Icon from "./Icon";
 
 export default function SwissLadder({
   rounds,
@@ -32,7 +33,7 @@ export default function SwissLadder({
               {m ? (
                 <>
                   <div className="ladder-result-icon" aria-label={won ? "won" : "lost"}>
-                    {won ? "✓" : "✗"}
+                    <Icon name={won ? "check" : "x"} size={16} strokeWidth={2.4} />
                   </div>
                   <div className="ladder-opponent">vs {m.teamAIsUser ? m.teamB : m.teamA}</div>
                   <div

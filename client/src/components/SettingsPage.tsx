@@ -1,3 +1,5 @@
+import Icon from "./Icon";
+
 export default function SettingsPage({
   onBack,
   onWipeData,
@@ -12,7 +14,7 @@ export default function SettingsPage({
       <div className="transfer-header">
         <h2>Settings</h2>
         <button className="secondary-btn" onClick={onBack}>
-          ← Back
+          <Icon name="chevronLeft" size={16} /> Back
         </button>
       </div>
 
@@ -24,7 +26,7 @@ export default function SettingsPage({
             : "There's no saved team yet — draft a roster to get started."}
         </p>
         <button className="danger-btn" onClick={onWipeData} disabled={!hasTeam}>
-          🧹 Wipe All Save Data
+          <Icon name="trash" size={16} /> Wipe All Save Data
         </button>
       </div>
 

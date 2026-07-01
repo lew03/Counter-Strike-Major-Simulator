@@ -1,4 +1,5 @@
 import type { MajorRun, HistoryEntry, MatchResult, Role } from "../types";
+import Icon from "./Icon";
 
 const ROLE_LABEL: Record<Role, string> = {
   entry: "Entry",
@@ -125,7 +126,6 @@ export default function GameOverScreen({
   onRestart,
   onNewDraft,
   onGoHome,
-  onRebuild,
   prizeMoney,
 }: {
   run: MajorRun;
@@ -134,7 +134,6 @@ export default function GameOverScreen({
   onRestart: () => void;
   onNewDraft: () => void;
   onGoHome: () => void;
-  onRebuild: () => void;
   prizeMoney: number;
 }) {
   const wins = history.filter((h) => h.userWon).length;
@@ -145,7 +144,13 @@ export default function GameOverScreen({
 
   return (
     <div className={`game-over-screen ${won ? "win" : "loss"} pop-in`}>
-      <div className="game-over-title">{won ? "🏆 MAJOR CHAMPIONS" : "GAME OVER"}</div>
+      <div className="game-over-title">
+        {won ? (
+          <><Icon name="trophy" size={30} strokeWidth={2} /> MAJOR CHAMPIONS</>
+        ) : (
+          "GAME OVER"
+        )}
+      </div>
       <div className="game-over-subtitle">
         {won
           ? "Your team ran the gauntlet and lifted the trophy."
@@ -158,7 +163,7 @@ export default function GameOverScreen({
 
       {prizeMoney > 0 && (
         <div className="prize-banner">
-          💰 Earned ${prizeMoney.toLocaleString()} for {prizeReason} — added to your budget.
+          <Icon name="dollar" size={15} /> Earned ${prizeMoney.toLocaleString()} for {prizeReason} — added to your budget.
         </div>
       )}
 
@@ -178,7 +183,7 @@ export default function GameOverScreen({
           <h4>Your Final Match</h4>
           <div className="live-scoreline">
             <div className={`live-team ${lastMatch.teamAIsUser ? "is-user" : ""}`}>
-              {lastMatch.teamAIsUser && <span className="user-star">★ </span>}
+              {lastMatch.teamAIsUser && <span className="user-star"><Icon name="star" size={13} /> </span>}
               {lastMatch.teamA}
             </div>
             <div className="live-map-score">
@@ -187,7 +192,7 @@ export default function GameOverScreen({
               <span className="big-score">{lastMatch.score.split("-")[1]}</span>
             </div>
             <div className={`live-team ${lastMatch.teamBIsUser ? "is-user" : ""}`}>
-              {lastMatch.teamBIsUser && <span className="user-star">★ </span>}
+              {lastMatch.teamBIsUser && <span className="user-star"><Icon name="star" size={13} /> </span>}
               {lastMatch.teamB}
             </div>
           </div>
@@ -204,34 +209,35 @@ export default function GameOverScreen({
                   <span>
                     {m.scoreA}-{m.scoreB}
                   </span>
-                  <span>{wonMap ? "✓" : "✗"}</span>
+                  <span className="map-result-ico">
+                    <Icon name={wonMap ? "check" : "x"} size={14} strokeWidth={2.4} />
+                  </span>
                 </div>
               );
             })}
           </div>
 
           <div className={`live-final-banner ${lastMatch.winnerIsUser ? "win" : "loss"} pop-in`}>
-            {lastMatch.winnerIsUser ? "✓ You won this match!" : "✗ You lost this match."} Final: {lastMatch.score} (
-            {lastMatch.winner})
+            {lastMatch.winnerIsUser ? (
+              <><Icon name="check" size={15} strokeWidth={2.4} /> You won this match!</>
+            ) : (
+              <><Icon name="x" size={15} strokeWidth={2.4} /> You lost this match.</>
+            )}{" "}
+            Final: {lastMatch.score} ({lastMatch.winner})
           </div>
         </div>
       )}
 
       <div className="actions-stack">
+        <button className="run-again-btn action-lg" onClick={onRestart}>
+          <Icon name="refresh" size={18} /> Run Another Major
+        </button>
         <div className="actions-row">
-          <button className="run-again-btn" onClick={onRestart}>
-            🔁 Run Another Major
-          </button>
           <button className="secondary-btn actions-btn" onClick={onGoHome}>
-            🏠 Home
+            <Icon name="home" size={16} /> Home
           </button>
-        </div>
-        <div className="actions-row">
-          <button className="secondary-btn actions-btn" onClick={onRebuild}>
-            🛠️ Rebuild Roster
-          </button>
-          <button className="danger-btn actions-btn" onClick={onNewDraft}>
-            🗑️ Start New Draft
+          <button className="danger-btn action-sm" onClick={onNewDraft}>
+            <Icon name="trash" size={14} /> Start New Draft
           </button>
         </div>
       </div>

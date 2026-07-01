@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import type { Player, Role, DraftSlot, TeamResponse } from "../types";
 import { fetchTransferOptions, submitTransfer } from "../api";
 import Flag from "./Flag";
+import Icon from "./Icon";
 
 const ROLE_LABELS: Record<DraftSlot, string> = {
   entry: "Entry",
@@ -129,7 +130,7 @@ export default function TransferWindow({
       <div className="transfer-header">
         <h2>Transfer Window</h2>
         <button className="secondary-btn" onClick={onClose}>
-          ← Back
+          <Icon name="chevronLeft" size={16} /> Back
         </button>
       </div>
       <p className="hint">

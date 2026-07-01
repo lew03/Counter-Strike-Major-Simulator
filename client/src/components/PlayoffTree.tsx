@@ -1,4 +1,5 @@
 import type { RoundResult, MatchResult } from "../types";
+import Icon from "./Icon";
 
 function MapPills({ match }: { match: MatchResult }) {
   return (
@@ -16,11 +17,11 @@ function TeamRow({ name, isUser, isWinner }: { name: string; isUser: boolean; is
   return (
     <div className={`bracket-team-row ${isWinner ? "winner" : "loser"} ${isUser ? "is-user" : ""}`}>
       <span className="bracket-team-name">
-        {isUser && <span className="user-star" aria-hidden="true">★ </span>}
+        {isUser && <span className="user-star" aria-hidden="true"><Icon name="star" size={11} /> </span>}
         {name}
       </span>
       <span className="result-icon" aria-label={isWinner ? "won" : "lost"}>
-        {isWinner ? "✓" : "✗"}
+        <Icon name={isWinner ? "check" : "x"} size={13} strokeWidth={2.4} />
       </span>
     </div>
   );

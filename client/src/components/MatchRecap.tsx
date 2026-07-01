@@ -1,15 +1,8 @@
 import type { MatchResult, ScoreboardRow } from "../types";
 import Flag from "./Flag";
 import Tooltip from "./Tooltip";
+import Icon, { ROLE_ICON } from "./Icon";
 import { computeMvp } from "../mvp";
-
-const ROLE_ICONS: Record<string, string> = {
-  entry: "🎯",
-  awp: "🔭",
-  support: "🛡️",
-  lurker: "🕵️",
-  igl: "🧠",
-};
 
 function ScoreboardTable({
   title,
@@ -36,8 +29,8 @@ function ScoreboardTable({
             <tr key={r.name} className={r.name === mvpName ? "mvp-row" : ""}>
               <td>
                 <Flag country={r.country} size={16} /> {r.name}{" "}
-                <span className="sb-role-icon">{ROLE_ICONS[r.role]}</span>
-                {r.name === mvpName && <span className="mvp-badge">★ MVP</span>}
+                <span className="sb-role-icon"><Icon name={ROLE_ICON[r.role]} size={12} /></span>
+                {r.name === mvpName && <span className="mvp-badge"><Icon name="star" size={10} /> MVP</span>}
               </td>
               <td className="sb-kills">{r.kills}</td>
               <td>{r.deaths}</td>
@@ -56,7 +49,7 @@ export default function MatchRecap({ match }: { match: MatchResult }) {
     <div className="match-recap">
       <div className="live-scoreline">
         <div className={`live-team ${match.teamAIsUser ? "is-user" : ""}`}>
-          {match.teamAIsUser && <span className="user-star">★ </span>}
+          {match.teamAIsUser && <span className="user-star"><Icon name="star" size={13} /> </span>}
           {match.teamA}
         </div>
         <div className="live-map-score">
@@ -75,7 +68,7 @@ export default function MatchRecap({ match }: { match: MatchResult }) {
           <span className="big-score">{match.score.split("-")[1]}</span>
         </div>
         <div className={`live-team ${match.teamBIsUser ? "is-user" : ""}`}>
-          {match.teamBIsUser && <span className="user-star">★ </span>}
+          {match.teamBIsUser && <span className="user-star"><Icon name="star" size={13} /> </span>}
           {match.teamB}
         </div>
       </div>
@@ -98,8 +91,12 @@ export default function MatchRecap({ match }: { match: MatchResult }) {
       })}
 
       <div className={`live-final-banner ${match.winnerIsUser ? "win" : "loss"} pop-in`}>
-        {match.winnerIsUser ? "✓ You won this match!" : "✗ You lost this match."} Final: {match.score} (
-        {match.winner})
+        {match.winnerIsUser ? (
+          <><Icon name="check" size={15} strokeWidth={2.4} /> You won this match!</>
+        ) : (
+          <><Icon name="x" size={15} strokeWidth={2.4} /> You lost this match.</>
+        )}{" "}
+        Final: {match.score} ({match.winner})
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import { useEffect, useReducer, useState } from "react";
 import type { Difficulty, Role, TeamResponse } from "./types";
-import { createTeam, rebuildTeam, startMajor, advanceMajor as advanceMajorApi, fetchTeam, startInfinite, advanceInfinite, confirmInfiniteTransfer } from "./api";
+import { createTeam, startMajor, advanceMajor as advanceMajorApi, fetchTeam, startInfinite, advanceInfinite, confirmInfiniteTransfer } from "./api";
 import { appReducer, initialState } from "./appState";
 import Welcome from "./components/Welcome";
 import TeamName from "./components/TeamName";
@@ -12,6 +12,7 @@ import MajorView from "./components/MajorView";
 import InfiniteMode from "./components/InfiniteMode";
 import SettingsPage from "./components/SettingsPage";
 import Tooltip from "./components/Tooltip";
+import Icon from "./components/Icon";
 import { isMuted, setMuted } from "./sound";
 
 const SAVED_TEAM_KEY = "csmajor_teamId";
@@ -59,9 +60,7 @@ export default function App() {
   const handleDraftComplete = async (picks: Record<Role, string>, coachId: string) => {
     dispatch({ type: "SET_ERROR", error: null });
     try {
-      const res = state.rebuilding && state.team
-        ? await rebuildTeam(state.team.teamId, picks, coachId)
-        : await createTeam(picks, coachId, state.pendingTeamName, state.difficulty, state.mode);
+      const res = await createTeam(picks, coachId, state.pendingTeamName, state.difficulty, state.mode);
       localStorage.setItem(SAVED_TEAM_KEY, res.teamId);
       localStorage.setItem(SAVED_MODE_KEY, state.mode);
       // Trust both the server's gameMode and the client's intended mode (defensive fallback
@@ -134,16 +133,6 @@ export default function App() {
 
   const handleResumeTournament = () => {
     dispatch({ type: "RESUME_TOURNAMENT" });
-  };
-
-  const handleStartRebuild = () => {
-    if (
-      !window.confirm(
-        "Rebuild Roster wipes your entire lineup and costs $150,000 from your budget.\n\nYour career history and trophies are kept. Continue?"
-      )
-    )
-      return;
-    dispatch({ type: "START_REBUILD" });
   };
 
   const handleStartInfinite = async () => {
@@ -223,7 +212,6 @@ export default function App() {
     runAttempt,
     showTransfer,
     showSettings,
-    rebuilding,
     lastPrizeMoney,
     infiniteRun,
     infiniteAdvancing,
@@ -246,13 +234,13 @@ export default function App() {
               aria-label="Home"
               title="Home"
             >
-              <span className="logo-icon">🎯</span>
+              <span className="logo-icon"><Icon name="crosshair" size={22} strokeWidth={2} /></span>
               <span className="logo-text">Frag GM</span>
             </button>
             <div className="header-actions">
               {team && (stage === "major" || stage === "infinite") && (
                 <button className="secondary-btn" onClick={handleGoHome}>
-                  🏠 Home
+                  <Icon name="home" size={16} /> Home
                 </button>
               )}
               <Tooltip
@@ -263,7 +251,7 @@ export default function App() {
                     {team && team.difficultyLevel > 0 && (
                       <>
                         <br />
-                        🔺 Increased after {team.difficultyLevel} major win{team.difficultyLevel > 1 ? "s" : ""} — AI
+                        Increased after {team.difficultyLevel} major win{team.difficultyLevel > 1 ? "s" : ""} — AI
                         is now +{(team.escalationBonus * 100).toFixed(0)}% stronger than baseline.
                       </>
                     )}
@@ -271,18 +259,20 @@ export default function App() {
                 }
               >
                 <span className="difficulty-badge">
-                  🎚️ {DIFFICULTY_LABEL[difficulty]}
-                  {team && team.difficultyLevel > 0 && <span className="difficulty-badge-up">▲</span>}
+                  {DIFFICULTY_LABEL[difficulty]}
+                  {team && team.difficultyLevel > 0 && (
+                    <span className="difficulty-badge-up"><Icon name="arrowUp" size={12} strokeWidth={2.4} /></span>
+                  )}
                 </span>
               </Tooltip>
               <button
                 className="secondary-btn"
                 onClick={() => dispatch({ type: "SET_SHOW_SETTINGS", open: !showSettings })}
               >
-                ⚙️ Settings
+                <Icon name="settings" size={16} /> Settings
               </button>
               <button className="mute-btn" onClick={toggleMute} aria-label={muted ? "Unmute sound" : "Mute sound"}>
-                {muted ? "🔇" : "🔊"}
+                <Icon name={muted ? "volumeMuted" : "volume"} size={18} />
               </button>
             </div>
           </header>
@@ -309,8 +299,6 @@ export default function App() {
                   difficulty={difficulty}
                   mode={mode}
                   onComplete={handleDraftComplete}
-                  overrideBudget={rebuilding ? team?.budget : undefined}
-                  rebuilding={rebuilding}
                 />
               )}
 
@@ -330,7 +318,6 @@ export default function App() {
                 <InfiniteLobby
                   team={team}
                   onStartRun={handleStartInfinite}
-                  onRebuild={handleStartRebuild}
                   onNewDraft={handleRestart}
                 />
               )}
@@ -356,7 +343,6 @@ export default function App() {
                   hasActiveRun={hasActiveRun}
                   onResume={handleResumeTournament}
                   onNewDraft={handleRestart}
-                  onRebuild={handleStartRebuild}
                 />
               )}
 
@@ -384,7 +370,6 @@ export default function App() {
                   onRestart={handleStartMajor}
                   onNewDraft={handleRestart}
                   onGoHome={handleGoHome}
-                  onRebuild={handleStartRebuild}
                   prizeMoney={lastPrizeMoney}
                   advancing={advancing}
                 />

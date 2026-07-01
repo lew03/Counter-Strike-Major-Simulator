@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import type { InfiniteRunView, TeamResponse } from "../types";
 import LiveMatch from "./LiveMatch";
 import TransferWindow from "./TransferWindow";
+import Icon from "./Icon";
 
 type Phase = "menu" | "watching" | "transfer" | "eliminated";
 
@@ -49,7 +50,11 @@ function HistoryList({ history }: { history: InfiniteRunView["history"] }) {
           <span className="inf-hist-num">#{h.gameNum}</span>
           <span className="inf-hist-opp">{h.opponentName}</span>
           <span className="inf-hist-result">
-            {h.won ? `✓ +$${h.prize.toLocaleString()}` : "✗ Eliminated"}
+            {h.won ? (
+              <><Icon name="check" size={13} strokeWidth={2.4} /> +${h.prize.toLocaleString()}</>
+            ) : (
+              <><Icon name="x" size={13} strokeWidth={2.4} /> Eliminated</>
+            )}
           </span>
         </div>
       ))}
@@ -68,7 +73,7 @@ function GameOver({
 }) {
   return (
     <div className="panel fade-in inf-gameover">
-      <div className="inf-gameover-icon">☠️</div>
+      <div className="inf-gameover-icon"><Icon name="x" size={40} strokeWidth={2.4} /></div>
       <h2>Eliminated</h2>
       <div className="inf-gameover-score">{run.gamesWon}</div>
       <div className="inf-gameover-score-label">consecutive wins</div>
@@ -79,10 +84,10 @@ function GameOver({
       <HistoryList history={run.history} />
       <div className="inf-gameover-actions">
         <button className="primary-btn" onClick={onRestart}>
-          Try Again
+          <Icon name="refresh" size={16} /> Try Again
         </button>
         <button className="secondary-btn" onClick={onGoHome}>
-          ← Home
+          <Icon name="chevronLeft" size={16} /> Home
         </button>
       </div>
     </div>
@@ -182,7 +187,7 @@ export default function InfiniteMode({
 
   return (
     <div className="panel fade-in inf-menu">
-      <div className="inf-title">♾️ Infinite Mode</div>
+      <div className="inf-title"><Icon name="infinity" size={26} strokeWidth={2} /> Infinite Mode</div>
       <p className="hint inf-subtitle">
         Survive as long as possible. Every 5 wins earns prize money and unlocks a transfer window.
         One loss ends the run.
@@ -213,7 +218,7 @@ export default function InfiniteMode({
 
       {run.gamesWon > 0 && (
         <div className="inf-transfer-countdown">
-          🔁 Transfer window in{" "}
+          <Icon name="swap" size={14} /> Transfer window in{" "}
           <strong>{winsUntilTransfer}</strong> more win{winsUntilTransfer !== 1 ? "s" : ""}
         </div>
       )}
@@ -222,10 +227,14 @@ export default function InfiniteMode({
 
       <div className="inf-actions">
         <button className="primary-btn inf-start-btn" onClick={onAdvance} disabled={advancing}>
-          {advancing ? "Matchmaking…" : isFirstGame ? "⚔️ Start" : "⚔️ Next Game"}
+          {advancing ? (
+            "Matchmaking…"
+          ) : (
+            <><Icon name="play" size={16} /> {isFirstGame ? "Start" : "Next Game"}</>
+          )}
         </button>
         <button className="secondary-btn" onClick={onGoHome}>
-          ← Home
+          <Icon name="chevronLeft" size={16} /> Home
         </button>
       </div>
     </div>
