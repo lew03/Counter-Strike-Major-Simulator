@@ -6,6 +6,7 @@ export interface AppState {
   booting: boolean;
   stage: Stage;
   difficulty: Difficulty;
+  mode: "major" | "infinite";
   pendingTeamName: string;
   team: TeamResponse | null;
   run: MajorRun | null;
@@ -27,6 +28,7 @@ export const initialState: AppState = {
   booting: true,
   stage: "welcome",
   difficulty: "normal",
+  mode: "major",
   pendingTeamName: "Your Team",
   team: null,
   run: null,
@@ -48,10 +50,10 @@ function activeRunFields(team: TeamResponse) {
 }
 
 export type AppAction =
-  | { type: "BOOT_RESOLVED"; team: TeamResponse | null }
-  | { type: "WELCOME_START"; difficulty: Difficulty }
+  | { type: "BOOT_RESOLVED"; team: TeamResponse | null; mode?: "major" | "infinite" }
+  | { type: "WELCOME_START"; difficulty: Difficulty; mode: "major" | "infinite" }
   | { type: "NAME_SUBMIT"; name: string }
-  | { type: "TEAM_READY"; team: TeamResponse; persist: boolean }
+  | { type: "TEAM_READY"; team: TeamResponse; persist: boolean; infiniteRun?: InfiniteRunView }
   | { type: "SET_ERROR"; error: string | null }
   | { type: "START_MAJOR_REQUEST" }
   | { type: "MAJOR_STARTED"; run: MajorRun }
@@ -80,13 +82,16 @@ export function appReducer(state: AppState, action: AppAction): AppState {
             booting: false,
             team: action.team,
             difficulty: action.team.difficulty,
+            // Prefer the server's durable gameMode; fall back to the locally-persisted mode
+            // for teams created before the server tracked it.
+            mode: action.team.gameMode || action.mode || "major",
             stage: "team",
             ...activeRunFields(action.team),
           }
         : { ...state, booting: false };
 
     case "WELCOME_START":
-      return { ...state, difficulty: action.difficulty, stage: "name" };
+      return { ...state, difficulty: action.difficulty, mode: action.mode, stage: "name" };
 
     case "NAME_SUBMIT":
       return { ...state, pendingTeamName: action.name, stage: "draft" };
@@ -96,11 +101,13 @@ export function appReducer(state: AppState, action: AppAction): AppState {
         ...state,
         team: action.team,
         difficulty: action.team.difficulty,
+        mode: action.team.gameMode || state.mode,
         showTransfer: false,
         showSettings: false,
         rebuilding: false,
         error: null,
-        stage: "team",
+        stage: action.infiniteRun ? "infinite" : "team",
+        infiniteRun: action.infiniteRun ?? null,
         ...activeRunFields(action.team),
       };
 
@@ -148,7 +155,7 @@ export function appReducer(state: AppState, action: AppAction): AppState {
 
     case "GO_HOME":
       return state.team
-        ? { ...state, stage: "team", showTransfer: false, showSettings: false, infiniteRun: null }
+        ? { ...state, stage: "team", showTransfer: false, showSettings: false, infiniteRun: null, run: state.run }
         : state;
 
     case "UPDATE_TEAM":

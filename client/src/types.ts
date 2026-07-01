@@ -48,6 +48,7 @@ export interface TeamResponse {
   history: HistoryEntry[];
   activeRun: { run: MajorRun; roundLog: RoundResult[] } | null;
   infiniteBestScore: number;
+  gameMode: "major" | "infinite";
 }
 
 export interface InfiniteMatchEntry {

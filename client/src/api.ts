@@ -14,8 +14,9 @@ import type {
 
 const BASE = "/api";
 
-export async function fetchConfig(difficulty: Difficulty): Promise<DraftConfig> {
-  const res = await fetch(`${BASE}/config?difficulty=${difficulty}`);
+export async function fetchConfig(difficulty: Difficulty, mode?: "major" | "infinite"): Promise<DraftConfig> {
+  const modeParam = mode ? `&mode=${mode}` : "";
+  const res = await fetch(`${BASE}/config?difficulty=${difficulty}${modeParam}`);
   if (!res.ok) throw new Error("Failed to fetch draft config");
   return res.json();
 }
@@ -43,12 +44,13 @@ export async function createTeam(
   picks: Record<Role, string>,
   coachId: string,
   teamName: string,
-  difficulty: Difficulty
+  difficulty: Difficulty,
+  mode?: "major" | "infinite"
 ): Promise<TeamResponse> {
   const res = await fetch(`${BASE}/team`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ picks, coachId, teamName, difficulty }),
+    body: JSON.stringify({ picks, coachId, teamName, difficulty, mode }),
   });
   if (!res.ok) {
     const err = await res.json().catch(() => ({ error: "Failed to create team" }));

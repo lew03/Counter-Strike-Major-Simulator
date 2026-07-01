@@ -25,7 +25,6 @@ export default function TeamSummary({
   history,
   onSimulate,
   onOpenTransfer,
-  onPlayInfinite,
   simulating,
   hasActiveRun,
   onResume,
@@ -47,7 +46,6 @@ export default function TeamSummary({
   history: HistoryEntry[];
   onSimulate: () => void;
   onOpenTransfer: () => void;
-  onPlayInfinite: () => void;
   simulating: boolean;
   hasActiveRun: boolean;
   onResume: () => void;
@@ -103,9 +101,6 @@ export default function TeamSummary({
               {simulating ? "Simulating..." : attempts === 0 ? "🔁 Run the Major" : "🔁 Run Another Major"}
             </button>
           )}
-          <button className="infinite-mode-btn actions-btn" onClick={onPlayInfinite}>
-            ♾️ Infinite Mode
-          </button>
         </div>
         <div className="actions-row">
           <button className="secondary-btn actions-btn" onClick={onOpenTransfer}>

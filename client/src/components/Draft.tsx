@@ -23,13 +23,13 @@ export default function Draft({
   onComplete,
   overrideBudget,
   rebuilding,
+  mode,
 }: {
   difficulty: Difficulty;
   onComplete: (picks: Record<Role, string>, coachId: string) => void;
-  // Rebuild mode: spend against the team's current (prize-money-grown) budget instead of the
-  // difficulty preset. Role order/min-prices still come from config — only the budget differs.
   overrideBudget?: number;
   rebuilding?: boolean;
+  mode?: "major" | "infinite";
 }) {
   const [draftOrder, setDraftOrder] = useState<DraftSlot[] | null>(null);
   const [minPrices, setMinPrices] = useState<Record<DraftSlot, number> | null>(null);
@@ -49,7 +49,7 @@ export default function Draft({
 
   useEffect(() => {
     setError(null);
-    fetchConfig(difficulty)
+    fetchConfig(difficulty, mode)
       .then((cfg) => {
         const effectiveBudget = overrideBudget ?? cfg.budget;
         setDraftOrder(cfg.draftOrder);
@@ -59,7 +59,7 @@ export default function Draft({
       })
       .catch((e) => setError(e.message));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [difficulty, overrideBudget, retryNonce]);
+  }, [difficulty, mode, overrideBudget, retryNonce]);
 
   useEffect(() => {
     if (!draftOrder) return;

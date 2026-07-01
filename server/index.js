@@ -41,7 +41,13 @@ const DIFFICULTIES = {
   normal: { budget: 850000, aiBoost: 0.94 },
   hard: { budget: 750000, aiBoost: 0.95 },
 };
-function difficultyConfig(d) {
+const INFINITE_DIFFICULTIES = {
+  easy:   { budget: 750000, aiBoost: 0.9 },
+  normal: { budget: 600000, aiBoost: 0.94 },
+  hard:   { budget: 500000, aiBoost: 0.95 },
+};
+function difficultyConfig(d, mode) {
+  if (mode === "infinite") return INFINITE_DIFFICULTIES[d] || INFINITE_DIFFICULTIES.normal;
   return DIFFICULTIES[d] || DIFFICULTIES.normal;
 }
 
@@ -214,6 +220,7 @@ function teamView(team, teamId) {
     history: team.history,
     activeRun,
     infiniteBestScore: team.infiniteBestScore || 0,
+    gameMode: team.gameMode || "major",
   };
 }
 
@@ -239,7 +246,7 @@ app.get("/api/roles", (req, res) => {
 app.get("/api/config", (req, res) => {
   const minPrices = {};
   for (const role of DRAFT_ORDER) minPrices[role] = minPriceForRole(role);
-  const { budget } = difficultyConfig(req.query.difficulty);
+  const { budget } = difficultyConfig(req.query.difficulty, req.query.mode);
   res.json({ budget, draftOrder: DRAFT_ORDER, minPrices });
 });
 
@@ -261,7 +268,7 @@ app.get("/api/draft/options", (req, res) => {
 });
 
 app.post("/api/team", (req, res) => {
-  const { picks, coachId, teamName, bannedMap, difficulty } = req.body;
+  const { picks, coachId, teamName, bannedMap, difficulty, mode } = req.body;
   if (!picks || ROLES.some((r) => !picks[r]) || !coachId) {
     return res.status(400).json({ error: "Must provide a pick for every role plus a coach" });
   }
@@ -278,8 +285,10 @@ app.post("/api/team", (req, res) => {
     return res.status(400).json({ error: e.message });
   }
 
-  const diffKey = DIFFICULTIES[difficulty] ? difficulty : "normal";
-  const { budget } = difficultyConfig(diffKey);
+  const gameMode = mode === "infinite" ? "infinite" : "major";
+  const modeTable = gameMode === "infinite" ? INFINITE_DIFFICULTIES : DIFFICULTIES;
+  const diffKey = modeTable[difficulty] ? difficulty : "normal";
+  const { budget } = difficultyConfig(diffKey, gameMode);
   const totalSpend = roster.reduce((sum, p) => sum + p.price, 0) + coach.price;
   if (totalSpend > budget) {
     return res.status(400).json({ error: `Roster costs $${totalSpend.toLocaleString()}, over the $${budget.toLocaleString()} budget` });
@@ -297,6 +306,7 @@ app.post("/api/team", (req, res) => {
     totalSpend,
     budget,
     difficulty: diffKey,
+    gameMode,
     difficultyLevel: 0,
     lossStreak: 0,
     bannedMap: validBannedMap,

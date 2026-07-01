@@ -142,15 +142,19 @@ export default function InfiniteMode({
   };
 
   if (phase === "watching" && run.currentMatch) {
+    // Wrapped in the same .panel used by Major mode's MajorView so the live-match window is
+    // the same size and framing across both game modes.
     return (
-      <LiveMatch
-        key={run.gamesPlayed}
-        match={run.currentMatch}
-        onContinue={handleMatchContinue}
-        advancing={false}
-        isLastRound={run.eliminated}
-        roundName={`Game ${run.gamesPlayed} · ${run.gamesWon} win${run.gamesWon !== 1 ? "s" : ""} in a row`}
-      />
+      <div className="panel fade-in major-view">
+        <LiveMatch
+          key={run.gamesPlayed}
+          match={run.currentMatch}
+          onContinue={handleMatchContinue}
+          advancing={false}
+          isLastRound={run.eliminated}
+          roundName={`Game ${run.gamesPlayed} · ${run.gamesWon} win${run.gamesWon !== 1 ? "s" : ""} in a row`}
+        />
+      </div>
     );
   }
 

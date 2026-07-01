@@ -6,6 +6,7 @@ import Welcome from "./components/Welcome";
 import TeamName from "./components/TeamName";
 import Draft from "./components/Draft";
 import TeamSummary from "./components/TeamSummary";
+import InfiniteLobby from "./components/InfiniteLobby";
 import TransferWindow from "./components/TransferWindow";
 import MajorView from "./components/MajorView";
 import InfiniteMode from "./components/InfiniteMode";
@@ -14,6 +15,13 @@ import Tooltip from "./components/Tooltip";
 import { isMuted, setMuted } from "./sound";
 
 const SAVED_TEAM_KEY = "csmajor_teamId";
+// The chosen game mode is persisted separately so a reload restores the correct experience
+// (Infinite vs Major) even if the server predates the durable `gameMode` field.
+const SAVED_MODE_KEY = "csmajor_mode";
+
+function readSavedMode(): "major" | "infinite" {
+  return localStorage.getItem(SAVED_MODE_KEY) === "infinite" ? "infinite" : "major";
+}
 
 const DIFFICULTY_LABEL: Record<Difficulty, string> = {
   easy: "Easy",
@@ -33,15 +41,15 @@ export default function App() {
       return;
     }
     fetchTeam(savedId)
-      .then((res) => dispatch({ type: "BOOT_RESOLVED", team: res }))
+      .then((res) => dispatch({ type: "BOOT_RESOLVED", team: res, mode: readSavedMode() }))
       .catch(() => {
         localStorage.removeItem(SAVED_TEAM_KEY);
         dispatch({ type: "BOOT_RESOLVED", team: null });
       });
   }, []);
 
-  const handleWelcomeStart = (chosen: Difficulty) => {
-    dispatch({ type: "WELCOME_START", difficulty: chosen });
+  const handleWelcomeStart = (chosen: Difficulty, mode: "major" | "infinite") => {
+    dispatch({ type: "WELCOME_START", difficulty: chosen, mode });
   };
 
   const handleNameSubmit = (name: string) => {
@@ -53,9 +61,17 @@ export default function App() {
     try {
       const res = state.rebuilding && state.team
         ? await rebuildTeam(state.team.teamId, picks, coachId)
-        : await createTeam(picks, coachId, state.pendingTeamName, state.difficulty);
+        : await createTeam(picks, coachId, state.pendingTeamName, state.difficulty, state.mode);
       localStorage.setItem(SAVED_TEAM_KEY, res.teamId);
-      dispatch({ type: "TEAM_READY", team: res, persist: true });
+      localStorage.setItem(SAVED_MODE_KEY, state.mode);
+      // Trust both the server's gameMode and the client's intended mode (defensive fallback
+      // in case the server is running stale code without the gameMode field).
+      if (res.gameMode === "infinite" || state.mode === "infinite") {
+        const infRes = await startInfinite(res.teamId);
+        dispatch({ type: "TEAM_READY", team: res, persist: true, infiniteRun: infRes.run });
+      } else {
+        dispatch({ type: "TEAM_READY", team: res, persist: true });
+      }
     } catch (e: any) {
       dispatch({ type: "SET_ERROR", error: e.message });
     }
@@ -96,6 +112,7 @@ export default function App() {
       return;
     }
     localStorage.removeItem(SAVED_TEAM_KEY);
+    localStorage.removeItem(SAVED_MODE_KEY);
     dispatch({ type: "RESTART" });
   };
 
@@ -141,7 +158,8 @@ export default function App() {
 
   const handleInfiniteTransferComplete = async (updated: import("./types").TeamResponse) => {
     dispatch({ type: "UPDATE_TEAM", team: updated });
-    if (state.team) {
+    dispatch({ type: "SET_SHOW_TRANSFER", open: false });
+    if (state.team && state.infiniteRun) {
       try {
         const res = await confirmInfiniteTransfer(state.team.teamId);
         dispatch({ type: "INFINITE_TRANSFER_CONFIRMED", run: res.run });
@@ -185,6 +203,7 @@ export default function App() {
     stage,
     team,
     difficulty,
+    mode,
     run,
     roundLog,
     error,
@@ -275,6 +294,7 @@ export default function App() {
               {stage === "draft" && (
                 <Draft
                   difficulty={difficulty}
+                  mode={mode}
                   onComplete={handleDraftComplete}
                   overrideBudget={rebuilding ? team?.budget : undefined}
                   rebuilding={rebuilding}
@@ -287,13 +307,22 @@ export default function App() {
                   players={team.players}
                   coach={team.coach}
                   budget={team.budget}
-                  wins={team.difficultyLevel}
-                  onComplete={handleTransferComplete}
+                  wins={mode === "infinite" ? 0 : team.difficultyLevel}
+                  onComplete={mode === "infinite" ? handleInfiniteTransferComplete : handleTransferComplete}
                   onClose={() => dispatch({ type: "SET_SHOW_TRANSFER", open: false })}
                 />
               )}
 
-              {stage === "team" && team && !showTransfer && (
+              {stage === "team" && team && !showTransfer && mode === "infinite" && (
+                <InfiniteLobby
+                  team={team}
+                  onStartRun={handleStartInfinite}
+                  onRebuild={handleStartRebuild}
+                  onNewDraft={handleRestart}
+                />
+              )}
+
+              {stage === "team" && team && !showTransfer && mode !== "infinite" && (
                 <TeamSummary
                   teamName={team.name}
                   players={team.players}
@@ -310,7 +339,6 @@ export default function App() {
                   history={team.history}
                   onSimulate={handleStartMajor}
                   onOpenTransfer={() => dispatch({ type: "SET_SHOW_TRANSFER", open: true })}
-                  onPlayInfinite={handleStartInfinite}
                   simulating={false}
                   hasActiveRun={hasActiveRun}
                   onResume={handleResumeTournament}
