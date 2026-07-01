@@ -117,6 +117,18 @@ export default function App() {
   };
 
   const handleGoHome = () => {
+    // Leaving an in-progress infinite run discards it (it can't be resumed), so guard against
+    // an accidental click throwing away a live win streak.
+    const activeInfinite = state.infiniteRun && !state.infiniteRun.eliminated && state.infiniteRun.gamesWon > 0;
+    if (
+      state.stage === "infinite" &&
+      activeInfinite &&
+      !window.confirm(
+        `End your current run? You're on a ${state.infiniteRun!.gamesWon}-win streak — leaving now ends it and it can't be resumed.`
+      )
+    ) {
+      return;
+    }
     dispatch({ type: "GO_HOME" });
   };
 
@@ -215,6 +227,7 @@ export default function App() {
     lastPrizeMoney,
     infiniteRun,
     infiniteAdvancing,
+    infiniteAttempt,
   } = state;
   const hasActiveRun = !!run && !run.finished;
 
@@ -349,6 +362,7 @@ export default function App() {
 
               {stage === "infinite" && infiniteRun && team && (
                 <InfiniteMode
+                  key={infiniteAttempt}
                   run={infiniteRun}
                   team={team}
                   onAdvance={handleAdvanceInfinite}

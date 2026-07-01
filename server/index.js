@@ -456,7 +456,9 @@ app.post("/api/team/:teamId/rebuild", (req, res) => {
   // Floored at the original difficulty budget so you're never locked below the
   // starting point — prize money above that is fair game to lose.
   const REBUILD_FEE = 150000;
-  const baseBudget = difficultyConfig(team.difficulty).budget;
+  // Floor against the team's OWN mode budget — using the Major table for an Infinite team
+  // would raise its floor above its actual starting budget, handing out free money on rebuild.
+  const baseBudget = difficultyConfig(team.difficulty, team.gameMode).budget;
   const budgetAfterFee = Math.max(baseBudget, team.budget - REBUILD_FEE);
 
   const totalSpend = roster.reduce((sum, p) => sum + p.price, 0) + coach.price;
@@ -540,6 +542,12 @@ app.post("/api/infinite/:teamId/advance", (req, res) => {
     }
   } else {
     run.eliminated = true;
+    // Bank any prize won since the last 5-win flush, so nothing the run reports as "earned"
+    // is silently lost on the final defeat — total earned == total carried into the budget.
+    if (run.pendingPrize > 0) {
+      team.budget += run.pendingPrize;
+      run.pendingPrize = 0;
+    }
     run.history.push({ gameNum: run.gamesPlayed, opponentName, opponentEraId: era.id, won: false, prize: 0 });
     // Persist best score and a short run history.
     if ((team.infiniteBestScore || 0) < run.gamesWon) team.infiniteBestScore = run.gamesWon;
@@ -580,7 +588,7 @@ app.post("/api/major/:teamId/start", (req, res) => {
     overall: team.overall * morale,
   };
 
-  const { aiBoost } = difficultyConfig(team.difficulty);
+  const { aiBoost } = difficultyConfig(team.difficulty, team.gameMode);
   const run = buildMajorRun(userTeam, teamEras, team.bannedMap, coaches, escalatedAiBoost(aiBoost, team.difficultyLevel));
   run.completedRounds = [];
   team.currentRun = run;

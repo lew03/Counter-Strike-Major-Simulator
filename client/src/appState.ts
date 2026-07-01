@@ -22,6 +22,9 @@ export interface AppState {
   lastPrizeMoney: number;
   infiniteRun: InfiniteRunView | null;
   infiniteAdvancing: boolean;
+  // Bumped every time an infinite run (re)starts, used as a React key to force the
+  // InfiniteMode component to remount with fresh internal phase state on Try Again.
+  infiniteAttempt: number;
 }
 
 export const initialState: AppState = {
@@ -42,6 +45,7 @@ export const initialState: AppState = {
   lastPrizeMoney: 0,
   infiniteRun: null,
   infiniteAdvancing: false,
+  infiniteAttempt: 0,
 };
 
 // Pulls the resumable run + round log (if any) off a freshly-fetched team payload.
@@ -162,7 +166,14 @@ export function appReducer(state: AppState, action: AppAction): AppState {
       return { ...state, team: action.team };
 
     case "INFINITE_STARTED":
-      return { ...state, infiniteRun: action.run, infiniteAdvancing: false, stage: "infinite", error: null };
+      return {
+        ...state,
+        infiniteRun: action.run,
+        infiniteAdvancing: false,
+        infiniteAttempt: state.infiniteAttempt + 1,
+        stage: "infinite",
+        error: null,
+      };
 
     case "INFINITE_ADVANCE_REQUEST":
       return { ...state, infiniteAdvancing: true, error: null };
