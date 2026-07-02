@@ -1,14 +1,18 @@
-import type { TeamResponse } from "../types";
+import type { InfiniteRunView, TeamResponse } from "../types";
 import PlayerCard from "./PlayerCard";
 import Icon from "./Icon";
 
 export default function InfiniteLobby({
   team,
+  resumableRun,
   onStartRun,
+  onResumeRun,
   onNewDraft,
 }: {
   team: TeamResponse;
+  resumableRun: InfiniteRunView | null;
   onStartRun: () => void;
+  onResumeRun: () => void;
   onNewDraft: () => void;
 }) {
   const pastRuns = (team.infiniteHistory || []).slice(0, 5);
@@ -59,9 +63,21 @@ export default function InfiniteLobby({
       </p>
 
       <div className="actions-stack">
-        <button className="run-again-btn action-lg" onClick={onStartRun}>
-          <Icon name="play" size={18} /> Start Run
-        </button>
+        {resumableRun ? (
+          <>
+            <button className="run-again-btn action-lg" onClick={onResumeRun}>
+              <Icon name="play" size={18} /> Resume Run · {resumableRun.gamesWon} win
+              {resumableRun.gamesWon !== 1 ? "s" : ""}
+            </button>
+            <button className="transfer-btn action-md" onClick={onStartRun}>
+              <Icon name="refresh" size={16} /> New Run
+            </button>
+          </>
+        ) : (
+          <button className="run-again-btn action-lg" onClick={onStartRun}>
+            <Icon name="play" size={18} /> Start Run
+          </button>
+        )}
         <button className="danger-btn action-sm" onClick={onNewDraft}>
           <Icon name="trash" size={14} /> Start New Draft
         </button>

@@ -3,3 +3,6 @@ dist/
 .env
 .claude/
 server/data/teams-state.json
+
+# TypeScript incremental build cache (machine-specific)
+*.tsbuildinfo

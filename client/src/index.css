@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap");
+/* Fonts (Inter + Space Grotesk) are loaded via <link> in index.html with preconnect,
+   so they don't render-block the stylesheet. System stack is the graceful fallback. */
 
 /* ── Design tokens ──────────────────────────────────────────────────────────
    Modern dark-esports theme: deep cool base, layered surfaces, a violet→azure
@@ -111,6 +112,19 @@ h1, h2, h3, .welcome-title, .major-start-title, .game-over-title {
 *::-webkit-scrollbar-thumb:hover {
   background: #3a4258;
   background-clip: padding-box;
+}
+
+/* Respect users who prefer reduced motion: kill the always-on animations
+   (legendary shimmer, CTA gradient shift, card pops) and collapse transitions. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* Hero / home screen */
@@ -706,6 +720,37 @@ h1, h2, h3, .welcome-title, .major-start-title, .game-over-title {
   color: #868da2;
 }
 
+/* Live roster preview while drafting */
+.draft-roster-summary {
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+  align-items: center;
+  background: var(--surface-2);
+  border: 1px solid var(--border-1);
+  border-radius: var(--radius-sm);
+  padding: 9px 14px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: var(--text-2);
+}
+.drs-stat {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.drs-stat strong {
+  color: var(--text-1);
+  font-size: 15px;
+  font-weight: 800;
+}
+.drs-label {
+  color: var(--text-muted);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
 .rarity-legend {
   display: flex;
   flex-wrap: wrap;
@@ -832,9 +877,9 @@ h1, h2, h3, .welcome-title, .major-start-title, .game-over-title {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  background: rgba(91, 141, 239, 0.1);
-  border: 1px solid #3a5a99;
-  color: #9fc0ff;
+  background: var(--accent-soft);
+  border: 1px solid rgba(123, 108, 255, 0.4);
+  color: #cbc2ff;
   font-size: 13px;
   font-weight: 600;
   padding: 7px 12px;
@@ -925,6 +970,31 @@ h1, h2, h3, .welcome-title, .major-start-title, .game-over-title {
   width: 100%;
   margin: auto 0;
   padding: 16px 26px;
+}
+
+.confirm-modal {
+  max-width: 440px;
+  text-align: center;
+  padding: 30px 32px 26px;
+  margin: auto;
+}
+.confirm-title {
+  margin: 0 0 10px;
+  font-size: 22px;
+}
+.confirm-message {
+  margin: 0 0 22px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.confirm-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+.confirm-actions button {
+  margin-bottom: 0;
+  min-width: 130px;
 }
 
 .reroll-btn {
@@ -1996,6 +2066,91 @@ tr.mvp-row {
   white-space: nowrap;
 }
 
+/* Second Life insurance */
+.inf-insurance {
+  margin-bottom: 16px;
+}
+.inf-insurance-btn {
+  width: 100%;
+  padding: 11px 18px;
+  font-size: 13.5px;
+}
+.inf-insurance-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(0.4);
+}
+.inf-insurance-active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #7fe6df;
+  background: rgba(23, 196, 189, 0.1);
+  border: 1px solid rgba(23, 196, 189, 0.4);
+}
+.inf-hist-row.inf-survived {
+  background: rgba(23, 196, 189, 0.09);
+}
+.inf-hist-row.inf-survived .inf-hist-result {
+  color: #4fd6cd;
+}
+
+/* Toasts */
+.toast-host {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+  pointer-events: none;
+}
+.toast {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 360px;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-1);
+  text-align: left;
+  background: var(--surface-3);
+  border: 1px solid var(--border-2);
+  border-left: 3px solid var(--accent);
+  box-shadow: var(--shadow-2);
+  cursor: pointer;
+}
+.toast .icon {
+  flex-shrink: 0;
+}
+.toast-success {
+  border-left-color: var(--success);
+  color: #b7f0cf;
+}
+.toast-success .icon {
+  color: var(--success);
+}
+.toast-error {
+  border-left-color: var(--danger);
+  color: #ffc2c9;
+}
+.toast-error .icon {
+  color: var(--danger);
+}
+.toast-info .icon {
+  color: var(--accent);
+}
+
 /* Game over screen */
 
 .game-over-screen {
@@ -2888,7 +3043,9 @@ h2 + .live-match {
 }
 
 .chemistry-icon {
-  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--accent);
 }
 
 .chemistry-title {
@@ -3130,8 +3287,16 @@ h2 + .live-match {
     grid-template-columns: 1fr;
   }
 
+  .mode-select {
+    grid-template-columns: 1fr;
+  }
+
   .card-grid {
     grid-template-columns: 1fr;
+  }
+
+  .welcome-card {
+    padding: 28px 20px 32px;
   }
 
   /* Transfer slots/options: drop the rigid column grid for a stacked layout. */
@@ -3171,8 +3336,21 @@ h2 + .live-match {
   }
 
   .actions-row button,
-  .actions-stack > .actions-btn,
-  .actions-stack > .run-again-btn {
+  .actions-stack > button,
+  .action-lg,
+  .action-md,
+  .action-sm {
     width: 100%;
+    min-width: 0;
+  }
+
+  .toast-host {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    align-items: stretch;
+  }
+  .toast {
+    max-width: none;
   }
 }

@@ -111,6 +111,15 @@ export async function confirmInfiniteTransfer(teamId: string): Promise<{ run: In
   return res.json();
 }
 
+export async function buyInfiniteInsurance(teamId: string): Promise<AdvanceInfiniteResponse> {
+  const res = await fetch(`${BASE}/infinite/${teamId}/buy-insurance`, { method: "POST" });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ error: "Failed to buy Second Life" }));
+    throw new Error(err.error || "Failed to buy Second Life");
+  }
+  return res.json();
+}
+
 export async function startMajor(teamId: string): Promise<StartMajorResponse> {
   const res = await fetch(`${BASE}/major/${teamId}/start`, { method: "POST" });
   if (!res.ok) throw new Error("Failed to start major");

@@ -27,52 +27,28 @@ app.use(express.json());
 
 const DRAFT_ORDER = [...ROLES, "coach"];
 
-// Difficulty presets — more money + weaker opponents = easier.
-//
-// aiBoost < 1.0 genuinely weakens AI rosters below their historical rating; >1.0 strengthens
-// them. These were originally 1.0/1.03/1.06 (i.e. "easy" never actually weakened anyone, just
-// skipped the bonus normal/hard apply) which, combined with how little headroom the budget
-// curve leaves even on a maximally-optimized draft, made majors nearly unwinnable at every
-// tier (empirically ~2-4% on easy, <1% on normal, 0% on hard over hundreds of simulated runs
-// with a near-best-possible roster). Recalibrated against simulated win rates for an
-// optimally-drafted team at each budget: easy ~40-45%, normal ~15-17%, hard ~6-9%.
-const DIFFICULTIES = {
-  easy: { budget: 1050000, aiBoost: 0.9 },
-  normal: { budget: 850000, aiBoost: 0.94 },
-  hard: { budget: 750000, aiBoost: 0.95 },
-};
-const INFINITE_DIFFICULTIES = {
-  easy:   { budget: 750000, aiBoost: 0.9 },
-  normal: { budget: 600000, aiBoost: 0.94 },
-  hard:   { budget: 500000, aiBoost: 0.95 },
-};
-function difficultyConfig(d, mode) {
-  if (mode === "infinite") return INFINITE_DIFFICULTIES[d] || INFINITE_DIFFICULTIES.normal;
-  return DIFFICULTIES[d] || DIFFICULTIES.normal;
-}
-
-// --- Difficulty escalation: each major you WIN nudges AI strength up for next time, so a
-// roster that solved one difficulty tier doesn't just keep steamrolling it forever — you have
-// to adapt (transfer, chase chemistry, etc.) to keep winning. Capped well short of pushing a
-// good roster into "unwinnable" territory (see the difficulty-calibration notes above). ---
-const ESCALATION_STEP = 0.01;
-const ESCALATION_MAX_WINS = 6; // caps the extra AI strength at +6%
-function escalatedAiBoost(baseAiBoost, difficultyLevel) {
-  return baseAiBoost + Math.min(difficultyLevel || 0, ESCALATION_MAX_WINS) * ESCALATION_STEP;
-}
+const {
+  DIFFICULTIES,
+  INFINITE_DIFFICULTIES,
+  difficultyConfig,
+  escalatedAiBoost,
+  transferEffectiveCap,
+  infiniteInsuranceCost,
+} = require("./config");
 
 // --- Disk persistence: durable team rosters + career history survive restarts.
-//     In-progress major runs are intentionally NOT persisted (they're cheap to
-//     re-start and fragile to serialise) — only the roster and history are. ---
+//     In-progress runs (the Swiss/playoff major run and the Infinite run) are persisted too,
+//     so a server restart mid-tournament / mid-run resumes instead of losing progress. Both
+//     are plain JSON trees (no cycles/functions), so they serialise cleanly. ---
 const STATE_FILE = path.join(__dirname, "data", "teams-state.json");
-const teams = new Map(); // teamId -> { name, players, coach, overall, totalSpend, budget, difficulty, history, currentRun }
+const teams = new Map(); // teamId -> { name, players, coach, overall, totalSpend, budget, difficulty, history, currentRun, infiniteRun }
 
 function loadTeams() {
   try {
     const raw = fs.readFileSync(STATE_FILE, "utf8");
     const obj = JSON.parse(raw);
     for (const [id, t] of Object.entries(obj)) {
-      teams.set(id, { ...t, currentRun: null, infiniteRun: null });
+      teams.set(id, { currentRun: null, infiniteRun: null, ...t });
     }
     console.log(`Loaded ${teams.size} saved team(s) from disk.`);
   } catch {
@@ -87,11 +63,7 @@ function saveTeams() {
   setImmediate(() => {
     saveQueued = false;
     const obj = {};
-    for (const [id, t] of teams.entries()) {
-      // eslint-disable-next-line no-unused-vars
-      const { currentRun, infiniteRun, ...durable } = t;
-      obj[id] = durable;
-    }
+    for (const [id, t] of teams.entries()) obj[id] = t;
     try {
       fs.writeFileSync(STATE_FILE, JSON.stringify(obj));
     } catch (e) {
@@ -203,6 +175,12 @@ function teamView(team, teamId) {
     team.currentRun && !team.currentRun.finished
       ? { run: runView(team.currentRun), roundLog: team.currentRun.completedRounds || [] }
       : null;
+  // Same idea for Infinite: a live (non-eliminated) run is surfaced so it can be resumed
+  // after a refresh or a trip back to the lobby instead of being silently lost.
+  const activeInfiniteRun =
+    team.infiniteRun && !team.infiniteRun.eliminated && team.infiniteRun.gamesPlayed > 0
+      ? infiniteRunView(team.infiniteRun)
+      : null;
   return {
     teamId,
     name: team.name,
@@ -221,6 +199,7 @@ function teamView(team, teamId) {
     activeRun,
     infiniteBestScore: team.infiniteBestScore || 0,
     infiniteHistory: team.infiniteHistory || [],
+    activeInfiniteRun,
     gameMode: team.gameMode || "major",
   };
 }
@@ -237,6 +216,8 @@ function infiniteRunView(run) {
     currentMatch: run.currentMatch || null,
     history: run.history || [],
     opponentBoost: infiniteOpponentBoost(run.gamesWon),
+    insured: !!run.insured,
+    insuranceCost: infiniteInsuranceCost(run.gamesWon),
   };
 }
 
@@ -409,7 +390,7 @@ app.post("/api/team/:teamId/transfer", (req, res) => {
   }
 
   const totalSpend = roster.reduce((sum, p) => sum + p.price, 0) + coach.price;
-  const effectiveCap = team.budget + Math.floor(sellTotal * 0.6);
+  const effectiveCap = transferEffectiveCap(team.budget, sellTotal);
   if (totalSpend > effectiveCap) {
     return res.status(400).json({ error: `Roster costs $${totalSpend.toLocaleString()}, over the effective cap of $${effectiveCap.toLocaleString()} (budget + sell-back)` });
   }
@@ -429,8 +410,9 @@ app.post("/api/team/:teamId/transfer", (req, res) => {
 
 // --- Infinite Mode endpoints ---
 
-// Start (or restart) an infinite run. The run is in-memory only (like currentRun) so a
-// refresh or Home → back resets it — that's intentional; the best-score is what persists.
+// Start (or restart) an infinite run — always begins a fresh run (0 wins). A live run is
+// persisted and resumable via teamView.activeInfiniteRun, so this is only called for a brand
+// new run ("Start Run" / "New Run" / "Try Again"), not to resume.
 app.post("/api/infinite/:teamId/start", (req, res) => {
   const team = teams.get(req.params.teamId);
   if (!team) return res.status(404).json({ error: "Team not found" });
@@ -444,6 +426,7 @@ app.post("/api/infinite/:teamId/start", (req, res) => {
     nextTransferAt: 5,
     currentMatch: null,
     history: [],
+    insured: false,
   };
   res.json({ run: infiniteRunView(team.infiniteRun) });
 });
@@ -489,6 +472,12 @@ app.post("/api/infinite/:teamId/advance", (req, res) => {
       run.pendingPrize = 0;
       saveTeams();
     }
+  } else if (run.insured) {
+    // Second Life: consume the insurance, survive the loss, and keep the run alive. The win
+    // streak (and therefore difficulty tier) is unchanged — you get another crack at the tier.
+    run.insured = false;
+    run.history.push({ gameNum: run.gamesPlayed, opponentName, opponentEraId: era.id, won: false, prize: 0, survived: true });
+    saveTeams();
   } else {
     run.eliminated = true;
     // Bank any prize won since the last 5-win flush, so nothing the run reports as "earned"
@@ -516,6 +505,24 @@ app.post("/api/infinite/:teamId/confirm-transfer", (req, res) => {
   if (!team || !team.infiniteRun) return res.status(404).json({ error: "No active infinite run" });
   team.infiniteRun.pendingTransfer = false;
   res.json({ run: infiniteRunView(team.infiniteRun) });
+});
+
+// Buy "Second Life" insurance for the current run: spends banked budget so the next loss is
+// survived instead of ending the run. One at a time; price scales with depth.
+app.post("/api/infinite/:teamId/buy-insurance", (req, res) => {
+  const team = teams.get(req.params.teamId);
+  if (!team || !team.infiniteRun) return res.status(404).json({ error: "No active infinite run" });
+  const run = team.infiniteRun;
+  if (run.eliminated) return res.status(400).json({ error: "Run is over — start a new one" });
+  if (run.insured) return res.status(400).json({ error: "You already have Second Life active" });
+  const cost = infiniteInsuranceCost(run.gamesWon);
+  if (team.budget < cost) {
+    return res.status(400).json({ error: `Second Life costs $${cost.toLocaleString()} — not enough budget` });
+  }
+  team.budget -= cost;
+  run.insured = true;
+  saveTeams();
+  res.json({ run: infiniteRunView(run), team: teamView(team, req.params.teamId) });
 });
 
 app.post("/api/major/:teamId/start", (req, res) => {

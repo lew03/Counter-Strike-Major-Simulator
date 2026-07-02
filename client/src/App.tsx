@@ -1,7 +1,8 @@
 import { useEffect, useReducer, useState } from "react";
 import type { Difficulty, Role, TeamResponse } from "./types";
-import { createTeam, startMajor, advanceMajor as advanceMajorApi, fetchTeam, startInfinite, advanceInfinite, confirmInfiniteTransfer } from "./api";
+import { createTeam, startMajor, advanceMajor as advanceMajorApi, fetchTeam, startInfinite, advanceInfinite, confirmInfiniteTransfer, buyInfiniteInsurance } from "./api";
 import { appReducer, initialState } from "./appState";
+import { toast } from "./toast";
 import Welcome from "./components/Welcome";
 import TeamName from "./components/TeamName";
 import Draft from "./components/Draft";
@@ -13,6 +14,8 @@ import InfiniteMode from "./components/InfiniteMode";
 import SettingsPage from "./components/SettingsPage";
 import Tooltip from "./components/Tooltip";
 import Icon from "./components/Icon";
+import ToastHost from "./components/ToastHost";
+import ConfirmModal, { type ConfirmOptions } from "./components/ConfirmModal";
 import { isMuted, setMuted } from "./sound";
 
 const SAVED_TEAM_KEY = "csmajor_teamId";
@@ -33,6 +36,7 @@ const DIFFICULTY_LABEL: Record<Difficulty, string> = {
 export default function App() {
   const [state, dispatch] = useReducer(appReducer, initialState);
   const [muted, setMutedState] = useState(isMuted());
+  const [confirmOptions, setConfirmOptions] = useState<ConfirmOptions | null>(null);
 
   // On load, resume a previously-drafted team if one is saved and still on the server.
   useEffect(() => {
@@ -78,6 +82,7 @@ export default function App() {
 
   const handleTransferComplete = (updated: TeamResponse) => {
     dispatch({ type: "TEAM_READY", team: updated, persist: false });
+    toast("Transfers confirmed — roster updated.", "success");
   };
 
   const handleStartMajor = async () => {
@@ -100,39 +105,50 @@ export default function App() {
       // server-side — re-fetch the team so the client doesn't have to re-derive those formulas.
       const updatedTeam = res.run.finished ? await fetchTeam(state.team.teamId) : undefined;
       dispatch({ type: "ADVANCE_RESULT", run: res.run, roundResult: res.roundResult, prizeMoney: res.prizeMoney, updatedTeam });
+      if (res.run.finished && res.prizeMoney > 0) {
+        toast(`Earned $${res.prizeMoney.toLocaleString()} prize money.`, "success");
+      }
     } catch (e: any) {
       dispatch({ type: "SET_ERROR", error: e.message });
       dispatch({ type: "ADVANCE_FAILED" });
     }
   };
 
-  const handleRestart = () => {
-    if (state.team && !window.confirm("This will permanently clear your roster and career history. Continue?")) {
-      return;
-    }
+  const wipeAndRestart = () => {
     localStorage.removeItem(SAVED_TEAM_KEY);
     localStorage.removeItem(SAVED_MODE_KEY);
     dispatch({ type: "RESTART" });
   };
 
-  const handleGoHome = () => {
-    // Leaving an in-progress infinite run discards it (it can't be resumed), so guard against
-    // an accidental click throwing away a live win streak.
-    const activeInfinite = state.infiniteRun && !state.infiniteRun.eliminated && state.infiniteRun.gamesWon > 0;
-    if (
-      state.stage === "infinite" &&
-      activeInfinite &&
-      !window.confirm(
-        `End your current run? You're on a ${state.infiniteRun!.gamesWon}-win streak — leaving now ends it and it can't be resumed.`
-      )
-    ) {
+  const handleRestart = () => {
+    if (!state.team) {
+      wipeAndRestart();
       return;
     }
+    setConfirmOptions({
+      title: "Start a new draft?",
+      message: "This permanently clears your current roster and career history. This can't be undone.",
+      confirmLabel: "Wipe & restart",
+      danger: true,
+      onConfirm: () => {
+        setConfirmOptions(null);
+        wipeAndRestart();
+      },
+    });
+  };
+
+  const handleGoHome = () => {
+    // Non-destructive: an in-progress infinite run is kept (and persisted server-side), so the
+    // lobby can offer to resume it. No confirmation needed.
     dispatch({ type: "GO_HOME" });
   };
 
   const handleResumeTournament = () => {
     dispatch({ type: "RESUME_TOURNAMENT" });
+  };
+
+  const handleResumeInfinite = () => {
+    dispatch({ type: "INFINITE_RESUMED" });
   };
 
   const handleStartInfinite = async () => {
@@ -145,12 +161,32 @@ export default function App() {
     }
   };
 
+  const handleBuyInsurance = async () => {
+    if (!state.team) return;
+    try {
+      const res = await buyInfiniteInsurance(state.team.teamId);
+      dispatch({ type: "INFINITE_INSURANCE_BOUGHT", run: res.run, team: res.team });
+      toast("Second Life active — your next loss won't end the run.", "success");
+    } catch (e: any) {
+      toast(e.message, "error");
+    }
+  };
+
   const handleAdvanceInfinite = async () => {
     if (!state.team) return;
+    const prevBest = state.team.infiniteBestScore || 0;
     dispatch({ type: "INFINITE_ADVANCE_REQUEST" });
     try {
       const res = await advanceInfinite(state.team.teamId);
       dispatch({ type: "INFINITE_ADVANCE_RESULT", run: res.run, team: res.team });
+      const last = res.run.history[res.run.history.length - 1];
+      if (last?.survived) {
+        toast("Second Life used — you survived the loss!", "success");
+      } else if (res.run.eliminated && res.run.gamesWon > prevBest) {
+        toast(`New best run — ${res.run.gamesWon} wins!`, "success");
+      } else if (res.run.pendingTransfer) {
+        toast("Transfer window unlocked — prize money banked.", "success");
+      }
     } catch (e: any) {
       dispatch({ type: "SET_ERROR", error: e.message });
       dispatch({ type: "INFINITE_ADVANCE_FAILED" });
@@ -160,6 +196,7 @@ export default function App() {
   const handleInfiniteTransferComplete = async (updated: import("./types").TeamResponse) => {
     dispatch({ type: "UPDATE_TEAM", team: updated });
     dispatch({ type: "SET_SHOW_TRANSFER", open: false });
+    toast("Transfers confirmed — roster updated.", "success");
     if (state.team && state.infiniteRun) {
       try {
         const res = await confirmInfiniteTransfer(state.team.teamId);
@@ -221,6 +258,10 @@ export default function App() {
 
   return (
     <>
+      <ToastHost />
+      {confirmOptions && (
+        <ConfirmModal options={confirmOptions} onCancel={() => setConfirmOptions(null)} />
+      )}
       {stage === "welcome" ? (
         <Welcome onStart={handleWelcomeStart} />
       ) : stage === "name" ? (
@@ -317,7 +358,9 @@ export default function App() {
               {stage === "team" && team && !showTransfer && mode === "infinite" && (
                 <InfiniteLobby
                   team={team}
+                  resumableRun={infiniteRun && !infiniteRun.eliminated && infiniteRun.gamesPlayed > 0 ? infiniteRun : null}
                   onStartRun={handleStartInfinite}
+                  onResumeRun={handleResumeInfinite}
                   onNewDraft={handleRestart}
                 />
               )}
@@ -352,6 +395,7 @@ export default function App() {
                   run={infiniteRun}
                   team={team}
                   onAdvance={handleAdvanceInfinite}
+                  onBuyInsurance={handleBuyInsurance}
                   onTransferComplete={handleInfiniteTransferComplete}
                   onSkipTransfer={handleInfiniteSkipTransfer}
                   onRestart={handleRestartInfinite}

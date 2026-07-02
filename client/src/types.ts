@@ -49,6 +49,7 @@ export interface TeamResponse {
   activeRun: { run: MajorRun; roundLog: RoundResult[] } | null;
   infiniteBestScore: number;
   infiniteHistory: InfiniteHistoryEntry[];
+  activeInfiniteRun: InfiniteRunView | null;
   gameMode: "major" | "infinite";
 }
 
@@ -64,6 +65,8 @@ export interface InfiniteMatchEntry {
   opponentEraId: string;
   won: boolean;
   prize: number;
+  // Set when a loss was absorbed by Second Life insurance instead of ending the run.
+  survived?: boolean;
 }
 
 export interface InfiniteRunView {
@@ -77,6 +80,8 @@ export interface InfiniteRunView {
   currentMatch: MatchResult | null;
   history: InfiniteMatchEntry[];
   opponentBoost: number;
+  insured: boolean;
+  insuranceCost: number;
 }
 
 export interface StartInfiniteResponse {

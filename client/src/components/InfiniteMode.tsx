@@ -46,12 +46,17 @@ function HistoryList({ history }: { history: InfiniteRunView["history"] }) {
     <div className="inf-history">
       <div className="inf-history-title">Recent games</div>
       {recent.map((h) => (
-        <div key={h.gameNum} className={`inf-hist-row ${h.won ? "inf-won" : "inf-lost"}`}>
+        <div
+          key={h.gameNum}
+          className={`inf-hist-row ${h.won ? "inf-won" : h.survived ? "inf-survived" : "inf-lost"}`}
+        >
           <span className="inf-hist-num">#{h.gameNum}</span>
           <span className="inf-hist-opp">{h.opponentName}</span>
           <span className="inf-hist-result">
             {h.won ? (
               <><Icon name="check" size={13} strokeWidth={2.4} /> +${h.prize.toLocaleString()}</>
+            ) : h.survived ? (
+              <><Icon name="shield" size={13} /> Survived</>
             ) : (
               <><Icon name="x" size={13} strokeWidth={2.4} /> Eliminated</>
             )}
@@ -98,6 +103,7 @@ export default function InfiniteMode({
   run,
   team,
   onAdvance,
+  onBuyInsurance,
   onTransferComplete,
   onSkipTransfer,
   onRestart,
@@ -107,6 +113,7 @@ export default function InfiniteMode({
   run: InfiniteRunView;
   team: TeamResponse;
   onAdvance: () => void;
+  onBuyInsurance: () => void;
   onTransferComplete: (updated: TeamResponse) => void;
   onSkipTransfer: () => void;
   onRestart: () => void;
@@ -116,7 +123,8 @@ export default function InfiniteMode({
   const [phase, setPhase] = useState<Phase>(() => {
     if (run.eliminated) return "eliminated";
     if (run.pendingTransfer) return "transfer";
-    if (run.currentMatch) return "watching";
+    // Start at the menu on mount even if a currentMatch exists (e.g. resuming a run): the
+    // last match was already watched. Fresh matches are picked up by the effect below.
     return "menu";
   });
 
@@ -222,6 +230,23 @@ export default function InfiniteMode({
           <strong>{winsUntilTransfer}</strong> more win{winsUntilTransfer !== 1 ? "s" : ""}
         </div>
       )}
+
+      <div className="inf-insurance">
+        {run.insured ? (
+          <div className="inf-insurance-active">
+            <Icon name="shield" size={16} /> Second Life active — your next loss is survived.
+          </div>
+        ) : (
+          <button
+            className="transfer-btn inf-insurance-btn"
+            onClick={onBuyInsurance}
+            disabled={team.budget < run.insuranceCost}
+            title={team.budget < run.insuranceCost ? "Not enough budget" : "Survive one loss this run"}
+          >
+            <Icon name="shield" size={16} /> Buy Second Life · ${run.insuranceCost.toLocaleString()}
+          </button>
+        )}
+      </div>
 
       <HistoryList history={run.history} />
 

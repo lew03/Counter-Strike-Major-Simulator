@@ -121,6 +121,24 @@ export default function Draft({
       .finally(() => setRerolling(false));
   };
 
+  // Running roster preview: average rating + chemistry links (same team / same country) among
+  // the players picked so far, so you can steer toward a stronger, higher-chemistry lineup
+  // before locking in rather than only seeing the result on the summary screen.
+  const pickedList = draftOrder
+    .filter((r) => r !== "coach")
+    .map((r) => pickedPlayers[r])
+    .filter((p): p is Player => !!p);
+  const avgRating = pickedList.length
+    ? pickedList.reduce((sum, p) => sum + p.rating, 0) / pickedList.length
+    : 0;
+  let chemistryLinks = 0;
+  for (let i = 0; i < pickedList.length; i++) {
+    for (let j = i + 1; j < pickedList.length; j++) {
+      if (pickedList[i].team && pickedList[i].team === pickedList[j].team) chemistryLinks++;
+      if (pickedList[i].country && pickedList[i].country === pickedList[j].country) chemistryLinks++;
+    }
+  }
+
   return (
     <div className="panel fade-in tall-panel">
       <div className="draft-progress">
@@ -155,6 +173,23 @@ export default function Draft({
         <span className="budget-amount">${remainingBudget.toLocaleString()}</span>
         <span className="budget-total">/ ${budget.toLocaleString()}</span>
       </div>
+
+      {pickedList.length > 0 && (
+        <div className="draft-roster-summary">
+          <span className="drs-stat">
+            <span className="drs-label">Roster</span>
+            <strong>{pickedList.length}/5</strong>
+          </span>
+          <span className="drs-stat">
+            <span className="drs-label">Avg rating</span>
+            <strong>{avgRating.toFixed(2)}</strong>
+          </span>
+          <span className="drs-stat">
+            <span className="drs-label">Chemistry</span>
+            <strong>{chemistryLinks}</strong> link{chemistryLinks !== 1 ? "s" : ""}
+          </span>
+        </div>
+      )}
 
       <h2>
         Pick your {ROLE_LABELS[role]} ({stepIndex + 1} / {draftOrder.length})

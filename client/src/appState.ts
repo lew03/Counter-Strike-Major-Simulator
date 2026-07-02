@@ -66,10 +66,12 @@ export type AppAction =
   | { type: "SET_SHOW_TRANSFER"; open: boolean }
   | { type: "SET_SHOW_SETTINGS"; open: boolean }
   | { type: "INFINITE_STARTED"; run: InfiniteRunView }
+  | { type: "INFINITE_RESUMED" }
   | { type: "INFINITE_ADVANCE_REQUEST" }
   | { type: "INFINITE_ADVANCE_RESULT"; run: InfiniteRunView; team: TeamResponse }
   | { type: "INFINITE_ADVANCE_FAILED" }
   | { type: "INFINITE_TRANSFER_CONFIRMED"; run: InfiniteRunView }
+  | { type: "INFINITE_INSURANCE_BOUGHT"; run: InfiniteRunView; team: TeamResponse }
   | { type: "UPDATE_TEAM"; team: TeamResponse };
 
 export function appReducer(state: AppState, action: AppAction): AppState {
@@ -85,6 +87,8 @@ export function appReducer(state: AppState, action: AppAction): AppState {
             // for teams created before the server tracked it.
             mode: action.team.gameMode || action.mode || "major",
             stage: "team",
+            // Restore a live infinite run so the lobby can offer "Resume Run" after a reload.
+            infiniteRun: action.team.activeInfiniteRun ?? null,
             ...activeRunFields(action.team),
           }
         : { ...state, booting: false };
@@ -152,8 +156,10 @@ export function appReducer(state: AppState, action: AppAction): AppState {
       return { ...initialState, booting: false };
 
     case "GO_HOME":
+      // Non-destructive: the infinite run is kept (and is persisted server-side), so the lobby
+      // can offer "Resume Run" instead of throwing away progress.
       return state.team
-        ? { ...state, stage: "team", showTransfer: false, showSettings: false, infiniteRun: null, run: state.run }
+        ? { ...state, stage: "team", showTransfer: false, showSettings: false, run: state.run }
         : state;
 
     case "UPDATE_TEAM":
@@ -169,6 +175,9 @@ export function appReducer(state: AppState, action: AppAction): AppState {
         error: null,
       };
 
+    case "INFINITE_RESUMED":
+      return state.infiniteRun ? { ...state, stage: "infinite", error: null } : state;
+
     case "INFINITE_ADVANCE_REQUEST":
       return { ...state, infiniteAdvancing: true, error: null };
 
@@ -180,6 +189,9 @@ export function appReducer(state: AppState, action: AppAction): AppState {
 
     case "INFINITE_TRANSFER_CONFIRMED":
       return { ...state, infiniteRun: action.run };
+
+    case "INFINITE_INSURANCE_BOUGHT":
+      return { ...state, infiniteRun: action.run, team: action.team };
 
     case "RESUME_TOURNAMENT":
       return state.run && !state.run.finished ? { ...state, stage: "major", showSettings: false } : state;
