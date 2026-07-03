@@ -22,7 +22,7 @@ export default function SettingsPage({
         <h3>Data</h3>
         <p className="hint">
           {hasTeam
-            ? "Wipes your roster, budget spend, and career history for this team, and returns you to the welcome screen. This can't be undone."
+            ? "Deletes this team — roster, budget, and career history — from your browser and the server, and returns you to the welcome screen. This can't be undone."
             : "There's no saved team yet — draft a roster to get started."}
         </p>
         <button className="danger-btn" onClick={onWipeData} disabled={!hasTeam}>

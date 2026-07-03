@@ -82,6 +82,9 @@ export interface InfiniteRunView {
   opponentBoost: number;
   insured: boolean;
   insuranceCost: number;
+  // Momentum perk: +5% team rating for the next game only.
+  boostNext: boolean;
+  boostCost: number;
 }
 
 export interface StartInfiniteResponse {

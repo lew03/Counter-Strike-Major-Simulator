@@ -34,6 +34,8 @@ const {
   escalatedAiBoost,
   transferEffectiveCap,
   infiniteInsuranceCost,
+  INFINITE_BOOST_FACTOR,
+  infiniteBoostCost,
 } = require("./config");
 
 // --- Disk persistence: durable team rosters + career history survive restarts.
@@ -53,6 +55,26 @@ function loadTeams() {
     console.log(`Loaded ${teams.size} saved team(s) from disk.`);
   } catch {
     // no state file yet — fine
+  }
+}
+
+// Mark a team as recently used, so pruning below removes genuinely-abandoned rosters
+// (e.g. throwaway drafts) rather than the one the player is actively using.
+function touch(team) {
+  team.lastActive = Date.now();
+}
+
+// Cap how many saved teams accumulate on disk. Old throwaway drafts otherwise pile up
+// forever (each one now carries persisted run state too) and get re-loaded on every boot.
+// Pruned oldest-first by lastActive; only invoked when a NEW team is created, by which
+// point any team in active use has been touched via its boot-time GET.
+const MAX_SAVED_TEAMS = 40;
+function pruneTeams() {
+  if (teams.size <= MAX_SAVED_TEAMS) return;
+  const byAge = [...teams.entries()].sort((a, b) => (a[1].lastActive || 0) - (b[1].lastActive || 0));
+  while (teams.size > MAX_SAVED_TEAMS && byAge.length > 0) {
+    const [oldestId] = byAge.shift();
+    teams.delete(oldestId);
   }
 }
 
@@ -218,6 +240,8 @@ function infiniteRunView(run) {
     opponentBoost: infiniteOpponentBoost(run.gamesWon),
     insured: !!run.insured,
     insuranceCost: infiniteInsuranceCost(run.gamesWon),
+    boostNext: !!run.boostNext,
+    boostCost: infiniteBoostCost(run.gamesWon),
   };
 }
 
@@ -294,7 +318,9 @@ app.post("/api/team", (req, res) => {
     bannedMap: validBannedMap,
     history: [],
     currentRun: null,
+    lastActive: Date.now(),
   });
+  pruneTeams();
   saveTeams();
 
   res.json(teamView(teams.get(teamId), teamId));
@@ -303,7 +329,16 @@ app.post("/api/team", (req, res) => {
 app.get("/api/team/:teamId", (req, res) => {
   const team = teams.get(req.params.teamId);
   if (!team) return res.status(404).json({ error: "Team not found" });
+  touch(team);
   res.json(teamView(team, req.params.teamId));
+});
+
+// Delete a saved team outright — called when the player starts a fresh draft, so
+// abandoned rosters don't linger on disk until the prune cap catches them.
+app.delete("/api/team/:teamId", (req, res) => {
+  if (!teams.delete(req.params.teamId)) return res.status(404).json({ error: "Team not found" });
+  saveTeams();
+  res.json({ ok: true });
 });
 
 // How many candidates to surface per transfer slot — random draw like the draft,
@@ -403,6 +438,7 @@ app.post("/api/team/:teamId/transfer", (req, res) => {
   // A transfer is exactly the "re-evaluation" a losing streak is meant to provoke — fresh
   // faces wipe the morale penalty rather than requiring a win to clear it.
   team.lossStreak = 0;
+  touch(team);
   saveTeams();
 
   res.json(teamView(team, req.params.teamId));
@@ -427,7 +463,10 @@ app.post("/api/infinite/:teamId/start", (req, res) => {
     currentMatch: null,
     history: [],
     insured: false,
+    boostNext: false,
   };
+  touch(team);
+  saveTeams();
   res.json({ run: infiniteRunView(team.infiniteRun) });
 });
 
@@ -447,11 +486,16 @@ app.post("/api/infinite/:teamId/advance", (req, res) => {
   const pool = freshPool.length >= 3 ? freshPool : teamEras;
   const era = pool[Math.floor(Math.random() * pool.length)];
 
+  // Momentum boost is consumed by this game whatever the result — it applied to the sim.
+  const userBoost = run.boostNext ? INFINITE_BOOST_FACTOR : 1;
+  run.boostNext = false;
+
   const { won, match, opponentName } = playInfiniteGame(
     { name: team.name, players: team.players, coach: team.coach, isUser: true },
     era,
     run.gamesWon,
-    coaches
+    coaches,
+    userBoost
   );
 
   run.gamesPlayed++;
@@ -470,14 +514,12 @@ app.post("/api/infinite/:teamId/advance", (req, res) => {
       run.pendingTransfer = true;
       run.nextTransferAt = run.gamesWon + 5;
       run.pendingPrize = 0;
-      saveTeams();
     }
   } else if (run.insured) {
     // Second Life: consume the insurance, survive the loss, and keep the run alive. The win
     // streak (and therefore difficulty tier) is unchanged — you get another crack at the tier.
     run.insured = false;
     run.history.push({ gameNum: run.gamesPlayed, opponentName, opponentEraId: era.id, won: false, prize: 0, survived: true });
-    saveTeams();
   } else {
     run.eliminated = true;
     // Bank any prize won since the last 5-win flush, so nothing the run reports as "earned"
@@ -492,8 +534,12 @@ app.post("/api/infinite/:teamId/advance", (req, res) => {
     if (!team.infiniteHistory) team.infiniteHistory = [];
     team.infiniteHistory.unshift({ timestamp: Date.now(), gamesWon: run.gamesWon, totalEarned: run.totalEarned });
     team.infiniteHistory = team.infiniteHistory.slice(0, 5);
-    saveTeams();
   }
+
+  // Persist every game, not just milestones — the run is resumable across a server
+  // restart, so the on-disk snapshot must track the live one.
+  touch(team);
+  saveTeams();
 
   res.json({ run: infiniteRunView(run), team: teamView(team, req.params.teamId) });
 });
@@ -504,6 +550,7 @@ app.post("/api/infinite/:teamId/confirm-transfer", (req, res) => {
   const team = teams.get(req.params.teamId);
   if (!team || !team.infiniteRun) return res.status(404).json({ error: "No active infinite run" });
   team.infiniteRun.pendingTransfer = false;
+  saveTeams();
   res.json({ run: infiniteRunView(team.infiniteRun) });
 });
 
@@ -521,6 +568,26 @@ app.post("/api/infinite/:teamId/buy-insurance", (req, res) => {
   }
   team.budget -= cost;
   run.insured = true;
+  touch(team);
+  saveTeams();
+  res.json({ run: infiniteRunView(run), team: teamView(team, req.params.teamId) });
+});
+
+// Buy a one-game "Momentum" boost: +5% team rating for the NEXT game only. Consumed by
+// the next advance whatever the result. One at a time; price scales with depth.
+app.post("/api/infinite/:teamId/buy-boost", (req, res) => {
+  const team = teams.get(req.params.teamId);
+  if (!team || !team.infiniteRun) return res.status(404).json({ error: "No active infinite run" });
+  const run = team.infiniteRun;
+  if (run.eliminated) return res.status(400).json({ error: "Run is over — start a new one" });
+  if (run.boostNext) return res.status(400).json({ error: "Momentum is already active for the next game" });
+  const cost = infiniteBoostCost(run.gamesWon);
+  if (team.budget < cost) {
+    return res.status(400).json({ error: `Momentum costs $${cost.toLocaleString()} — not enough budget` });
+  }
+  team.budget -= cost;
+  run.boostNext = true;
+  touch(team);
   saveTeams();
   res.json({ run: infiniteRunView(run), team: teamView(team, req.params.teamId) });
 });
@@ -548,6 +615,8 @@ app.post("/api/major/:teamId/start", (req, res) => {
   const run = buildMajorRun(userTeam, teamEras, team.bannedMap, coaches, escalatedAiBoost(aiBoost, team.difficultyLevel));
   run.completedRounds = [];
   team.currentRun = run;
+  touch(team);
+  saveTeams();
 
   res.json({ run: runView(run) });
 });
@@ -590,8 +659,12 @@ app.post("/api/major/:teamId/advance", (req, res) => {
     } else {
       team.lossStreak = (team.lossStreak || 0) + 1;
     }
-    saveTeams();
   }
+
+  // Persist every round, not just the finish — the run is resumable across a server
+  // restart, so the on-disk snapshot must track the live one.
+  touch(team);
+  saveTeams();
 
   res.json({ roundResult, run: runView(run), attempts: team.history.length, prizeMoney });
 });

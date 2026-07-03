@@ -17,6 +17,8 @@ function makeRun(overrides: Partial<InfiniteRunView> = {}): InfiniteRunView {
     opponentBoost: 0.74,
     insured: false,
     insuranceCost: 105000,
+    boostNext: false,
+    boostCost: 64000,
     ...overrides,
   };
 }

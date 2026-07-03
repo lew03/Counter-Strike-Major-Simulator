@@ -76,16 +76,43 @@ function GameOver({
   onRestart: () => void;
   onGoHome: () => void;
 }) {
+  // Run recap, derived entirely from the game log: the last win is by construction the
+  // hardest opponent beaten (difficulty only ramps up), and survived = losses absorbed
+  // by Second Life along the way.
+  const wins = run.history.filter((h) => h.won);
+  const toughestScalp = wins.length > 0 ? wins[wins.length - 1].opponentName : null;
+  const survived = run.history.filter((h) => !h.won && h.survived).length;
+  const tier = difficultyTier(run.opponentBoost);
+
   return (
     <div className="panel fade-in inf-gameover">
       <div className="inf-gameover-icon"><Icon name="x" size={40} strokeWidth={2.4} /></div>
       <h2>Eliminated</h2>
       <div className="inf-gameover-score">{run.gamesWon}</div>
-      <div className="inf-gameover-score-label">consecutive wins</div>
-      <div className="inf-gameover-sub">
-        {run.gamesPlayed} game{run.gamesPlayed !== 1 ? "s" : ""} played ·{" "}
-        ${run.totalEarned.toLocaleString()} earned
+      <div className="inf-gameover-score-label">wins this run</div>
+      <div className="inf-stats-row inf-gameover-stats">
+        <div className="inf-stat">
+          <div className="inf-stat-val">{run.gamesPlayed}</div>
+          <div className="inf-stat-label">Games</div>
+        </div>
+        <div className="inf-stat">
+          <div className="inf-stat-val">${run.totalEarned.toLocaleString()}</div>
+          <div className="inf-stat-label">Earned</div>
+        </div>
+        <div className="inf-stat">
+          <div className="inf-stat-val">{survived}</div>
+          <div className="inf-stat-label">Losses survived</div>
+        </div>
+        <div className="inf-stat">
+          <div className="inf-stat-val">{tier.label}</div>
+          <div className="inf-stat-label">Tier reached</div>
+        </div>
       </div>
+      {toughestScalp && (
+        <div className="inf-gameover-sub">
+          Toughest scalp: <strong>{toughestScalp}</strong>
+        </div>
+      )}
       <HistoryList history={run.history} />
       <div className="inf-gameover-actions">
         <button className="primary-btn" onClick={onRestart}>
@@ -104,6 +131,7 @@ export default function InfiniteMode({
   team,
   onAdvance,
   onBuyInsurance,
+  onBuyBoost,
   onTransferComplete,
   onSkipTransfer,
   onRestart,
@@ -114,6 +142,7 @@ export default function InfiniteMode({
   team: TeamResponse;
   onAdvance: () => void;
   onBuyInsurance: () => void;
+  onBuyBoost: () => void;
   onTransferComplete: (updated: TeamResponse) => void;
   onSkipTransfer: () => void;
   onRestart: () => void;
@@ -231,19 +260,33 @@ export default function InfiniteMode({
         </div>
       )}
 
-      <div className="inf-insurance">
+      <div className="inf-perks">
         {run.insured ? (
-          <div className="inf-insurance-active">
-            <Icon name="shield" size={16} /> Second Life active — your next loss is survived.
+          <div className="inf-perk-active">
+            <Icon name="shield" size={16} /> Second Life active — your next loss is survived
           </div>
         ) : (
           <button
-            className="transfer-btn inf-insurance-btn"
+            className="transfer-btn inf-perk-btn"
             onClick={onBuyInsurance}
             disabled={team.budget < run.insuranceCost}
             title={team.budget < run.insuranceCost ? "Not enough budget" : "Survive one loss this run"}
           >
-            <Icon name="shield" size={16} /> Buy Second Life · ${run.insuranceCost.toLocaleString()}
+            <Icon name="shield" size={16} /> Second Life · ${run.insuranceCost.toLocaleString()}
+          </button>
+        )}
+        {run.boostNext ? (
+          <div className="inf-perk-active">
+            <Icon name="flame" size={16} /> Momentum active — +5% rating next game
+          </div>
+        ) : (
+          <button
+            className="transfer-btn inf-perk-btn"
+            onClick={onBuyBoost}
+            disabled={team.budget < run.boostCost}
+            title={team.budget < run.boostCost ? "Not enough budget" : "+5% team rating for the next game only"}
+          >
+            <Icon name="flame" size={16} /> Momentum · ${run.boostCost.toLocaleString()}
           </button>
         )}
       </div>

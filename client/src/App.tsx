@@ -1,6 +1,6 @@
 import { useEffect, useReducer, useState } from "react";
 import type { Difficulty, Role, TeamResponse } from "./types";
-import { createTeam, startMajor, advanceMajor as advanceMajorApi, fetchTeam, startInfinite, advanceInfinite, confirmInfiniteTransfer, buyInfiniteInsurance } from "./api";
+import { createTeam, startMajor, advanceMajor as advanceMajorApi, fetchTeam, startInfinite, advanceInfinite, confirmInfiniteTransfer, buyInfiniteInsurance, buyInfiniteBoost, deleteTeam } from "./api";
 import { appReducer, initialState } from "./appState";
 import { toast } from "./toast";
 import Welcome from "./components/Welcome";
@@ -115,6 +115,8 @@ export default function App() {
   };
 
   const wipeAndRestart = () => {
+    // Remove the abandoned team server-side too, so old rosters don't pile up on disk.
+    if (state.team) void deleteTeam(state.team.teamId);
     localStorage.removeItem(SAVED_TEAM_KEY);
     localStorage.removeItem(SAVED_MODE_KEY);
     dispatch({ type: "RESTART" });
@@ -170,6 +172,38 @@ export default function App() {
     } catch (e: any) {
       toast(e.message, "error");
     }
+  };
+
+  const handleBuyBoost = async () => {
+    if (!state.team) return;
+    try {
+      const res = await buyInfiniteBoost(state.team.teamId);
+      dispatch({ type: "INFINITE_BOOST_BOUGHT", run: res.run, team: res.team });
+      toast("Momentum active — +5% team rating next game.", "success");
+    } catch (e: any) {
+      toast(e.message, "error");
+    }
+  };
+
+  // From the lobby, "New Run" over a live resumable run needs a confirmation — one
+  // misclick would otherwise discard the streak for good.
+  const handleLobbyStartRun = () => {
+    const live = state.infiniteRun && !state.infiniteRun.eliminated && state.infiniteRun.gamesPlayed > 0;
+    if (!live) {
+      void handleStartInfinite();
+      return;
+    }
+    const wins = state.infiniteRun!.gamesWon;
+    setConfirmOptions({
+      title: "Abandon current run?",
+      message: `You have a live run at ${wins} win${wins !== 1 ? "s" : ""}. Starting a new run ends it for good.`,
+      confirmLabel: "Start new run",
+      danger: true,
+      onConfirm: () => {
+        setConfirmOptions(null);
+        void handleStartInfinite();
+      },
+    });
   };
 
   const handleAdvanceInfinite = async () => {
@@ -359,7 +393,7 @@ export default function App() {
                 <InfiniteLobby
                   team={team}
                   resumableRun={infiniteRun && !infiniteRun.eliminated && infiniteRun.gamesPlayed > 0 ? infiniteRun : null}
-                  onStartRun={handleStartInfinite}
+                  onStartRun={handleLobbyStartRun}
                   onResumeRun={handleResumeInfinite}
                   onNewDraft={handleRestart}
                 />
@@ -396,6 +430,7 @@ export default function App() {
                   team={team}
                   onAdvance={handleAdvanceInfinite}
                   onBuyInsurance={handleBuyInsurance}
+                  onBuyBoost={handleBuyBoost}
                   onTransferComplete={handleInfiniteTransferComplete}
                   onSkipTransfer={handleInfiniteSkipTransfer}
                   onRestart={handleRestartInfinite}

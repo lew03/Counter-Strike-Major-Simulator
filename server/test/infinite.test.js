@@ -48,3 +48,15 @@ test("playInfiniteGame returns a well-formed Bo1 result", () => {
   // The user is always one side of their own match.
   assert.ok(result.match.teamAIsUser || result.match.teamBIsUser);
 });
+
+test("playInfiniteGame accepts a user boost and doesn't mutate the roster", () => {
+  const roster = ROLES.map((role) => players.find((p) => p.role === role));
+  const userTeam = { name: "Test Org", isUser: true, players: roster, coach: coaches[0] };
+  const ratingsBefore = roster.map((p) => p.rating);
+
+  const result = playInfiniteGame(userTeam, eras[0], 3, coaches, 1.05);
+  assert.equal(typeof result.won, "boolean");
+  assert.equal(result.match.format, "Bo1");
+  // The boost must be applied to copies — the caller's roster ratings stay untouched.
+  assert.deepEqual(roster.map((p) => p.rating), ratingsBefore);
+});

@@ -572,11 +572,16 @@ function infinitePrizePerWin(gamesWon) {
 
 // Simulate one Infinite Mode game (always Bo1). The user faces a randomly-chosen era
 // team boosted to match the current difficulty tier, with fresh per-game form applied
-// to both rosters.
-function playInfiniteGame(userTeam, opponentEra, gamesWon, coachesPool) {
+// to both rosters. `userBoost` (default 1) scales the user's ratings for this game only —
+// used by the purchasable one-game Momentum perk.
+function playInfiniteGame(userTeam, opponentEra, gamesWon, coachesPool, userBoost) {
   const boost = infiniteOpponentBoost(gamesWon);
   const opponent = teamFromEra(opponentEra, coachesPool, boost);
-  const formedPlayers = applyForm(userTeam.players);
+  const scale = userBoost || 1;
+  const basePlayers = scale !== 1
+    ? userTeam.players.map((p) => ({ ...p, rating: p.rating * scale }))
+    : userTeam.players;
+  const formedPlayers = applyForm(basePlayers);
   const formedUser = {
     ...userTeam,
     isUser: true,

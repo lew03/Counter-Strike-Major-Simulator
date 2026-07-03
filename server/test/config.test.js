@@ -4,6 +4,8 @@ const {
   difficultyConfig,
   transferEffectiveCap,
   infiniteInsuranceCost,
+  infiniteBoostCost,
+  INFINITE_BOOST_FACTOR,
   escalatedAiBoost,
 } = require("../config");
 
@@ -42,6 +44,20 @@ test("infiniteInsuranceCost scales with depth and caps out", () => {
   for (let w = 0; w < 30; w++) {
     assert.ok(infiniteInsuranceCost(w) <= infiniteInsuranceCost(w + 1) || infiniteInsuranceCost(w) === 220000);
   }
+});
+
+test("infiniteBoostCost is cheaper than insurance, scales, and caps", () => {
+  assert.equal(infiniteBoostCost(0), 40000);
+  assert.equal(infiniteBoostCost(5), 80000);
+  assert.equal(infiniteBoostCost(12), 136000);
+  assert.equal(infiniteBoostCost(13), 140000); // 40000 + 13*8000 = 144000 -> capped
+  assert.equal(infiniteBoostCost(100), 140000);
+  // Always the cheaper perk at the same depth.
+  for (let w = 0; w <= 30; w++) {
+    assert.ok(infiniteBoostCost(w) < infiniteInsuranceCost(w), `boost >= insurance at ${w} wins`);
+  }
+  // The boost is a modest, bounded nudge.
+  assert.ok(INFINITE_BOOST_FACTOR > 1 && INFINITE_BOOST_FACTOR <= 1.1);
 });
 
 test("escalatedAiBoost adds up to +6% and no more", () => {

@@ -120,6 +120,25 @@ export async function buyInfiniteInsurance(teamId: string): Promise<AdvanceInfin
   return res.json();
 }
 
+export async function buyInfiniteBoost(teamId: string): Promise<AdvanceInfiniteResponse> {
+  const res = await fetch(`${BASE}/infinite/${teamId}/buy-boost`, { method: "POST" });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ error: "Failed to buy Momentum" }));
+    throw new Error(err.error || "Failed to buy Momentum");
+  }
+  return res.json();
+}
+
+// Fire-and-forget removal of an abandoned team from the server. Failures are swallowed —
+// worst case the server-side prune cap cleans it up later.
+export async function deleteTeam(teamId: string): Promise<void> {
+  try {
+    await fetch(`${BASE}/team/${teamId}`, { method: "DELETE" });
+  } catch {
+    /* non-critical */
+  }
+}
+
 export async function startMajor(teamId: string): Promise<StartMajorResponse> {
   const res = await fetch(`${BASE}/major/${teamId}/start`, { method: "POST" });
   if (!res.ok) throw new Error("Failed to start major");

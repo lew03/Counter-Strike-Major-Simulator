@@ -49,6 +49,24 @@ export default function CareerStats({ history }: { history: HistoryEntry[] }) {
           <div className="career-stat-label">Best finish</div>
         </div>
       </div>
+
+      {attempts > 0 && (
+        <div className="career-timeline">
+          <div className="career-timeline-title">Recent majors</div>
+          {history
+            .slice(-8)
+            .reverse()
+            .map((h) => (
+              <div key={h.timestamp} className={`career-tl-row ${h.userWon ? "tl-won" : ""}`}>
+                <span className="tl-date">{new Date(h.timestamp).toLocaleDateString()}</span>
+                <span className="tl-finish">{h.userWon ? "Champion" : h.eliminatedAt || "Swiss Stage"}</span>
+                <span className="tl-champ" title="Tournament winner">
+                  {h.userWon ? "Your team" : h.champion}
+                </span>
+              </div>
+            ))}
+        </div>
+      )}
     </div>
   );
 }

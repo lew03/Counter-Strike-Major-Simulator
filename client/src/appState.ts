@@ -72,6 +72,7 @@ export type AppAction =
   | { type: "INFINITE_ADVANCE_FAILED" }
   | { type: "INFINITE_TRANSFER_CONFIRMED"; run: InfiniteRunView }
   | { type: "INFINITE_INSURANCE_BOUGHT"; run: InfiniteRunView; team: TeamResponse }
+  | { type: "INFINITE_BOOST_BOUGHT"; run: InfiniteRunView; team: TeamResponse }
   | { type: "UPDATE_TEAM"; team: TeamResponse };
 
 export function appReducer(state: AppState, action: AppAction): AppState {
@@ -191,6 +192,7 @@ export function appReducer(state: AppState, action: AppAction): AppState {
       return { ...state, infiniteRun: action.run };
 
     case "INFINITE_INSURANCE_BOUGHT":
+    case "INFINITE_BOOST_BOUGHT":
       return { ...state, infiniteRun: action.run, team: action.team };
 
     case "RESUME_TOURNAMENT":

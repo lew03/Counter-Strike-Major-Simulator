@@ -47,6 +47,14 @@ function infiniteInsuranceCost(gamesWon) {
   return Math.min(220000, 75000 + Math.max(0, gamesWon || 0) * 10000);
 }
 
+// Infinite "Momentum" boost: a one-game +5% team-rating bump for the NEXT game only.
+// Cheaper than Second Life (it can be "wasted" on a game you'd have won anyway), also
+// scaling with depth so late-run purchases stay a real trade-off against the prize pool.
+const INFINITE_BOOST_FACTOR = 1.05;
+function infiniteBoostCost(gamesWon) {
+  return Math.min(140000, 40000 + Math.max(0, gamesWon || 0) * 8000);
+}
+
 module.exports = {
   DIFFICULTIES,
   INFINITE_DIFFICULTIES,
@@ -57,4 +65,6 @@ module.exports = {
   SELL_BACK_RATE,
   transferEffectiveCap,
   infiniteInsuranceCost,
+  INFINITE_BOOST_FACTOR,
+  infiniteBoostCost,
 };
