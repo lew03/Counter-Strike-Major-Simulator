@@ -889,6 +889,34 @@ h3, h4 {
   align-items: center;
 }
 
+/* Infinite-mode bank readout in the header — money stays on screen in every phase. */
+.bank-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: 1px solid var(--border-2);
+  color: var(--success);
+  font-family: var(--font-display);
+  letter-spacing: 0.03em;
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  cursor: help;
+}
+.bank-chip .icon {
+  color: var(--success);
+}
+.bank-chip-pending {
+  color: var(--gold);
+  margin-left: 4px;
+  padding-left: 8px;
+  border-left: 1px solid var(--border-2);
+}
+
 .secondary-btn:disabled {
   opacity: 0.45;
   cursor: default;
@@ -1836,6 +1864,18 @@ tr.mvp-row {
   letter-spacing: 0.05em;
   color: #7d7a71;
   margin-top: 2px;
+}
+/* Money cells get their semantic colours: gold = pending (not yet spendable),
+   green = banked (spendable now). */
+.inf-stat-pending .inf-stat-val {
+  color: var(--gold);
+}
+.inf-stat-bank .inf-stat-val {
+  color: var(--success);
+}
+.inf-pending-note {
+  margin: -10px 0 16px;
+  font-size: 12.5px;
 }
 
 /* Difficulty bar */

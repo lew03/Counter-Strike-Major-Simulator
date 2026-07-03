@@ -230,25 +230,36 @@ export default function InfiniteMode({
         One loss ends the run.
       </p>
 
-      {run.gamesWon > 0 && (
-        <div className="inf-stats-row">
-          <div className="inf-stat">
-            <div className="inf-stat-val">{run.gamesWon}</div>
-            <div className="inf-stat-label">Win streak</div>
-          </div>
-          <div className="inf-stat">
-            <div className="inf-stat-val">{run.gamesPlayed}</div>
-            <div className="inf-stat-label">Played</div>
-          </div>
-          <div className="inf-stat">
-            <div className="inf-stat-val">${run.totalEarned.toLocaleString()}</div>
-            <div className="inf-stat-label">Earned</div>
-          </div>
-          <div className="inf-stat">
-            <div className="inf-stat-val">${team.budget.toLocaleString()}</div>
-            <div className="inf-stat-label">Budget</div>
-          </div>
+      {/* Always visible — the bank matters from game 0 (perk prices sit right below),
+          and "pending" makes the earn-then-bank economy legible instead of money
+          silently appearing five wins later. */}
+      <div className="inf-stats-row">
+        <div className="inf-stat">
+          <div className="inf-stat-val">{run.gamesWon}</div>
+          <div className="inf-stat-label">Wins</div>
         </div>
+        <div className="inf-stat">
+          <div className="inf-stat-val">{run.gamesPlayed}</div>
+          <div className="inf-stat-label">Played</div>
+        </div>
+        <div className="inf-stat inf-stat-pending">
+          <div className="inf-stat-val">${run.pendingPrize.toLocaleString()}</div>
+          <div className="inf-stat-label">Pending prize</div>
+        </div>
+        <div className="inf-stat inf-stat-bank">
+          <div className="inf-stat-val">${team.budget.toLocaleString()}</div>
+          <div className="inf-stat-label">Bank</div>
+        </div>
+        <div className="inf-stat">
+          <div className="inf-stat-val">${run.totalEarned.toLocaleString()}</div>
+          <div className="inf-stat-label">Run earnings</div>
+        </div>
+      </div>
+      {run.pendingPrize > 0 && (
+        <p className="hint inf-pending-note">
+          Pending prize money banks at the next transfer window ({winsUntilTransfer} more win
+          {winsUntilTransfer !== 1 ? "s" : ""}) — or immediately if the run ends.
+        </p>
       )}
 
       <DifficultyBar boost={run.opponentBoost} gamesWon={run.gamesWon} />

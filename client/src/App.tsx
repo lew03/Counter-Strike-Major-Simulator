@@ -313,6 +313,35 @@ export default function App() {
               <span className="logo-text">Frag GM</span>
             </button>
             <div className="header-actions">
+              {/* Persistent bank readout for Infinite mode — visible across the menu, live
+                  match, transfer window and game-over so money is never off-screen. */}
+              {team && mode === "infinite" && (stage === "infinite" || stage === "team") && (
+                <Tooltip
+                  placement="bottom"
+                  content={
+                    <span>
+                      Banked budget — spendable on perks and transfers.
+                      {infiniteRun && infiniteRun.pendingPrize > 0 && (
+                        <>
+                          <br />
+                          +${infiniteRun.pendingPrize.toLocaleString()} pending prize banks at the
+                          next transfer window.
+                        </>
+                      )}
+                    </span>
+                  }
+                >
+                  <span className="bank-chip">
+                    <Icon name="dollar" size={13} strokeWidth={2.2} />
+                    {team.budget.toLocaleString()}
+                    {infiniteRun && infiniteRun.pendingPrize > 0 && (
+                      <span className="bank-chip-pending">
+                        +${infiniteRun.pendingPrize.toLocaleString()}
+                      </span>
+                    )}
+                  </span>
+                </Tooltip>
+              )}
               {team && (stage === "major" || stage === "infinite") && (
                 <button className="secondary-btn" onClick={handleGoHome}>
                   <Icon name="home" size={16} /> Home
